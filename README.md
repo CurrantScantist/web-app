@@ -1,33 +1,22 @@
 # web-app
 
-## Project setup
+## Django Project commands
+- First, start your virtual env
+- CD into /backend
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+Start Django server:      python manage.py runserver
+Make migrations:          python manage.py makemigrations
+Migrate:                  python manage.py migrate
 ```
 
-### Run your unit tests
+## Vue Project commands
 ```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
+Install dependencies:     npm install
+Run development server:   npm run serve
+Production build:         npm run build
+Run unit tests:           npm run test:unit
+Run end-to-end tests:     npm run test:e2e
+Run linter:               npm run lint
 ```
 
 ### Customize configuration
