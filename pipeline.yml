@@ -1,0 +1,3 @@
+steps:
+  - commands:
+    - "npm install && npm run lint"
