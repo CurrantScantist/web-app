@@ -2,6 +2,33 @@
 
 ## Django Project commands
 - First, start your virtual env
+Setups to setup virtual env  
+
+**Windows/CMD(Command Prompt)**
+```
+cd "<project directory>"
+
+py -3.7 -m venv backendEnv
+
+backendEnv\Scripts\activate
+
+pip install wheel
+
+pip install -r requirements.txt
+```
+
+**MacOS/Bash Command**
+```
+cd <project directory>
+
+py -3.7 -m venv backendEnv
+
+source ./backendEnv/Scripts/activate
+
+pip install wheel
+
+pip install -r requirements.txt
+```
 - CD into /backend
 ```
 Start Django server:      python manage.py runserver
