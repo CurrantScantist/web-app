@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 
-from app.server.routes.student import router as StudentRouter # Wiring up the student route in app/server/app.py
+from app.server.routes.techstack import router as TechstackRouter # Wiring up the techstack route in app/server/app.py
 
 # Before starting the server via the entry point file, create a base route in app/server/app.py:
 
 app = FastAPI()
 
-app.include_router(StudentRouter, tags=["Student"], prefix="/student")
+app.include_router(TechstackRouter, tags=["Techstack"], prefix="/techstack")
 
 # Tags are identifiers used to group routes. Routes with the same tags are grouped into a section on the API documentation.
 

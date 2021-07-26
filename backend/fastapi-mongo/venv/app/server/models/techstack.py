@@ -4,16 +4,17 @@ from pydantic import BaseModel, EmailStr, Field
 
 # Pydantic Schema's are used for validating data along with serializing (JSON -> Python) and de-serializing (Python -> JSON). It does not serve as a Mongo schema validator, in other words.
 
-# we define a Pydantic Schema called StudentSchema that represents how the student data will be stored in your MongoDB database.
-class StudentSchema(BaseModel):
-    fullname: str = Field(...)
-    email: EmailStr = Field(...)
-    course_of_study: str = Field(...)
-    year: int = Field(..., gt=0, lt=9)
-    gpa: float = Field(..., le=4.0)
+# we define a Pydantic Schema called TechstackSchema that represents how the techstack data will be stored in your MongoDB database.
+class TechstackSchema(BaseModel):
+    techstack_name: str = Field(...)
+    link: str = Field(...)
+    date_created: str = Field(...)
+    size_mb: float = Field(...)
+    num_of_commits: float = Field(...)
     
     """
-    In the gpa and year field in the StudentSchema, we added the validators gt, lt, and le:
+    NOT RELEVANT AS IT IS REMOVED FOR NOW 26/07/2021.
+    In the gpa and year field in the TechstackSchema, we added the validators gt, lt, and le:
 
     gt and lt in the year field ensures that the value passed is greater than 0 and less than 9. As a result, values such as 0, 10, 11, will result in errors.
     le validator in the gpa field ensures that the value passed is less than or equal to 4.0.
@@ -26,30 +27,30 @@ class StudentSchema(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "fullname": "John Doe",
-                "email": "jdoe@x.edu.ng",
-                "course_of_study": "Water resources engineering",
-                "year": 2,
-                "gpa": "3.0",
+                "techstack_name": "php",
+                "link": "https://github.com/php/php-src",
+                "date_created": "26-Jul_1997",
+                "size_mb": 20,
+                "num_of_commits": "150710",
             }
         }
 
 
-class UpdateStudentModel(BaseModel):
-    fullname: Optional[str]
-    email: Optional[EmailStr]
-    course_of_study: Optional[str]
-    year: Optional[int]
-    gpa: Optional[float]
+class UpdateTechstackModel(BaseModel):
+    techstack_name: Optional[str]
+    link: Optional[str]
+    date_created: Optional[str]
+    size_mb: Optional[float]
+    num_of_commits: Optional[float]
 
     class Config:
         schema_extra = {
             "example": {
-                "fullname": "John Doe",
-                "email": "jdoe@x.edu.ng",
-                "course_of_study": "Water resources and environmental engineering",
-                "year": 4,
-                "gpa": "4.0",
+                "techstack_name": "php",
+                "link": "https://github.com/php/php-src",
+                "date_created": "26-Jul_1997",
+                "size_mb": 21,
+                "num_of_commits": "150717",
             }
         }
 

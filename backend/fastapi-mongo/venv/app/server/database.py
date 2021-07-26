@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 # Here, we imported Motor, defined the connection details, and created a client via AsyncIOMotorClient.
 
 """
-We then referenced a database called students and a collection (akin to a table in a relational database) called students_collection. Since these are just references and not actual I/O, neither requires an await expression. When the first I/O operation is made, both the database and collection will be created if they don't already exist.
+We then referenced a database called techstacks and a collection (akin to a table in a relational database) called techstacks_collection. Since these are just references and not actual I/O, neither requires an await expression. When the first I/O operation is made, both the database and collection will be created if they don't already exist.
 
 Next, create a quick helper function for parsing the results from a database query into a Python dict.
 """
@@ -14,68 +14,68 @@ MONGO_DETAILS = "mongodb://localhost:27017"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
-database = client.students
+database = client.techstacks
 
-student_collection = database.get_collection("students_collection")
+techstack_collection = database.get_collection("techstacks_collection")
 
 # helpers
 
 
-def student_helper(student) -> dict:
+def techstack_helper(techstack) -> dict:
     return {
-        "id": str(student["_id"]),
-        "fullname": student["fullname"],
-        "email": student["email"],
-        "course_of_study": student["course_of_study"],
-        "year": student["year"],
-        "GPA": student["gpa"],
+        "id": str(techstack["_id"]),
+        "techstack_name": techstack["techstack_name"],
+        "link": techstack["link"],
+        "date_created": techstack["date_created"],
+        "size_mb": techstack["size_mb"],
+        "num_of_commits": techstack["num_of_commits"],
     }
     
-# Retrieve all students present in the database
-async def retrieve_students():
-    students = []
-    async for student in student_collection.find():
-        students.append(student_helper(student))
-    return students
+# Retrieve all techstacks present in the database
+async def retrieve_techstacks():
+    techstacks = []
+    async for techstack in techstack_collection.find():
+        techstacks.append(techstack_helper(techstack))
+    return techstacks
 
 """
-Below, we defined the asynchronous operations to create, read, update and delete student data in the database via motor.
+Below, we defined the asynchronous operations to create, read, update and delete techstack data in the database via motor.
 
-In the update and delete operations, the student is searched for in the database to decide whether to carry out the operation or not. The return values guide how to send responses to the user which we'll be working on in the next section.
+In the update and delete operations, the techstack is searched for in the database to decide whether to carry out the operation or not. The return values guide how to send responses to the user which we'll be working on in the next section.
 """
 
-# Add a new student into to the database
-async def add_student(student_data: dict) -> dict:
-    student = await student_collection.insert_one(student_data)
-    new_student = await student_collection.find_one({"_id": student.inserted_id})
-    return student_helper(new_student)
+# Add a new techstack into to the database
+async def add_techstack(techstack_data: dict) -> dict:
+    techstack = await techstack_collection.insert_one(techstack_data)
+    new_techstack = await techstack_collection.find_one({"_id": techstack.inserted_id})
+    return techstack_helper(new_techstack)
 
 
-# Retrieve a student with a matching ID
-async def retrieve_student(id: str) -> dict:
-    student = await student_collection.find_one({"_id": ObjectId(id)})
-    if student:
-        return student_helper(student)
+# Retrieve a techstack with a matching ID
+async def retrieve_techstack(id: str) -> dict:
+    techstack = await techstack_collection.find_one({"_id": ObjectId(id)})
+    if techstack:
+        return techstack_helper(techstack)
 
 
-# Update a student with a matching ID
-async def update_student(id: str, data: dict):
+# Update a techstack with a matching ID
+async def update_techstack(id: str, data: dict):
     # Return false if an empty request body is sent.
     if len(data) < 1:
         return False
-    student = await student_collection.find_one({"_id": ObjectId(id)})
-    if student:
-        updated_student = await student_collection.update_one(
+    techstack = await techstack_collection.find_one({"_id": ObjectId(id)})
+    if techstack:
+        updated_techstack = await techstack_collection.update_one(
             {"_id": ObjectId(id)}, {"$set": data}
         )
-        if updated_student:
+        if updated_techstack:
             return True
         return False
 
 
-# Delete a student from the database
-async def delete_student(id: str):
-    student = await student_collection.find_one({"_id": ObjectId(id)})
-    if student:
-        await student_collection.delete_one({"_id": ObjectId(id)})
+# Delete a techstack from the database
+async def delete_techstack(id: str):
+    techstack = await techstack_collection.find_one({"_id": ObjectId(id)})
+    if techstack:
+        await techstack_collection.delete_one({"_id": ObjectId(id)})
         return True
