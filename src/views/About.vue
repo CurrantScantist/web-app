@@ -1,8 +1,13 @@
 <template>
   <div class="about">
-    <h1>
-      This is pull request! 
-      Please review it and merge to the main/master branch 
-    </h1>
+    <h1>About</h1>
   </div>
 </template>
+
+<style lang="scss" scoped></style>
+
+<script>
+export default {
+  name: "Home",
+};
+</script>
