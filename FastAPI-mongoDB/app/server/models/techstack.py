@@ -11,27 +11,43 @@ class TechstackSchema(BaseModel):
     date_created: str = Field(...)
     size_mb: float = Field(...)
     num_of_commits: float = Field(...)
-    
-    """
-    NOT RELEVANT AS IT IS REMOVED FOR NOW 26/07/2021.
-    In the gpa and year field in the TechstackSchema, we added the validators gt, lt, and le:
-
-    gt and lt in the year field ensures that the value passed is greater than 0 and less than 9. As a result, values such as 0, 10, 11, will result in errors.
-    le validator in the gpa field ensures that the value passed is less than or equal to 4.0.
-    
-    This schema will help users send HTTP requests with the proper shape to the API -- e.g., the type of data to send and how to send it.
-    
-    FastAPI uses Pyantic Schemas to automatically document data models in conjunction with Json Schema. Swagger UI then renders the data from the generated data models.
-    """
 
     class Config:
         schema_extra = {
             "example": {
-                "techstack_name": "php",
-                "link": "https://github.com/php/php-src",
-                "date_created": "26-Jul_1997",
-                "size_mb": 20,
-                "num_of_commits": "150710",
+                "id": "60fc0777f113c31336c7e596",
+                "releases": {
+                    "v3.40.0": {}
+                },
+                "techstack_name": "svelte",
+                "owner": "sveltejs",
+                "description": "Cybernetically enhanced web apps",
+                "forks": 2317,
+                "forks_count": 2317,
+                "language": "TypeScript",
+                "stargazers_count": 48744,
+                "watchers_count": 48744,
+                "watchers": 48744,
+                "size": 67214,
+                "default_branch": "master",
+                "open_issues_count": 573,
+                "open_issues": 573,
+                "has_issues": True,
+                "archived": False,
+                "disabled": False,
+                "pushed_at": "2021-07-24T18:30:36Z",
+                "created_at": "2016-11-20T18:13:05Z",
+                "updated_at": "2021-07-25T03:36:42Z",
+                "languages": {
+                    "TypeScript": 714949,
+                    "Svelte": 557000,
+                    "JavaScript": 9669
+                },
+                "topics": [
+                    "template",
+                    "ui",
+                    "compiler"
+                ]
             }
         }
 
@@ -46,11 +62,39 @@ class UpdateTechstackModel(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "techstack_name": "php",
-                "link": "https://github.com/php/php-src",
-                "date_created": "26-Jul_1997",
-                "size_mb": 21,
-                "num_of_commits": "150717",
+                "id": "60fc0777f113c31336c7e596",
+                "releases": {
+                    "v3.40.0": {}
+                },
+                "techstack_name": "svelte",
+                "owner": "sveltejs",
+                "description": "Cybernetically enhanced web apps",
+                "forks": 2317,
+                "forks_count": 2317,
+                "language": "TypeScript",
+                "stargazers_count": 48744,
+                "watchers_count": 48744,
+                "watchers": 48744,
+                "size": 67214,
+                "default_branch": "master",
+                "open_issues_count": 573,
+                "open_issues": 573,
+                "has_issues": True,
+                "archived": False,
+                "disabled": False,
+                "pushed_at": "2021-07-24T18:30:36Z",
+                "created_at": "2016-11-20T18:13:05Z",
+                "updated_at": "2021-07-25T03:36:42Z",
+                "languages": {
+                    "TypeScript": 714949,
+                    "Svelte": 557000,
+                    "JavaScript": 9669
+                },
+                "topics": [
+                    "template",
+                    "ui",
+                    "compiler"
+                ]
             }
         }
 
