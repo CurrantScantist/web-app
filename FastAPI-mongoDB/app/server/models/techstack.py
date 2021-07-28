@@ -6,11 +6,28 @@ from pydantic import BaseModel, EmailStr, Field
 
 # we define a Pydantic Schema called TechstackSchema that represents how the techstack data will be stored in your MongoDB database.
 class TechstackSchema(BaseModel):
-    techstack_name: str = Field(...)
-    link: str = Field(...)
-    date_created: str = Field(...)
-    size_mb: float = Field(...)
-    num_of_commits: float = Field(...)
+    releases: list = Field(...)
+    name: str = Field(...)
+    owner: str = Field(...)
+    description: str = Field(...)
+    forks: float = Field(...)
+    forks_count: float = Field(...)
+    language: str = Field(...)
+    stargazers_count: float = Field(...)
+    watchers_count: float = Field(...)
+    watchers: float = Field(...)
+    size: float = Field(...)
+    default_branch: str = Field(...)
+    open_issues_count: float = Field(...)
+    open_issues: float = Field(...)
+    has_issues: bool = Field(...)
+    archived: bool = Field(...)
+    disabled: bool = Field(...)
+    pushed_at: str = Field(...)
+    created_at: str = Field(...)
+    updated_at: str = Field(...)
+    languages: list = Field(...)
+    topics: list = Field(...)
 
     class Config:
         schema_extra = {
@@ -53,11 +70,28 @@ class TechstackSchema(BaseModel):
 
 
 class UpdateTechstackModel(BaseModel):
-    techstack_name: Optional[str]
-    link: Optional[str]
-    date_created: Optional[str]
-    size_mb: Optional[float]
-    num_of_commits: Optional[float]
+    releases: list = Field(...)
+    name: str = Field(...)
+    owner: str = Field(...)
+    description: str = Field(...)
+    forks: float = Field(...)
+    forks_count: float = Field(...)
+    language: str = Field(...)
+    stargazers_count: float = Field(...)
+    watchers_count: float = Field(...)
+    watchers: float = Field(...)
+    size: float = Field(...)
+    default_branch: str = Field(...)
+    open_issues_count: float = Field(...)
+    open_issues: float = Field(...)
+    has_issues: bool = Field(...)
+    archived: bool = Field(...)
+    disabled: bool = Field(...)
+    pushed_at: str = Field(...)
+    created_at: str = Field(...)
+    updated_at: str = Field(...)
+    languages: list = Field(...)
+    topics: list = Field(...)
 
     class Config:
         schema_extra = {

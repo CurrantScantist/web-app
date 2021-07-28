@@ -32,9 +32,10 @@ async def get_techstacks():
     return ResponseModel(techstacks, "Empty list returned")
 
 
-@router.get("/{name}", response_description="Techstack data retrieved")
-async def get_techstack_data(name):
-    techstack = await retrieve_techstack(name)
+@router.get("/{name_owner}", response_description="Techstack data retrieved")
+async def get_techstack_data(name, owner):
+    # techstack = await retrieve_techstack(owner) and await retrieve_techstack(name)
+    techstack = await retrieve_techstack(name,owner)
     if techstack:
         return ResponseModel(techstack, "Techstack data retrieved successfully")
     return ErrorResponseModel("An error occurred.", 404, "Techstack doesn't exist.")

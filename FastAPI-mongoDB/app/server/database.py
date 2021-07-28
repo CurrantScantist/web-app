@@ -27,7 +27,7 @@ def techstack_helper(techstack) -> dict:
     return {
         "id": str(techstack["_id"]),
         "releases": techstack["releases"],
-        "techstack_name": techstack["name"],
+        "name": techstack["name"],
         "owner": techstack["owner"],
         "description": techstack["description"],
         "forks": techstack["forks"],
@@ -60,7 +60,9 @@ async def retrieve_techstacks():
 
 
 # Retrieve a techstack with a matching ID
-async def retrieve_techstack(name: str) -> dict:
-    techstack = await techstack_collection.find_one({"name": name})
+async def retrieve_techstack(name: str, owner:str) -> dict:
+    # techstack = await techstack_collection.find({"name": name, "owner": owner}) # finds first occurence of name and owner combo
+    techstack = await techstack_collection.find_one({"name": name}) and await techstack_collection.find_one({"owner": owner})
+    # techstack = await techstack_collection.find_one({"name": name})
     if techstack:
         return techstack_helper(techstack)
