@@ -1,21 +1,13 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
 from server.secrets import CONNECTION_STRING 
-# we'll configure Motor, an asynchronous MongoDB driver, to interact with the database.
-
-# Here, we imported Motor, defined the connection details, and created a client via AsyncIOMotorClient.
-
 """
-We then referenced a database called techstacks and a collection (akin to a table in a relational database) called techstacks_collection. Since these are just references and not actual I/O, neither requires an await expression. When the first I/O operation is made, both the database and collection will be created if they don't already exist.
-
-Next, create a quick helper function for parsing the results from a database query into a Python dict.
+Retrieve techstack and techstack data from the mongodb database
 """
-
 MONGO_DETAILS = CONNECTION_STRING
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
-# database = client.techstacks
 database = client.test_db
 
 techstack_collection = database.get_collection("repositories")
@@ -61,8 +53,6 @@ async def retrieve_techstacks():
 
 # Retrieve a techstack with a matching ID
 async def retrieve_techstack(name: str, owner:str) -> dict:
-    # techstack = await techstack_collection.find({"name": name, "owner": owner}) # finds first occurence of name and owner combo
     techstack = await techstack_collection.find_one({"name": name}) and await techstack_collection.find_one({"owner": owner})
-    # techstack = await techstack_collection.find_one({"name": name})
     if techstack:
         return techstack_helper(techstack)

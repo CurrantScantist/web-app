@@ -1,10 +1,10 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr, Field
+"""
+Schema file for techstacks
+"""
 
-# Pydantic Schema's are used for validating data along with serializing (JSON -> Python) and de-serializing (Python -> JSON). It does not serve as a Mongo schema validator, in other words.
-
-# we define a Pydantic Schema called TechstackSchema that represents how the techstack data will be stored in your MongoDB database.
 class TechstackSchema(BaseModel):
     releases: list = Field(...)
     name: str = Field(...)

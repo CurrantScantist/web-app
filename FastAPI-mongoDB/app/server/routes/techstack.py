@@ -1,18 +1,13 @@
 """
-we'll add the routes to complement the database operations in the database file.
-
-We'll be using the JSON Compatible Encoder from FastAPI to convert our models into a format that's JSON compatible.
+Route to retrieve all techstacks, and route to retrieve techstack data
 """
-
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
 from server.database import (
-    # add_techstack,
-    # delete_techstack,
     retrieve_techstack,
     retrieve_techstacks,
-    # update_techstack,
+
 )
 from server.models.techstack import (
     ErrorResponseModel,
@@ -34,7 +29,6 @@ async def get_techstacks():
 
 @router.get("/{name_owner}", response_description="Techstack data retrieved")
 async def get_techstack_data(name, owner):
-    # techstack = await retrieve_techstack(owner) and await retrieve_techstack(name)
     techstack = await retrieve_techstack(name,owner)
     if techstack:
         return ResponseModel(techstack, "Techstack data retrieved successfully")
