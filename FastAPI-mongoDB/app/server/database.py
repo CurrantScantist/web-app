@@ -53,6 +53,6 @@ async def retrieve_techstacks():
 
 # Retrieve a techstack with a matching ID
 async def retrieve_techstack(name: str, owner:str) -> dict:
-    techstack = await techstack_collection.find_one({"name": name}) and await techstack_collection.find_one({"owner": owner})
+    techstack = await techstack_collection.find_one({"name": name, "owner": owner})
     if techstack:
         return techstack_helper(techstack)
