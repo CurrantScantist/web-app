@@ -14,7 +14,6 @@ techstack_collection = database.get_collection("repositories")
 
 # helpers
 
-
 def techstack_helper(techstack) -> dict:
     return {
         "id": str(techstack["_id"]),
@@ -41,6 +40,12 @@ def techstack_helper(techstack) -> dict:
         "languages": techstack["languages"],
         "topics": techstack["topics"],
     }
+def techstack_helper_name(techstack) -> dict:
+    return {
+        "id": str(techstack["_id"]),
+        "name": techstack["name"],
+        "owner": techstack["owner"],
+    }
     
 # Retrieve all techstacks present in the database
 async def retrieve_techstacks():
@@ -56,3 +61,13 @@ async def retrieve_techstack(name: str, owner:str) -> dict:
     techstack = await techstack_collection.find_one({"name": name, "owner": owner})
     if techstack:
         return techstack_helper(techstack)
+
+
+# Retrieve all techstack repo detail with few information (Id, name and owner)
+async def retrieve_techstack_name() -> dict:
+    techstacks_name = []
+    async for techstack in techstack_collection.find():
+        techstacks_name.append(techstack_helper_name(techstack))
+    print(techstacks_name)
+    return techstacks_name
+
