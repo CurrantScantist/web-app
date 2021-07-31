@@ -28,3 +28,14 @@ pnpm-debug.log*
 # Python
 *.venv
 /backend/backend/__pycache__
+secrets.py
+./venv
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
