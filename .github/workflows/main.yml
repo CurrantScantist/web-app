@@ -24,5 +24,3 @@ jobs:
         run: |
           ls -la
           find requirements.txts
-          pip install -r requirements.txt
-          pytest test/teckstack_test.py
