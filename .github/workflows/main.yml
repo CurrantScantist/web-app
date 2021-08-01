@@ -10,15 +10,24 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x, 15.x]
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm run test:unit
-      - run: npm run lint
-      
+          python-version: ${{ matrix.python-version }}
+      - name: Fixing env
+        with: # Set the secret as an input
+            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+         env: # Or as an environment variable
+            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+      - name: Install dependencies
+        working-directory: ./FastAPI-mongoDB/app
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        run: |
+          pytest test\teckstack_test.py
