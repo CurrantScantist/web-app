@@ -1,7 +1,9 @@
-name: Node.js CI
+name: Python Backend
 
 on: [push, pull_request]
-
+defaults:
+  run:
+    working-directory: ./FastAPI-mongoDB/app
 jobs:
   build:
 
@@ -26,6 +28,5 @@ jobs:
         env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
-          cd ./FastAPI-mongoDB/app
           pip install -r requirements.txt
           pytest test/teckstack_test.py
