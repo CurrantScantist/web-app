@@ -16,6 +16,5 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: testing working directory
-        working-directory:  FastAPI-mongoDB/app
         run: |
           ls
