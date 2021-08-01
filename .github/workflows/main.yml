@@ -16,16 +16,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-          
+
       - name: Install dependencies
-        working-directory: ./FastAPI-mongoDB/app
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
-        with: # Set the secret as an input
-            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+        working-directory: ./FastAPI-mongoDB/app
         env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
