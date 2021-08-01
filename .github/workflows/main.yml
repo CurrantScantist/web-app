@@ -9,7 +9,6 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
         python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
@@ -20,7 +19,7 @@ jobs:
       - name: Fixing env
         with: # Set the secret as an input
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-         env: # Or as an environment variable
+        env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
       - name: Install dependencies
         working-directory: ./FastAPI-mongoDB/app
