@@ -1,16 +1,17 @@
-import motor.motor_asyncio
-from bson.objectid import ObjectId
-from server.secrets import CONNECTION_STRING 
+from server.database.connect import DatabaseConnection
+import os
+from dotenv import load_dotenv
+
 """
 Retrieve techstack and techstack data from the mongodb database
 """
-MONGO_DETAILS = CONNECTION_STRING
+# Connecting to MongoDB and getting the database test_db with the collection name repositories
+load_dotenv()
+CONNECTION_STRING=os.getenv('CONNECTION_STRING')
+database = DatabaseConnection(CONNECTION_STRING)
+database.connection_to_db("test_db")
+techstack_collection = database.database_name.get_collection("repositories")
 
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
-
-database = client.test_db
-
-techstack_collection = database.get_collection("repositories")
 
 # helpers
 
