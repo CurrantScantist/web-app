@@ -1,6 +1,7 @@
-name: Python Backend
+name: Node.js CI
 
 on: [push, pull_request]
+
 jobs:
   build:
 
@@ -17,6 +18,17 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: testing working directory
+
+      - name: Install dependencies
+        working-directory: ./FastAPI-mongoDB/app
         run: |
-          ls
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        working-directory: ./FastAPI-mongoDB/app
+        env:
+            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+        run: |
+          pip install -r requirements.txt
+          pytest test\teckstack_test.py
