@@ -27,5 +27,4 @@ jobs:
         env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
-          pip install -r requirements.txt
           pytest test\teckstack_test.py
