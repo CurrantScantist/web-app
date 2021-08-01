@@ -1,9 +1,6 @@
 name: Python Backend
 
 on: [push, pull_request]
-defaults:
-  run:
-    working-directory: ./FastAPI-mongoDB/app
 jobs:
   build:
 
@@ -18,9 +15,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Test with pytest
+      - name: testing working directory
+        working-directory:  FastAPI-mongoDB/app
         run: |
-          ls -la
-          find requirements.txts
-          pip install -r requirements.txt
-          pytest test/teckstack_test.py
+          ls
