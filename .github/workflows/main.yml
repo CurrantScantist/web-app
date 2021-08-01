@@ -27,5 +27,5 @@ jobs:
         env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
           pytest test\teckstack_test.py
