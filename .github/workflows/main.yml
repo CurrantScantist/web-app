@@ -16,11 +16,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Fixing env
-        with: # Set the secret as an input
-            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
-        env:
-            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+          
       - name: Install dependencies
         working-directory: ./FastAPI-mongoDB/app
         run: |
@@ -28,5 +24,9 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
+        with: # Set the secret as an input
+            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+        env:
+            CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
           pytest test\teckstack_test.py
