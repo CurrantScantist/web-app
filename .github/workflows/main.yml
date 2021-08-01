@@ -24,7 +24,8 @@ jobs:
           pip install pytest
     
       - name: Test with pytest
+    
         env:
             CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         run: |
-          pytest test\teckstack_test.py
+          pytest FastAPI-mongoDB/app/test/teckstack_test.py
