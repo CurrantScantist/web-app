@@ -1,7 +1,9 @@
 import uvicorn
 import os
 import sys
-
+# print(os.getcwd())
+# sys.path.insert(0, os.getcwd()+"/FastAPI-mongoDB/app")
+# print(os.getcwd())
 
 if __name__ == "__main__":
     sys.path.insert(0, os.getcwd())

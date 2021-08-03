@@ -1,4 +1,4 @@
-from server.database.connect import DatabaseConnection
+from app.server.database.connect import DatabaseConnection
 import os
 from dotenv import load_dotenv
 
@@ -18,7 +18,7 @@ techstack_collection = database.database_name.get_collection("repositories")
 def techstack_helper(techstack) -> dict:
     return {
         "id": str(techstack["_id"]),
-        "releases": techstack["releases"],
+        # "releases": techstack["releases"],
         "name": techstack["name"],
         "owner": techstack["owner"],
         "description": techstack["description"],
@@ -46,6 +46,7 @@ def techstack_helper_name(techstack) -> dict:
         "id": str(techstack["_id"]),
         "name": techstack["name"],
         "owner": techstack["owner"],
+        # "releases": techstack["releases"],
     }
     
 # Retrieve all techstacks present in the database
@@ -59,6 +60,7 @@ async def retrieve_techstacks():
 
 # Retrieve a techstack with a matching ID
 async def retrieve_techstack(name: str, owner:str) -> dict:
+
     techstack = await techstack_collection.find_one({"name": name, "owner": owner})
     if techstack:
         return techstack_helper(techstack)

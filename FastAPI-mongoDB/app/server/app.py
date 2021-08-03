@@ -1,6 +1,10 @@
 from fastapi import FastAPI
-
-from server.routes.techstack import router as TechstackRouter # Wiring up the techstack route in app/server/app.py
+import os
+import sys
+print(os.getcwd())
+sys.path.insert(0, os.getcwd()+"/FastAPI-mongoDB/app")
+print(os.getcwd())
+from app.server.routes.techstack import router as TechstackRouter # Wiring up the techstack route in app/server/app.py
 
 app = FastAPI()
 

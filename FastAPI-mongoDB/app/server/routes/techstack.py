@@ -4,13 +4,13 @@ Route to retrieve all techstacks, and route to retrieve techstack data
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
-from server.database.techstack import (
+from app.server.database.techstack import (
     retrieve_techstack,
     retrieve_techstacks,
     retrieve_techstack_name,
 
 )
-from server.models.techstack import (
+from app.server.models.techstack import (
     ErrorResponseModel,
     ResponseModel,
     TechstackSchema,
