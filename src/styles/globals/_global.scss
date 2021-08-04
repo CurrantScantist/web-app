@@ -33,14 +33,30 @@ h1,
 h2 {
   font-weight: 800;
   font-size: 380%;
-  color: #000000;
+  //color: #000000;
   margin-bottom: 13px;
 }
 
+h3 {
+  font-weight: 800;
+  font-size: 100%;
+  color: #000000;
+  margin: 0;
+  text-align: left;
+}
+
+h6 {
+  font-weight: 500;
+  font-size: 50%;
+  color: #383838;
+  margin: 0;
+  text-align: left;
+}
+
 h5{
-  font-weight: 300;
-  font-size: 158%;
-  color: #131313;
+  font-weight: 500;
+  font-size: 138%;
+  //color: #a1a1a1;
   margin-top: 5px;
   text-align: justify;
 }
@@ -50,7 +66,7 @@ h5{
 }
 
 .rep-container{
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgba(131, 131, 131, 0.53);
   padding: 2%;
   padding-top: 5px;
   border-radius: 25px;
@@ -58,6 +74,7 @@ h5{
 
 .viz-grid {
   display: grid;
+  font-size: 138%;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-gap: 1rem;
@@ -79,7 +96,7 @@ h5{
 }
 
 .simple-visualisation1 {
-  background-color: rgba(32, 32, 32, 0.8);
+  background-color: rgba(255, 255, 255, 0.88);
   //border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
   font-size: 30px;
@@ -89,7 +106,7 @@ h5{
 }
 
 .simple-visualisation2 {
-  background-color: rgba(32, 32, 32, 0.8);
+  background-color: rgba(255, 255, 255, 0.88);
   //border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
   font-size: 30px;
@@ -99,7 +116,7 @@ h5{
 }
 
 .wide-visualisation {
-  background-color: rgba(113, 113, 113, 0.8);
+  background-color: rgba(255, 255, 255, 0.88);
   //border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
   font-size: 30px;
@@ -114,8 +131,8 @@ body {
 }
 
 .close-button {
-  background-color: rgb(255, 137, 137, 0.3);
-  color: rgb(255, 0, 0,0.5);
+  background-color: rgba(238, 208, 208, 0.58);
+  color: rgb(255, 0, 0, 1);
   border: none;
   font-size: 35;
   display:block;

@@ -54,7 +54,7 @@
 }
 
 .app-subname{
-  font-weight: 500;
+  font-weight: 300;
 }
 
 .logo-button {

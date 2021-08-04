@@ -2,7 +2,11 @@
   <div class="test">
     <div class="repository">
         <div class="rep-container">
-           <span id='close' onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>
+           <span id='close' 
+            onclick='
+                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
+                return false;
+            '>
                 <button class="close-button">X</button>
             </span> 
 
@@ -19,19 +23,294 @@
             </h5>
 
             <div class="viz-grid">
-                <div class="simple-visualisation1">Viz 1</div>
-                <div class="simple-visualisation2">Viz 2</div>
-                <div class="wide-visualisation">Viz 3</div>
+                <div class="simple-visualisation1">
+                    <h3>Programming Language Breakdown</h3>
+                    <h6>(in %)</h6>
+                    <v-echarts v-bind:option="option1" style="height: 500px" />
+                </div>
+                <div class="simple-visualisation2">
+                    <h3>Contribution Pie Chart</h3>
+                    <h6>(by Number of Commits)</h6>
+                    <v-echarts v-bind:option="option2" style="height: 500px" />
+                </div>
+                <div class="wide-visualisation">
+                    <h3>Lines of Code over Time</h3>
+                    <v-echarts v-bind:option="option3" style="height: 500px" />
+                </div>
             </div>
         </div>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped> </style>
+
 
 <script>
-export default {
-  name: "SingleRepository",
-};
+
+    import { VEcharts } from 'vue3-echarts';
+    console.log("ok")
+    // // based on prepared DOM, initialize echarts instance
+    // var myChart1 = document.getElementById("vis1");
+
+    // var option1 = {
+    //             title: {
+    //                 subtext: 'in %',
+    //                 left: 'center'
+    //             },
+    //             tooltip: {
+    //                 trigger: 'axis',
+    //                 axisPointer: {            // Use axis to trigger tooltip
+    //                     type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+    //                 }
+    //             },
+    //             legend: {
+    //                 data: ['Python', 'C++', 'Go', 'Java', 'R'],
+    //                 top: 'bottom'
+    //             },
+    //             yAxis: {
+    //                 type: 'value'
+    //             },
+    //             xAxis: {
+    //                 type: 'category',
+    //                 data: ["Tensorflow", "Google Cloud AutoML"]
+    //             },
+    //             series: [
+    //                 {
+    //                     name: 'Python',
+    //                     type: 'bar',
+    //                     stack: 'total',
+    //                     emphasis: {
+    //                         focus: 'series'
+    //                     },
+    //                     data: [30, 10]
+    //                 },
+    //                 {
+    //                     name: 'C++',
+    //                     type: 'bar',
+    //                     stack: 'total',
+    //                     emphasis: {
+    //                         focus: 'series'
+    //                     },
+    //                     data: [10, 5]
+    //                 },
+    //                 {
+    //                     name: 'Go',
+    //                     type: 'bar',
+    //                     stack: 'total',
+    //                     emphasis: {
+    //                         focus: 'series'
+    //                     },
+    //                     data: [20, 35]
+    //                 },
+    //                 {
+    //                     name: 'Java',
+    //                     type: 'bar',
+    //                     stack: 'total',
+    //                     emphasis: {
+    //                         focus: 'series'
+    //                     },
+    //                     data: [15, 35]
+    //                 },
+    //                 {
+    //                     name: 'R',
+    //                     type: 'bar',
+    //                     stack: 'total',
+    //                     emphasis: {
+    //                         focus: 'series'
+    //                     },
+    //                     data: [25, 15]
+    //                 }
+    //             ]
+    //         };
+
+    // myChart1.setOption(option1);
+    
+    export default {
+    name: 'SingleRepository',
+     data () {
+      return {
+          option1:  {
+                title: {
+                    subtext: 'in %',
+                    textstyle: {
+                        color: "#ffffff",
+                        fontFamily: "Montserrat"
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // Use axis to trigger tooltip
+                        type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['Python', 'C++', 'Go', 'Java', 'R'],
+                    top: 'bottom'
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ["microsoft/vscode", "ios/xcode"]
+                },
+                series: [
+                    {
+                        name: 'Python',
+                        type: 'bar',
+                        stack: 'total',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [30, 10]
+                    },
+                    {
+                        name: 'C++',
+                        type: 'bar',
+                        stack: 'total',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [10, 5]
+                    },
+                    {
+                        name: 'Go',
+                        type: 'bar',
+                        stack: 'total',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [20, 35]
+                    },
+                    {
+                        name: 'Java',
+                        type: 'bar',
+                        stack: 'total',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [15, 35]
+                    },
+                    {
+                        name: 'R',
+                        type: 'bar',
+                        stack: 'total',
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [25, 15]
+                    }
+                ]
+            },
+            option2: {
+                title: {
+                    subtext: 'By Total Number of Commits',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                series: [
+                    {
+                        name: 'Number of Commits',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [
+                            {value: 2, name: 'Alan Kopenowski'},
+                            {value: 2, name: 'Howard Wolowitz'},
+                            {value: 5, name: 'Rodion emayov'},
+                            {value: 8, name: 'Gautam Naidu'},
+                            {value: 3, name: 'Eddie Chen'},
+                            {value: 10, name: 'Emma Richards'},
+                            {value: 7, name: 'Others'}
+                        ],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            },
+            option3: {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} K'
+                    },
+                    axisPointer: {
+                        snap: true
+                    }
+                },
+                visualMap: {
+                    show: false,
+                    dimension: 0,
+                    pieces: [{
+                        lte: 6,
+                        color: 'green'
+                    }, {
+                        gt: 6,
+                        lte: 8,
+                        color: 'red'
+                    }, {
+                        gt: 8,
+                        lte: 14,
+                        color: 'green'
+                    }, {
+                        gt: 14,
+                        lte: 17,
+                        color: 'red'
+                    }, {
+                        gt: 17,
+                        color: 'green'
+                    }]
+                },
+                series: [
+                    {
+                        type: 'line',
+                        smooth: true,
+                        data: [10, 28, 88, 260, 270, 280, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+                        markArea: {
+                            itemStyle: {
+                                color: 'rgba(255, 173, 177, 0.4)'
+                            },
+                            data: [ [{
+                                name: 'Neural Network Update',
+                                xAxis: 'Jul'
+                            }, {
+                                xAxis: 'Sep'
+                            }] ]
+                        }
+                    }
+                ]
+            }
+       }
+    },
+    components: {
+        VEcharts,
+    }
+}
+
+    
+    
 </script>
