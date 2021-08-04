@@ -1,9 +1,7 @@
 import motor.motor_asyncio
 from bson.objectid import ObjectId
-from server.secrets import CONNECTION_STRING 
-"""
-Retrieve techstack and techstack data from the mongodb database
-"""
+from server.secrets import CONNECTION_STRING
+
 MONGO_DETAILS = CONNECTION_STRING
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
@@ -12,13 +10,18 @@ database = client.test_db
 
 techstack_collection = database.get_collection("repositories")
 
+
 # helpers
 
 
 def techstack_helper(techstack) -> dict:
+    """
+
+    :param techstack: techstack object from database
+    :return: techstack metadata in an ordered format
+    """
     return {
         "id": str(techstack["_id"]),
-        "releases": techstack["releases"],
         "name": techstack["name"],
         "owner": techstack["owner"],
         "description": techstack["description"],
@@ -41,18 +44,26 @@ def techstack_helper(techstack) -> dict:
         "languages": techstack["languages"],
         "topics": techstack["topics"],
     }
-    
-# Retrieve all techstacks present in the database
+
+
 async def retrieve_techstacks():
+    '''
+
+    :return: all techstacks present in the database
+    '''
     techstacks = []
     async for techstack in techstack_collection.find():
         techstacks.append(techstack_helper(techstack))
     print(techstacks)
     return techstacks
 
+async def retrieve_techstack(name: str, owner: str) -> dict:
+    '''
 
-# Retrieve a techstack with a matching ID
-async def retrieve_techstack(name: str, owner:str) -> dict:
+    :param name: name attribute of the techstack
+    :param owner: owner attribute of the techstack
+    :return: Call techstack_helper() on the given techstack, which returns its respective metadata
+    '''
     techstack = await techstack_collection.find_one({"name": name, "owner": owner})
     if techstack:
         return techstack_helper(techstack)
