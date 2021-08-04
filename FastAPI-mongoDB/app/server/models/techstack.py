@@ -128,7 +128,7 @@ class UpdateTechstackModel(BaseModel):
 
 def ResponseModel(data, message):
     '''
-
+    Returns a response model, with the queried data, response code and response message
     :param data: query payload
     :param message: message of success or failure
     :return: Returns Response body, code, and message of success or failure
@@ -142,10 +142,10 @@ def ResponseModel(data, message):
 
 def ErrorResponseModel(error, code, message):
     '''
-
+    Returns an error statement indicating the error type, error code and its description.
     :param error: indication message of error
     :param code: error code
     :param message: error description
-    :return:
+    :return: an error response model, indicating the error type, error code and its description.
     '''
     return {"error": error, "code": code, "message": message}

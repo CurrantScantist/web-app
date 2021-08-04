@@ -11,14 +11,11 @@ database = client.test_db
 techstack_collection = database.get_collection("repositories")
 
 
-# helpers
-
-
 def techstack_helper(techstack) -> dict:
     """
-
+    Helps retrieve_techstack return techstack metadata in dictionary form.
     :param techstack: techstack object from database
-    :return: techstack metadata in an ordered format
+    :return: techstack metadata in an ordered dictionary format
     """
     return {
         "id": str(techstack["_id"]),
@@ -48,7 +45,7 @@ def techstack_helper(techstack) -> dict:
 
 async def retrieve_techstacks():
     '''
-
+    Retrieve all unique techstacks in the database
     :return: all techstacks present in the database
     '''
     techstacks = []
@@ -57,9 +54,10 @@ async def retrieve_techstacks():
     print(techstacks)
     return techstacks
 
+
 async def retrieve_techstack(name: str, owner: str) -> dict:
     '''
-
+    Retrieve a specific techstack and its metadata, from the database
     :param name: name attribute of the techstack
     :param owner: owner attribute of the techstack
     :return: Call techstack_helper() on the given techstack, which returns its respective metadata
