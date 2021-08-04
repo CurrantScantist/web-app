@@ -19,14 +19,9 @@
             </h5>
 
             <div class="viz-grid">
-                <div class="visualisation">1</div>
-                <div class="visualisation">2</div>
-                <div class="visualisation">3</div>
-                <div class="visualisation">4</div>
-                <div class="visualisation">5</div>
-                <div class="visualisation">6</div>
-                <div class="visualisation">7</div>
-                <div class="visualisation">8</div>
+                <div class="simple-visualisation1">Viz 1</div>
+                <div class="simple-visualisation2">Viz 2</div>
+                <div class="wide-visualisation">Viz 3</div>
             </div>
         </div>
     </div>
