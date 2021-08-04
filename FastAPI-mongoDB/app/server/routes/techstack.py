@@ -1,6 +1,3 @@
-"""
-Route to retrieve all techstacks, and route to retrieve techstack data
-"""
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 
@@ -20,7 +17,12 @@ router = APIRouter()
 
 
 @router.get("/", response_description="Techstacks retrieved")
+
 async def get_techstacks():
+    '''
+    Once called, starts the process of retrieving all techstacks
+    :return:  Response Model that gives indication of all techstack retrieval success or failure
+    '''
     techstacks = await retrieve_techstacks()
     if techstacks:
         return ResponseModel(techstacks, "Techstacks data retrieved successfully")
@@ -29,6 +31,12 @@ async def get_techstacks():
 
 @router.get("/{name_owner}", response_description="Techstack data retrieved")
 async def get_techstack_data(name, owner):
+    '''
+    Once the techstack name and owner name is provided, starts the process of retrieving the specified techstack data
+    :param name: Endpoint which asks for techstack name
+    :param owner: Endpoint which asks for techstack owner name
+    :return: response model that indicates techstack retrieval success or failure
+    '''
     techstack = await retrieve_techstack(name,owner)
     if techstack:
         return ResponseModel(techstack, "Techstack data retrieved successfully")
