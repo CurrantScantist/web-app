@@ -76,7 +76,7 @@ def test_endpoint_techstack_detailed_json_format():
 def test_endpoint_techstack_detailed_performance_sanity():
 
     # time is in nanosecond (since the epoch: unix time)
-    maximum_tolerance_time = 0.3
+    maximum_tolerance_time = 1.0
     t0 = time.time()
     response = client.get("/techstack/detailed")
     t1 = time.time()
