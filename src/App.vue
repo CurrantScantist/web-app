@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <Topbar class="topbar" />
+    <TheTopbar class="topbar" />
     <router-view class="route" />
   </div>
 </template>
@@ -22,11 +22,11 @@
 
 <script>
 // import Sidebar from "@/components/Sidebar.vue";
-import Topbar from "./components/Topbar.vue";
+import TheTopbar from "./components/TheTopbar.vue";
 export default {
   components: {
     // Sidebar,
-    Topbar,
+    TheTopbar,
   },
   setup() {},
 };
