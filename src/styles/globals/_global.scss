@@ -93,6 +93,14 @@ h5{
   padding-bottom: 3%;
 } 
 
+.health-model {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0rem;
+  grid-template-columns: minmax(0%, auto) minmax(0%, auto);
+  grid-auto-flow: column;
+}
+
 .stat-name {
   font-weight: 800;
   padding-right: 5px;
@@ -107,6 +115,12 @@ h5{
     grid-auto-flow: row;
     padding-bottom: 3%;
   }
+
+h1,
+h2 {
+    font-size: 185%;
+    margin-bottom: 8px;
+  }
 }
 
 @media only screen and (max-width: 850px) {
@@ -119,6 +133,17 @@ h5{
     "simple-visualisation2"
     "wide-visualisation1"
     "wide-visualisation2";
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .health-model{
+    display: grid;
+    grid-template-rows: repeat(1fr);
+    grid-gap: 1rem;
+    grid-template-columns: minmax(0%, auto);
+    grid-auto-flow: row;
+    grid-template-rows: repeat(1fr);
   }
 }
 

@@ -1,86 +1,171 @@
 <template>
   <div class="test">
-        <div class="repository">
-            <div class="rep-container">
-            <span id='close' 
-                onclick='
-                    this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
-                    return false;
-                '>
-                    <button class="close-button">X</button>
-                </span> 
+      <div class = "health-model">
+            <div class="repository">
+                <div class="rep-container">
+                <span id='close' 
+                    onclick='
+                        this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
+                        return false;
+                    '>
+                        <button class="close-button">X</button>
+                    </span> 
 
-                <h1>
-                    microsoft/vscode
-                </h1>
-                
-                <h5>
-                    Visual Studio Code is a source-code editor made by Microsoft for Windows, 
-                    Linux and macOS. Features include support for debugging, syntax highlighting, 
-                    intelligent code completion, snippets, code refactoring, and embedded Git. Users 
-                    can change the theme, keyboard shortcuts, preferences, and install extensions that 
-                    add additional functionality.
-                </h5>
+                    <h1>
+                        microsoft/vscode
+                    </h1>
+                    
+                    <h5>
+                        Visual Studio Code is a source-code editor made by Microsoft for Windows, 
+                        Linux and macOS. Features include support for debugging, syntax highlighting, 
+                        intelligent code completion, snippets, code refactoring, and embedded Git. Users 
+                        can change the theme, keyboard shortcuts, preferences, and install extensions that 
+                        add additional functionality.
+                    </h5>
 
-                <div class= "info-grid">
-                    <div class="info-item">
-                        <div class="stat-name">Stars:</div><div>99999</div>
+                    <div class= "info-grid">
+                        <div class="info-item">
+                            <div class="stat-name">Stars:</div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Forks: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Watchers: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Issues: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Tags: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Default Branch: </div><div>main</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Stargazers: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Project Size: </div><div>100 MB</div>
+                        </div>
+
                     </div>
 
-                    <div class="info-item">
-                        <div class="stat-name">Forks: </div><div>99999</div>
-                    </div>
+                    <div class="viz-grid">
+                        <div class="simple-visualisation1">
+                        <h3>Placeholder </h3>
+                            <h6>(Placeholder)</h6> 
+                            <v-echarts v-bind:option="option2" style="height: 300px" />
+                        </div>
+                        <div class="simple-visualisation2">
+                            <h3>Contribution Pie Chart</h3>
+                            <h6>(by Number of Commits)</h6>
+                            <v-echarts v-bind:option="option2" style="height: 300px" />
+                        </div>
+                        <div class="wide-visualisation1">
+                            <h3>Lines of Code by language</h3>
+                            <h6>(over versions in %)</h6>
+                            <v-echarts v-bind:option="option3" style="height: 500px" />
+                        </div>
 
-                    <div class="info-item">
-                        <div class="stat-name">Watchers: </div><div>99999</div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="stat-name">Issues: </div><div>99999</div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="stat-name">Tags: </div><div>99999</div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="stat-name">Default Branch: </div><div>main</div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="stat-name">Stargazers: </div><div>99999</div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="stat-name">Project Size: </div><div>100 MB</div>
-                    </div>
-
-                </div>
-
-                <div class="viz-grid">
-                    <div class="simple-visualisation1">
-                    <h3>Placeholder </h3>
-                        <h6>(Placeholder)</h6> 
-                    </div>
-                    <div class="simple-visualisation2">
-                        <h3>Contribution Pie Chart</h3>
-                        <h6>(by Number of Commits)</h6>
-                        <v-echarts v-bind:option="option2" style="height: 500px" />
-                    </div>
-                    <div class="wide-visualisation1">
-                        <h3>Lines of Code by language</h3>
-                        <h6>(over versions in %)</h6>
-                        <v-echarts v-bind:option="option3" style="height: 500px" />
-                    </div>
-
-                    <div class="wide-visualisation2">
-                        <h3>Lines in files by type</h3>
-                        <h6>(in %)</h6>
-                        <v-echarts v-bind:option="option4" style="height: 500px" />
+                        <div class="wide-visualisation2">
+                            <h3>Lines in files by type</h3>
+                            <h6>(in %)</h6>
+                            <v-echarts v-bind:option="option4" style="height: 500px" />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="repository">
+                <div class="rep-container">
+                <span id='close' 
+                    onclick='
+                        this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
+                        return false;
+                    '>
+                        <button class="close-button">X</button>
+                    </span> 
+
+                    <h1>
+                        microsoft/vscode2
+                    </h1>
+                    
+                    <h5>
+                        Visual Studio Code is a source-code editor made by Microsoft for Windows, 
+                        Linux and macOS. Features include support for debugging, syntax highlighting, 
+                        intelligent code completion, snippets, code refactoring, and embedded Git. Users 
+                        can change the theme, keyboard shortcuts, preferences, and install extensions that 
+                        add additional functionality.
+                    </h5>
+
+                    <div class= "info-grid">
+                        <div class="info-item">
+                            <div class="stat-name">Stars:</div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Forks: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Watchers: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Issues: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Tags: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Default Branch: </div><div>main</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Stargazers: </div><div>99999</div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="stat-name">Project Size: </div><div>100 MB</div>
+                        </div>
+
+                    </div>
+
+                    <div class="viz-grid">
+                        <div class="simple-visualisation1">
+                        <h3>Placeholder </h3>
+                            <h6>(Placeholder)</h6> 
+                            <v-echarts v-bind:option="option2" style="height: 300px" />
+                        </div>
+                        <div class="simple-visualisation2">
+                            <h3>Contribution Pie Chart</h3>
+                            <h6>(by Number of Commits)</h6>
+                            <v-echarts v-bind:option="option2" style="height: 300px" />
+                        </div>
+                        <div class="wide-visualisation1">
+                            <h3>Lines of Code by language</h3>
+                            <h6>(over versions in %)</h6>
+                            <v-echarts v-bind:option="option3" style="height: 500px" />
+                        </div>
+
+                        <div class="wide-visualisation2">
+                            <h3>Lines in files by type</h3>
+                            <h6>(in %)</h6>
+                            <v-echarts v-bind:option="option4" style="height: 500px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>>
   </div>
 </template>
 
@@ -95,12 +180,7 @@
     name: 'SingleRepository',
      data () {
       return {
-          
             option2: {
-                title: {
-                    subtext: 'By Total Number of Commits',
-                    left: 'center'
-                },
                 tooltip: {
                     trigger: 'item'
                 },
