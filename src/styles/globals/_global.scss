@@ -32,7 +32,7 @@ body {
 h1, 
 h2 {
   font-weight: 800;
-  font-size: 380%;
+  font-size: 385%;
   //color: #000000;
   margin-bottom: 13px;
 }
@@ -80,7 +80,8 @@ h5{
   grid-auto-flow: row;
   grid-template-areas: 
   "simple-visualisation1 simple-visualisation2"
-  "wide-visualisation wide-visualisation";
+  "wide-visualisation1 wide-visualisation1"
+  "wide-visualisation2 wide-visualisation2";
 }
 
 .info-grid {
@@ -116,13 +117,15 @@ h5{
     grid-template-areas: 
     "simple-visualisation1"
     "simple-visualisation2"
-    "wide-visualisation";
+    "wide-visualisation1"
+    "wide-visualisation2";
   }
 }
 
 .simple-visualisation1,
 .simple-visualisation2,
-.wide-visualisation {
+.wide-visualisation1,
+.wide-visualisation2 {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -138,14 +141,18 @@ h5{
   grid-area: simple-visualisation2;
 }
 
-.wide-visualisation {
-  grid-area: wide-visualisation;
+.wide-visualisation1 {
+  grid-area: wide-visualisation1;
+}
+
+.wide-visualisation2 {
+  grid-area: wide-visualisation2;
 }
 
 .info-item {
   display: flex;
   font-weight: 500;
-  font-size: 155%;
+  font-size: 158%;
   padding: 5px;
 }
 

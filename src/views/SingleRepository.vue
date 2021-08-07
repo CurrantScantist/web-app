@@ -1,80 +1,86 @@
 <template>
   <div class="test">
-    <div class="repository">
-        <div class="rep-container">
-           <span id='close' 
-            onclick='
-                this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
-                return false;
-            '>
-                <button class="close-button">X</button>
-            </span> 
+        <div class="repository">
+            <div class="rep-container">
+            <span id='close' 
+                onclick='
+                    this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); 
+                    return false;
+                '>
+                    <button class="close-button">X</button>
+                </span> 
 
-            <h1>
-                microsoft/vscode
-            </h1>
-            
-            <h5>
-                Visual Studio Code is a source-code editor made by Microsoft for Windows, 
-                Linux and macOS. Features include support for debugging, syntax highlighting, 
-                intelligent code completion, snippets, code refactoring, and embedded Git. Users 
-                can change the theme, keyboard shortcuts, preferences, and install extensions that 
-                add additional functionality.
-            </h5>
+                <h1>
+                    microsoft/vscode
+                </h1>
+                
+                <h5>
+                    Visual Studio Code is a source-code editor made by Microsoft for Windows, 
+                    Linux and macOS. Features include support for debugging, syntax highlighting, 
+                    intelligent code completion, snippets, code refactoring, and embedded Git. Users 
+                    can change the theme, keyboard shortcuts, preferences, and install extensions that 
+                    add additional functionality.
+                </h5>
 
-            <div class= "info-grid">
-                <div class="info-item">
-                    <div class="stat-name">Stars:</div><div>99999</div>
+                <div class= "info-grid">
+                    <div class="info-item">
+                        <div class="stat-name">Stars:</div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Forks: </div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Watchers: </div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Issues: </div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Tags: </div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Default Branch: </div><div>main</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Stargazers: </div><div>99999</div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="stat-name">Project Size: </div><div>100 MB</div>
+                    </div>
+
                 </div>
 
-                <div class="info-item">
-                    <div class="stat-name">Forks: </div><div>99999</div>
-                </div>
+                <div class="viz-grid">
+                    <div class="simple-visualisation1">
+                    <h3>Placeholder </h3>
+                        <h6>(Placeholder)</h6> 
+                    </div>
+                    <div class="simple-visualisation2">
+                        <h3>Contribution Pie Chart</h3>
+                        <h6>(by Number of Commits)</h6>
+                        <v-echarts v-bind:option="option2" style="height: 500px" />
+                    </div>
+                    <div class="wide-visualisation1">
+                        <h3>Lines of Code by language</h3>
+                        <h6>(over versions in %)</h6>
+                        <v-echarts v-bind:option="option3" style="height: 500px" />
+                    </div>
 
-                <div class="info-item">
-                    <div class="stat-name">Watchers: </div><div>99999</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="stat-name">Issues: </div><div>99999</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="stat-name">Tags: </div><div>99999</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="stat-name">Default Branch: </div><div>main</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="stat-name">Stargazers: </div><div>99999</div>
-                </div>
-
-                <div class="info-item">
-                    <div class="stat-name">Project Size: </div><div>100 MB</div>
-                </div>
-
-            </div>
-
-            <div class="viz-grid">
-                <div class="simple-visualisation1">
-                    <h3>Programming Language Breakdown</h3>
-                    <h6>(in %)</h6>
-                    <v-echarts v-bind:option="option1" style="height: 500px" />
-                </div>
-                <div class="simple-visualisation2">
-                    <h3>Contribution Pie Chart</h3>
-                    <h6>(by Number of Commits)</h6>
-                    <v-echarts v-bind:option="option2" style="height: 500px" />
-                </div>
-                <div class="wide-visualisation">
-                    <h3>Lines of Code over Time</h3>
-                    <v-echarts v-bind:option="option3" style="height: 500px" />
+                    <div class="wide-visualisation2">
+                        <h3>Lines in files by type</h3>
+                        <h6>(in %)</h6>
+                        <v-echarts v-bind:option="option4" style="height: 500px" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
   </div>
 </template>
 
@@ -89,79 +95,7 @@
     name: 'SingleRepository',
      data () {
       return {
-          option1:  {
-                title: {
-                    subtext: 'in %',
-                    textstyle: {
-                        color: "#ffffff",
-                        fontFamily: "Montserrat"
-                    }
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {            // Use axis to trigger tooltip
-                        type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
-                    }
-                },
-                legend: {
-                    data: ['Python', 'C++', 'Go', 'Java', 'R'],
-                    top: 'bottom'
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                xAxis: {
-                    type: 'category',
-                    data: ["microsoft/vscode", "ios/xcode"]
-                },
-                series: [
-                    {
-                        name: 'Python',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [30, 10]
-                    },
-                    {
-                        name: 'C++',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [10, 5]
-                    },
-                    {
-                        name: 'Go',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [20, 35]
-                    },
-                    {
-                        name: 'Java',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [15, 35]
-                    },
-                    {
-                        name: 'R',
-                        type: 'bar',
-                        stack: 'total',
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [25, 15]
-                    }
-                ]
-            },
+          
             option2: {
                 title: {
                     subtext: 'By Total Number of Commits',
@@ -194,72 +128,227 @@
                     }
                 ]
             },
-            option3: {
+            option3:  {
+                color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
-                        type: 'cross'
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
                     }
                 },
+                legend: {
+                    data: ['Java', 'JavaScript', 'CSS', 'HTML', 'Python']
+                },
                 toolbox: {
-                    show: true,
                     feature: {
                         saveAsImage: {}
                     }
                 },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+                grid: {
+                    left: '1%',
+                    right: '3%',
+                    bottom: '3%',
+                    containLabel: true
                 },
-                yAxis: {
-                    type: 'value',
-                    axisLabel: {
-                        formatter: '{value} K'
-                    },
-                    axisPointer: {
-                        snap: true
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
                     }
-                },
-                visualMap: {
-                    show: false,
-                    dimension: 0,
-                    pieces: [{
-                        lte: 6,
-                        color: 'green'
-                    }, {
-                        gt: 6,
-                        lte: 8,
-                        color: 'red'
-                    }, {
-                        gt: 8,
-                        lte: 14,
-                        color: 'green'
-                    }, {
-                        gt: 14,
-                        lte: 17,
-                        color: 'red'
-                    }, {
-                        gt: 17,
-                        color: 'green'
-                    }]
-                },
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
                 series: [
                     {
+                        name: 'Java',
                         type: 'line',
-                        smooth: true,
-                        data: [10, 28, 88, 260, 270, 280, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
-                        markArea: {
-                            itemStyle: {
-                                color: 'rgba(255, 173, 177, 0.4)'
-                            },
-                            data: [ [{
-                                name: 'Neural Network Update',
-                                xAxis: 'Jul'
-                            }, {
-                                xAxis: 'Sep'
-                            }] ]
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 1
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: 'rgba(128, 255, 165)'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.4, 0.425, 0.5, 0.53, 0.51, 0.55, 0.31, 0.2]
+                    },
+                    {
+                        name: 'JavaScript',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 1
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: 'rgba(0, 221, 255)'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.3, 0.3, 0.28, 0.2, 0.2, 0.2, 0.38, 0.51]
+                    },
+                    {
+                        name: 'CSS',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 0
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color:  'rgba(55, 162, 255)'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.05, 0.1, 0.15, 0.09, 0.2, 0.13, 0.11, 0.2]
+                    },
+                    {
+                        name: 'HTML',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 0
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: 'rgba(255, 0, 135)'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.075, 0.05, 0.02, 0.18, 0.09, 0.12, 0.2, 0.09]
+                    },
+                    {
+                        name: 'Python',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 0
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: 'rgba(255, 191, 0)'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.175, 0.125, 0.05, 0, 0, 0, 0, 0]
+                    }
+                ]
+            },
+            option4:  {
+                color: ['#000000', '#383838', '#8a8888'],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
                         }
+                    }
+                },
+                legend: {
+                    data: ['Code', 'Comments', 'Blank']
+                },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}
+                    }
+                },
+                grid: {
+                    left: '1%',
+                    right: '3%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Code',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: true,
+                        lineStyle: {
+                            width: 1
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: '#000000'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.7, 0.74, 0.67, 0.66, 0.65, 0.67, 0.64, 0.67]
+                    },
+                    {
+                        name: 'Comments',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: true,
+                        lineStyle: {
+                            width: 1
+                        },
+                        showSymbol: false,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: '#383838'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.2, 0.18, 0.23, 0.23, 0.25, 0.23, 0.25, 0.25]
+                    },
+                    {
+                        name: 'Blank',
+                        type: 'line',
+                        stack: 'total',
+                        smooth: false,
+                        lineStyle: {
+                            width: 0
+                        },
+                        showSymbol: true,
+                        areaStyle: {
+                            opacity: 0.95,
+                            color: '#8a8888'
+                        },
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: [0.1, 0.080, 0.1, 0.11, 0.1, 0.1, 0.11, 0.080]
                     }
                 ]
             }
