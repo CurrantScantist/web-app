@@ -56,7 +56,6 @@ h6 {
 h5{
   font-weight: 500;
   font-size: 138%;
-  //color: #a1a1a1;
   margin-top: 5px;
   text-align: justify;
 }
@@ -75,8 +74,7 @@ h5{
 .viz-grid {
   display: grid;
   font-size: 138%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: repeat(1fr);
   grid-gap: 1rem;
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   grid-auto-flow: row;
@@ -87,20 +85,31 @@ h5{
 
 .info-grid {
   display: grid;
-  font-size: 138%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;
-  grid-template-areas: 
-  "info-col info-col"
-  "";
+  padding-bottom: 3%;
 } 
+
+.stat-name {
+  font-weight: 800;
+  padding-right: 5px;
+}
+
+@media only screen and (max-width: 650px) {
+.info-grid {
+    display: grid;
+    grid-template-columns: minmax(0%, 1fr);
+    grid-template-rows: repeat(1fr);
+    grid-gap: 0.5rem;
+    grid-auto-flow: row;
+    padding-bottom: 3%;
+  }
+}
 
 @media only screen and (max-width: 850px) {
   .viz-grid{
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
     grid-gap: 1rem;
     grid-template-columns: minmax(0%, 100%);
     grid-auto-flow: row;
@@ -109,46 +118,35 @@ h5{
     "simple-visualisation2"
     "wide-visualisation";
   }
+}
 
-  .info-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
+.simple-visualisation1,
+.simple-visualisation2,
+.wide-visualisation {
+  background-color: rgba(255, 255, 255, 0.88);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  border-radius: var(--viz--radius);
 }
 
 .simple-visualisation1 {
-  background-color: rgba(255, 255, 255, 0.88);
-  //border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
   grid-area: simple-visualisation1;
-  border-radius: var(--viz--radius);
 }
 
 .simple-visualisation2 {
-  background-color: rgba(255, 255, 255, 0.88);
-  //border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
   grid-area: simple-visualisation2;
-  border-radius: var(--viz--radius);
 }
 
 .wide-visualisation {
-  background-color: rgba(255, 255, 255, 0.88);
-  //border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
   grid-area: wide-visualisation;
-  border-radius: var(--viz--radius);
 }
 
-.info-col {
+.info-item {
+  display: flex;
+  font-weight: 500;
+  font-size: 155%;
   padding: 5px;
-  text-align: left;
 }
 
 body {

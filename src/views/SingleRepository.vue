@@ -22,31 +22,40 @@
                 add additional functionality.
             </h5>
 
-            <!-- <div class= "info-grid">
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa1</h5>
+            <div class= "info-grid">
+                <div class="info-item">
+                    <div class="stat-name">Stars:</div><div>99999</div>
                 </div>
 
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa2</h5>
+                <div class="info-item">
+                    <div class="stat-name">Forks: </div><div>99999</div>
                 </div>
 
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa3</h5>
+                <div class="info-item">
+                    <div class="stat-name">Watchers: </div><div>99999</div>
                 </div>
 
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa4</h5>
+                <div class="info-item">
+                    <div class="stat-name">Issues: </div><div>99999</div>
                 </div>
 
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa5</h5>
+                <div class="info-item">
+                    <div class="stat-name">Tags: </div><div>99999</div>
                 </div>
 
-                <div class="info-col">
-                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa6</h5>
+                <div class="info-item">
+                    <div class="stat-name">Default Branch: </div><div>main</div>
                 </div>
-            </div> -->
+
+                <div class="info-item">
+                    <div class="stat-name">Stargazers: </div><div>99999</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="stat-name">Project Size: </div><div>100 MB</div>
+                </div>
+
+            </div>
 
             <div class="viz-grid">
                 <div class="simple-visualisation1">
@@ -75,82 +84,6 @@
 <script>
 
     import { VEcharts } from 'vue3-echarts';
-    console.log("ok")
-    // // based on prepared DOM, initialize echarts instance
-    // var myChart1 = document.getElementById("vis1");
-
-    // var option1 = {
-    //             title: {
-    //                 subtext: 'in %',
-    //                 left: 'center'
-    //             },
-    //             tooltip: {
-    //                 trigger: 'axis',
-    //                 axisPointer: {            // Use axis to trigger tooltip
-    //                     type: 'shadow'        // 'shadow' as default; can also be 'line' or 'shadow'
-    //                 }
-    //             },
-    //             legend: {
-    //                 data: ['Python', 'C++', 'Go', 'Java', 'R'],
-    //                 top: 'bottom'
-    //             },
-    //             yAxis: {
-    //                 type: 'value'
-    //             },
-    //             xAxis: {
-    //                 type: 'category',
-    //                 data: ["Tensorflow", "Google Cloud AutoML"]
-    //             },
-    //             series: [
-    //                 {
-    //                     name: 'Python',
-    //                     type: 'bar',
-    //                     stack: 'total',
-    //                     emphasis: {
-    //                         focus: 'series'
-    //                     },
-    //                     data: [30, 10]
-    //                 },
-    //                 {
-    //                     name: 'C++',
-    //                     type: 'bar',
-    //                     stack: 'total',
-    //                     emphasis: {
-    //                         focus: 'series'
-    //                     },
-    //                     data: [10, 5]
-    //                 },
-    //                 {
-    //                     name: 'Go',
-    //                     type: 'bar',
-    //                     stack: 'total',
-    //                     emphasis: {
-    //                         focus: 'series'
-    //                     },
-    //                     data: [20, 35]
-    //                 },
-    //                 {
-    //                     name: 'Java',
-    //                     type: 'bar',
-    //                     stack: 'total',
-    //                     emphasis: {
-    //                         focus: 'series'
-    //                     },
-    //                     data: [15, 35]
-    //                 },
-    //                 {
-    //                     name: 'R',
-    //                     type: 'bar',
-    //                     stack: 'total',
-    //                     emphasis: {
-    //                         focus: 'series'
-    //                     },
-    //                     data: [25, 15]
-    //                 }
-    //             ]
-    //         };
-
-    // myChart1.setOption(option1);
     
     export default {
     name: 'SingleRepository',

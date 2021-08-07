@@ -2,7 +2,6 @@
   <div class="landing-wrapper">
     <div class="hero">
       <div class="one">
-        bubba
         <img src="@/assets/temp-logo.svg" alt="Logo" height="200" />
       </div>
       <div class="two">
