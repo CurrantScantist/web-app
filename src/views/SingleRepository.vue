@@ -22,6 +22,32 @@
                 add additional functionality.
             </h5>
 
+            <!-- <div class= "info-grid">
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa1</h5>
+                </div>
+
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa2</h5>
+                </div>
+
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa3</h5>
+                </div>
+
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa4</h5>
+                </div>
+
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa5</h5>
+                </div>
+
+                <div class="info-col">
+                    <h5>cocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoacocoa6</h5>
+                </div>
+            </div> -->
+
             <div class="viz-grid">
                 <div class="simple-visualisation1">
                     <h3>Programming Language Breakdown</h3>
