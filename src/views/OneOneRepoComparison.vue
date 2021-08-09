@@ -12,48 +12,44 @@
                     </span> 
 
                     <h1>
-                        microsoft/vscode
+                        {{repository1.owner}}/{{repository1.name}}
                     </h1>
                     
                     <h5>
-                        Visual Studio Code is a source-code editor made by Microsoft for Windows, 
-                        Linux and macOS. Features include support for debugging, syntax highlighting, 
-                        intelligent code completion, snippets, code refactoring, and embedded Git. Users 
-                        can change the theme, keyboard shortcuts, preferences, and install extensions that 
-                        add additional functionality.
+                        {{repository1.description}}
                     </h5>
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Stars:</div><div>99999</div>
+                            <div class="stat-name">Forks Count:</div><div>{{repository1.forks_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>99999</div>
+                            <div class="stat-name">Forks: </div><div>{{repository1.forks}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>99999</div>
+                            <div class="stat-name">Watchers: </div><div>{{repository1.watchers_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>99999</div>
+                            <div class="stat-name">Issues: </div><div>{{repository1.open_issues_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Tags: </div><div>99999</div>
+                            <div class="stat-name">Tags: </div><div>{{(repository1.topics || []).join(', ')}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Default Branch: </div><div>main</div>
+                            <div class="stat-name">Default Branch: </div><div>{{repository1.default_branch}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>99999</div>
+                            <div class="stat-name">Stargazers: </div><div>{{repository1.stargazers_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>100 MB</div>
+                            <div class="stat-name">Project Size: </div><div>{{repository1.size}} bytes</div>
                         </div>
 
                     </div>
@@ -83,6 +79,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="repository">
                 <div class="rep-container">
                 <span id='close' 
@@ -94,48 +91,44 @@
                     </span> 
 
                     <h1>
-                        microsoft/vscode2
+                        {{repository2.owner}}/{{repository2.name}}
                     </h1>
                     
                     <h5>
-                        Visual Studio Code is a source-code editor made by Microsoft for Windows, 
-                        Linux and macOS. Features include support for debugging, syntax highlighting, 
-                        intelligent code completion, snippets, code refactoring, and embedded Git. Users 
-                        can change the theme, keyboard shortcuts, preferences, and install extensions that 
-                        add additional functionality.
+                        {{repository2.description}}
                     </h5>
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Stars:</div><div>99999</div>
+                            <div class="stat-name">Forks Count:</div><div>{{repository2.forks_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>99999</div>
+                            <div class="stat-name">Forks: </div><div>{{repository2.forks}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>99999</div>
+                            <div class="stat-name">Watchers: </div><div>{{repository2.watchers_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>99999</div>
+                            <div class="stat-name">Issues: </div><div>{{repository2.open_issues_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Tags: </div><div>99999</div>
+                            <div class="stat-name">Tags: </div><div>{{(repository2.topics || []).join(', ')}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Default Branch: </div><div>main</div>
+                            <div class="stat-name">Default Branch: </div><div>{{repository2.default_branch}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>99999</div>
+                            <div class="stat-name">Stargazers: </div><div>{{repository2.stargazers_count}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>100 MB</div>
+                            <div class="stat-name">Project Size: </div><div>{{repository2.size}} bytes</div>
                         </div>
 
                     </div>
@@ -165,7 +158,7 @@
                     </div>
                 </div>
             </div>
-      </div>>
+      </div>
   </div>
 </template>
 
@@ -177,9 +170,32 @@
     import { VEcharts } from 'vue3-echarts';
     
     export default {
-    name: 'SingleRepository',
+    name: 'OneOneRepoComparison',
+    async created(){
+        const repo1Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL1, {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        const repo2Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL2, {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        const responseDataRepo1 = await repo1Fetch.json()
+        const responseDataRepo2 = await repo2Fetch.json()
+        this.repository1 = responseDataRepo1.data[0]
+        this.repository2 = responseDataRepo2.data[0]
+    } ,
      data () {
       return {
+            repository1: {},
+            repository2: {},
+            fetchURL1: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=react&owner=facebook",
+            fetchURL2: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=vue&owner=vuejs",
             option2: {
                 tooltip: {
                     trigger: 'item'
@@ -208,8 +224,9 @@
                     }
                 ]
             },
-            option3:  {
-                color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+            option3:  {},
+            option4: {},
+            linesOfCodeByLangChart: {
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -257,7 +274,7 @@
                         showSymbol: false,
                         areaStyle: {
                             opacity: 0.95,
-                            color: 'rgba(128, 255, 165)'
+                            color: '#ff5100'
                         },
                         emphasis: {
                             focus: 'series'
@@ -275,7 +292,7 @@
                         showSymbol: false,
                         areaStyle: {
                             opacity: 0.95,
-                            color: 'rgba(0, 221, 255)'
+                            color: '#8800ff'
                         },
                         emphasis: {
                             focus: 'series'
@@ -293,7 +310,7 @@
                         showSymbol: false,
                         areaStyle: {
                             opacity: 0.95,
-                            color:  'rgba(55, 162, 255)'
+                            color:  '#82173f'
                         },
                         emphasis: {
                             focus: 'series'
@@ -311,7 +328,7 @@
                         showSymbol: false,
                         areaStyle: {
                             opacity: 0.95,
-                            color: 'rgba(255, 0, 135)'
+                            color: '#383838'
                         },
                         emphasis: {
                             focus: 'series'
@@ -329,7 +346,7 @@
                         showSymbol: false,
                         areaStyle: {
                             opacity: 0.95,
-                            color: 'rgba(255, 191, 0)'
+                            color: '#000000'
                         },
                         emphasis: {
                             focus: 'series'
@@ -338,8 +355,7 @@
                     }
                 ]
             },
-            option4:  {
-                color: ['#000000', '#383838', '#8a8888'],
+            codeTrendChart: {
                 tooltip: {
                     trigger: 'axis',
                     axisPointer: {
@@ -436,6 +452,12 @@
     },
     components: {
         VEcharts,
+    },
+    methods: {
+        getColor() {
+            let colorSet = ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00','#ff5100', '#8800ff', '#82173f', '#383838', '#000000']
+            console.log(colorSet)
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 import Repositories from "@/views/Repositories";
 import About from "@/views/About";
-import SingleRepository from "@/views/SingleRepository";
+import OneOneRepoComparison from "@/views/OneOneRepoComparison";
 
 export default [
   {
@@ -20,9 +20,9 @@ export default [
     },
   },
   {
-    path: "/single-repository",
-    name: "test-repo",
-    component: SingleRepository,
+    path: "/one-one-compare",
+    name: "1:1 Compare",
+    component: OneOneRepoComparison,
     meta: {
       icon: "el-icon-info",
     },
