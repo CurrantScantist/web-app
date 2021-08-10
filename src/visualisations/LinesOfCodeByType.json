@@ -10,7 +10,6 @@
         }
     },
     "legend": {
-        "data": ["Code", "Comments", "Blank"]
     },
     "toolbox": {
         "feature": {
@@ -35,56 +34,6 @@
         }
     ],
     "series": [
-        {
-            "name": "Code",
-            "type": "line",
-            "stack": "total",
-            "smooth": true,
-            "lineStyle": {
-                "width": 1
-            },
-            "showSymbol": false,
-            "areaStyle": {
-                "opacity": 0.95,
-                "color": "#000000"
-            },
-            "emphasis": {
-                "focus": "series"
-            } 
-        },
-        {
-            "name": "Comments",
-            "type": "line",
-            "stack": "total",
-            "smooth": true,
-            "lineStyle": {
-                "width": 1
-            },
-            "showSymbol": false,
-            "areaStyle": {
-                "opacity": 0.95,
-                "color": "#383838"
-            },
-            "emphasis": {
-                "focus": "series"
-            }
-        },
-        {
-            "name": "Blank",
-            "type": "line",
-            "stack": "total",
-            "smooth": false,
-            "lineStyle": {
-                "width": 0
-            },
-            "showSymbol": true,
-            "areaStyle": {
-                "opacity": 0.95,
-                "color": "#8a8888"
-            },
-            "emphasis": {
-                "focus": "series"
-            }
-        }
+        
     ]
 }
