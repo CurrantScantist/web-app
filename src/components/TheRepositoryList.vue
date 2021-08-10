@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="list-wrapper">
     <el-input
+      class="search"
       placeholder="Search for a repository!"
       v-model="search"
       clearable
@@ -10,12 +11,15 @@
       <div v-if="data.length == 0" />
       <!-- Otherwise, show this -->
       <div v-else>
-        <el-table :data="pagedData">
-          <el-table-column type="selection"> </el-table-column>
+        <el-table :data="pagedData" @row-click="handleRowClick">
+          <!-- <el-table-column type="selection"> </el-table-column> -->
           <el-table-column label="Repository">
-            <template #default="scope">{{ scope.row.repo_name }}</template>
+            <template #default="scope">{{ scope.row.name }}</template>
           </el-table-column>
-          <el-table-column
+          <el-table-column property="owner" label="Owner" show-overflow-tooltip>
+          </el-table-column>
+          <!-- Deprecated -->
+          <!-- <el-table-column
             property="releases"
             label="Releases"
             v-slot="scope"
@@ -37,13 +41,17 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
+          </el-table-column> -->
+          <el-table-column property="forks" label="Forks"> </el-table-column>
+          <el-table-column property="stargazers_count" label="Stargazers">
           </el-table-column>
-          <el-table-column property="tags" label="Tags" show-overflow-tooltip>
+          <el-table-column property="topics" label="Tags" show-overflow-tooltip>
           </el-table-column>
         </el-table>
       </div>
     </div>
     <el-pagination
+      class="pagination"
       background
       layout="prev, pager, next"
       @current-change="handlePageChange"
@@ -55,8 +63,17 @@
 </template>
 
 <style lang="scss" scoped>
-.table {
-  width: 100%;
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .table-wrapper {
+    padding: 1rem 0;
+  }
+
+  .pagination {
+    margin: 0 auto;
+  }
 }
 </style>
 
@@ -81,9 +98,9 @@ export default defineComponent({
   async created() {
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/ccc2b137-5853-4cf0-9c0e-a7c71a248d06"
+        process.env.VUE_APP_API_URL + "/techstack/detailed"
       );
-      this.data = this.parseData(response.data);
+      this.data = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
@@ -94,10 +111,11 @@ export default defineComponent({
         return this.data;
       }
 
+      // Filter's data
       return this.data.filter(
         (items) =>
           !this.search ||
-          items.repo_name.toLowerCase().includes(this.search.toLowerCase())
+          items.name.toLowerCase().includes(this.search.toLowerCase())
       );
     },
     pagedData() {
@@ -120,6 +138,7 @@ export default defineComponent({
      * Called on API request to parse the data.
      *
      * @param {object} data - The data object to be parsed
+     * @deprecated - Data no longer needs to be parsed
      */
     parseData(data) {
       console.log(typeof data);
@@ -133,6 +152,7 @@ export default defineComponent({
      * Called on dropdown selection.
      *
      * @param {object} indices - The index of the row being changed and index of the selected release
+     * @deprecated - Release information not displayed within this component
      */
     setRelease(indices) {
       console.log(typeof indices);
@@ -145,6 +165,9 @@ export default defineComponent({
      */
     handlePageChange(newPage) {
       this.page = newPage;
+    },
+    handleRowClick(row) {
+      this.$router.push(`/repositories/${row.name}/${row.owner}`);
     },
   },
 });
