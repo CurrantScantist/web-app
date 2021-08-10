@@ -26,8 +26,7 @@
     "xAxis": [
         {
             "type": "category",
-            "boundaryGap": false,
-            "data": ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
+            "boundaryGap": false
         }
     ],
     "yAxis": [
@@ -51,8 +50,7 @@
             },
             "emphasis": {
                 "focus": "series"
-            },
-            "data": [0.7, 0.74, 0.67, 0.66, 0.65, 0.67, 0.64, 0.67]
+            } 
         },
         {
             "name": "Comments",
@@ -69,8 +67,7 @@
             },
             "emphasis": {
                 "focus": "series"
-            },
-            "data": [0.2, 0.18, 0.23, 0.23, 0.25, 0.23, 0.25, 0.25]
+            }
         },
         {
             "name": "Blank",
@@ -87,8 +84,7 @@
             },
             "emphasis": {
                 "focus": "series"
-            },
-            "data": [0.1, 0.080, 0.1, 0.11, 0.1, 0.1, 0.11, 0.080]
+            }
         }
     ]
 }

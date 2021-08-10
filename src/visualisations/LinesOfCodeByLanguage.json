@@ -1,0 +1,129 @@
+{
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "label": {
+                "backgroundColor": "#6a7985"
+            }
+        }
+    },
+    "legend": {
+        "data": ["Java", "JavaScript", "CSS", "HTML", "Python"]
+    },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {}
+        }
+    },
+    "grid": {
+        "left": "1%",
+        "right": "3%",
+        "bottom": "3%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "type": "category",
+            "boundaryGap": false,
+            "data": ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value"
+        }
+    ],
+    "series": [
+        {
+            "name": "Java",
+            "type": "line",
+            "stack": "total",
+            "smooth": "false",
+            "lineStyle": {
+                "width": 1
+            },
+            "showSymbol": false,
+            "areaStyle": {
+                "opacity": 0.95,
+                "color": "#ff5100"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [0.4, 0.425, 0.5, 0.53, 0.51, 0.55, 0.31, 0.2]
+        },
+        {
+            "name": "JavaScript",
+            "type": "line",
+            "stack": "total",
+            "smooth": false,
+            "lineStyle": {
+                "width": 1
+            },
+            "showSymbol": false,
+            "areaStyle": {
+                "opacity": 0.95,
+                "color": "#8800ff"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [0.3, 0.3, 0.28, 0.2, 0.2, 0.2, 0.38, 0.51]
+        },
+        {
+            "name": "CSS",
+            "type": "line",
+            "stack": "total",
+            "smooth": false,
+            "lineStyle": {
+                "width": 0
+            },
+            "showSymbol": false,
+            "areaStyle": {
+                "opacity": 0.95,
+                "color":  "#82173f"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [0.05, 0.1, 0.15, 0.09, 0.2, 0.13, 0.11, 0.2]
+        },
+        {
+            "name": "HTML",
+            "type": "line",
+            "stack": "total",
+            "smooth": false,
+            "lineStyle": {
+                "width": 0
+            },
+            "showSymbol": false,
+            "areaStyle": {
+               "opacity": 0.95,
+                "color": "#383838"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [0.075, 0.05, 0.02, 0.18, 0.09, 0.12, 0.2, 0.09]
+        },
+        {
+            "name": "Python",
+            "type": "line",
+            "stack": "total",
+            "smooth": "false",
+            "lineStyle": {
+                "width": 0
+            },
+            "showSymbol": false,
+            "areaStyle": {
+                "opacity": 0.95,
+                "color": "#000000"
+            },
+            "emphasis": {
+                "focus": "series"
+            },
+            "data": [0.175, 0.125, 0.05, 0, 0, 0, 0, 0]
+        }
+    ]
+}

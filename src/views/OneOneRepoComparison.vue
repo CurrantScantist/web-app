@@ -21,19 +21,19 @@
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Forks Count:</div><div>{{repository1.forks_count.toLocaleString()}}</div>
+                            <div class="stat-name">Forks Count:</div><div>{{(repository1.forks_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>{{repository1.forks.toLocaleString()}}</div>
+                            <div class="stat-name">Forks: </div><div>{{(repository1.forks || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>{{repository1.watchers_count.toLocaleString()}}</div>
+                            <div class="stat-name">Watchers: </div><div>{{(repository1.watchers_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>{{repository1.open_issues_count.toLocaleString()}}</div>
+                            <div class="stat-name">Issues: </div><div>{{(repository1.open_issues_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
@@ -45,11 +45,11 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>{{repository1.stargazers_count.toLocaleString()}}</div>
+                            <div class="stat-name">Stargazers: </div><div>{{(repository1.stargazers_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>{{repository1.size.toLocaleString()}} bytes</div>
+                            <div class="stat-name">Project Size: </div><div>{{(repository1.size || 0).toLocaleString()}} bytes</div>
                         </div>
 
                     </div>
@@ -100,19 +100,19 @@
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Forks Count:</div><div>{{repository2.forks_count.toLocaleString()}}</div>
+                            <div class="stat-name">Forks Count:</div><div>{{(repository2.forks_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>{{repository2.forks.toLocaleString()}}</div>
+                            <div class="stat-name">Forks: </div><div>{{(repository2.forks || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>{{repository2.watchers_count.toLocaleString()}}</div>
+                            <div class="stat-name">Watchers: </div><div>{{(repository2.watchers_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>{{repository2.open_issues_count.toLocaleString()}}</div>
+                            <div class="stat-name">Issues: </div><div>{{(repository2.open_issues_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
@@ -124,11 +124,11 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>{{repository2.stargazers_count.toLocaleString()}}</div>
+                            <div class="stat-name">Stargazers: </div><div>{{(repository2.stargazers_count || 0).toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>{{repository2.size.toLocaleString()}} bytes</div>
+                            <div class="stat-name">Project Size: </div><div>{{(repository2.size || 0).toLocaleString()}} bytes</div>
                         </div>
 
                     </div>
@@ -178,9 +178,9 @@
      data () {
       return {
             repository1: {},
-            repository2: {},
-            fetchURL1: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=react&owner=facebook",
-            fetchURL2: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=vue&owner=vuejs",
+            repository2: {}, 
+            fetchURL1: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=flask&owner=pallets",
+            fetchURL2: "https://scantist-backend.herokuapp.com/techstack/{name_owner}?name=grab&owner=lorien",
             option2: {
                 tooltip: {
                     trigger: 'item'
@@ -210,136 +210,7 @@
                 ]
             },
             option3:  {},
-            option4: {},
-            linesOfCodeByLangChart: {
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#6a7985'
-                        }
-                    }
-                },
-                legend: {
-                    data: ['Java', 'JavaScript', 'CSS', 'HTML', 'Python']
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                grid: {
-                    left: '1%',
-                    right: '3%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: 'Java',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 1
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#ff5100'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.4, 0.425, 0.5, 0.53, 0.51, 0.55, 0.31, 0.2]
-                    },
-                    {
-                        name: 'JavaScript',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 1
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#8800ff'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.3, 0.3, 0.28, 0.2, 0.2, 0.2, 0.38, 0.51]
-                    },
-                    {
-                        name: 'CSS',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color:  '#82173f'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.05, 0.1, 0.15, 0.09, 0.2, 0.13, 0.11, 0.2]
-                    },
-                    {
-                        name: 'HTML',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#383838'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.075, 0.05, 0.02, 0.18, 0.09, 0.12, 0.2, 0.09]
-                    },
-                    {
-                        name: 'Python',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#000000'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.175, 0.125, 0.05, 0, 0, 0, 0, 0]
-                    }
-                ]
-            }
+            option4: {}
        }
     },
     components: {
@@ -364,20 +235,38 @@
             }
         })
 
+        // lorien/grab: https://run.mocky.io/v3/4c239fe2-a2cc-4837-a8ac-039f20be3aae
+        // pallets/flask: https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09
+        // pallets/flask delete: https://designer.mocky.io/manage/delete/28c55b76-6424-470e-9440-a164ee8aed09/fit4002
+        // lorien/grab delete: https://designer.mocky.io/manage/delete/4c239fe2-a2cc-4837-a8ac-039f20be3aae/fit4002
+
+
         const responseDataRepo1 = await repo1Fetch.json()
         const responseDataRepo2 = await repo2Fetch.json()
         this.repository1 = responseDataRepo1.data[0]
         this.repository2 = responseDataRepo2.data[0]
         setTimeout(()=>{
-          this.option4 = locByType
+          this.option4 = this.processData(locByType)
         }, 3000)
 
         setTimeout(()=>{
-          this.option3 = locByType
+          this.option3 = this.processData(locByType)
         }, 9000)
         },
-        processData(){
+        processData(obj){
+            let copyObj = obj
+            
+            let versions = ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
+            let codeLines = [0.7, 0.74, 0.67, 0.66, 0.65, 0.67, 0.64, 0.67]
+            let commentLines = [0.2, 0.18, 0.23, 0.23, 0.25, 0.23, 0.25, 0.25]
+            let blankLines = [0.1, 0.080, 0.1, 0.11, 0.1, 0.1, 0.11, 0.080]
 
+            copyObj.xAxis[0].data = versions
+            copyObj.series[0].data = codeLines
+            copyObj.series[1].data = commentLines
+            copyObj.series[2].data = blankLines
+
+            return copyObj
         },
         changeLoadingAnimation(){
 
