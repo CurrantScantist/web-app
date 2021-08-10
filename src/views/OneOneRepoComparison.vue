@@ -21,19 +21,19 @@
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Forks Count:</div><div>{{repository1.forks_count}}</div>
+                            <div class="stat-name">Forks Count:</div><div>{{repository1.forks_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>{{repository1.forks}}</div>
+                            <div class="stat-name">Forks: </div><div>{{repository1.forks.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>{{repository1.watchers_count}}</div>
+                            <div class="stat-name">Watchers: </div><div>{{repository1.watchers_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>{{repository1.open_issues_count}}</div>
+                            <div class="stat-name">Issues: </div><div>{{repository1.open_issues_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
@@ -45,11 +45,11 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>{{repository1.stargazers_count}}</div>
+                            <div class="stat-name">Stargazers: </div><div>{{repository1.stargazers_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>{{repository1.size}} bytes</div>
+                            <div class="stat-name">Project Size: </div><div>{{repository1.size.toLocaleString()}} bytes</div>
                         </div>
 
                     </div>
@@ -100,19 +100,19 @@
 
                     <div class= "info-grid">
                         <div class="info-item">
-                            <div class="stat-name">Forks Count:</div><div>{{repository2.forks_count}}</div>
+                            <div class="stat-name">Forks Count:</div><div>{{repository2.forks_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Forks: </div><div>{{repository2.forks}}</div>
+                            <div class="stat-name">Forks: </div><div>{{repository2.forks.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Watchers: </div><div>{{repository2.watchers_count}}</div>
+                            <div class="stat-name">Watchers: </div><div>{{repository2.watchers_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Issues: </div><div>{{repository2.open_issues_count}}</div>
+                            <div class="stat-name">Issues: </div><div>{{repository2.open_issues_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
@@ -124,11 +124,11 @@
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Stargazers: </div><div>{{repository2.stargazers_count}}</div>
+                            <div class="stat-name">Stargazers: </div><div>{{repository2.stargazers_count.toLocaleString()}}</div>
                         </div>
 
                         <div class="info-item">
-                            <div class="stat-name">Project Size: </div><div>{{repository2.size}} bytes</div>
+                            <div class="stat-name">Project Size: </div><div>{{repository2.size.toLocaleString()}} bytes</div>
                         </div>
 
                     </div>
