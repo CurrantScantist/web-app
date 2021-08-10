@@ -168,27 +168,12 @@
 <script>
 
     import { VEcharts } from 'vue3-echarts';
+    import locByType from '@/visualisations/LinesOfCodeByType.json'
     
     export default {
     name: 'OneOneRepoComparison',
     async created(){
-        const repo1Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL1, {
-            method: "GET",
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-        const repo2Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL2, {
-            method: "GET",
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-
-        const responseDataRepo1 = await repo1Fetch.json()
-        const responseDataRepo2 = await repo2Fetch.json()
-        this.repository1 = responseDataRepo1.data[0]
-        this.repository2 = responseDataRepo2.data[0]
+        this.fetchData()
     } ,
      data () {
       return {
@@ -354,99 +339,6 @@
                         data: [0.175, 0.125, 0.05, 0, 0, 0, 0, 0]
                     }
                 ]
-            },
-            codeTrendChart: {
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#6a7985'
-                        }
-                    }
-                },
-                legend: {
-                    data: ['Code', 'Comments', 'Blank']
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                grid: {
-                    left: '1%',
-                    right: '3%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ["V1.1.0","V1.1.1","V1.1.2","V1.2.0","V1.3.0","V1.4.0","V1.5.0","V1.5.2"]
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    {
-                        name: 'Code',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 1
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#000000'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.7, 0.74, 0.67, 0.66, 0.65, 0.67, 0.64, 0.67]
-                    },
-                    {
-                        name: 'Comments',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 1
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#383838'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.2, 0.18, 0.23, 0.23, 0.25, 0.23, 0.25, 0.25]
-                    },
-                    {
-                        name: 'Blank',
-                        type: 'line',
-                        stack: 'total',
-                        smooth: false,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: true,
-                        areaStyle: {
-                            opacity: 0.95,
-                            color: '#8a8888'
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [0.1, 0.080, 0.1, 0.11, 0.1, 0.1, 0.11, 0.080]
-                    }
-                ]
             }
        }
     },
@@ -457,6 +349,38 @@
         getColor() {
             let colorSet = ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00','#ff5100', '#8800ff', '#82173f', '#383838', '#000000']
             console.log(colorSet)
+        },
+        async fetchData() {
+            const repo1Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL1, {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        const repo2Fetch = await fetch("https://cors-anywhere.herokuapp.com/"+this.fetchURL2, {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+
+        const responseDataRepo1 = await repo1Fetch.json()
+        const responseDataRepo2 = await repo2Fetch.json()
+        this.repository1 = responseDataRepo1.data[0]
+        this.repository2 = responseDataRepo2.data[0]
+        setTimeout(()=>{
+          this.option4 = locByType
+        }, 3000)
+
+        setTimeout(()=>{
+          this.option3 = locByType
+        }, 9000)
+        },
+        processData(){
+
+        },
+        changeLoadingAnimation(){
+
         }
     }
 }
