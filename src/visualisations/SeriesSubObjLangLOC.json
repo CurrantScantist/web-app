@@ -1,13 +1,13 @@
 {
     "type": "line",
     "stack": "total",
-    "smooth": true,
+    "smooth": false,
     "lineStyle": {
         "width": 1
     },
     "showSymbol": false,
     "areaStyle": {
-        "opacity": 0.95
+        "opacity": 0.9
     },
     "emphasis": {
         "focus": "series"

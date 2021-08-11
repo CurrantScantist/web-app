@@ -72,7 +72,7 @@
             <div class="info-item">
               <div class="stat-name">Project Size:</div>
               <div>
-                {{ (repository1MetaData.size || 0).toLocaleString() }} bytes
+                {{ (repository1MetaData.size || 0).toLocaleString() }} KB
               </div>
             </div>
           </div>
@@ -90,13 +90,13 @@
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
-              <h6>(over versions in %)</h6>
+              <h6>(over versions)</h6>
               <v-echarts v-bind:option="locLang1" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
-              <h6>(in %)</h6>
+              <h6>(over versions)</h6>
               <v-echarts v-bind:option="locType1" style="height: 500px" />
             </div>
           </div>
@@ -174,7 +174,7 @@
             <div class="info-item">
               <div class="stat-name">Project Size:</div>
               <div>
-                {{ (repository2MetaData.size || 0).toLocaleString() }} bytes
+                {{ (repository2MetaData.size || 0).toLocaleString() }} KB
               </div>
             </div>
           </div>
@@ -192,13 +192,14 @@
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
-              <h6>(over versions in %)</h6>
+              <h6>(over versions)</h6>
               <v-echarts v-bind:option="locLang2" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
-              <h6>(in %)</h6>
+              <h6>(over versions)</h6>
+              
               <v-echarts v-bind:option="locType2" style="height: 500px" />
             </div>
           </div>
@@ -229,10 +230,8 @@ export default {
       repository2MetaData: {},
       repository1Stats: {},
       repository2Stats: {},
-      fetchStatsData1URL:
-        "https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09",
-      fetchStatsData2URL:
-        "https://run.mocky.io/v3/4c239fe2-a2cc-4837-a8ac-039f20be3aae",
+      fetchStatsData1URL: "https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09",
+      fetchStatsData2URL: "https://run.mocky.io/v3/4c239fe2-a2cc-4837-a8ac-039f20be3aae",
       option2: {
         tooltip: {
           trigger: "item",
@@ -314,7 +313,7 @@ export default {
   methods: {
     getColor(size) {
       let colorSet = [
-        "#80FFA5",
+        "#1ceca8",
         "#00DDFF",
         "#37A2FF",
         "#FF0087",
@@ -324,6 +323,11 @@ export default {
         "#82173f",
         "#383838",
         "#000000",
+        "#bc5090",
+        "#a05195",
+        "#f95d6a",
+        "#003f5c",
+        "#55838a"
       ];
       let colorPalette = [];
       for (let i = 0; i < size; i++) {
@@ -339,72 +343,44 @@ export default {
       map.forEach((value, key) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(seriesObj));
         seriesSubObjCopy.name = key;
-        seriesSubObjCopy.areaStyle.color = value.colors;
+        seriesSubObjCopy.areaStyle.color = value.color;
         seriesSubObjCopy.data = value.data;
+        if(key === "blank" || key === "comment"){
+            seriesSubObjCopy.areaStyle.opacity = 0.5
+        }
         chart.series.push(seriesSubObjCopy);
       });
     },
     assignColor(givenMap, colorPalette) {
       let colorAllocationIndex = 0;
       givenMap.forEach((value, key, map) => {
-        let tempValue = value;
-        tempValue.color = colorPalette[colorAllocationIndex++];
-        map.set(key, tempValue);
+        value.color = colorPalette[colorAllocationIndex++];
+        map.set(key, value);
       });
     },
     processData(repoNumber) {
       let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
-      const languageData = new Map();
-      const statsData = new Map();
+      let languageData = new Map();
+      let statsData = new Map();
+      let versions = [];
 
-      let versions = [
-        "V1.1.0",
-        "V1.1.1",
-        "V1.1.2",
-        "V1.2.0",
-        "V1.3.0",
-        "V1.4.0",
-        "V1.5.0",
-        "V1.5.2",
-      ];
-      statsData.set("Code", {
-        data: [0.7, 0.74, 0.67, 0.66, 0.65, 0.67, 0.64, 0.67],
-        color: "#000000",
-      });
-      statsData.set("Comments", {
-        data: [0.2, 0.18, 0.23, 0.23, 0.25, 0.23, 0.25, 0.25],
-        color: "#383838",
-      });
-      statsData.set("Blank", {
-        data: [0.1, 0.08, 0.1, 0.11, 0.1, 0.1, 0.11, 0.08],
-        color: "#8a8888",
-      });
-
-      languageData.set("Java", {
-        data: [0.4, 0.425, 0.5, 0.53, 0.51, 0.55, 0.31, 0.2],
-      });
-      languageData.set("JavaScript", {
-        data: [0.3, 0.3, 0.28, 0.2, 0.2, 0.2, 0.38, 0.51],
-      });
-      languageData.set("CSS", {
-        data: [0.05, 0.1, 0.15, 0.09, 0.2, 0.13, 0.11, 0.2],
-      });
-      languageData.set("HTML", {
-        data: [0.075, 0.05, 0.02, 0.18, 0.09, 0.12, 0.2, 0.09],
-      });
-      languageData.set("Python", { data: [0.175, 0.125, 0.05, 0, 0, 0, 0, 0] });
+      let extractedData = this.extractData(repoNumber);
+      versions = extractedData[0];
+      languageData = extractedData[1];
+      statsData = extractedData[2];
+    console.log(statsData)
 
       let colorPalette = this.getColor(languageData.size);
       this.assignColor(languageData, colorPalette);
 
-      locByLangCopy.xAxis[0].data = versions;
-      locByTypeCopy.xAxis[0].data = versions;
+      locByLangCopy.xAxis[0].data = versions
+      locByTypeCopy.xAxis[0].data = versions
 
       locByLangCopy.color = colorPalette;
 
-      locByLangCopy.legend.data = Array.from(languageData.keys());
-      locByTypeCopy.legend.data = Array.from(statsData.keys());
+      locByLangCopy.legend.data = Array.from(languageData.keys()); // add x axis label
+    //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
 
       this.setSeriesSubObject(locByLangCopy, languageData);
       this.setSeriesSubObject(locByTypeCopy, statsData);
@@ -412,10 +388,50 @@ export default {
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
         this.locLang1 = locByLangCopy;
-      } else if (repoNumber == 2) {
         this.locType2 = locByTypeCopy;
         this.locLang2 = locByLangCopy;
+      } else if (repoNumber == 2) {
+        // this.locType2 = locByTypeCopy;
+        // this.locLang2 = locByLangCopy;
       }
+    },
+    extractData(repoNumber) {
+      let jsonObj;
+      let versions = [];
+      const languageData = new Map();
+      const statsData = new Map();
+
+      statsData.set("code", { data: [], color: "#1ceca8" });
+      statsData.set("comment", { data: [], color: "#1ceca8" });
+      statsData.set("blank", { data: [], color: "#8ce3cc" });
+
+      if (repoNumber == 1) {
+        jsonObj = this.repository1Stats;
+      } else if (repoNumber == 2) {
+        jsonObj = this.repository2Stats;
+      }
+
+      for (let versionObj of jsonObj) {
+        versions.push(versionObj.tag_name)
+        for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
+          if (langKey === "SUM") {
+            statsData.forEach((value, key, map) => {
+              value.data.push(langObj[key]);
+              map.set(key, value);
+            });
+          } else {
+            let normalisedValue = Math.round((langObj.code / 1) * 1);
+            if (languageData.has(langKey)) {
+              let tempValue = languageData.get(langKey);
+              tempValue.data.push(normalisedValue);
+              languageData.set(langKey, tempValue);
+            } else {
+              languageData.set(langKey, { data: [normalisedValue] });
+            }
+          }
+        }
+      }
+      return [versions, languageData, statsData];
     },
   },
 };

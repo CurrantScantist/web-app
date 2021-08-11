@@ -12,13 +12,16 @@
     },
     "toolbox": {
         "feature": {
-            "saveAsImage": {}
+            "saveAsImage": {
+                "title": "Save as .png"
+            }
         }
     },
     "grid": {
         "left": "1%",
         "right": "3%",
         "bottom": "3%",
+        "top": "13%",
         "containLabel": true
     },
     "xAxis": [

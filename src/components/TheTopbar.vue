@@ -41,7 +41,7 @@
 
 .app-name,
 .app-subname {
-  color:black;
+  color: black;
   font-size: 150%;
   display: flex;
   justify-content: center;
@@ -53,7 +53,7 @@
   padding: 5px;
 }
 
-.app-subname{
+.app-subname {
   font-weight: 300;
 }
 
