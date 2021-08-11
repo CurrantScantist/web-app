@@ -167,7 +167,10 @@ export default defineComponent({
       this.page = newPage;
     },
     handleRowClick(row) {
-      this.$router.push(`/repositories/${row.name}/${row.owner}`);
+      this.$router.push({
+        name: "repository_view",
+        params: { name: row.name, owner: row.owner },
+      });
     },
   },
 });

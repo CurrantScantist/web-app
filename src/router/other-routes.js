@@ -1,14 +1,19 @@
 import Landing from "@/views/Landing";
+import OneOneRepoComparison from "@/views/OneOneRepoComparison";
 
 export default [
   {
     path: "/",
     name: "landing",
     component: Landing,
+    meta: {
+      icon: "",
+    },
   },
   {
-    path: "/repositories/:repo_name/:repo_owner",
-    name: "repository",
-    component: Landing, // replace with single repository view component
+    path: "/repository_view/:name/:owner",
+    name: "repository_view",
+    component: OneOneRepoComparison,
+    props: true,
   },
 ];
