@@ -1,6 +1,6 @@
 <template>
   <div class="repositories">
-    <RepoList class="repo-list" />
+    <TheRepositoryList class="repo-list" />
   </div>
 </template>
 
@@ -20,12 +20,12 @@
 </style>
 
 <script>
-import RepoList from "@/components/RepoList";
+import TheRepositoryList from "@/components/TheRepositoryList";
 
 export default {
   name: "Repositories",
   components: {
-    RepoList,
+    TheRepositoryList,
   },
 };
 </script>
