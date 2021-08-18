@@ -146,6 +146,14 @@
               <h6>(over versions)</h6>
               <v-echarts v-bind:option="locType1" style="height: 500px" />
             </div>
+
+            <div class="wide-visualisation3">
+              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h6>Bubble plot</h6>
+              <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
+            </div>
+
+  
           </div>
         </div>
       </div>
@@ -293,9 +301,15 @@
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
-              
               <v-echarts v-bind:option="locType2" style="height: 500px" />
             </div>
+
+            <div class="wide-visualisation3">
+              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h6>Bubble plot</h6>
+              <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
+            </div>
+
           </div>
         </div>
       </div>
@@ -309,7 +323,9 @@
 import { VEcharts } from "vue3-echarts";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
+import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json"
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
+import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
 import axios from "axios";
 
 export default {
@@ -324,8 +340,6 @@ export default {
       repository2MetaData: {},
       repository1Stats: {},
       repository2Stats: {},
-      fetchStatsData1URL: "https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09",
-      fetchStatsData2URL: "https://run.mocky.io/v3/4c239fe2-a2cc-4837-a8ac-039f20be3aae",
       option2: {
         tooltip: {
           trigger: "item",
@@ -358,6 +372,8 @@ export default {
       locLang2: {},
       locType1: {},
       locType2: {},
+      bubblePlot1: {},
+      bubblePlot2: {}
     };
   },
   components: {
@@ -368,7 +384,6 @@ export default {
       const response = await axios.get(
           process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
-      console.log(response)
       this.repository1MetaData = response.data.data[0];
     } catch (e) {
       console.log(e);
@@ -387,7 +402,7 @@ export default {
       const response = await axios.get(
          process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
-      this.repository1Stats = response.data.data[0];
+      this.repository1Stats.loc = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
@@ -396,28 +411,29 @@ export default {
       const response = await axios.get(
           process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
-      this.repository2Stats = response.data.data[0];
+      this.repository2Stats.loc = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
 
-    // const repo1StatsFetch = await fetch(this.fetchStatsData1URL, {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    // });
-    // const repo2StatsFetch = await fetch(this.fetchStatsData2URL, {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    // });
+    try {
+      const response = await axios.get(
+          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+      );
+      this.repository1Stats.dep = response.data.data
+    } catch (e) {
+      console.log(e);
+    }
 
-    // this.repository1Stats = await repo1StatsFetch.json();
-    // this.repository2Stats = await repo2StatsFetch.json();
+    try {
+      const response = await axios.get(
+          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+      );
+      this.repository2Stats.dep = response.data.data
+    } catch (e) {
+      console.log(e);
+    }
 
-    console.log(this.repository1Stats)
     this.processData(1);
     this.processData(2);
   },
@@ -472,54 +488,105 @@ export default {
     processData(repoNumber) {
       let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
+      let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
+
       let languageData = new Map();
       let statsData = new Map();
       let versions = [];
 
+      let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
+
       versions = extractedData[0];
       languageData = extractedData[1];
       statsData = extractedData[2];
-      console.log(statsData)
 
+      let depRepos = extractedDepData.map((repoArray) => {
+          return repoArray[3];
+      })
+     
       let colorPalette = this.getColor(languageData.size);
       this.assignColor(languageData, colorPalette);
 
+
       locByLangCopy.xAxis[0].data = versions
       locByTypeCopy.xAxis[0].data = versions
+      
 
       locByLangCopy.color = colorPalette;
 
+      depBubbleChartCopy.color = this.getColor(depRepos.length);
       locByLangCopy.legend.data = Array.from(languageData.keys()); // add x axis label
+      depBubbleChartCopy.legend.data = depRepos
+
     //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
 
       this.setSeriesSubObject(locByLangCopy, languageData);
       this.setSeriesSubObject(locByTypeCopy, statsData);
+      this.setSeriesBubbleChart(depBubbleChartCopy, extractedDepData, depBubbleChartCopy.color)
 
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
         this.locLang1 = locByLangCopy;
         this.locType2 = locByTypeCopy;
         this.locLang2 = locByLangCopy;
+        this.bubblePlot1 = depBubbleChartCopy;
+        this.bubblePlot2 = depBubbleChartCopy;
+
       } else if (repoNumber == 2) {
         // this.locType2 = locByTypeCopy;
         // this.locLang2 = locByLangCopy;
       }
     },
-    processDate(inputDate){
-      let date = new Date(inputDate);
-      let dateFormatter = new Intl.DateTimeFormat('en-AU', {
-        day : '2-digit',
-        month: 'short',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        timeZone: 'Australia/Sydney',
-        timeZoneName: 'short',
-        hour12: false
+    setSeriesBubbleChart(chart, map, colors) {
+      let colorIndex = 0
+      map.forEach((repoArray) => {
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
+        seriesSubObjCopy.name = repoArray[3];
+        seriesSubObjCopy.symbolSize = repoArray[2];
+        seriesSubObjCopy.data = [repoArray];
+        seriesSubObjCopy.areaStyle.color = colors[colorIndex++];
+        chart.series.push(seriesSubObjCopy);
       });
+    },
+    processDate(inputDate){
+      if (inputDate) {
+        let date = new Date(inputDate);
+        let dateFormatter = new Intl.DateTimeFormat('en-AU', {
+          day : '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          timeZone: 'Australia/Sydney',
+          timeZoneName: 'short',
+          hour12: false
+        });
 
-      return dateFormatter.format(date)
+        return dateFormatter.format(date)
+      }
+      return ""
+    },
+    extractDepData(repoNumber){
+      let jsonObj;
+      let extractedDepData = [] // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+
+      if (repoNumber == 1) {
+        jsonObj = this.repository1Stats.dep;
+      } else if (repoNumber == 2) {
+        jsonObj = this.repository2Stats.dep;
+      }
+
+       for (let repoObj of jsonObj) {
+         let repoData = []
+         repoData.push(repoObj.size);
+         repoData.push(repoObj.dep_count);
+         repoData.push(Math.sqrt(repoObj.issue_count)* 5);
+         repoData.push(repoObj.name);
+         extractedDepData.push(repoData)
+       }
+
+      return extractedDepData
     },
     extractData(repoNumber) {
       let jsonObj;
@@ -532,9 +599,9 @@ export default {
       statsData.set("blank", { data: [], color: "#8ce3cc" });
 
       if (repoNumber == 1) {
-        jsonObj = this.repository1Stats;
+        jsonObj = this.repository1Stats.loc;
       } else if (repoNumber == 2) {
-        jsonObj = this.repository2Stats;
+        jsonObj = this.repository2Stats.loc;
       }
 
       for (let versionObj of jsonObj) {
@@ -561,12 +628,6 @@ export default {
     },
   },
 };
-
-// Critical: #7a002f
-// High: #c70039
-// Medium: #ff7733
-// Low: #fcad00
-// Unknown: #8e8e8e
 
 // bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
 // bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF

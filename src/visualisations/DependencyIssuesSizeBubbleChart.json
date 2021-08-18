@@ -1,3 +1,44 @@
 {
-    
+    "legend": {
+    },
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "label": {
+                "backgroundColor": "#6a7985"
+            }
+        }
+    },
+    "grid": {
+         "left": "8%",
+        "right": "3%",
+        "bottom": "10%",
+        "top": "13%",
+        "containLabel": true
+    },
+    "xAxis": {
+        "name": "Project Size (in KB)",
+        "nameLocation": "middle",
+        "nameGap": 30,
+        "nameTextStyle": {
+            "fontSize": 18
+        },
+        "splitLine": {
+            "show": false
+        }
+    },
+    "yAxis": {
+        "name": "Dependency Count",
+        "nameLocation": "middle",
+        "nameGap": 68,
+        "nameTextStyle": {
+            "fontSize": 18
+        },
+        "splitLine": {
+            "show": false
+        },
+        "scale": true
+    },
+    "series": []
 }

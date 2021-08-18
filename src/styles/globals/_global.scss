@@ -96,7 +96,6 @@ h5{
 
 .unknown {
   background-color: #8e8e8e;
-  margin-bottom: 5%;
 }
 
 
@@ -110,7 +109,8 @@ h5{
   grid-template-areas: 
   "simple-visualisation1 simple-visualisation2"
   "wide-visualisation1 wide-visualisation1"
-  "wide-visualisation2 wide-visualisation2";
+  "wide-visualisation2 wide-visualisation2"
+  "wide-visualisation3 wide-visualisation3";
 }
 
 .info-grid {
@@ -164,7 +164,8 @@ h2 {
     "simple-visualisation1"
     "simple-visualisation2"
     "wide-visualisation1"
-    "wide-visualisation2";
+    "wide-visualisation2"
+    "wide-visualisation3";
   }
 }
 
@@ -182,7 +183,8 @@ h2 {
 .simple-visualisation1,
 .simple-visualisation2,
 .wide-visualisation1,
-.wide-visualisation2 {
+.wide-visualisation2,
+.wide-visualisation3 {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -206,11 +208,16 @@ h2 {
   grid-area: wide-visualisation2;
 }
 
+.wide-visualisation3 {
+  grid-area: wide-visualisation3;
+}
+
 .info-item {
   display: flex;
   font-weight: 500;
   font-size: 130%;
   padding: 5px;
+  margin: 1%;
 }
 
 body {
