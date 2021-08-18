@@ -272,10 +272,9 @@ export default {
   async created() {
     try {
       const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
-
+      console.log(response)
       this.repository1MetaData = response.data.data[0];
     } catch (e) {
       console.log(e);
@@ -283,30 +282,48 @@ export default {
 
     try {
       const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository2MetaData = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
 
-    const repo1StatsFetch = await fetch(this.fetchStatsData1URL, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    const repo2StatsFetch = await fetch(this.fetchStatsData2URL, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    try {
+      const response = await axios.get(
+         process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+      );
+      this.repository1Stats = response.data.data[0];
+    } catch (e) {
+      console.log(e);
+    }
 
-    this.repository1Stats = await repo1StatsFetch.json();
-    this.repository2Stats = await repo2StatsFetch.json();
+    try {
+      const response = await axios.get(
+          process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+      );
+      this.repository2Stats = response.data.data[0];
+    } catch (e) {
+      console.log(e);
+    }
 
+    // const repo1StatsFetch = await fetch(this.fetchStatsData1URL, {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    // });
+    // const repo2StatsFetch = await fetch(this.fetchStatsData2URL, {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    // });
+
+    // this.repository1Stats = await repo1StatsFetch.json();
+    // this.repository2Stats = await repo2StatsFetch.json();
+
+    console.log(this.repository1Stats)
     this.processData(1);
     this.processData(2);
   },
@@ -369,7 +386,7 @@ export default {
       versions = extractedData[0];
       languageData = extractedData[1];
       statsData = extractedData[2];
-    console.log(statsData)
+      console.log(statsData)
 
       let colorPalette = this.getColor(languageData.size);
       this.assignColor(languageData, colorPalette);
@@ -440,4 +457,7 @@ export default {
 // pallets/flask: https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09
 // pallets/flask delete: https://designer.mocky.io/manage/delete/28c55b76-6424-470e-9440-a164ee8aed09/fit4002
 // lorien/grab delete: https://designer.mocky.io/manage/delete/4c239fe2-a2cc-4837-a8ac-039f20be3aae/fit4002
+
+// bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
+// bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
 </script>
