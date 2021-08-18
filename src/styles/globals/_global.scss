@@ -72,6 +72,34 @@ h5{
   border-radius: 25px;
 }
 
+.vulnerabilityTheme {
+  border-radius: var(--viz--radius);
+  align-items: center;
+  justify-content: center;
+}
+
+.critical {
+  background-color: #7a002f;
+}
+
+.high {
+  background-color: #c70039;
+}
+
+.medium {
+  background-color: #ff7733;
+}
+
+.low {
+  background-color:  #fcad00;
+}
+
+.unknown {
+  background-color: #8e8e8e;
+  margin-bottom: 5%;
+}
+
+
 .viz-grid {
   display: grid;
   font-size: 138%;

@@ -29,8 +29,18 @@
               </div>
             </div>
 
+            <div class="info-item vulnerabilityTheme  critical">
+              <div class="stat-name">Critical Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
+            </div>
+
             <div class="info-item">
               <div class="stat-name">Forks:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  high">
+              <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
@@ -39,6 +49,11 @@
               <div>
                 {{ (repository1MetaData.watchers_count || 0).toLocaleString() }}
               </div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  medium">
+              <div class="stat-name">Medium Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
@@ -50,14 +65,19 @@
               </div>
             </div>
 
-            <div class="info-item">
-              <div class="stat-name">Tags:</div>
-              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
+            <div class="info-item vulnerabilityTheme  low">
+              <div class="stat-name">Low Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Default Branch:</div>
               <div>{{ repository1MetaData.default_branch }}</div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  unknown">
+              <div class="stat-name">Unknown Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
@@ -74,6 +94,33 @@
               <div>
                 {{ (repository1MetaData.size || 0).toLocaleString() }} KB
               </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Created on:</div>
+              <div>
+                {{ this.processDate(repository1MetaData.created_at) }} 
+              </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Last updated on:</div>
+              <div>
+                {{ this.processDate(repository1MetaData.updated_at) }} 
+              </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Tags:</div>
+              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
+            </div>
+
+            <div class="info-item">
+              <div class="stat-name">Tags:</div>
+              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
             </div>
           </div>
 
@@ -127,46 +174,66 @@
             <div class="info-item">
               <div class="stat-name">Forks Count:</div>
               <div>
-                {{ (repository2MetaData.forks_count || 0).toLocaleString() }}
+                {{ (repository1MetaData.forks_count || 0).toLocaleString() }}
               </div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  critical">
+              <div class="stat-name">Critical Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Forks:</div>
-              <div>{{ (repository2MetaData.forks || 0).toLocaleString() }}</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  high">
+              <div class="stat-name">High Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Watchers:</div>
               <div>
-                {{ (repository2MetaData.watchers_count || 0).toLocaleString() }}
+                {{ (repository1MetaData.watchers_count || 0).toLocaleString() }}
               </div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  medium">
+              <div class="stat-name">Medium Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Issues:</div>
               <div>
                 {{
-                  (repository2MetaData.open_issues_count || 0).toLocaleString()
+                  (repository1MetaData.open_issues_count || 0).toLocaleString()
                 }}
               </div>
             </div>
 
-            <div class="info-item">
-              <div class="stat-name">Tags:</div>
-              <div>{{ (repository2MetaData.topics || []).join(", ") }}</div>
+            <div class="info-item vulnerabilityTheme  low">
+              <div class="stat-name">Low Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Default Branch:</div>
-              <div>{{ repository2MetaData.default_branch }}</div>
+              <div>{{ repository1MetaData.default_branch }}</div>
+            </div>
+
+            <div class="info-item vulnerabilityTheme  unknown">
+              <div class="stat-name">Unknown Vulnerabilities:</div>
+              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
               <div class="stat-name">Stargazers:</div>
               <div>
                 {{
-                  (repository2MetaData.stargazers_count || 0).toLocaleString()
+                  (repository1MetaData.stargazers_count || 0).toLocaleString()
                 }}
               </div>
             </div>
@@ -174,8 +241,35 @@
             <div class="info-item">
               <div class="stat-name">Project Size:</div>
               <div>
-                {{ (repository2MetaData.size || 0).toLocaleString() }} KB
+                {{ (repository1MetaData.size || 0).toLocaleString() }} KB
               </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Created on:</div>
+              <div>
+                {{ this.processDate(repository1MetaData.created_at) }} 
+              </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Last updated on:</div>
+              <div>
+                {{ this.processDate(repository1MetaData.updated_at) }} 
+              </div>
+            </div>
+
+
+            <div class="info-item">
+              <div class="stat-name">Tags:</div>
+              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
+            </div>
+
+            <div class="info-item">
+              <div class="stat-name">Tags:</div>
+              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
             </div>
           </div>
 
@@ -412,6 +506,21 @@ export default {
         // this.locLang2 = locByLangCopy;
       }
     },
+    processDate(inputDate){
+      let date = new Date(inputDate);
+      let dateFormatter = new Intl.DateTimeFormat('en-AU', {
+        day : '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        timeZone: 'Australia/Sydney',
+        timeZoneName: 'short',
+        hour12: false
+      });
+
+      return dateFormatter.format(date)
+    },
     extractData(repoNumber) {
       let jsonObj;
       let versions = [];
@@ -453,10 +562,11 @@ export default {
   },
 };
 
-// lorien/grab: https://run.mocky.io/v3/4c239fe2-a2cc-4837-a8ac-039f20be3aae
-// pallets/flask: https://run.mocky.io/v3/28c55b76-6424-470e-9440-a164ee8aed09
-// pallets/flask delete: https://designer.mocky.io/manage/delete/28c55b76-6424-470e-9440-a164ee8aed09/fit4002
-// lorien/grab delete: https://designer.mocky.io/manage/delete/4c239fe2-a2cc-4837-a8ac-039f20be3aae/fit4002
+// Critical: #7a002f
+// High: #c70039
+// Medium: #ff7733
+// Low: #fcad00
+// Unknown: #8e8e8e
 
 // bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
 // bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
