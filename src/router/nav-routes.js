@@ -1,11 +1,11 @@
-import Home from "@/views/Home";
+import Repositories from "@/views/Repositories";
 import About from "@/views/About";
 
 export default [
   {
-    path: "/",
-    name: "home",
-    component: Home,
+    path: "/repositories",
+    name: "repositories",
+    component: Repositories,
     meta: {
       icon: "el-icon-s-home",
     },
