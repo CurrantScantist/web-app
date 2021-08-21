@@ -20,27 +20,10 @@
   </el-col>
 </template>
 
-<script>
-import navRoutes from "@/router/nav-routes.js";
-
-export default {
-  name: "Sidebar",
-  data() {
-    return {
-      routes: navRoutes,
-    };
-  },
-  methods: {
-    capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    },
-  },
-};
-</script>
-
 <style lang="scss" scoped>
 .nav-wrapper {
-  width: 15rem;
+  position: fixed;
+  max-width: 20%;
 
   .logo-wrapper {
     margin-bottom: 2.5rem;
@@ -88,3 +71,21 @@ export default {
   }
 }
 </style>
+
+<script>
+import navRoutes from "@/router/nav-routes.js";
+
+export default {
+  name: "Sidebar",
+  data() {
+    return {
+      routes: navRoutes,
+    };
+  },
+  methods: {
+    capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    },
+  },
+};
+</script>
