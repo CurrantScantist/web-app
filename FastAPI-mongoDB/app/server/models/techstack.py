@@ -1,12 +1,9 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr, Field
-"""
-Schema file for techstacks
-"""
+
 
 class TechstackSchema(BaseModel):
-    releases: list = Field(...)
     name: str = Field(...)
     owner: str = Field(...)
     description: str = Field(...)
@@ -33,9 +30,6 @@ class TechstackSchema(BaseModel):
         schema_extra = {
             "example": {
                 "id": "60fc0777f113c31336c7e596",
-                "releases": {
-                    "v3.40.0": {}
-                },
                 "techstack_name": "svelte",
                 "owner": "sveltejs",
                 "description": "Cybernetically enhanced web apps",
@@ -70,7 +64,6 @@ class TechstackSchema(BaseModel):
 
 
 class UpdateTechstackModel(BaseModel):
-    releases: list = Field(...)
     name: str = Field(...)
     owner: str = Field(...)
     description: str = Field(...)
@@ -134,6 +127,12 @@ class UpdateTechstackModel(BaseModel):
 
 
 def ResponseModel(data, message):
+    '''
+    Returns a response model, with the queried data, response code and response message
+    :param data: query payload
+    :param message: message of success or failure
+    :return: Returns Response body, code, and message of success or failure
+    '''
     return {
         "data": [data],
         "code": 200,
@@ -142,4 +141,11 @@ def ResponseModel(data, message):
 
 
 def ErrorResponseModel(error, code, message):
+    '''
+    Returns an error statement indicating the error type, error code and its description.
+    :param error: indication message of error
+    :param code: error code
+    :param message: error description
+    :return: an error response model, indicating the error type, error code and its description.
+    '''
     return {"error": error, "code": code, "message": message}

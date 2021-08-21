@@ -8,7 +8,9 @@
     />
     <div class="table-wrapper">
       <!-- Shown when no data has been loaded in -->
-      <div v-if="data.length == 0" />
+      <div v-if="pagedData.length == 0">
+        <el-empty description="No Data" :image-size="300"></el-empty>
+      </div>
       <!-- Otherwise, show this -->
       <div v-else>
         <el-table :data="pagedData" @row-click="handleRowClick">
@@ -56,7 +58,7 @@
       layout="prev, pager, next"
       @current-change="handlePageChange"
       :page-size="pageSize"
-      :total="filteredData.length"
+      :total="totalItems"
     >
     </el-pagination>
   </div>
@@ -93,6 +95,7 @@ export default defineComponent({
       search: "",
       page: 1,
       pageSize: 20,
+      totalItems: 0,
     };
   },
   async created() {
@@ -107,25 +110,24 @@ export default defineComponent({
   },
   computed: {
     filteredData() {
-      if (this.data === []) {
+      if (!this.search) {
+        this.setTotalItems(this.data.length);
         return this.data;
       }
+      this.setPage(1);
 
       // Filter's data
-      return this.data.filter(
-        (items) =>
-          !this.search ||
-          items.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.data.filter((items) =>
+        items.name.toLowerCase().includes(this.search.toLowerCase())
       );
     },
     pagedData() {
+      this.setTotalItems(this.filteredData.length);
+
       return this.filteredData.slice(
         this.pageSize * this.page - this.pageSize,
         this.pageSize * this.page
       );
-    },
-    totalItems() {
-      return this.filteredData.length;
     },
   },
   watch: {
@@ -164,6 +166,12 @@ export default defineComponent({
      * @param {number} newPage - The new page number
      */
     handlePageChange(newPage) {
+      this.page = newPage;
+    },
+    setTotalItems(newTotal) {
+      this.totalItems = newTotal;
+    },
+    setPage(newPage) {
       this.page = newPage;
     },
     handleRowClick(row) {
