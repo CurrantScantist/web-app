@@ -1,0 +1,15 @@
+{
+    "type": "line",
+    "stack": "total",
+    "smooth": false,
+    "lineStyle": {
+        "width": 1
+    },
+    "showSymbol": false,
+    "areaStyle": {
+        "opacity": 0.9
+    },
+    "emphasis": {
+        "focus": "series"
+    }
+}

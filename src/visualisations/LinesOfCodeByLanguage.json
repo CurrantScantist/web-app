@@ -1,0 +1,51 @@
+{
+    "tooltip": {
+        "trigger": "axis",
+        "axisPointer": {
+            "type": "cross",
+            "label": {
+                "backgroundColor": "#6a7985"
+            }
+        }
+    },
+    "legend": {
+    },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {
+                "title": "Save as .png"
+            }
+        }
+    },
+    "grid": {
+        "left": "5%",
+        "right": "3%",
+        "bottom": "5%",
+        "top": "13%",
+        "containLabel": true
+    },
+    "xAxis": [
+        {
+            "name": "Versions",
+            "nameLocation": "middle",
+            "nameGap": 28,
+            "nameTextStyle": {
+                "fontSize": 18
+            },
+            "type": "category",
+            "boundaryGap": false
+        }
+    ],
+    "yAxis": [
+        {
+            "type": "value",
+            "name": "Lines of Code",
+            "nameLocation": "middle",
+            "nameGap": 55,
+            "nameTextStyle": {
+                "fontSize": 18
+            }
+        }
+    ],
+    "series": []
+}

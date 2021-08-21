@@ -6,7 +6,7 @@ Setups to setup virtual env
 
 **Windows/CMD(Command Prompt)**
 ```
-cd "<project directory>"
+cd "<outer project directory>"
 
 py -3.7 -m venv backendEnv
 
@@ -19,11 +19,11 @@ pip install -r requirements.txt
 
 **MacOS/Bash Command**
 ```
-cd <project directory>
+cd <outer project directory>
 
-py -3.7 -m venv backendEnv
+python3 -m venv backendEnv
 
-source ./backendEnv/Scripts/activate
+source ./backendEnv/bin/activate
 
 pip install wheel
 

@@ -101,7 +101,7 @@ export default defineComponent({
   async created() {
     try {
       const response = await axios.get(
-        process.env.VUE_APP_API_URL + "/techstack/detailed"
+        "/techstack/detailed"
       );
       this.data = response.data.data[0];
     } catch (e) {
@@ -175,7 +175,10 @@ export default defineComponent({
       this.page = newPage;
     },
     handleRowClick(row) {
-      this.$router.push(`/repositories/${row.name}/${row.owner}`);
+      this.$router.push({
+        name: "repository_view",
+        params: { name: row.name, owner: row.owner },
+      });
     },
   },
 });
