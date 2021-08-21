@@ -29,7 +29,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  critical">
+            <div class="info-item vulnerabilityTheme critical">
               <div class="stat-name">Critical Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -39,7 +39,7 @@
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  high">
+            <div class="info-item vulnerabilityTheme high">
               <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -51,7 +51,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  medium">
+            <div class="info-item vulnerabilityTheme medium">
               <div class="stat-name">Medium Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -65,7 +65,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  low">
+            <div class="info-item vulnerabilityTheme low">
               <div class="stat-name">Low Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -75,7 +75,7 @@
               <div>{{ repository1MetaData.default_branch }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  unknown">
+            <div class="info-item vulnerabilityTheme unknown">
               <div class="stat-name">Unknown Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -96,22 +96,19 @@
               </div>
             </div>
 
-
             <div class="info-item">
               <div class="stat-name">Created on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.created_at) }} 
+                {{ this.processDate(repository1MetaData.created_at) }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Last updated on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.updated_at) }} 
+                {{ this.processDate(repository1MetaData.updated_at) }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Tags:</div>
@@ -126,14 +123,22 @@
 
           <div class="viz-grid">
             <div class="simple-visualisation1">
-              <h3>Placeholder</h3>
-              <h6>(Placeholder)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <PieChart
+                v-bind:contributorsData="option2"
+                hoverHeading="Placeholder"
+              >
+                <template v-slot:heading>Placeholder</template>
+                <template v-slot:subheading>placeholder</template>
+              </PieChart>
             </div>
             <div class="simple-visualisation2">
-              <h3>Contribution Pie Chart</h3>
-              <h6>(by Number of Commits)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <PieChart
+                v-bind:contributorsData="option2"
+                hoverHeading="Number of Commits"
+              >
+                <template v-slot:heading>Contribution Pie Chart</template>
+                <template v-slot:subheading>by Number of Commits</template>
+              </PieChart>
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
@@ -152,8 +157,6 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
-
-  
           </div>
         </div>
       </div>
@@ -186,7 +189,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  critical">
+            <div class="info-item vulnerabilityTheme critical">
               <div class="stat-name">Critical Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -196,7 +199,7 @@
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  high">
+            <div class="info-item vulnerabilityTheme high">
               <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -208,7 +211,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  medium">
+            <div class="info-item vulnerabilityTheme medium">
               <div class="stat-name">Medium Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -222,7 +225,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  low">
+            <div class="info-item vulnerabilityTheme low">
               <div class="stat-name">Low Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -232,7 +235,7 @@
               <div>{{ repository1MetaData.default_branch }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  unknown">
+            <div class="info-item vulnerabilityTheme unknown">
               <div class="stat-name">Unknown Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -253,22 +256,19 @@
               </div>
             </div>
 
-
             <div class="info-item">
               <div class="stat-name">Created on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.created_at) }} 
+                {{ this.processDate(repository1MetaData.created_at) }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Last updated on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.updated_at) }} 
+                {{ this.processDate(repository1MetaData.updated_at) }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Tags:</div>
@@ -283,14 +283,22 @@
 
           <div class="viz-grid">
             <div class="simple-visualisation1">
-              <h3>Placeholder</h3>
-              <h6>(Placeholder)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <PieChart
+                v-bind:contributorsData="option2"
+                hoverHeading="Placeholder"
+              >
+                <template v-slot:heading>Placeholder</template>
+                <template v-slot:subheading>placeholder</template>
+              </PieChart>
             </div>
             <div class="simple-visualisation2">
-              <h3>Contribution Pie Chart</h3>
-              <h6>(by Number of Commits)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <PieChart
+                v-bind:contributorsData="option2"
+                hoverHeading="Number of Commits"
+              >
+                <template v-slot:heading>Contribution Pie Chart</template>
+                <template v-slot:subheading>by Number of Commits</template>
+              </PieChart>
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
@@ -309,7 +317,6 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
-
           </div>
         </div>
       </div>
@@ -323,10 +330,12 @@
 import { VEcharts } from "vue3-echarts";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
-import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json"
+import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
-import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
+import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
 import axios from "axios";
+
+import PieChart from "@/components/ThePieChart";
 
 export default {
   name: "OneOneRepoComparison",
@@ -340,49 +349,32 @@ export default {
       repository2MetaData: {},
       repository1Stats: {},
       repository2Stats: {},
-      option2: {
-        tooltip: {
-          trigger: "item",
-        },
-        series: [
-          {
-            name: "Number of Commits",
-            type: "pie",
-            radius: "50%",
-            data: [
-              { value: 2, name: "Alan Kopenowski" },
-              { value: 2, name: "Howard Wolowitz" },
-              { value: 5, name: "Rodion emayov" },
-              { value: 8, name: "Gautam Naidu" },
-              { value: 3, name: "Eddie Chen" },
-              { value: 10, name: "Emma Richards" },
-              { value: 7, name: "Others" },
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              },
-            },
-          },
-        ],
-      },
+      option2: [
+        { value: 2, name: "Alan Kopenowski" },
+        { value: 2, name: "Howard Wolowitz" },
+        { value: 5, name: "Rodion emayov" },
+        { value: 8, name: "Gautam Naidu" },
+        { value: 3, name: "Eddie Chen" },
+        { value: 10, name: "Emma Richards" },
+        { value: 7, name: "Others" },
+      ],
       locLang1: {},
       locLang2: {},
       locType1: {},
       locType2: {},
       bubblePlot1: {},
-      bubblePlot2: {}
+      bubblePlot2: {},
     };
   },
   components: {
     VEcharts,
+    PieChart,
   },
   async created() {
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository1MetaData = response.data.data[0];
     } catch (e) {
@@ -391,7 +383,8 @@ export default {
 
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository2MetaData = response.data.data[0];
     } catch (e) {
@@ -400,7 +393,8 @@ export default {
 
     try {
       const response = await axios.get(
-         process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository1Stats.loc = response.data.data[0];
     } catch (e) {
@@ -409,7 +403,8 @@ export default {
 
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository2Stats.loc = response.data.data[0];
     } catch (e) {
@@ -418,18 +413,18 @@ export default {
 
     try {
       const response = await axios.get(
-          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
       );
-      this.repository1Stats.dep = response.data.data
+      this.repository1Stats.dep = response.data.data;
     } catch (e) {
       console.log(e);
     }
 
     try {
       const response = await axios.get(
-          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
       );
-      this.repository2Stats.dep = response.data.data
+      this.repository2Stats.dep = response.data.data;
     } catch (e) {
       console.log(e);
     }
@@ -454,7 +449,7 @@ export default {
         "#a05195",
         "#f95d6a",
         "#003f5c",
-        "#55838a"
+        "#55838a",
       ];
       let colorPalette = [];
       for (let i = 0; i < size; i++) {
@@ -472,8 +467,8 @@ export default {
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = value.color;
         seriesSubObjCopy.data = value.data;
-        if(key === "blank" || key === "comment"){
-            seriesSubObjCopy.areaStyle.opacity = 0.5
+        if (key === "blank" || key === "comment") {
+          seriesSubObjCopy.areaStyle.opacity = 0.5;
         }
         chart.series.push(seriesSubObjCopy);
       });
@@ -502,28 +497,30 @@ export default {
       statsData = extractedData[2];
 
       let depRepos = extractedDepData.map((repoArray) => {
-          return repoArray[3];
-      })
-     
+        return repoArray[3];
+      });
+
       let colorPalette = this.getColor(languageData.size);
       this.assignColor(languageData, colorPalette);
 
-
-      locByLangCopy.xAxis[0].data = versions
-      locByTypeCopy.xAxis[0].data = versions
-      
+      locByLangCopy.xAxis[0].data = versions;
+      locByTypeCopy.xAxis[0].data = versions;
 
       locByLangCopy.color = colorPalette;
 
       depBubbleChartCopy.color = this.getColor(depRepos.length);
       locByLangCopy.legend.data = Array.from(languageData.keys()); // add x axis label
-      depBubbleChartCopy.legend.data = depRepos
+      depBubbleChartCopy.legend.data = depRepos;
 
-    //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
+      //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
 
       this.setSeriesSubObject(locByLangCopy, languageData);
       this.setSeriesSubObject(locByTypeCopy, statsData);
-      this.setSeriesBubbleChart(depBubbleChartCopy, extractedDepData, depBubbleChartCopy.color)
+      this.setSeriesBubbleChart(
+        depBubbleChartCopy,
+        extractedDepData,
+        depBubbleChartCopy.color
+      );
 
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
@@ -532,14 +529,13 @@ export default {
         this.locLang2 = locByLangCopy;
         this.bubblePlot1 = depBubbleChartCopy;
         this.bubblePlot2 = depBubbleChartCopy;
-
       } else if (repoNumber == 2) {
         // this.locType2 = locByTypeCopy;
         // this.locLang2 = locByLangCopy;
       }
     },
     setSeriesBubbleChart(chart, map, colors) {
-      let colorIndex = 0
+      let colorIndex = 0;
       map.forEach((repoArray) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
@@ -549,27 +545,27 @@ export default {
         chart.series.push(seriesSubObjCopy);
       });
     },
-    processDate(inputDate){
+    processDate(inputDate) {
       if (inputDate) {
         let date = new Date(inputDate);
-        let dateFormatter = new Intl.DateTimeFormat('en-AU', {
-          day : '2-digit',
-          month: 'short',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          timeZone: 'Australia/Sydney',
-          timeZoneName: 'short',
-          hour12: false
+        let dateFormatter = new Intl.DateTimeFormat("en-AU", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          timeZone: "Australia/Sydney",
+          timeZoneName: "short",
+          hour12: false,
         });
 
-        return dateFormatter.format(date)
+        return dateFormatter.format(date);
       }
-      return ""
+      return "";
     },
-    extractDepData(repoNumber){
+    extractDepData(repoNumber) {
       let jsonObj;
-      let extractedDepData = [] // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
 
       if (repoNumber == 1) {
         jsonObj = this.repository1Stats.dep;
@@ -577,16 +573,16 @@ export default {
         jsonObj = this.repository2Stats.dep;
       }
 
-       for (let repoObj of jsonObj) {
-         let repoData = []
-         repoData.push(repoObj.size);
-         repoData.push(repoObj.dep_count);
-         repoData.push(Math.sqrt(repoObj.issue_count)* 5);
-         repoData.push(repoObj.name);
-         extractedDepData.push(repoData)
-       }
+      for (let repoObj of jsonObj) {
+        let repoData = [];
+        repoData.push(repoObj.size);
+        repoData.push(repoObj.dep_count);
+        repoData.push(Math.sqrt(repoObj.issue_count) * 5);
+        repoData.push(repoObj.name);
+        extractedDepData.push(repoData);
+      }
 
-      return extractedDepData
+      return extractedDepData;
     },
     extractData(repoNumber) {
       let jsonObj;
@@ -605,7 +601,7 @@ export default {
       }
 
       for (let versionObj of jsonObj) {
-        versions.push(versionObj.tag_name)
+        versions.push(versionObj.tag_name);
         for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
