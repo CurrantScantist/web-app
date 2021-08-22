@@ -12,4 +12,12 @@ module.exports = {
         .end();
     });
   },
+  devServer: {
+    proxy: {
+        '^/techstack/*':{
+          target: " https://scantist-backend.herokuapp.com",
+          secure: false
+        }
+    }
+}
 };

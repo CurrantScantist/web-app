@@ -1,0 +1,9 @@
+{
+        "type": "scatter",
+        "emphasis": {
+            "focus": "series"
+        },
+        "areaStyle": {
+            "opacity": 0.8
+        }
+}
