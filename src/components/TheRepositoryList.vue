@@ -101,7 +101,7 @@ export default defineComponent({
   async created() {
     try {
       const response = await axios.get(
-        "/techstack/detailed"
+        process.env.VUE_APP_API_URL + "/techstack/list"
       );
       this.data = response.data.data[0];
     } catch (e) {
