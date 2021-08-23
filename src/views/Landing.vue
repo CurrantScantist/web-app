@@ -109,6 +109,7 @@ h2 {
 .landing-wrapper {
   overflow: hidden;
   height: 100%;
+  max-height: 100vh;
   width: 100%;
   margin: 0px;
   padding: 0px;
