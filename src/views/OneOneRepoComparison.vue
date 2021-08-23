@@ -29,7 +29,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  critical">
+            <div class="info-item vulnerabilityTheme critical">
               <div class="stat-name">Critical Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -39,7 +39,7 @@
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  high">
+            <div class="info-item vulnerabilityTheme high">
               <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -51,7 +51,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  medium">
+            <div class="info-item vulnerabilityTheme medium">
               <div class="stat-name">Medium Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -65,7 +65,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  low">
+            <div class="info-item vulnerabilityTheme low">
               <div class="stat-name">Low Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -75,7 +75,7 @@
               <div>{{ repository1MetaData.default_branch }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  unknown">
+            <div class="info-item vulnerabilityTheme unknown">
               <div class="stat-name">Unknown Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -96,22 +96,19 @@
               </div>
             </div>
 
-
             <div class="info-item">
               <div class="stat-name">Created on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.created_at) }} 
+                {{ repo1CreatedAt }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Last updated on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.updated_at) }} 
+                {{ repo1LastUpdatedOn }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Tags:</div>
@@ -152,8 +149,6 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
-
-  
           </div>
         </div>
       </div>
@@ -186,7 +181,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  critical">
+            <div class="info-item vulnerabilityTheme critical">
               <div class="stat-name">Critical Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -196,7 +191,7 @@
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  high">
+            <div class="info-item vulnerabilityTheme high">
               <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -208,7 +203,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  medium">
+            <div class="info-item vulnerabilityTheme medium">
               <div class="stat-name">Medium Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -222,7 +217,7 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  low">
+            <div class="info-item vulnerabilityTheme low">
               <div class="stat-name">Low Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -232,7 +227,7 @@
               <div>{{ repository1MetaData.default_branch }}</div>
             </div>
 
-            <div class="info-item vulnerabilityTheme  unknown">
+            <div class="info-item vulnerabilityTheme unknown">
               <div class="stat-name">Unknown Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
@@ -253,22 +248,19 @@
               </div>
             </div>
 
-
             <div class="info-item">
               <div class="stat-name">Created on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.created_at) }} 
+                {{ repo2CreatedAt }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Last updated on:</div>
               <div>
-                {{ this.processDate(repository1MetaData.updated_at) }} 
+                {{ repo2LastUpdatedOn }}
               </div>
             </div>
-
 
             <div class="info-item">
               <div class="stat-name">Tags:</div>
@@ -309,7 +301,6 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
-
           </div>
         </div>
       </div>
@@ -317,15 +308,230 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.test {
+  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
+  color: white;
+}
+
+.repository {
+  padding: 2%;
+}
+
+.rep-container {
+  background-color: rgba(113, 113, 113, 0.58);
+  padding: 2%;
+  padding-top: 5px;
+  border-radius: 25px;
+}
+
+.vulnerabilityTheme {
+  border-radius: var(--viz--radius);
+  align-items: center;
+  justify-content: center;
+}
+
+.critical {
+  background-color: #7a002f;
+}
+
+.high {
+  background-color: #c70039;
+}
+
+.medium {
+  background-color: #ff7733;
+}
+
+.low {
+  background-color: #fcad00;
+}
+
+.unknown {
+  background-color: #8e8e8e;
+}
+
+.viz-grid {
+  display: grid;
+  font-size: 138%;
+  grid-template-rows: repeat(1fr);
+  grid-gap: 1rem;
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  grid-auto-flow: row;
+  grid-template-areas:
+    "simple-visualisation1 simple-visualisation2"
+    "wide-visualisation1 wide-visualisation1"
+    "wide-visualisation2 wide-visualisation2"
+    "wide-visualisation3 wide-visualisation3";
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0.5rem;
+  grid-auto-flow: row;
+  padding: 2%;
+  background-color: rgba(38, 38, 38, 0.35);
+  border-radius: var(--viz--radius);
+  margin-bottom: 3%;
+}
+
+.health-model {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0rem;
+  grid-template-columns: minmax(0%, auto) minmax(0%, auto);
+  grid-auto-flow: column;
+}
+
+.stat-name {
+  font-weight: 800;
+  padding-right: 5px;
+}
+
+@media only screen and (max-width: 650px) {
+  .info-grid {
+    display: grid;
+    grid-template-columns: minmax(0%, 1fr);
+    grid-template-rows: repeat(1fr);
+    grid-gap: 0.5rem;
+    grid-auto-flow: row;
+    margin-bottom: 3%;
+  }
+
+  h1,
+  h2 {
+    font-size: 185%;
+    margin-bottom: 8px;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .viz-grid {
+    grid-gap: 1rem;
+    grid-template-columns: minmax(0%, 100%);
+    grid-auto-flow: row;
+    grid-template-areas:
+      "simple-visualisation1"
+      "simple-visualisation2"
+      "wide-visualisation1"
+      "wide-visualisation2"
+      "wide-visualisation3";
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .health-model {
+    display: grid;
+    grid-template-rows: repeat(1fr);
+    grid-gap: 1rem;
+    grid-template-columns: minmax(0%, auto);
+    grid-auto-flow: row;
+    grid-template-rows: repeat(1fr);
+  }
+}
+
+.simple-visualisation1,
+.simple-visualisation2,
+.wide-visualisation1,
+.wide-visualisation2,
+.wide-visualisation3 {
+  background-color: rgba(255, 255, 255, 0.88);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  border-radius: var(--viz--radius);
+}
+
+.simple-visualisation1 {
+  grid-area: simple-visualisation1;
+}
+
+.simple-visualisation2 {
+  grid-area: simple-visualisation2;
+}
+
+.wide-visualisation1 {
+  grid-area: wide-visualisation1;
+}
+
+.wide-visualisation2 {
+  grid-area: wide-visualisation2;
+}
+
+.wide-visualisation3 {
+  grid-area: wide-visualisation3;
+}
+
+.info-item {
+  display: flex;
+  font-weight: 500;
+  font-size: 130%;
+  padding: 5px;
+  margin: 1%;
+}
+
+.close-button {
+  background-color: rgb(255, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  font-size: 11;
+  display: block;
+  border-radius: 50%;
+  font-weight: 500;
+  height: 25px;
+  width: 25px;
+  margin-top: 13px;
+  float: right;
+}
+
+.close-button:hover {
+  background-color: rgb(255, 0, 0, 1);
+  color: white;
+}
+
+// Typography
+h1,
+h2 {
+  font-weight: 800;
+  font-size: 385%;
+  //color: #000000;
+  margin-bottom: 13px;
+}
+
+h3 {
+  font-weight: 800;
+  font-size: 100%;
+  color: #000000;
+  margin: 0;
+  text-align: left;
+}
+
+h6 {
+  font-weight: 500;
+  font-size: 50%;
+  color: #383838;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 3%;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: 138%;
+  margin-top: 5px;
+  text-align: justify;
+}
+</style>
 
 <script>
 import { VEcharts } from "vue3-echarts";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
-import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json"
+import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
-import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
+import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
 import axios from "axios";
 
 export default {
@@ -373,7 +579,7 @@ export default {
       locType1: {},
       locType2: {},
       bubblePlot1: {},
-      bubblePlot2: {}
+      bubblePlot2: {},
     };
   },
   components: {
@@ -382,7 +588,8 @@ export default {
   async created() {
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository1MetaData = response.data.data[0];
     } catch (e) {
@@ -391,7 +598,8 @@ export default {
 
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository2MetaData = response.data.data[0];
     } catch (e) {
@@ -400,7 +608,8 @@ export default {
 
     try {
       const response = await axios.get(
-         process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository1Stats.loc = response.data.data[0];
     } catch (e) {
@@ -409,7 +618,8 @@ export default {
 
     try {
       const response = await axios.get(
-          process.env.VUE_APP_API_URL+ `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository2Stats.loc = response.data.data[0];
     } catch (e) {
@@ -418,24 +628,38 @@ export default {
 
     try {
       const response = await axios.get(
-          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
       );
-      this.repository1Stats.dep = response.data.data
+      this.repository1Stats.dep = response.data.data;
     } catch (e) {
       console.log(e);
     }
 
     try {
       const response = await axios.get(
-          'https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712'
+        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
       );
-      this.repository2Stats.dep = response.data.data
+      this.repository2Stats.dep = response.data.data;
     } catch (e) {
       console.log(e);
     }
 
     this.processData(1);
     this.processData(2);
+  },
+  computed: {
+    repo1CreatedAt() {
+      return this.processDate(this.repository1MetaData.created_at);
+    },
+    repo2CreatedAt() {
+      return this.processDate(this.repository2MetaData.created_at);
+    },
+    repo1LastUpdatedOn() {
+      return this.processDate(this.repository1MetaData.updated_at);
+    },
+    repo2LastUpdatedOn() {
+      return this.processDate(this.repository2MetaData.updated_at);
+    },
   },
   methods: {
     getColor(size) {
@@ -454,7 +678,7 @@ export default {
         "#a05195",
         "#f95d6a",
         "#003f5c",
-        "#55838a"
+        "#55838a",
       ];
       let colorPalette = [];
       for (let i = 0; i < size; i++) {
@@ -472,8 +696,8 @@ export default {
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = value.color;
         seriesSubObjCopy.data = value.data;
-        if(key === "blank" || key === "comment"){
-            seriesSubObjCopy.areaStyle.opacity = 0.5
+        if (key === "blank" || key === "comment") {
+          seriesSubObjCopy.areaStyle.opacity = 0.5;
         }
         chart.series.push(seriesSubObjCopy);
       });
@@ -502,28 +726,30 @@ export default {
       statsData = extractedData[2];
 
       let depRepos = extractedDepData.map((repoArray) => {
-          return repoArray[3];
-      })
-     
+        return repoArray[3];
+      });
+
       let colorPalette = this.getColor(languageData.size);
       this.assignColor(languageData, colorPalette);
 
-
-      locByLangCopy.xAxis[0].data = versions
-      locByTypeCopy.xAxis[0].data = versions
-      
+      locByLangCopy.xAxis[0].data = versions;
+      locByTypeCopy.xAxis[0].data = versions;
 
       locByLangCopy.color = colorPalette;
 
       depBubbleChartCopy.color = this.getColor(depRepos.length);
       locByLangCopy.legend.data = Array.from(languageData.keys()); // add x axis label
-      depBubbleChartCopy.legend.data = depRepos
+      depBubbleChartCopy.legend.data = depRepos;
 
-    //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
+      //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
 
       this.setSeriesSubObject(locByLangCopy, languageData);
       this.setSeriesSubObject(locByTypeCopy, statsData);
-      this.setSeriesBubbleChart(depBubbleChartCopy, extractedDepData, depBubbleChartCopy.color)
+      this.setSeriesBubbleChart(
+        depBubbleChartCopy,
+        extractedDepData,
+        depBubbleChartCopy.color
+      );
 
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
@@ -532,14 +758,13 @@ export default {
         this.locLang2 = locByLangCopy;
         this.bubblePlot1 = depBubbleChartCopy;
         this.bubblePlot2 = depBubbleChartCopy;
-
       } else if (repoNumber == 2) {
         // this.locType2 = locByTypeCopy;
         // this.locLang2 = locByLangCopy;
       }
     },
     setSeriesBubbleChart(chart, map, colors) {
-      let colorIndex = 0
+      let colorIndex = 0;
       map.forEach((repoArray) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
@@ -549,27 +774,27 @@ export default {
         chart.series.push(seriesSubObjCopy);
       });
     },
-    processDate(inputDate){
+    processDate(inputDate) {
       if (inputDate) {
         let date = new Date(inputDate);
-        let dateFormatter = new Intl.DateTimeFormat('en-AU', {
-          day : '2-digit',
-          month: 'short',
-          year: 'numeric',
-          hour: 'numeric',
-          minute: 'numeric',
-          timeZone: 'Australia/Sydney',
-          timeZoneName: 'short',
-          hour12: false
+        let dateFormatter = new Intl.DateTimeFormat("en-AU", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          timeZone: "Australia/Sydney",
+          timeZoneName: "short",
+          hour12: false,
         });
 
-        return dateFormatter.format(date)
+        return dateFormatter.format(date);
       }
-      return ""
+      return "";
     },
-    extractDepData(repoNumber){
+    extractDepData(repoNumber) {
       let jsonObj;
-      let extractedDepData = [] // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
 
       if (repoNumber == 1) {
         jsonObj = this.repository1Stats.dep;
@@ -577,16 +802,16 @@ export default {
         jsonObj = this.repository2Stats.dep;
       }
 
-       for (let repoObj of jsonObj) {
-         let repoData = []
-         repoData.push(repoObj.size);
-         repoData.push(repoObj.dep_count);
-         repoData.push(Math.sqrt(repoObj.issue_count)* 5);
-         repoData.push(repoObj.name);
-         extractedDepData.push(repoData)
-       }
+      for (let repoObj of jsonObj) {
+        let repoData = [];
+        repoData.push(repoObj.size);
+        repoData.push(repoObj.dep_count);
+        repoData.push(Math.sqrt(repoObj.issue_count) * 5);
+        repoData.push(repoObj.name);
+        extractedDepData.push(repoData);
+      }
 
-      return extractedDepData
+      return extractedDepData;
     },
     extractData(repoNumber) {
       let jsonObj;
@@ -605,7 +830,7 @@ export default {
       }
 
       for (let versionObj of jsonObj) {
-        versions.push(versionObj.tag_name)
+        versions.push(versionObj.tag_name);
         for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
