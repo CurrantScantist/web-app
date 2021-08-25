@@ -8,7 +8,24 @@
   <v-chart :option="pieOptions" :style="pieHeight" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h3 {
+  font-weight: 800;
+  font-size: 100%;
+  color: #000000;
+  margin: 0;
+  text-align: left;
+}
+
+h6 {
+  font-weight: 500;
+  font-size: 50%;
+  color: #383838;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 3%;
+}
+</style>
 
 <script>
 import VChart from "vue-echarts";
