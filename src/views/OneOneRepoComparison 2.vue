@@ -65,23 +65,23 @@
             <div class="simple-visualisation1">
               <h3>Placeholder</h3>
               <h6>(Placeholder)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <v-chart v-bind:option="option2" style="height: 300px" />
             </div>
             <div class="simple-visualisation2">
               <h3>Contribution Pie Chart</h3>
               <h6>(by Number of Commits)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <v-chart v-bind:option="option2" style="height: 300px" />
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
               <h6>(over versions in %)</h6>
-              <v-echarts v-bind:option="option3" style="height: 500px" />
+              <v-chart v-bind:option="option3" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(in %)</h6>
-              <v-echarts v-bind:option="option4" style="height: 500px" />
+              <v-chart v-bind:option="option4" style="height: 500px" />
             </div>
           </div>
         </div>
@@ -151,23 +151,23 @@
             <div class="simple-visualisation1">
               <h3>Placeholder</h3>
               <h6>(Placeholder)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <v-chart v-bind:option="option2" style="height: 300px" />
             </div>
             <div class="simple-visualisation2">
               <h3>Contribution Pie Chart</h3>
               <h6>(by Number of Commits)</h6>
-              <v-echarts v-bind:option="option2" style="height: 300px" />
+              <v-chart v-bind:option="option2" style="height: 300px" />
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
               <h6>(over versions in %)</h6>
-              <v-echarts v-bind:option="option3" style="height: 500px" />
+              <v-chart v-bind:option="option3" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(in %)</h6>
-              <v-echarts v-bind:option="option4" style="height: 500px" />
+              <v-chart v-bind:option="option4" style="height: 500px" />
             </div>
           </div>
         </div>
@@ -179,13 +179,16 @@
 <style lang="scss" scoped></style>
 
 <script>
-import { VEcharts } from "vue3-echarts";
+import VChart from "vue-echarts";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 
 export default {
   name: "OneOneRepoComparison",
   async created() {
     this.fetchData();
+  },
+  components: {
+    VChart,
   },
   data() {
     return {
@@ -364,9 +367,6 @@ export default {
         ],
       },
     };
-  },
-  components: {
-    VEcharts,
   },
   methods: {
     getColor() {
