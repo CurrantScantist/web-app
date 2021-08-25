@@ -125,7 +125,7 @@ svg {
   z-index: -1;
 }
 
-@media screen and (min-width: 1700px){
+@media screen and (min-width: 1700px) {
   .top {
     margin-top: -150px !important;
     margin-bottom: 0px !important;
@@ -143,7 +143,6 @@ svg {
     margin-bottom: 0px !important;
   }
 
-  
   .three img {
     width: 300px;
   }
@@ -158,12 +157,10 @@ svg {
     max-width: 600px !important;
   }
 
-  
   .three img {
     width: 350px !important;
   }
 }
-
 
 @media screen and (max-width: 600px) {
   .three img {
@@ -176,7 +173,6 @@ svg {
     width: 300px !important;
   }
 }
-
 
 .one {
   flex: 1 1 auto;

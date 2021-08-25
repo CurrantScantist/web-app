@@ -14,10 +14,10 @@ module.exports = {
   },
   devServer: {
     proxy: {
-        '^/techstack/*':{
-          target: " https://scantist-backend.herokuapp.com",
-          secure: false
-        }
-    }
-}
+      "^/techstack/*": {
+        target: " https://scantist-backend.herokuapp.com",
+        secure: false,
+      },
+    },
+  },
 };

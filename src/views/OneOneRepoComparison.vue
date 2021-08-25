@@ -143,19 +143,19 @@
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
               <h6>(over versions)</h6>
-              <v-echarts v-bind:option="locLang1" style="height: 500px" />
+              <v-chart v-bind:option="locLang1" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
-              <v-echarts v-bind:option="locType1" style="height: 500px" />
+              <v-chart v-bind:option="locType1" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes Comparison</h3>
               <h6>Bubble plot</h6>
-              <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
+              <v-chart v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
           </div>
         </div>
@@ -303,19 +303,19 @@
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
               <h6>(over versions)</h6>
-              <v-echarts v-bind:option="locLang2" style="height: 500px" />
+              <v-chart v-bind:option="locLang2" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
-              <v-echarts v-bind:option="locType2" style="height: 500px" />
+              <v-chart v-bind:option="locType2" style="height: 500px" />
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes Comparison</h3>
               <h6>Bubble plot</h6>
-              <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
+              <v-chart v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
           </div>
         </div>
@@ -542,14 +542,14 @@ h5 {
 </style>
 
 <script>
-import { VEcharts } from "vue3-echarts";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
 import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
-import axios from "axios";
 
+import axios from "axios";
+import VChart from "vue-echarts";
 import PieChart from "@/components/ThePieChart";
 
 export default {
@@ -557,6 +557,10 @@ export default {
   props: {
     name: { type: String, required: true },
     owner: { type: String, required: true },
+  },
+  components: {
+    VChart,
+    PieChart,
   },
   data() {
     return {
@@ -580,10 +584,6 @@ export default {
       bubblePlot1: {},
       bubblePlot2: {},
     };
-  },
-  components: {
-    VEcharts,
-    PieChart,
   },
   async created() {
     try {
