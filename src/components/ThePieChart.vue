@@ -5,18 +5,18 @@
     <slot name="subheading">subheading</slot>
     )
   </h6>
-  <v-echarts :option="pieOptions" :style="pieHeight" />
+  <v-chart :option="pieOptions" :style="pieHeight" />
 </template>
 
 <style lang="scss" scoped></style>
 
 <script>
-import { VEcharts } from "vue3-echarts";
+import VChart from "vue-echarts";
 
 export default {
   name: "PieChart",
   components: {
-    VEcharts,
+    VChart,
   },
   props: {
     height: {
