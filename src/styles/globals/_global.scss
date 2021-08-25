@@ -1,8 +1,8 @@
 // global styles
 // font import
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap");
 
-// css 
+// css
 html {
   box-sizing: border-box;
 }
@@ -13,233 +13,20 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: inherit;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
 
-:root{
+:root {
   --viz--radius: 18px;
 }
 
 html,
 body {
   height: 100%;
-  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
-  //background-image: linear-gradient(90deg, #0867ff 13%, #09c6f9 74%);
-  color: white;
-}
-
-h1, 
-h2 {
-  font-weight: 800;
-  font-size: 385%;
-  //color: #000000;
-  margin-bottom: 13px;
-}
-
-h3 {
-  font-weight: 800;
-  font-size: 100%;
-  color: #000000;
-  margin: 0;
-  text-align: left;
-}
-
-h6 {
-  font-weight: 500;
-  font-size: 50%;
-  color: #383838;
-  margin: 0;
-  text-align: left;
-  margin-bottom: 3%;
-}
-
-h5{
-  font-weight: 500;
-  font-size: 138%;
-  margin-top: 5px;
-  text-align: justify;
-}
-
-.repository{
-  padding: 2%;
-}
-
-.rep-container{
-  background-color: rgba(113, 113, 113, 0.58);
-  padding: 2%;
-  padding-top: 5px;
-  border-radius: 25px;
-}
-
-.vulnerabilityTheme {
-  border-radius: var(--viz--radius);
-  align-items: center;
-  justify-content: center;
-}
-
-.critical {
-  background-color: #7a002f;
-}
-
-.high {
-  background-color: #c70039;
-}
-
-.medium {
-  background-color: #ff7733;
-}
-
-.low {
-  background-color:  #fcad00;
-}
-
-.unknown {
-  background-color: #8e8e8e;
-}
-
-
-.viz-grid {
-  display: grid;
-  font-size: 138%;
-  grid-template-rows: repeat(1fr);
-  grid-gap: 1rem;
-  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
-  grid-auto-flow: row;
-  grid-template-areas: 
-  "simple-visualisation1 simple-visualisation2"
-  "wide-visualisation1 wide-visualisation1"
-  "wide-visualisation2 wide-visualisation2"
-  "wide-visualisation3 wide-visualisation3";
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
-  grid-template-rows: repeat(1fr);
-  grid-gap: 0.5rem;
-  grid-auto-flow: row;
-  padding: 2%;
-  background-color: rgba(38, 38, 38, 0.35);
-  border-radius: var(--viz--radius);
-  margin-bottom: 3%;
-} 
-
-.health-model {
-  display: grid;
-  grid-template-rows: repeat(1fr);
-  grid-gap: 0rem;
-  grid-template-columns: minmax(0%, auto) minmax(0%, auto);
-  grid-auto-flow: column;
-}
-
-.stat-name {
-  font-weight: 800;
-  padding-right: 5px;
-}
-
-@media only screen and (max-width: 650px) {
-.info-grid {
-    display: grid;
-    grid-template-columns: minmax(0%, 1fr);
-    grid-template-rows: repeat(1fr);
-    grid-gap: 0.5rem;
-    grid-auto-flow: row;
-    margin-bottom: 3%;
-  }
-
-h1,
-h2 {
-    font-size: 185%;
-    margin-bottom: 8px;
-  }
-}
-
-@media only screen and (max-width: 850px) {
-  .viz-grid{
-    grid-gap: 1rem;
-    grid-template-columns: minmax(0%, 100%);
-    grid-auto-flow: row;
-    grid-template-areas: 
-    "simple-visualisation1"
-    "simple-visualisation2"
-    "wide-visualisation1"
-    "wide-visualisation2"
-    "wide-visualisation3";
-  }
-}
-
-@media only screen and (max-width: 980px) {
-  .health-model{
-    display: grid;
-    grid-template-rows: repeat(1fr);
-    grid-gap: 1rem;
-    grid-template-columns: minmax(0%, auto);
-    grid-auto-flow: row;
-    grid-template-rows: repeat(1fr);
-  }
-}
-
-.simple-visualisation1,
-.simple-visualisation2,
-.wide-visualisation1,
-.wide-visualisation2,
-.wide-visualisation3 {
-  background-color: rgba(255, 255, 255, 0.88);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-  border-radius: var(--viz--radius);
-}
-
-.simple-visualisation1 {
-  grid-area: simple-visualisation1;
-}
-
-.simple-visualisation2 {
-  grid-area: simple-visualisation2;
-}
-
-.wide-visualisation1 {
-  grid-area: wide-visualisation1;
-}
-
-.wide-visualisation2 {
-  grid-area: wide-visualisation2;
-}
-
-.wide-visualisation3 {
-  grid-area: wide-visualisation3;
-}
-
-.info-item {
-  display: flex;
-  font-weight: 500;
-  font-size: 130%;
-  padding: 5px;
-  margin: 1%;
 }
 
 body {
   margin: 0;
   position: relative;
-}
-
-.close-button {
-  background-color: rgb(255, 0, 0, 0.8);
-  color: rgba(255, 255, 255, 0.8);
-  border: none;
-  font-size: 11;
-  display:block;
-  border-radius: 50%;
-  font-weight: 500;
-  height: 25px;
-  width: 25px;
-  margin-top: 13px;
-  float: right;
-}
-
-.close-button:hover {
-  background-color: rgb(255, 0, 0, 1);
-  color: white;
 }
