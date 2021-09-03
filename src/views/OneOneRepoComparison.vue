@@ -532,6 +532,7 @@ import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
 import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
+import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import axios from "axios";
 
 export default {
@@ -690,15 +691,12 @@ export default {
       }
       return colorPalette;
     },
-    setSeriesSubObject(chart, map) {
+    setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(seriesObj));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = value.color;
         seriesSubObjCopy.data = value.data;
-        if (key === "blank" || key === "comment") {
-          seriesSubObjCopy.areaStyle.opacity = 0.5;
-        }
         chart.series.push(seriesSubObjCopy);
       });
     },
@@ -733,7 +731,7 @@ export default {
       this.assignColor(languageData, colorPalette);
 
       locByLangCopy.xAxis[0].data = versions;
-      locByTypeCopy.xAxis[0].data = versions;
+      locByTypeCopy.yAxis[0].data = versions;
 
       locByLangCopy.color = colorPalette;
 
@@ -743,8 +741,8 @@ export default {
 
       //   locByTypeCopy.legend.data = Array.from(statsData.keys());  // rm legend
 
-      this.setSeriesSubObject(locByLangCopy, languageData);
-      this.setSeriesSubObject(locByTypeCopy, statsData);
+      this.setSeriesSubObject(locByLangCopy, languageData, seriesObj);
+      this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
         extractedDepData,
@@ -819,9 +817,9 @@ export default {
       const languageData = new Map();
       const statsData = new Map();
 
-      statsData.set("code", { data: [], color: "#1ceca8" });
-      statsData.set("comment", { data: [], color: "#1ceca8" });
-      statsData.set("blank", { data: [], color: "#8ce3cc" });
+      statsData.set("code", { data: [], color: "#34a853" });
+      statsData.set("comment", { data: [], color: "#4285f4" });
+      statsData.set("blank", { data: [], color: "#ea4335" });
 
       if (repoNumber == 1) {
         jsonObj = this.repository1Stats.loc;
@@ -838,13 +836,12 @@ export default {
               map.set(key, value);
             });
           } else {
-            let normalisedValue = Math.round((langObj.code / 1) * 1);
             if (languageData.has(langKey)) {
               let tempValue = languageData.get(langKey);
-              tempValue.data.push(normalisedValue);
+              tempValue.data.push(langObj.code);
               languageData.set(langKey, tempValue);
             } else {
-              languageData.set(langKey, { data: [normalisedValue] });
+              languageData.set(langKey, { data: [langObj.code] });
             }
           }
         }

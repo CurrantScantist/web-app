@@ -1,12 +1,9 @@
 {
-    "color": ["#35dbb1"],
+    "color": ["#34a853", "#4285f4", "#ea4335"],
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
-            "type": "cross",
-            "label": {
-                "backgroundColor": "#6a7985"
-            }
+            "type": "line"
         }
     },
     "legend": {
@@ -22,29 +19,35 @@
         "left": "5%",
         "right": "3%",
         "bottom": "5%",
-        "top": "13%",
+        "top": "3%",
         "containLabel": true
     },
     "xAxis": [
         {
-            "name": "Versions",
+            "type": "value",
+            "name": "Lines of Code",
             "nameLocation": "middle",
-            "nameGap": 28,
+            "nameGap": 25,
             "nameTextStyle": {
                 "fontSize": 18
-            },
-            "type": "category",
-            "boundaryGap": false
+            }
         }
     ],
     "yAxis": [
         {
-            "type": "value",
-            "name": "Lines of Code",
+            "name": "Versions",
             "nameLocation": "middle",
-            "nameGap": 55,
+            "nameGap": 15,
             "nameTextStyle": {
                 "fontSize": 18
+            },
+            "type": "category",
+            "boundaryGap": false,
+            "axisLabel": {
+                "show": false
+            },
+            "axisTick": {
+                "show": false
             }
         }
     ],
