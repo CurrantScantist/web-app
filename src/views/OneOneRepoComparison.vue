@@ -149,6 +149,12 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
+
+            <div class="node-link">
+              <h3>Node Link Diagram</h3>
+              <h6>By License Type</h6>
+              <v-echarts v-bind:option="nodeLink1" style="height: 800px" />
+            </div>
           </div>
         </div>
       </div>
@@ -301,6 +307,12 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
+
+            <div class="node-link">
+              <h3>Node Link Diagram</h3>
+              <h6>By License Type</h6>
+              <v-echarts v-bind:option="nodeLink2" style="height: 800px" />
+            </div>
           </div>
         </div>
       </div>
@@ -362,7 +374,8 @@
     "simple-visualisation1 simple-visualisation2"
     "wide-visualisation1 wide-visualisation1"
     "wide-visualisation2 wide-visualisation2"
-    "wide-visualisation3 wide-visualisation3";
+    "wide-visualisation3 wide-visualisation3"
+    "node-link node-link";
 }
 
 .info-grid {
@@ -417,7 +430,8 @@
       "simple-visualisation2"
       "wide-visualisation1"
       "wide-visualisation2"
-      "wide-visualisation3";
+      "wide-visualisation3"
+      "node-link";
   }
 }
 
@@ -436,7 +450,8 @@
 .simple-visualisation2,
 .wide-visualisation1,
 .wide-visualisation2,
-.wide-visualisation3 {
+.wide-visualisation3,
+.node-link {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -462,6 +477,10 @@
 
 .wide-visualisation3 {
   grid-area: wide-visualisation3;
+}
+
+.node-link {
+  grid-area: node-link;
 }
 
 .info-item {
@@ -533,6 +552,7 @@ import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.jso
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
 import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
+import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 import axios from "axios";
 
 export default {
@@ -581,6 +601,8 @@ export default {
       locType2: {},
       bubblePlot1: {},
       bubblePlot2: {},
+      nodeLink1: {},
+      nodeLink2: {},
     };
   },
   components: {
@@ -645,6 +667,25 @@ export default {
       console.log(e);
     }
 
+    try {
+      const response = await axios.get(
+        "https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda"
+      );
+      this.repository1Stats.nodeLink = response.data.data;
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const response = await axios.get(
+        "https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda"
+      );
+      this.repository2Stats.nodeLink = response.data;
+      console.log(this.repository2Stats.nodeLink)
+    } catch (e) {
+      console.log(e);
+    }
+
     this.processData(1);
     this.processData(2);
   },
@@ -699,6 +740,19 @@ export default {
         seriesSubObjCopy.data = value.data;
         chart.series.push(seriesSubObjCopy);
       });
+    },
+    setSeriesNodeLink(chart, map){
+      map.forEach((value) => {
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
+        seriesSubObjCopy.links = value.links;
+        seriesSubObjCopy.categories = value.categories
+        seriesSubObjCopy.data = 
+        chart.series.push(seriesSubObjCopy);
+      });
+    //   data: webkitDep.nodes.map(function (node, idx) {
+    //     node.id = idx;
+    //     return node;
+    //   }),
     },
     assignColor(givenMap, colorPalette) {
       let colorAllocationIndex = 0;
@@ -851,6 +905,8 @@ export default {
   },
 };
 
+// node link: https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda
+// node link delete: https://designer.mocky.io/manage/delete/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda/fit4002
 // bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
 // bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
 </script>

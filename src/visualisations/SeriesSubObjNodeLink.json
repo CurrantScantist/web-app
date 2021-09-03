@@ -1,0 +1,15 @@
+{
+    "type": "graph",
+    "layout": "force",
+    "animation": "false",
+    "label": {
+        "position": "top",
+        "formatter": "{b}"
+    },
+    "draggable": true,
+    "force": {
+        "edgeLength": 5,
+        "repulsion": 20,
+        "gravity": 0.2
+    }
+}
