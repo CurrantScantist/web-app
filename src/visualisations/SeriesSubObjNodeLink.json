@@ -8,8 +8,8 @@
     },
     "draggable": true,
     "force": {
-        "edgeLength": 5,
-        "repulsion": 20,
-        "gravity": 0.2
+        "edgeLength": 25,
+        "repulsion": 50,
+        "gravity": 0.15
     }
 }
