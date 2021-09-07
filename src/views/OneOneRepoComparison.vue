@@ -150,6 +150,12 @@
               <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
 
+            <div class="heat-map">
+              <h3>Open Issues Heat Map</h3>
+              <h6>By Weeks</h6>
+              <v-echarts v-bind:option="heatMap1" style="height: 350px" />
+            </div>
+
             <div class="node-link">
               <h3>Node Link Diagram</h3>
               <h6>By License Type</h6>
@@ -312,6 +318,12 @@
               <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
 
+            <div class="heat-map">
+              <h3>Open Issues Heat Map</h3>
+              <h6>By Weeks</h6>
+              <v-echarts v-bind:option="heatMap2" style="height: 350px" />
+            </div>
+
             <div class="node-link">
               <h3>Node Link Diagram</h3>
               <h6>By License Type</h6>
@@ -383,6 +395,7 @@
     "wide-visualisation1 wide-visualisation1"
     "wide-visualisation2 wide-visualisation2"
     "wide-visualisation3 wide-visualisation3"
+    "heat-map heat-map"
     "node-link node-link";
 }
 
@@ -439,6 +452,7 @@
       "wide-visualisation1"
       "wide-visualisation2"
       "wide-visualisation3"
+      "heat-map"
       "node-link";
   }
 }
@@ -459,7 +473,8 @@
 .wide-visualisation1,
 .wide-visualisation2,
 .wide-visualisation3,
-.node-link {
+.node-link,
+.heat-map {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -485,6 +500,10 @@
 
 .wide-visualisation3 {
   grid-area: wide-visualisation3;
+}
+
+.heat-map {
+  grid-area: heat-map;
 }
 
 .node-link {
@@ -627,6 +646,8 @@ export default {
       locType2: {},
       bubblePlot1: {},
       bubblePlot2: {},
+      heatMap1: {},
+      heatMap2: {},
       nodeLink1: {},
       nodeLink2: {},
     };

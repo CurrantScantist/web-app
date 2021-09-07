@@ -1,0 +1,10 @@
+{
+    "name": "Open Issues",
+    "type": "heatmap",
+    "data": [],
+    "itemStyle": {
+        "borderType": "solid",
+        "borderColor": "rgba(255, 255, 255, 0.88)",
+        "borderWidth": 1
+    }
+}
