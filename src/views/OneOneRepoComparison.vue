@@ -859,6 +859,8 @@ export default {
       locByLangCopy.xAxis[0].data = versions;
       locByTypeCopy.yAxis[0].data = versions;
 
+      heatMapCopy.xAxis.data = extractedHeatMapData[3]
+
       locByLangCopy.color = colorPalette;
 
       depBubbleChartCopy.color = this.getColor(depRepos.length);
@@ -871,11 +873,10 @@ export default {
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(depBubbleChartCopy, extractedDepData,depBubbleChartCopy.color);
       this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj)
+      
 
       this.initializeNodeLink(nodeLinkCopy1, this.repository1Stats.nodeLink);
       this.initializeNodeLink(nodeLinkCopy2, this.repository2Stats.nodeLink);
-
-      console.log(heatMapCopy)
       
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
@@ -945,8 +946,10 @@ export default {
     },
     extractHeatMapData(repoNumber){
       let jsonResponse;
-      let extractedHeatMapData = new Map();  // [Week: [Y,X,VAL]]
+      let extractedHeatMapData = new Map();  // [Week: [X,Y,VAL]]
       let maxVal = 0, minVal = Infinity;
+      let xAxis = []  // 19 cols
+      let weekCount = 0;
 
       if (repoNumber == 1) {
         jsonResponse = this.repository1Stats.heatMap;
@@ -955,12 +958,21 @@ export default {
       }
 
       for (let week in jsonResponse) {
-        let weekObj = jsonResponse[week]
-        let weekData = []
+        let weekObj = jsonResponse[week];
+        let weekData = [];
+        weekCount+=1;
       
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
+  
+        if(weekObj.start.substring(5,7) === "01"){
+          if (xAxis.length < Math.floor(weekCount / 8)) {
+             xAxis.push(weekObj.start.substring(0,4));
+          } else {
+            xAxis[Math.floor(weekCount / 8)-1] = weekObj.start.substring(0,4);
+          }
+        }
 
         if (weekData[2] > maxVal) {
           maxVal = weekData[2];      // max range for color palette and accurate colour interpolation
@@ -968,12 +980,17 @@ export default {
 
         if (weekData[2] < minVal){
           minVal = weekData[2];      // max range for color palette and accurate colour interpolation
-          console.log(weekObj)
+        }
+
+        if (weekCount % 8 == 0){
+          if (xAxis.length < (weekCount / 8)) {
+            xAxis.push("");
+          }
         }
 
         extractedHeatMapData.set(weekObj.week,weekData);
       }
-      return [extractedHeatMapData, minVal, maxVal];
+      return [extractedHeatMapData, minVal, maxVal, xAxis];
     },
     initializeNodeLink(nodeLink, data){
       let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
