@@ -21,6 +21,45 @@
             {{ repository1MetaData.description }}
           </h5>
 
+          <!-- <div class="meta-container">
+            <div class="container-title">Tags</div> -->
+            <div class="tag-grid" id = "tags1" >
+            </div>
+          <!-- </div> -->
+
+          <div class="meta-container">
+            <div class="container-title">Tags</div>
+            <div class="tag-grid" id = "tags2" >
+            </div>
+          </div>
+
+
+          <div class="meta-container">
+            <div class="container-title">Vulnerabilities</div>
+            <div class="vulnerability-grid">
+              <div class="vulnerability-grid-item vulnerabilityTheme critical">
+                <div class="stat-name">Critical:</div>
+                <div>{{ (repository1MetaData.open_issues_count || 0).toLocaleString() }}</div>
+              </div>
+              <div class="vulnerability-grid-item vulnerabilityTheme high">
+                <div class="stat-name">High:</div>
+                <div>{{ (repository1MetaData.open_issues_count || 0).toLocaleString() }}</div>
+              </div>
+              <div class="vulnerability-grid-item vulnerabilityTheme medium">
+                <div class="stat-name">Medium:</div>
+                <div>{{ (repository1MetaData.open_issues_count || 0).toLocaleString() }}</div>
+              </div>
+              <div class="vulnerability-grid-item vulnerabilityTheme low">
+                <div class="stat-name">Low:</div>
+                <div>{{ (repository1MetaData.open_issues_count || 0).toLocaleString() }}</div>
+              </div>
+              <div class="vulnerability-grid-item vulnerabilityTheme unknown">
+                <div class="stat-name">Unknown:</div>
+                <div>{{ (repository1MetaData.open_issues_count || 0).toLocaleString() }}</div>
+              </div>
+            </div>
+          </div>
+
           <div class="info-grid">
             <div class="info-item">
               <div class="stat-name">Forks Count:</div>
@@ -29,18 +68,8 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme critical">
-              <div class="stat-name">Critical Vulnerabilities:</div>
-              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
-            </div>
-
             <div class="info-item">
               <div class="stat-name">Forks:</div>
-              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
-            </div>
-
-            <div class="info-item vulnerabilityTheme high">
-              <div class="stat-name">High Vulnerabilities:</div>
               <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
@@ -49,11 +78,6 @@
               <div>
                 {{ (repository1MetaData.watchers_count || 0).toLocaleString() }}
               </div>
-            </div>
-
-            <div class="info-item vulnerabilityTheme medium">
-              <div class="stat-name">Medium Vulnerabilities:</div>
-              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
@@ -65,19 +89,9 @@
               </div>
             </div>
 
-            <div class="info-item vulnerabilityTheme low">
-              <div class="stat-name">Low Vulnerabilities:</div>
-              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
-            </div>
-
             <div class="info-item">
               <div class="stat-name">Default Branch:</div>
               <div>{{ repository1MetaData.default_branch }}</div>
-            </div>
-
-            <div class="info-item vulnerabilityTheme unknown">
-              <div class="stat-name">Unknown Vulnerabilities:</div>
-              <div>{{ (repository1MetaData.forks || 0).toLocaleString() }}</div>
             </div>
 
             <div class="info-item">
@@ -104,20 +118,10 @@
             </div>
 
             <div class="info-item">
-              <div class="stat-name">Last updated on:</div>
+              <div class="stat-name">Last update:</div>
               <div>
                 {{ repo1LastUpdatedOn }}
               </div>
-            </div>
-
-            <div class="info-item">
-              <div class="stat-name">Tags:</div>
-              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
-            </div>
-
-            <div class="info-item">
-              <div class="stat-name">Tags:</div>
-              <div>{{ (repository1MetaData.topics || []).join(", ") }}</div>
             </div>
           </div>
 
@@ -371,10 +375,45 @@
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;
-  padding: 2%;
+  padding: 1%;
   background-color: rgba(38, 38, 38, 0.35);
   border-radius: var(--viz--radius);
   margin-bottom: 3%;
+}
+
+.meta-container {
+  background-color: rgba(38, 38, 38, 0.35);
+  padding: 1%;
+  margin-bottom: 1%;
+  border-radius: var(--viz--radius); 
+}
+
+.container-title {
+  padding: 1%;
+  margin-top: 2px;
+  font-size: 158%;
+  font-weight: 800;
+}
+
+.vulnerability-grid {
+  display: grid;
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0.5rem;
+  grid-auto-flow: row;
+}
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+}
+
+.vulnerability-grid-item {
+  display: flex;
+  font-weight: 500;
+  font-size: 100%;
+  padding: 5px;
+  margin: 2%;
 }
 
 .health-model {
@@ -399,6 +438,26 @@
     grid-auto-flow: row;
     margin-bottom: 3%;
   }
+
+  .vulnerability-grid {
+    display: grid;
+    grid-template-columns: minmax(0%, 100%) minmax(0%, 100%);
+    grid-template-rows: repeat(1fr);
+    grid-gap: 0.5rem;
+    grid-auto-flow: row;
+    margin-bottom: 1%;
+  }
+
+  .tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+}
+
+  .unknown {
+  background-color: #8e8e8e;
+  grid-column: span 2; 
+}
 
   h1,
   h2 {
@@ -593,6 +652,8 @@ export default {
           `/techstack/{name_owner}?name=${this.name}&owner=${this.owner}`
       );
       this.repository1MetaData = response.data.data[0];
+      this.addTags(this.repository1MetaData.topics, "tags1");
+      this.addTags(this.repository1MetaData.topics, "tags2");
     } catch (e) {
       console.log(e);
     }
@@ -663,6 +724,23 @@ export default {
     },
   },
   methods: {
+    addTags(repoData,tag){
+      let colourPalette = this.getColor(repoData.length)
+      repoData.forEach((item, index) => {
+        let tagDiv = document.createElement("div");
+        tagDiv.innerText = item;
+        tagDiv.style.backgroundColor = colourPalette[index];
+        tagDiv.style.display = "flex";
+        tagDiv.style.fontWeight = 800;
+        tagDiv.style.fontSize = "100%";
+        tagDiv.style.padding = "5px 8px";
+        tagDiv.style.margin = "3px";
+        tagDiv.style.borderRadius = "18px";
+        tagDiv.style.alignItems = "center";
+        tagDiv.style.justifyContent = "center";
+        document.getElementById(tag).append(tagDiv);
+      })
+    },
     getColor(size) {
       let colorSet = [
         "#1ceca8",
