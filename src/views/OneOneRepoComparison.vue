@@ -832,6 +832,7 @@ export default {
       let statsData = new Map();
       let versions = [];
       let heatMapData = new Map();
+      let heatMapTooltipData = new Map();
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
@@ -844,6 +845,7 @@ export default {
       heatMapData = extractedHeatMapData[0];
       heatMapCopy.visualMap.min = extractedHeatMapData[1];
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
+      heatMapTooltipData = extractedHeatMapData[4];
 
       let depRepos = extractedDepData.map((repoArray) => {
         return repoArray[3];
@@ -874,6 +876,23 @@ export default {
       );
       this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj);
 
+
+      // custom tooltips for heatmap
+      heatMapCopy.tooltip.formatter = (obj) => {
+        // console.log(obj)
+        var dataPoint = obj.value;
+        // obj.borderColor = obj.color
+        // obj.marker = ""
+        // console.log(obj)
+        var weekTooltipData = heatMapTooltipData.get(dataPoint[0]+"-"+dataPoint[1])
+            return '<div class = "bubba" style="border: 3px solid '+ obj.color+';">'
+                + dataPoint[2] + ' open issues in '+obj.seriesName + '<br>'
+                + 'Start Date：' + weekTooltipData[0] + '<br>'
+                + 'End Date：' + weekTooltipData[1] + '<br>'
+                + '</div>';          
+      }
+
+      console.log(heatMapCopy)
       this.initializeNodeLink(nodeLinkCopy1, this.repository1Stats.nodeLink);
       this.initializeNodeLink(nodeLinkCopy2, this.repository2Stats.nodeLink);
 
@@ -946,8 +965,9 @@ export default {
     extractHeatMapData(repoNumber) {
       let jsonResponse;
       let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
+      let extractedTooltipData = new Map(); // [start date, end date]
       let maxVal = 0,
-        minVal = Infinity;
+      minVal = Infinity;
       let xAxis = []; // 19 cols
       let weekCount = 0;
 
@@ -960,11 +980,15 @@ export default {
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
         let weekData = [];
+        let weekTooltipData = [];
         weekCount += 1;
-
+        
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
+
+        weekTooltipData.push(weekObj.start);
+        weekTooltipData.push(weekObj.end);
 
         if (weekObj.start.substring(5, 7) === "01") {
           if (xAxis.length < Math.floor(weekCount / 8)) {
@@ -991,9 +1015,10 @@ export default {
           }
         }
 
+        extractedTooltipData.set(weekObj.coords.x+"-"+weekObj.coords.y, weekTooltipData)
         extractedHeatMapData.set(weekObj.week, weekData);
       }
-      return [extractedHeatMapData, minVal, maxVal, xAxis];
+      return [extractedHeatMapData, minVal, maxVal, xAxis, extractedTooltipData];
     },
     initializeNodeLink(nodeLink, data) {
       let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));

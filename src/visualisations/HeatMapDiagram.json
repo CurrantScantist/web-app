@@ -1,6 +1,7 @@
 {
     "tooltip": {
-        "position": "top"
+        "position": "top",
+        "backgroundColor": ["rgba(255,255,255,0)"]
     },
     "grid": {
         "height": "75%",
