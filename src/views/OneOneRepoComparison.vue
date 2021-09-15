@@ -149,6 +149,16 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot1" style="height: 500px" />
             </div>
+
+            <div class="node-link">
+              <h3>Node Link Diagram</h3>
+              <h6>By License Type</h6>
+              <div class="node-link-container">
+                <div style="width: auto; min-width: 1100px">
+                  <v-echarts v-bind:option="nodeLink1" style="height: 1100px" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -301,6 +311,16 @@
               <h6>Bubble plot</h6>
               <v-echarts v-bind:option="bubblePlot2" style="height: 500px" />
             </div>
+
+            <div class="node-link">
+              <h3>Node Link Diagram</h3>
+              <h6>By License Type</h6>
+              <div class="node-link-container">
+                <div style="width: auto; min-width: 1100px">
+                  <v-echarts v-bind:option="nodeLink2" style="height: 1100px" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -362,7 +382,8 @@
     "simple-visualisation1 simple-visualisation2"
     "wide-visualisation1 wide-visualisation1"
     "wide-visualisation2 wide-visualisation2"
-    "wide-visualisation3 wide-visualisation3";
+    "wide-visualisation3 wide-visualisation3"
+    "node-link node-link";
 }
 
 .info-grid {
@@ -417,7 +438,8 @@
       "simple-visualisation2"
       "wide-visualisation1"
       "wide-visualisation2"
-      "wide-visualisation3";
+      "wide-visualisation3"
+      "node-link";
   }
 }
 
@@ -436,7 +458,8 @@
 .simple-visualisation2,
 .wide-visualisation1,
 .wide-visualisation2,
-.wide-visualisation3 {
+.wide-visualisation3,
+.node-link {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -464,6 +487,19 @@
   grid-area: wide-visualisation3;
 }
 
+.node-link {
+  grid-area: node-link;
+  overflow-x: scroll;
+  overflow-y: scroll;
+
+  //white-space:nowrap;
+}
+
+.node-link-container {
+  height: 800px;
+  //display:inline-block;
+}
+
 .info-item {
   display: flex;
   font-weight: 500;
@@ -489,6 +525,7 @@
 .close-button:hover {
   background-color: rgb(255, 0, 0, 1);
   color: white;
+  cursor: pointer;
 }
 
 // Typography
@@ -526,14 +563,21 @@ h5 {
 </style>
 
 <script>
+// Library Imports
 import { VEcharts } from "vue3-echarts";
+import axios from "axios";
+
+// imports for json visualisations containing all the design elements representing the channel of visualisations
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
+import nodeLink from "@/visualisations/NodeLinkDiagram.json";
+
+// imports for series sub objects for different visualisations representing the mark of visualisations
 import seriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
 import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
-import axios from "axios";
+import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 
 export default {
   name: "OneOneRepoComparison",
@@ -581,6 +625,8 @@ export default {
       locType2: {},
       bubblePlot1: {},
       bubblePlot2: {},
+      nodeLink1: {},
+      nodeLink2: {},
     };
   },
   components: {
@@ -641,6 +687,24 @@ export default {
         "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
       );
       this.repository2Stats.dep = response.data.data;
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const response = await axios.get(
+        "https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda"
+      );
+      this.repository1Stats.nodeLink = response.data;
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const response = await axios.get(
+        "https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751"
+      );
+      this.repository2Stats.nodeLink = response.data;
     } catch (e) {
       console.log(e);
     }
@@ -711,6 +775,8 @@ export default {
       let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
       let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
+      let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink));
+      let nodeLinkCopy2 = JSON.parse(JSON.stringify(nodeLink));
 
       let languageData = new Map();
       let statsData = new Map();
@@ -749,6 +815,9 @@ export default {
         depBubbleChartCopy.color
       );
 
+      this.initializeNodeLink(nodeLinkCopy1, this.repository1Stats.nodeLink);
+      this.initializeNodeLink(nodeLinkCopy2, this.repository2Stats.nodeLink);
+
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
         this.locLang1 = locByLangCopy;
@@ -756,6 +825,8 @@ export default {
         this.locLang2 = locByLangCopy;
         this.bubblePlot1 = depBubbleChartCopy;
         this.bubblePlot2 = depBubbleChartCopy;
+        this.nodeLink1 = nodeLinkCopy1;
+        this.nodeLink2 = nodeLinkCopy2;
       } else if (repoNumber == 2) {
         // this.locType2 = locByTypeCopy;
         // this.locLang2 = locByLangCopy;
@@ -811,6 +882,13 @@ export default {
 
       return extractedDepData;
     },
+    initializeNodeLink(nodeLink, data) {
+      let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
+      nodeLinkSubObj.categories = data.categories;
+      nodeLinkSubObj.nodes = data.nodes;
+      nodeLinkSubObj.links = data.links;
+      nodeLink.series.push(nodeLinkSubObj);
+    },
     extractData(repoNumber) {
       let jsonObj;
       let versions = [];
@@ -851,6 +929,9 @@ export default {
   },
 };
 
+// node link: https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda
+// node link (large data): https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751
+// node link delete: https://designer.mocky.io/manage/delete/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda/fit4002
 // bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
 // bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
 </script>
