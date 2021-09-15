@@ -160,9 +160,9 @@
               <h3>Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
-                  <div style="width: auto; min-width: 1100px">
-                    <v-echarts v-bind:option="nodeLink1" style="height: 1100px"/>
-                  </div>
+                <div style="width: auto; min-width: 1100px">
+                  <v-echarts v-bind:option="nodeLink1" style="height: 1100px" />
+                </div>
               </div>
             </div>
           </div>
@@ -328,9 +328,9 @@
               <h3>Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
-                  <div style="width: auto; min-width: 1100px">
-                    <v-echarts v-bind:option="nodeLink2" style="height: 1100px"/>
-                  </div>
+                <div style="width: auto; min-width: 1100px">
+                  <v-echarts v-bind:option="nodeLink2" style="height: 1100px" />
+                </div>
               </div>
             </div>
           </div>
@@ -508,9 +508,9 @@
 
 .node-link {
   grid-area: node-link;
-  overflow-x:scroll;
-  overflow-y:scroll;
-  
+  overflow-x: scroll;
+  overflow-y: scroll;
+
   //white-space:nowrap;
 }
 
@@ -582,7 +582,6 @@ h5 {
 </style>
 
 <script>
-
 // Library Imports
 import { VEcharts } from "vue3-echarts";
 import axios from "axios";
@@ -600,7 +599,6 @@ import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 import heatMapSeriesObj from "@/visualisations/SeriesSubObjHeatMap.json";
-
 
 export default {
   name: "OneOneRepoComparison",
@@ -734,7 +732,6 @@ export default {
       console.log(e);
     }
 
-
     try {
       const response = await axios.get(
         "https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82"
@@ -812,7 +809,7 @@ export default {
       map.forEach((value, key) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj));
         seriesSubObjCopy.name = seriesSubObjCopy.name + key;
-        seriesSubObjCopy.data = [value]
+        seriesSubObjCopy.data = [value];
         chart.series.push(seriesSubObjCopy);
       });
     },
@@ -838,16 +835,15 @@ export default {
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
-      let extractedHeatMapData = this.extractHeatMapData(repoNumber); 
+      let extractedHeatMapData = this.extractHeatMapData(repoNumber);
 
       versions = extractedData[0];
-      languageData = extractedData[1];          // extracting info from array
+      languageData = extractedData[1]; // extracting info from array
       statsData = extractedData[2];
 
-      heatMapData = extractedHeatMapData[0]
-      heatMapCopy.visualMap.min = extractedHeatMapData[1]
-      heatMapCopy.visualMap.max = extractedHeatMapData[2]
-
+      heatMapData = extractedHeatMapData[0];
+      heatMapCopy.visualMap.min = extractedHeatMapData[1];
+      heatMapCopy.visualMap.max = extractedHeatMapData[2];
 
       let depRepos = extractedDepData.map((repoArray) => {
         return repoArray[3];
@@ -859,7 +855,7 @@ export default {
       locByLangCopy.xAxis[0].data = versions;
       locByTypeCopy.yAxis[0].data = versions;
 
-      heatMapCopy.xAxis.data = extractedHeatMapData[3]
+      heatMapCopy.xAxis.data = extractedHeatMapData[3];
 
       locByLangCopy.color = colorPalette;
 
@@ -871,13 +867,16 @@ export default {
 
       this.setSeriesSubObject(locByLangCopy, languageData, seriesObj);
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
-      this.setSeriesBubbleChart(depBubbleChartCopy, extractedDepData,depBubbleChartCopy.color);
-      this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj)
-      
+      this.setSeriesBubbleChart(
+        depBubbleChartCopy,
+        extractedDepData,
+        depBubbleChartCopy.color
+      );
+      this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj);
 
       this.initializeNodeLink(nodeLinkCopy1, this.repository1Stats.nodeLink);
       this.initializeNodeLink(nodeLinkCopy2, this.repository2Stats.nodeLink);
-      
+
       if (repoNumber == 1) {
         this.locType1 = locByTypeCopy;
         this.locLang1 = locByLangCopy;
@@ -885,10 +884,10 @@ export default {
         this.locLang2 = locByLangCopy;
         this.bubblePlot1 = depBubbleChartCopy;
         this.bubblePlot2 = depBubbleChartCopy;
-        this.nodeLink1 = nodeLinkCopy1
-        this.nodeLink2 = nodeLinkCopy2
-        this.heatMap1 = heatMapCopy
-        this.heatMap2 = heatMapCopy
+        this.nodeLink1 = nodeLinkCopy1;
+        this.nodeLink2 = nodeLinkCopy2;
+        this.heatMap1 = heatMapCopy;
+        this.heatMap2 = heatMapCopy;
       } else if (repoNumber == 2) {
         // this.locType2 = locByTypeCopy;
         // this.locLang2 = locByLangCopy;
@@ -944,11 +943,12 @@ export default {
 
       return extractedDepData;
     },
-    extractHeatMapData(repoNumber){
+    extractHeatMapData(repoNumber) {
       let jsonResponse;
-      let extractedHeatMapData = new Map();  // [Week: [X,Y,VAL]]
-      let maxVal = 0, minVal = Infinity;
-      let xAxis = []  // 19 cols
+      let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
+      let maxVal = 0,
+        minVal = Infinity;
+      let xAxis = []; // 19 cols
       let weekCount = 0;
 
       if (repoNumber == 1) {
@@ -960,43 +960,46 @@ export default {
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
         let weekData = [];
-        weekCount+=1;
-      
+        weekCount += 1;
+
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
-  
-        if(weekObj.start.substring(5,7) === "01"){
+
+        if (weekObj.start.substring(5, 7) === "01") {
           if (xAxis.length < Math.floor(weekCount / 8)) {
-             xAxis.push(weekObj.start.substring(0,4));
+            xAxis.push(weekObj.start.substring(0, 4));
           } else {
-            xAxis[Math.floor(weekCount / 8)-1] = weekObj.start.substring(0,4);
+            xAxis[Math.floor(weekCount / 8) - 1] = weekObj.start.substring(
+              0,
+              4
+            );
           }
         }
 
         if (weekData[2] > maxVal) {
-          maxVal = weekData[2];      // max range for color palette and accurate colour interpolation
+          maxVal = weekData[2]; // max range for color palette and accurate colour interpolation
         }
 
-        if (weekData[2] < minVal){
-          minVal = weekData[2];      // max range for color palette and accurate colour interpolation
+        if (weekData[2] < minVal) {
+          minVal = weekData[2]; // max range for color palette and accurate colour interpolation
         }
 
-        if (weekCount % 8 == 0){
-          if (xAxis.length < (weekCount / 8)) {
+        if (weekCount % 8 == 0) {
+          if (xAxis.length < weekCount / 8) {
             xAxis.push("");
           }
         }
 
-        extractedHeatMapData.set(weekObj.week,weekData);
+        extractedHeatMapData.set(weekObj.week, weekData);
       }
       return [extractedHeatMapData, minVal, maxVal, xAxis];
     },
-    initializeNodeLink(nodeLink, data){
+    initializeNodeLink(nodeLink, data) {
       let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
-      nodeLinkSubObj.categories = data.categories
-      nodeLinkSubObj.nodes = data.nodes
-      nodeLinkSubObj.links = data.links
+      nodeLinkSubObj.categories = data.categories;
+      nodeLinkSubObj.nodes = data.nodes;
+      nodeLinkSubObj.links = data.links;
       nodeLink.series.push(nodeLinkSubObj);
     },
     extractData(repoNumber) {
@@ -1042,7 +1045,7 @@ export default {
 // heat map: https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82
 // heat map delete: https://designer.mocky.io/manage/delete/1e024a52-8dd0-4844-bae8-644ddae4ee82/fit4002
 // node link: https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda
-// node link (large data): https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751 
+// node link (large data): https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751
 // node link delete: https://designer.mocky.io/manage/delete/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda/fit4002
 // bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
 // bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
