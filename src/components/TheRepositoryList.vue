@@ -6,6 +6,14 @@
       v-model="search"
       clearable
     />
+    <label>Sort By:</label>
+    <select v-model="selected">
+      <option disabled value="">Please Select One</option>
+      <option >Forks</option>
+      <option >Stargazers</option>
+    </select>
+    <!-- <input type="checkbox" id="checkbox" v-model="resetSort" />
+    <label for="checkbox">Reset Sort</label> -->
     <div class="table-wrapper">
       <!-- Shown when no data has been loaded in -->
       <div v-if="pagedData.length == 0">
@@ -96,6 +104,10 @@ export default defineComponent({
       page: 1,
       pageSize: 20,
       totalItems: 0,
+      activesort: true,
+      sortedData: [],
+      resetSort: false,
+      selected: '',
     };
   },
   async created() {
@@ -122,12 +134,29 @@ export default defineComponent({
       );
     },
     pagedData() {
-      this.setTotalItems(this.filteredData.length);
-
-      return this.filteredData.slice(
-        this.pageSize * this.page - this.pageSize,
-        this.pageSize * this.page
-      );
+      if (this.selected ==="Forks") {
+        let newSortedData = this.sortArray("forks", [...this.filteredData]);
+        this.setTotalItems(newSortedData.length);
+        return newSortedData.slice(
+          this.pageSize * this.page - this.pageSize,
+          this.pageSize * this.page
+        );
+      } else if (this.selected ==="Stargazers") {
+        let newSortedData = this.sortArray("stargazers_count", [
+          ...this.filteredData,
+        ]);
+        this.setTotalItems(newSortedData.length);
+        return newSortedData.slice(
+          this.pageSize * this.page - this.pageSize,
+          this.pageSize * this.page
+        );
+      } else {
+        this.setTotalItems(this.filteredData.length);
+        return this.filteredData.slice(
+          this.pageSize * this.page - this.pageSize,
+          this.pageSize * this.page
+        );
+      }
     },
   },
   watch: {
@@ -149,6 +178,25 @@ export default defineComponent({
         index: index,
         selectedRelease: 0,
       }));
+    },
+    /**
+     * @param {string} key - the key on which array is going to be sorted
+     * @return {array} - It returns a sorted array of objects
+     */
+    sortArray(key, dataNeedToSort) {
+      let sortedData = dataNeedToSort.sort((a, b) => {
+        let valueA = a[key],
+          valueB = b[key];
+        if (valueA < valueB) {
+          return -1;
+        }
+        if (valueA > valueB) {
+          return 1;
+        }
+        return 0;
+      });
+
+      return sortedData;
     },
     /**
      * Called on dropdown selection.
@@ -179,6 +227,10 @@ export default defineComponent({
         name: "repository_view",
         params: { name: row.name, owner: row.owner },
       });
+    },
+    changeSort: function () {
+      this.activesort = !this.activesort;
+      this.orderByTime = !this.orderByTime;
     },
   },
 });
