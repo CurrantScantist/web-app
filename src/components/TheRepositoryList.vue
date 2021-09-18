@@ -1,4 +1,9 @@
 <template>
+  <div v-if="numOfSelected != 0">
+    <el-button class="nav-button" @click="handleNavClick" plain round
+      >Checkout</el-button
+    >
+  </div>
   <div class="list-wrapper">
     <el-input
       class="search"
@@ -14,36 +19,16 @@
       <!-- Otherwise, show this -->
       <div v-else>
         <el-table :data="pagedData" @row-click="handleRowClick">
-          <!-- <el-table-column type="selection"> </el-table-column> -->
+          <el-table-column width="40px">
+            <template #default="scope">
+              <el-checkbox v-model="scope.row.selected"></el-checkbox>
+            </template>
+          </el-table-column>
           <el-table-column label="Repository">
             <template #default="scope">{{ scope.row.name }}</template>
           </el-table-column>
           <el-table-column property="owner" label="Owner" show-overflow-tooltip>
           </el-table-column>
-          <!-- Deprecated -->
-          <!-- <el-table-column
-            property="releases"
-            label="Releases"
-            v-slot="scope"
-            show-overflow-tooltip
-          >
-            <el-dropdown @command="setRelease" trigger="click">
-              <span class="el-dropdown-link">
-                {{ scope.row.releases[scope.row.selectedRelease]
-                }}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item
-                    v-for="(item, releaseIndex) in scope.row.releases"
-                    :key="releaseIndex"
-                    :command="[scope.row.index, releaseIndex]"
-                    >{{ item }}</el-dropdown-item
-                  >
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </el-table-column> -->
           <el-table-column property="forks" label="Forks"> </el-table-column>
           <el-table-column property="stargazers_count" label="Stargazers">
           </el-table-column>
@@ -65,6 +50,12 @@
 </template>
 
 <style lang="scss" scoped>
+.nav-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 .list-wrapper {
   display: flex;
   flex-direction: column;
@@ -96,6 +87,8 @@ export default defineComponent({
       page: 1,
       pageSize: 20,
       totalItems: 0,
+      numOfSelected: 0,
+      selectedRows: [],
     };
   },
   async created() {
@@ -103,7 +96,7 @@ export default defineComponent({
       const response = await axios.get(
         process.env.VUE_APP_API_URL + "/techstack/list"
       );
-      this.data = response.data.data[0];
+      this.data = this.parseData(response.data.data[0]);
     } catch (e) {
       console.log(e);
     }
@@ -140,14 +133,11 @@ export default defineComponent({
      * Called on API request to parse the data.
      *
      * @param {object} data - The data object to be parsed
-     * @deprecated - Data no longer needs to be parsed
      */
     parseData(data) {
-      console.log(typeof data);
-      return data.map((item, index) => ({
+      return data.map((item) => ({
         ...item,
-        index: index,
-        selectedRelease: 0,
+        selected: false,
       }));
     },
     /**
@@ -174,11 +164,58 @@ export default defineComponent({
     setPage(newPage) {
       this.page = newPage;
     },
+    handleNavClick() {
+      // console.log(this.selectedRows[1]);
+
+      if (this.selectedRows.length == 2) {
+        this.$router.push({
+          name: "visualize",
+          params: {
+            name1: this.selectedRows[0].name,
+            owner1: this.selectedRows[0].owner,
+            name2: this.selectedRows[1].name,
+            owner2: this.selectedRows[1].owner,
+          },
+        });
+      } else {
+        this.$router.push({
+          name: "visualize",
+          params: {
+            name1: this.selectedRows[0].name,
+            owner1: this.selectedRows[0].owner,
+          },
+        });
+      }
+    },
     handleRowClick(row) {
-      this.$router.push({
-        name: "repository_view",
-        params: { name: row.name, owner: row.owner },
-      });
+      if (this.numOfSelected == 2 && row.selected == false) {
+        this.printMessage(
+          "More than two repositories selected, please deselect one."
+        );
+        return;
+      }
+
+      row.selected = !row.selected;
+
+      if (row.selected == true) {
+        this.selectedRows.push({ name: row.name, owner: row.owner });
+        this.numOfSelected++;
+      } else {
+        for (var i = 0; i < this.selectedRows.length; i++) {
+          if (
+            this.selectedRows[i].name == row.name &&
+            this.selectedRows[i].owner == row.owner
+          ) {
+            this.selectedRows.splice(i, 1);
+          }
+        }
+        this.numOfSelected--;
+      }
+
+      return;
+    },
+    printMessage(message) {
+      this.$message.error(message);
     },
   },
 });

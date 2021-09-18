@@ -5,26 +5,11 @@
     <slot name="subheading">subheading</slot>
     )
   </h6>
-  <v-chart :option="pieOptions" :style="pieHeight" />
+  <v-chart :option="pieOptions" :style="pieHeight" autoresize />
 </template>
 
 <style lang="scss" scoped>
-h3 {
-  font-weight: 800;
-  font-size: 100%;
-  color: #000000;
-  margin: 0;
-  text-align: left;
-}
-
-h6 {
-  font-weight: 500;
-  font-size: 50%;
-  color: #383838;
-  margin: 0;
-  text-align: left;
-  margin-bottom: 3%;
-}
+@import "@/styles/components/_chart.scss";
 </style>
 
 <script>
@@ -40,8 +25,8 @@ export default {
       type: String,
       default: "300px",
     },
-    contributorsData: {
-      type: Array,
+    pieData: {
+      type: Object,
       required: true,
     },
     pieRadius: {
@@ -64,7 +49,7 @@ export default {
             name: this.hoverHeading,
             type: "pie",
             radius: this.pieRadius,
-            data: this.contributorsData,
+            data: this.pieData,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
