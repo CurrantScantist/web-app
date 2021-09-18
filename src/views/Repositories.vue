@@ -10,11 +10,10 @@
 .repositories-wrapper {
   background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
   color: white;
+  min-height: 100vh;
 }
 
 .repositories {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   max-width: 1280px;
   padding: 5rem 0;
