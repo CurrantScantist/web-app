@@ -42,6 +42,9 @@
       ></path>
     </svg>
   </div>
+  <div>
+    <the-top-repo-list></the-top-repo-list>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -225,7 +228,8 @@ svg {
 </style>
 
 <script>
+import TheTopRepoList from '@/components/TheTopRepoList.vue';
 export default {
-  setup() {},
+  components: { TheTopRepoList },
 };
 </script>
