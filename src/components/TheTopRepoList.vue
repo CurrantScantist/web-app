@@ -9,7 +9,6 @@
           :data="data"
           @row-click="handleRowClick"
           style="width: 100%"
-          :cell-style="cellstyle"
           :row-style="rowstyle"
         >
           <el-table-column
@@ -61,21 +60,22 @@ export default defineComponent({
     }
   },
   methods: {
+    /**
+     * View corresponding repository page when clicking row
+     */
     handleRowClick(row) {
       this.$router.push({
         name: "repository_view",
         params: { name: row.name, owner: row.owner },
       });
     },
+    /**
+     * Causes pointer to replace mouse icon when hovering over table rows
+     */
     // eslint-disable-next-line no-unused-vars
-    rowstyle({ row, rowIndex }) {
+    rowstyle() {
       return {
         cursor: "pointer",
-      };
-    },
-    cellstyle() {
-      return {
-        // "background": "#d4e7e2"
       };
     },
   },
