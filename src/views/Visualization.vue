@@ -78,6 +78,15 @@
                 autoresize
               />
             </div>
+            <div class="wide-visualisation4">
+              <the-contributor-line-chart
+                :xData="locOverTimeData[0].xData"
+                :yData="locOverTimeData[0].yData"
+              >
+                <template v-slot:title>Placeholder</template>
+                <template v-slot:subtitle>placeholder</template>
+              </the-contributor-line-chart>
+            </div>
           </div>
         </div>
       </div>
@@ -196,7 +205,7 @@
   grid-template-areas:
     "simple-visualisation1 simple-visualisation2"
     "wide-visualisation1 wide-visualisation2"
-    "wide-visualisation3 wide-visualisation3";
+    "wide-visualisation3 wide-visualisation4";
 }
 
 .multi-repo {
@@ -204,7 +213,7 @@
     "simple-visualisation1 simple-visualisation2"
     "wide-visualisation1 wide-visualisation1"
     "wide-visualisation2 wide-visualisation2"
-    "wide-visualisation3 wide-visualisation3";
+    "wide-visualisation3 wide-visualisation4";
 }
 
 .meta-grid {
@@ -278,7 +287,8 @@
 .simple-visualisation2,
 .wide-visualisation1,
 .wide-visualisation2,
-.wide-visualisation3 {
+.wide-visualisation3,
+.wide-visualisation4 {
   background-color: rgba(255, 255, 255, 0.88);
   padding: 20px;
   font-size: 30px;
@@ -304,6 +314,10 @@
 
 .wide-visualisation3 {
   grid-area: wide-visualisation3;
+}
+
+.wide-visualisation4 {
+  grid-area: wide-visualisation4;
 }
 
 .info-item {
@@ -346,6 +360,7 @@ import VChart from "vue-echarts";
 import TheMetadataCard from "@/components/TheMetadataCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
+import TheContributorLineChart from "@/components/TheContributorLineChart";
 
 export default {
   name: "MultipleRepository",
@@ -360,6 +375,7 @@ export default {
     TheMetadataCard,
     TheContributorPieChart,
     TheLocLineChart,
+    TheContributorLineChart,
   },
   data() {
     return {
@@ -367,8 +383,6 @@ export default {
       repo2MetaData: {},
       repo1stats: {},
       repo2stats: {},
-      locLang1: {},
-      locLang2: {},
       locType1: {},
       locType2: {},
       bubblePlot1: {},
@@ -377,6 +391,10 @@ export default {
       versionData: [],
       languageData: [],
       locColorData: [],
+      locOverTimeData: {
+        0: { xData: [], yData: [] },
+        1: { xData: [], yData: [] },
+      },
     };
   },
   async created() {
@@ -396,6 +414,7 @@ export default {
           `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1stats.loc = response.data.data[0];
+      this.parseLocOverTimeData(1);
     } catch (e) {
       console.log(e);
     }
@@ -447,6 +466,7 @@ export default {
             `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2stats.loc = response.data.data[0];
+        this.parseLocOverTimeData(2);
       } catch (e) {
         console.log(e);
       }
@@ -659,6 +679,29 @@ export default {
       );
       // console.log(this.contributors[0][1]);
       return;
+    },
+    parseLocOverTimeData(repoNumber) {
+      var statsRepos = ["repo1stats", "repo2stats"];
+
+      Object.keys(this[statsRepos[repoNumber - 1]].loc).forEach((commitKey) => {
+        this.locOverTimeData[repoNumber - 1].xData.push(
+          this.repo1stats.loc[commitKey].committed_date
+        );
+
+        var totalLines = 0;
+
+        Object.keys(
+          this[statsRepos[repoNumber - 1]].loc[commitKey].LOC["SUM"]
+        ).forEach((lineKey) => {
+          if (lineKey != "nFiles") {
+            totalLines += this.repo1stats.loc[commitKey].LOC["SUM"][lineKey];
+          }
+        });
+
+        this.locOverTimeData[repoNumber - 1].yData.push(totalLines);
+      });
+
+      console.log(this.locOverTimeData[repoNumber - 1]);
     },
   },
 };
