@@ -78,14 +78,14 @@
                 autoresize
               />
             </div>
-            <div class="wide-visualisation4">
-              <the-contributor-line-chart
-                :xData="locOverTimeData[0].xData"
-                :yData="locOverTimeData[0].yData"
-              >
+            <div
+              class="wide-visualisation4"
+              v-if="Object.keys(locOverTimeData[0]).length != 0"
+            >
+              <the-multi-line-chart :chartData="locOverTimeData[0]">
                 <template v-slot:title>Placeholder</template>
                 <template v-slot:subtitle>placeholder</template>
-              </the-contributor-line-chart>
+              </the-multi-line-chart>
             </div>
           </div>
         </div>
@@ -360,7 +360,7 @@ import VChart from "vue-echarts";
 import TheMetadataCard from "@/components/TheMetadataCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
-import TheContributorLineChart from "@/components/TheContributorLineChart";
+import TheMultiLineChart from "@/components/TheMultiLineChart";
 
 export default {
   name: "MultipleRepository",
@@ -375,7 +375,7 @@ export default {
     TheMetadataCard,
     TheContributorPieChart,
     TheLocLineChart,
-    TheContributorLineChart,
+    TheMultiLineChart,
   },
   data() {
     return {
@@ -392,8 +392,13 @@ export default {
       languageData: [],
       locColorData: [],
       locOverTimeData: {
-        0: { xData: [], yData: [] },
-        1: { xData: [], yData: [] },
+        0: {
+          test: {
+            xData: ["2010-05-11T23:30:10", "2010-06-18T15:13:32"],
+            yData: [11597, 33685],
+          },
+        },
+        1: {},
       },
     };
   },
@@ -414,7 +419,7 @@ export default {
           `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1stats.loc = response.data.data[0];
-      this.parseLocOverTimeData(1);
+      this.parseLocOverTimeData(1, "LocOverTime");
     } catch (e) {
       console.log(e);
     }
@@ -466,7 +471,7 @@ export default {
             `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2stats.loc = response.data.data[0];
-        this.parseLocOverTimeData(2);
+        this.parseLocOverTimeData(2, "LocOverTime");
       } catch (e) {
         console.log(e);
       }
@@ -504,6 +509,24 @@ export default {
     }
   },
   methods: {
+    processDate(inputDate) {
+      if (inputDate) {
+        let date = new Date(inputDate);
+        let dateFormatter = new Intl.DateTimeFormat("en-AU", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          timeZone: "Australia/Sydney",
+          timeZoneName: "short",
+          hour12: false,
+        });
+
+        return dateFormatter.format(date);
+      }
+      return "";
+    },
     getColor(size) {
       let colorSet = [
         "#1ceca8",
@@ -680,11 +703,23 @@ export default {
       // console.log(this.contributors[0][1]);
       return;
     },
-    parseLocOverTimeData(repoNumber) {
+    parseLocOverTimeData(repoNumber, dataType) {
       var statsRepos = ["repo1stats", "repo2stats"];
 
+      // If there is no 'SUM' key in the lines of code data
+      if (!("SUM" in this[statsRepos[repoNumber - 1]].loc[0].LOC)) {
+        return;
+      }
+
+      // Add a new object
+      this.locOverTimeData[repoNumber - 1][dataType] = {
+        xData: [],
+        yData: [],
+      };
+
       Object.keys(this[statsRepos[repoNumber - 1]].loc).forEach((commitKey) => {
-        this.locOverTimeData[repoNumber - 1].xData.push(
+        // Push all the x axis data to the xData key
+        this.locOverTimeData[repoNumber - 1][dataType].xData.push(
           this.repo1stats.loc[commitKey].committed_date
         );
 
@@ -698,7 +733,7 @@ export default {
           }
         });
 
-        this.locOverTimeData[repoNumber - 1].yData.push(totalLines);
+        this.locOverTimeData[repoNumber - 1][dataType].yData.push(totalLines);
       });
 
       console.log(this.locOverTimeData[repoNumber - 1]);
