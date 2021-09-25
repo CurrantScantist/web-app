@@ -6,14 +6,6 @@
       v-model="search"
       clearable
     />
-    <label>Sort By:</label>
-    <select v-model="selected">
-      <option disabled value="">Please Select One</option>
-      <option >Forks</option>
-      <option >Stargazers</option>
-    </select>
-    <!-- <input type="checkbox" id="checkbox" v-model="resetSort" />
-    <label for="checkbox">Reset Sort</label> -->
     <div class="table-wrapper">
       <!-- Shown when no data has been loaded in -->
       <div v-if="pagedData.length == 0">
@@ -23,10 +15,14 @@
       <div v-else>
         <el-table :data="pagedData" @row-click="handleRowClick">
           <!-- <el-table-column type="selection"> </el-table-column> -->
-          <el-table-column label="Repository">
-            <template #default="scope">{{ scope.row.name }}</template>
+          <el-table-column prop="name" label="Repository" sortable>
           </el-table-column>
-          <el-table-column property="owner" label="Owner" show-overflow-tooltip>
+          <el-table-column
+            prop="owner"
+            label="Owner"
+            sortable
+            show-overflow-tooltip
+          >
           </el-table-column>
           <!-- Deprecated -->
           <!-- <el-table-column
@@ -52,10 +48,11 @@
               </template>
             </el-dropdown>
           </el-table-column> -->
-          <el-table-column property="forks" label="Forks"> </el-table-column>
-          <el-table-column property="stargazers_count" label="Stargazers">
+          <el-table-column prop="forks" label="Forks" sortable>
           </el-table-column>
-          <el-table-column property="topics" label="Tags" show-overflow-tooltip>
+          <el-table-column prop="stargazers_count" label="Stargazers" sortable>
+          </el-table-column>
+          <el-table-column prop="topics" label="Tags" show-overflow-tooltip>
           </el-table-column>
         </el-table>
       </div>
@@ -104,10 +101,6 @@ export default defineComponent({
       page: 1,
       pageSize: 20,
       totalItems: 0,
-      activesort: true,
-      sortedData: [],
-      resetSort: false,
-      selected: '',
     };
   },
   async created() {
@@ -115,7 +108,7 @@ export default defineComponent({
       const response = await axios.get(
         process.env.VUE_APP_API_URL + "/techstack/list"
       );
-      this.data = response.data.data[0];
+      this.data = this.parseData(response.data.data[0]);
     } catch (e) {
       console.log(e);
     }
@@ -129,34 +122,24 @@ export default defineComponent({
       this.setPage(1);
 
       // Filter's data
-      return this.data.filter((items) =>
-        items.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.data.filter(
+        (items) =>
+          items.name.toLowerCase().includes(this.search.toLowerCase()) || // Search on row name
+          items.owner.toLowerCase().includes(this.search.toLowerCase()) || // Search on row owner
+          items.topics.some((element) => {
+            // Search on row tags
+            return element.toLowerCase().includes(this.search.toLowerCase());
+          })
       );
     },
     pagedData() {
-      if (this.selected ==="Forks") {
-        let newSortedData = this.sortArray("forks", [...this.filteredData]);
-        this.setTotalItems(newSortedData.length);
-        return newSortedData.slice(
-          this.pageSize * this.page - this.pageSize,
-          this.pageSize * this.page
-        );
-      } else if (this.selected ==="Stargazers") {
-        let newSortedData = this.sortArray("stargazers_count", [
-          ...this.filteredData,
-        ]);
-        this.setTotalItems(newSortedData.length);
-        return newSortedData.slice(
-          this.pageSize * this.page - this.pageSize,
-          this.pageSize * this.page
-        );
-      } else {
-        this.setTotalItems(this.filteredData.length);
-        return this.filteredData.slice(
-          this.pageSize * this.page - this.pageSize,
-          this.pageSize * this.page
-        );
-      }
+      this.setTotalItems(this.filteredData.length);
+
+      return this.filteredData.slice(
+        this.pageSize * this.page - this.pageSize,
+        this.pageSize * this.page
+      );
+      //   }
     },
   },
   watch: {
@@ -169,34 +152,32 @@ export default defineComponent({
      * Called on API request to parse the data.
      *
      * @param {object} data - The data object to be parsed
-     * @deprecated - Data no longer needs to be parsed
      */
     parseData(data) {
-      console.log(typeof data);
-      return data.map((item, index) => ({
-        ...item,
-        index: index,
-        selectedRelease: 0,
-      }));
-    },
-    /**
-     * @param {string} key - the key on which array is going to be sorted
-     * @return {array} - It returns a sorted array of objects
-     */
-    sortArray(key, dataNeedToSort) {
-      let sortedData = dataNeedToSort.sort((a, b) => {
-        let valueA = a[key],
-          valueB = b[key];
-        if (valueA < valueB) {
-          return -1;
-        }
-        if (valueA > valueB) {
-          return 1;
-        }
-        return 0;
-      });
+      // Object.keys(data).forEach((repoItem) => {
+      //   var repoTopics = data[repoItem].topics;
 
-      return sortedData;
+      //   Object.keys(repoTopics).forEach((topic) => {
+      //     var index = this.tagFilters.findIndex(
+      //       (x) => x.text == repoTopics[topic]
+      //     );
+
+      //     if (index == -1) {
+      //       this.tagFilters.push({
+      //         text: repoTopics[topic],
+      //         value: repoTopics[topic],
+      //       });
+      //     }
+      //   });
+      // });
+
+      // this.tagFiltersProcessed = true;
+      // console.log(this.tagFilters);
+
+      return data.map((item) => ({
+        ...item,
+        selected: false,
+      }));
     },
     /**
      * Called on dropdown selection.
@@ -227,10 +208,6 @@ export default defineComponent({
         name: "repository_view",
         params: { name: row.name, owner: row.owner },
       });
-    },
-    changeSort: function () {
-      this.activesort = !this.activesort;
-      this.orderByTime = !this.orderByTime;
     },
   },
 });
