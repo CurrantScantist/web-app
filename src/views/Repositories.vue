@@ -1,8 +1,6 @@
 <template>
   <div class="repositories-wrapper">
-    <div class="repositories">
-      <TheRepositoryList class="repo-list" />
-    </div>
+    <the-repository-list class="repo-list" />
   </div>
 </template>
 
@@ -13,15 +11,11 @@
   min-height: 100vh;
 }
 
-.repositories {
+.repo-list {
   width: 100%;
   max-width: 1280px;
   padding: 5rem 0;
   margin: 0 auto;
-}
-
-.repo-list {
-  margin-top: 2rem;
 }
 </style>
 

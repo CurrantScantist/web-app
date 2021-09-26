@@ -1,51 +1,60 @@
 <template>
-  <div v-if="numOfSelected != 0">
-    <el-button class="nav-button" @click="handleNavClick" plain round
-      >Checkout</el-button
-    >
-  </div>
-  <div class="list-wrapper">
-    <el-input
-      class="search"
-      placeholder="Search for a repository!"
-      v-model="search"
-      clearable
-    />
-    <div class="table-wrapper">
-      <!-- Shown when no data has been loaded in -->
-      <div v-if="pagedData.length == 0">
-        <el-empty description="No Data" :image-size="300"></el-empty>
-      </div>
-      <!-- Otherwise, show this -->
-      <div v-else>
-        <el-table :data="pagedData" @row-click="handleRowClick">
-          <el-table-column width="40px">
-            <template #default="scope">
-              <el-checkbox v-model="scope.row.selected"></el-checkbox>
-            </template>
-          </el-table-column>
-          <el-table-column label="Repository">
-            <template #default="scope">{{ scope.row.name }}</template>
-          </el-table-column>
-          <el-table-column property="owner" label="Owner" show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column property="forks" label="Forks"> </el-table-column>
-          <el-table-column property="stargazers_count" label="Stargazers">
-          </el-table-column>
-          <el-table-column property="topics" label="Tags" show-overflow-tooltip>
-          </el-table-column>
-        </el-table>
-      </div>
+  <div>
+    <div v-if="numOfSelected != 0">
+      <el-button class="nav-button" @click="handleNavClick" plain round
+        >Checkout</el-button
+      >
     </div>
-    <el-pagination
-      class="pagination"
-      background
-      layout="prev, pager, next"
-      @current-change="handlePageChange"
-      :page-size="pageSize"
-      :total="totalItems"
-    >
-    </el-pagination>
+    <div class="list-wrapper">
+      <el-input
+        class="search"
+        placeholder="Search for a repository!"
+        v-model="search"
+        clearable
+      />
+      <div class="table-wrapper">
+        <!-- Shown when no data has been loaded in -->
+        <div v-if="pagedData.length == 0">
+          <el-empty description="No Data" :image-size="300"></el-empty>
+        </div>
+        <!-- Otherwise, show this -->
+        <div v-else>
+          <el-table class="table" :data="pagedData" @row-click="handleRowClick">
+            <el-table-column width="40px">
+              <template #default="scope">
+                <el-checkbox v-model="scope.row.selected"></el-checkbox>
+              </template>
+            </el-table-column>
+            <el-table-column property="name" label="Repository">
+            </el-table-column>
+            <el-table-column
+              property="owner"
+              label="Owner"
+              show-overflow-tooltip
+            >
+            </el-table-column>
+            <el-table-column property="forks" label="Forks"> </el-table-column>
+            <el-table-column property="stargazers_count" label="Stargazers">
+            </el-table-column>
+            <el-table-column
+              property="topics"
+              label="Tags"
+              show-overflow-tooltip
+            >
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, pager, next"
+        @current-change="handlePageChange"
+        :page-size="pageSize"
+        :total="totalItems"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
