@@ -1,0 +1,10 @@
+{
+    "type": "bar",
+    "stack": "total",
+    "areaStyle": {
+        "opacity": 0.9
+    },
+    "emphasis": {
+        "focus": "series"
+    }
+}
