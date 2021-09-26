@@ -83,8 +83,8 @@
               v-if="Object.keys(locOverTimeData[0]).length != 0"
             >
               <the-multi-line-chart :chartData="locOverTimeData[0]">
-                <template v-slot:title>Placeholder</template>
-                <template v-slot:subtitle>placeholder</template>
+                <template v-slot:title>Lines of Code</template>
+                <template v-slot:subtitle>over time</template>
               </the-multi-line-chart>
             </div>
           </div>
@@ -166,6 +166,15 @@
                 autoresize
               />
             </div>
+            <div
+              class="wide-visualisation4"
+              v-if="Object.keys(locOverTimeData[1]).length != 0"
+            >
+              <the-multi-line-chart :chartData="locOverTimeData[1]">
+                <template v-slot:title>Lines of Code</template>
+                <template v-slot:subtitle>over time</template>
+              </the-multi-line-chart>
+            </div>
           </div>
         </div>
       </div>
@@ -213,7 +222,8 @@
     "simple-visualisation1 simple-visualisation2"
     "wide-visualisation1 wide-visualisation1"
     "wide-visualisation2 wide-visualisation2"
-    "wide-visualisation3 wide-visualisation4";
+    "wide-visualisation3 wide-visualisation3"
+    "wide-visualisation4 wide-visualisation4";
 }
 
 .meta-grid {
@@ -392,12 +402,7 @@ export default {
       languageData: [],
       locColorData: [],
       locOverTimeData: {
-        0: {
-          test: {
-            xData: ["2010-05-11T23:30:10", "2010-06-18T15:13:32"],
-            yData: [11597, 33685],
-          },
-        },
+        0: {},
         1: {},
       },
     };
@@ -717,26 +722,21 @@ export default {
         yData: [],
       };
 
-      Object.keys(this[statsRepos[repoNumber - 1]].loc).forEach((commitKey) => {
-        // Push all the x axis data to the xData key
-        this.locOverTimeData[repoNumber - 1][dataType].xData.push(
-          this.repo1stats.loc[commitKey].committed_date
-        );
+      var commit = this[statsRepos[repoNumber - 1]].loc;
 
-        var totalLines = 0;
+      Object.keys(commit).forEach((commitKey) => {
+        var date = commit[commitKey].committed_date;
+        var loc = 0;
 
-        Object.keys(
-          this[statsRepos[repoNumber - 1]].loc[commitKey].LOC["SUM"]
-        ).forEach((lineKey) => {
+        Object.keys(commit[commitKey].LOC["SUM"]).forEach((lineKey) => {
           if (lineKey != "nFiles") {
-            totalLines += this.repo1stats.loc[commitKey].LOC["SUM"][lineKey];
+            loc += commit[commitKey].LOC["SUM"][lineKey];
           }
         });
 
-        this.locOverTimeData[repoNumber - 1][dataType].yData.push(totalLines);
+        this.locOverTimeData[repoNumber - 1][dataType].xData.push(date);
+        this.locOverTimeData[repoNumber - 1][dataType].yData.push(loc);
       });
-
-      console.log(this.locOverTimeData[repoNumber - 1]);
     },
   },
 };
