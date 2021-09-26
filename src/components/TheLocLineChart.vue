@@ -40,20 +40,17 @@ export default {
       locByLangCopy.xAxis[0].data = this.versions;
       locByLangCopy.color = this.colorData;
       locByLangCopy.legend.data = Array.from(this.languageData.keys()); // add x axis label
-      this.setSeriesSubObject(locByLangCopy, this.languageData);
+      this.setSeriesSubObject(locByLangCopy, this.languageData, seriesObj);
       return locByLangCopy;
     },
   },
   methods: {
-    setSeriesSubObject(chart, map) {
+    setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(seriesObj));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = value.color;
         seriesSubObjCopy.data = value.data;
-        if (key === "blank" || key === "comment") {
-          seriesSubObjCopy.areaStyle.opacity = 0.5;
-        }
         chart.series.push(seriesSubObjCopy);
       });
     },
