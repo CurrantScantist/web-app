@@ -77,6 +77,10 @@
     margin: 0 auto;
   }
 }
+
+.table {
+  border-radius: 10px;
+}
 </style>
 
 <script>
