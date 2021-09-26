@@ -2,7 +2,7 @@
   <div class="top-wrapper">
     <div class="title-wrapper">
       <h3><slot name="title"></slot></h3>
-      <h6><slot name="subtitle"></slot></h6>
+      <h6>(<slot name="subtitle"></slot>)</h6>
     </div>
     <div class="dropdown-wrapper" v-if="Object.keys(chartData).length > 1">
       <el-dropdown trigger="click" @command="handleDropdownClick">
