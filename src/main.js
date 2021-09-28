@@ -8,9 +8,9 @@ import "@/styles/admin.scss";
 
 // Element Plus
 import ElementPlus from "element-plus";
-import "element-plus/lib/theme-chalk/index.css";
+import "element-plus/dist/index.css";
 
-// register globally (or you can do it locally)
-//App.component('v-chart', ECharts)
+// ECharts
+import "echarts";
 
 createApp(App).use(store).use(router).use(ElementPlus).mount("#app");
