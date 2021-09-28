@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
 .repositories-wrapper {
-  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
+  background: #d4e7e2;
   color: white;
   min-height: 100vh;
 }

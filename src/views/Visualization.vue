@@ -215,7 +215,7 @@
 @import "@/styles/components/_chart.scss";
 
 .page {
-  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
+  background: #d4e7e2;
   color: white;
 }
 
@@ -224,10 +224,11 @@
 }
 
 .rep-container {
-  background-color: rgba(113, 113, 113, 0.58);
+  background-color: rgba(23, 158, 117, 0.7);
   padding: 2%;
   padding-top: 5px;
   border-radius: 25px;
+  box-shadow: 5px 10px 18px #888888;
 }
 
 .viz-grid {
