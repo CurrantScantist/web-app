@@ -14,7 +14,7 @@
 
 .topbar {
   position: fixed;
-  z-index: 10;
+  z-index: 99;
 }
 
 .route {
