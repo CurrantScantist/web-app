@@ -65,8 +65,8 @@ export default defineComponent({
      */
     handleRowClick(row) {
       this.$router.push({
-        name: "repository_view",
-        params: { name: row.name, owner: row.owner },
+        name: "visualize",
+        params: { name1: row.name, owner1: row.owner },
       });
     },
     /**
