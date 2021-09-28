@@ -5,6 +5,7 @@
         >Checkout</el-button
       >
     </div>
+    <p>List of repositories</p>
     <div class="list-wrapper">
       <el-input
         class="search"

@@ -7,8 +7,11 @@
 <style lang="scss" scoped>
 .repositories-wrapper {
   background: #d4e7e2;
-  color: white;
+  color: #464c58;
   min-height: 100vh;
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 0px;
 }
 
 .repo-list {
