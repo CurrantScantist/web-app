@@ -6,9 +6,12 @@
 
 <style lang="scss" scoped>
 .repositories-wrapper {
-  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
-  color: white;
+  background: #d4e7e2;
+  color: #464c58;
   min-height: 100vh;
+  font-size: 45px;
+  font-weight: 500;
+  line-height: 0px;
 }
 
 .repo-list {
