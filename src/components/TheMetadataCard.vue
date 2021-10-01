@@ -72,7 +72,7 @@
   </div>
 
   <div class="info-item">
-    <div class="stat-name">Primary Language:</div>
+    <div class="stat-name">Top Language:</div>
     <div>
       {{ (language || "N/A") }}
     </div>

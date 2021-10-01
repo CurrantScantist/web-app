@@ -6,16 +6,19 @@
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
           <h5>{{ repo1MetaData.description }}</h5>
 
-          <div class="meta-container">
-            <div class="container-title">Tags</div>
-            <div class="tag-grid" id = "tags2" > 
+          <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
+            <div class="meta-container">
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id = "tags2" > </div>
             </div>
+
+            <the-vulnerabilities-card
+                  v-if="Object.keys(repo1MetaData).length"
+                  :open_issues_count="repo1MetaData.open_issues_count"
+            ></the-vulnerabilities-card>
           </div>
 
-          <the-vulnerabilities-card
-              v-if="Object.keys(repo1MetaData).length"
-              :open_issues_count="repo1MetaData.open_issues_count"
-          ></the-vulnerabilities-card>
+          
 
           <div  v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
             <the-metadata-card
@@ -139,6 +142,12 @@
               :topics="repo2MetaData.topics"
               :createdOn="repo2MetaData.created_at"
               :lastUpdatedOn="repo2MetaData.updated_at"
+              :archived="repo2MetaData.archived"
+              :disabled="repo2MetaData.disabled"
+              :language="repo2MetaData.language"
+              :num_tags="repo2MetaData.num_tags"
+              :latest_tag="repo2MetaData.latest_tag"
+              :subscriber_count="repo2MetaData.subscribers_count"
             ></the-metadata-card>
           </div>
 
@@ -310,10 +319,6 @@
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;
-  padding: 2%;
-  background-color: rgba(38, 38, 38, 0.35);
-  border-radius: var(--viz--radius);
-  margin-bottom: 3%;
 }
 
 .health-model {
@@ -412,22 +417,6 @@
   color: white;
 }
 
-@media only screen and (max-width: 650px) {
- .meta-grid-single{
-    grid-template-columns: minmax(0%, 1fr);
-  }
-
-  .meta-grid-multi {
-    grid-template-columns: minmax(0%, 1fr);
-  }
-
-  h1,
-  h2 {
-    font-size: 285%
-  }
-}
-
-
 @media only screen and (max-width: 850px) {
   .viz-grid {
     grid-gap: 1rem;
@@ -441,6 +430,22 @@
       "wide-visualisation3"
       "heat-map"
       "node-link";
+  }
+  .meta-grid-single{
+    grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  }
+
+  .meta-grid-multi {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
+  .meta-grid-round-single {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
+  h1,
+  h2 {
+    font-size: 285%
   }
 }
 
