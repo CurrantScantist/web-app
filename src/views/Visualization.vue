@@ -12,7 +12,7 @@
             </div>
           </div>
 
-          <div  v-bind:class="{ 'meta-grid-single': !name2, 'meta-grid-multi': name2 }">
+          <div  v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
               :forks="repo1MetaData.forks"
@@ -117,7 +117,7 @@
           <h1>{{ repo2MetaData.owner }}/{{ repo2MetaData.name }}</h1>
           <h5>{{ repo2MetaData.description }}</h5>
 
-          <div v-bind:class="{ 'meta-grid-single': !name2, 'meta-grid-multi': name2 }">
+          <div v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo2MetaData).length"
               :forks="repo2MetaData.forks"
@@ -280,20 +280,15 @@
 }
 
 .meta-grid-multi {
-    display: grid;
     grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
-    grid-template-rows: repeat(1fr);
-    grid-gap: 0.5rem;
-    grid-auto-flow: row;
-    padding: 2%;
-    background-color: rgba(38, 38, 38, 0.35);
-    border-radius: var(--viz--radius);
-    margin-bottom: 3%;
   }
 
 .meta-grid-single {
-  display: grid;
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
+}
+
+.meta-grid {
+  display: grid;
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;
@@ -400,13 +395,12 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .info-grid {
-    display: grid;
+ .meta-grid-single{
     grid-template-columns: minmax(0%, 1fr);
-    grid-template-rows: repeat(1fr);
-    grid-gap: 0.5rem;
-    grid-auto-flow: row;
-    margin-bottom: 3%;
+  }
+
+  .meta-grid-multi {
+    grid-template-columns: minmax(0%, 1fr);
   }
 
   h1,
@@ -415,6 +409,7 @@
     margin-bottom: 8px;
   }
 }
+
 
 @media only screen and (max-width: 850px) {
   .viz-grid {
