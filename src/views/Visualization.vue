@@ -16,7 +16,8 @@
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
               :forks="repo1MetaData.forks"
-              :stargazers="repo1MetaData.stargazers"
+              :stargazers="repo1MetaData.stargazers_count"
+              :watchers="repo1MetaData.watchers_count"
               :openIssues="repo1MetaData.open_issues"
               :defaultBranch="repo1MetaData.default_branch"
               :size="repo1MetaData.size"
@@ -219,6 +220,18 @@
 
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
+.meta-container {
+  background-color: rgba(38, 38, 38, 0.35);
+  padding: 1%;
+  margin-bottom: 1%;
+  border-radius: var(--viz--radius); 
+}
+.container-title {
+  padding: 1%;
+  margin-top: 2px;
+  font-size: 158%;
+  font-weight: 800;
+}
 
 .page {
   background: #d4e7e2;

@@ -1,6 +1,13 @@
 <template>
-  <div class="info-item">
 
+<div class="info-item">
+    <div class="stat-name">Watchers:</div>
+    <div>
+      {{ (watchers || 0).toLocaleString() }}
+    </div>
+  </div>
+
+  <div class="info-item">
     <div class="stat-name">Forks Count:</div>
     <div>
       {{ (forks || 0).toLocaleString() }}
@@ -12,12 +19,7 @@
     <div>{{ (forks || 0).toLocaleString() }}</div>
   </div>
 
-  <div class="info-item">
-    <div class="stat-name">Watchers:</div>
-    <div>
-      {{ (watchers || 0).toLocaleString() }}
-    </div>
-  </div>
+  
 
   <div class="info-item">
     <div class="stat-name">Issues:</div>
@@ -29,13 +31,6 @@
   <div class="info-item">
     <div class="stat-name">Default Branch:</div>
     <div>{{ defaultBranch }}</div>
-  </div>
-
-  <div class="info-item">
-    <div class="stat-name">Stargazers:</div>
-    <div>
-      {{ (stargazers || 0).toLocaleString() }}
-    </div>
   </div>
 
   <div class="info-item">
@@ -54,6 +49,13 @@
     <div class="stat-name">Last updated:</div>
     <div>
       {{ parsedUpdatedOn }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Stargazers:</div>
+    <div>
+      {{ (stargazers || 0).toLocaleString() }}
     </div>
   </div>
 </template>
