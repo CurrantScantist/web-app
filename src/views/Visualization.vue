@@ -6,7 +6,13 @@
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
           <h5>{{ repo1MetaData.description }}</h5>
 
-          <div class="meta-grid">
+          <div class="meta-container">
+            <div class="container-title">Tags</div>
+            <div class="tag-grid" id = "tags2" > 
+            </div>
+          </div>
+
+          <div  v-bind:class="{ 'meta-grid-single': !name2, 'meta-grid-multi': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
               :forks="repo1MetaData.forks"
@@ -70,7 +76,7 @@
             </div>
 
             <div class="wide-visualisation3">
-              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
                 v-bind:option="bubblePlot1"
@@ -110,7 +116,7 @@
           <h1>{{ repo2MetaData.owner }}/{{ repo2MetaData.name }}</h1>
           <h5>{{ repo2MetaData.description }}</h5>
 
-          <div class="meta-grid">
+          <div v-bind:class="{ 'meta-grid-single': !name2, 'meta-grid-multi': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo2MetaData).length"
               :forks="repo2MetaData.forks"
@@ -172,7 +178,7 @@
             </div>
 
             <div class="wide-visualisation3">
-              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
                 v-bind:option="bubblePlot2"
@@ -260,9 +266,21 @@
     "node-link node-link";
 }
 
-.meta-grid {
+.meta-grid-multi {
+    display: grid;
+    grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+    grid-template-rows: repeat(1fr);
+    grid-gap: 0.5rem;
+    grid-auto-flow: row;
+    padding: 2%;
+    background-color: rgba(38, 38, 38, 0.35);
+    border-radius: var(--viz--radius);
+    margin-bottom: 3%;
+  }
+
+.meta-grid-single {
   display: grid;
-  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;

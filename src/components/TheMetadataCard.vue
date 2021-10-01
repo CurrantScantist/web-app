@@ -1,23 +1,14 @@
 <template>
   <div class="info-item">
+
     <div class="stat-name">Forks Count:</div>
     <div>
       {{ (forks || 0).toLocaleString() }}
     </div>
   </div>
 
-  <div class="info-item vulnerabilityTheme critical">
-    <div class="stat-name">Critical Vulnerabilities:</div>
-    <div>{{ (forks || 0).toLocaleString() }}</div>
-  </div>
-
   <div class="info-item">
     <div class="stat-name">Forks:</div>
-    <div>{{ (forks || 0).toLocaleString() }}</div>
-  </div>
-
-  <div class="info-item vulnerabilityTheme high">
-    <div class="stat-name">High Vulnerabilities:</div>
     <div>{{ (forks || 0).toLocaleString() }}</div>
   </div>
 
@@ -28,11 +19,6 @@
     </div>
   </div>
 
-  <div class="info-item vulnerabilityTheme medium">
-    <div class="stat-name">Medium Vulnerabilities:</div>
-    <div>{{ (forks || 0).toLocaleString() }}</div>
-  </div>
-
   <div class="info-item">
     <div class="stat-name">Issues:</div>
     <div>
@@ -40,19 +26,9 @@
     </div>
   </div>
 
-  <div class="info-item vulnerabilityTheme low">
-    <div class="stat-name">Low Vulnerabilities:</div>
-    <div>{{ (forks || 0).toLocaleString() }}</div>
-  </div>
-
   <div class="info-item">
     <div class="stat-name">Default Branch:</div>
     <div>{{ defaultBranch }}</div>
-  </div>
-
-  <div class="info-item vulnerabilityTheme unknown">
-    <div class="stat-name">Unknown Vulnerabilities:</div>
-    <div>{{ (forks || 0).toLocaleString() }}</div>
   </div>
 
   <div class="info-item">
@@ -75,20 +51,10 @@
   </div>
 
   <div class="info-item">
-    <div class="stat-name">Last updated on:</div>
+    <div class="stat-name">Last updated:</div>
     <div>
       {{ parsedUpdatedOn }}
     </div>
-  </div>
-
-  <div class="info-item">
-    <div class="stat-name">Tags:</div>
-    <div>{{ (topics || []).join(", ") }}</div>
-  </div>
-
-  <div class="info-item">
-    <div class="stat-name">Tags:</div>
-    <div>{{ (topics || []).join(", ") }}</div>
   </div>
 </template>
 
@@ -106,31 +72,6 @@
   padding-right: 5px;
 }
 
-.vulnerabilityTheme {
-  border-radius: var(--viz--radius);
-  align-items: center;
-  justify-content: center;
-}
-
-.critical {
-  background-color: #7a002f;
-}
-
-.high {
-  background-color: #c70039;
-}
-
-.medium {
-  background-color: #ff7733;
-}
-
-.low {
-  background-color: #fcad00;
-}
-
-.unknown {
-  background-color: #8e8e8e;
-}
 </style>
 
 <script>
