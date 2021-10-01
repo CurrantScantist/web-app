@@ -12,6 +12,11 @@
             </div>
           </div>
 
+          <the-vulnerabilities-card
+              v-if="Object.keys(repo1MetaData).length"
+              :open_issues_count="repo1MetaData.open_issues_count"
+          ></the-vulnerabilities-card>
+
           <div  v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
@@ -220,9 +225,12 @@
 
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
+
 .meta-container {
   background-color: rgba(38, 38, 38, 0.35);
   padding: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
   margin-bottom: 1%;
   border-radius: var(--viz--radius); 
 }
@@ -405,8 +413,7 @@
 
   h1,
   h2 {
-    font-size: 185%;
-    margin-bottom: 8px;
+    font-size: 285%
   }
 }
 
@@ -456,6 +463,7 @@ import axios from "axios";
 import VChart from "vue-echarts";
 
 import TheMetadataCard from "@/components/TheMetadataCard";
+import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
 import TheMultiLineChart from "@/components/TheMultiLineChart";
@@ -474,6 +482,7 @@ export default {
     TheContributorPieChart,
     TheLocLineChart,
     TheMultiLineChart,
+    TheVulnerabilitiesCard
   },
   data() {
     return {
