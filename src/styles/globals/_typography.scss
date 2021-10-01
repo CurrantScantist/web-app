@@ -1,9 +1,12 @@
+// font import
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap");
+
 :root,
 html {
-  font-family: $base-font-family;
+  font-family: "Montserrat", sans-serif;
   // 12px is our base font-size
   font-size: 12px;
-  font-weight: $weight-normal;
+  font-weight: 500;
   font-display: swap;
 }
 

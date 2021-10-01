@@ -69,6 +69,10 @@
   display: none;
 }
 
+span {
+  font-weight: 500;
+}
+
 .nav-wrapper {
   margin-left: auto;
   margin-right: 1rem;
