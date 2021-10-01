@@ -29,6 +29,12 @@
               :topics="repo1MetaData.topics"
               :createdOn="repo1MetaData.created_at"
               :lastUpdatedOn="repo1MetaData.updated_at"
+              :archived="repo1MetaData.archived"
+              :disabled="repo1MetaData.disabled"
+              :language="repo1MetaData.language"
+              :num_tags="repo1MetaData.num_tags"
+              :latest_tag="repo1MetaData.latest_tag"
+              :subscriber_count="repo1MetaData.subscribers_count"
             ></the-metadata-card>
           </div>
 
@@ -226,21 +232,6 @@
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
 
-.meta-container {
-  background-color: rgba(38, 38, 38, 0.35);
-  padding: 1%;
-  padding-left: 2%;
-  padding-right: 2%;
-  margin-bottom: 1%;
-  border-radius: var(--viz--radius); 
-}
-.container-title {
-  padding: 1%;
-  margin-top: 2px;
-  font-size: 158%;
-  font-weight: 800;
-}
-
 .page {
   background: #d4e7e2;
   color: white;
@@ -295,7 +286,26 @@
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
 }
 
+.meta-grid-round-multi {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
+.meta-grid-round-single {
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+}
+
 .meta-grid {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0.5rem;
+  grid-auto-flow: row;
+  padding: 2%;
+  background-color: rgba(38, 38, 38, 0.35);
+  border-radius: var(--viz--radius);
+  margin-bottom: 3%;
+}
+
+.meta-grid-round {
   display: grid;
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
@@ -515,6 +525,7 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
+      console.log(this.repo1MetaData)
     } catch (e) {
       console.log(e);
     }

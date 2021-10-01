@@ -19,8 +19,6 @@
     <div>{{ (forks || 0).toLocaleString() }}</div>
   </div>
 
-  
-
   <div class="info-item">
     <div class="stat-name">Issues:</div>
     <div>
@@ -58,6 +56,49 @@
       {{ (stargazers || 0).toLocaleString() }}
     </div>
   </div>
+
+  <div class="info-item">
+    <div class="stat-name">Archived:</div>
+    <div>
+      {{ archived == false ? "No" : archived == true? "Yes" : "N/A" }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Disabled:</div>
+    <div>
+      {{ disabled == false ? "No" : disabled == true? "Yes" : "N/A" }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Primary Language:</div>
+    <div>
+      {{ (language || "N/A") }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Total Tags:</div>
+    <div>
+      {{ (num_tags || 0).toLocaleString() }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Latest Tag:</div>
+    <div>
+      {{ (latest_tag || "N/A")}}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">Subscribers:</div>
+    <div>
+      {{ (subscriber_count || 0).toLocaleString() }}
+    </div>
+  </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -88,6 +129,12 @@ export default {
     topics: { type: Array },
     createdOn: { type: String },
     lastUpdatedOn: { type: String },
+    archived: { type: String },
+    disabled: { type: String },
+    language: { type: String },
+    num_tags: { type: Number },
+    latest_tag: { type: String },
+    subscriber_count: { type: Number },
   },
   computed: {
     parsedCreatedOn() {
