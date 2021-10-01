@@ -46,8 +46,25 @@
   display: grid;
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
   grid-template-rows: repeat(1fr);
-  grid-gap: 0.5rem;
+  grid-gap: 0;
   grid-auto-flow: row;
+}
+
+@media only screen and (max-width: 1300px) {
+  .vulnerability-grid {
+    display: grid;
+    grid-template-columns: minmax(0%, 100%) minmax(0%, 100%);
+    grid-template-rows: repeat(1fr);
+    grid-gap: 0;
+    grid-auto-flow: row;
+    margin-bottom: 1%;
+  }
+
+   .unknown {
+    background-color: #8e8e8e;
+    grid-column: span 2; 
+  }
+  
 }
 
 .vulnerability-grid-item {
@@ -55,7 +72,7 @@
   font-weight: 500;
   font-size: 100%;
   padding: 5px;
-  margin: 2%;
+  margin: 5px;
 }
 
 .stat-name {

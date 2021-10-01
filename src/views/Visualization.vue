@@ -131,6 +131,18 @@
           <h1>{{ repo2MetaData.owner }}/{{ repo2MetaData.name }}</h1>
           <h5>{{ repo2MetaData.description }}</h5>
 
+          <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
+            <div class="meta-container">
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id = "tags2" > </div>
+            </div>
+
+            <the-vulnerabilities-card
+                  v-if="Object.keys(repo2MetaData).length"
+                  :open_issues_count="repo2MetaData.open_issues_count"
+            ></the-vulnerabilities-card>
+          </div>
+
           <div v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
             <the-metadata-card
               v-if="Object.keys(repo2MetaData).length"
@@ -449,7 +461,7 @@
   }
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 1300px) {
   .health-model {
     display: grid;
     grid-template-rows: repeat(1fr);
