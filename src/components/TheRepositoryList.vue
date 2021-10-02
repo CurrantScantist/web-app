@@ -242,7 +242,7 @@ export default defineComponent({
     },
     /**
      * Converts a number to a reader friendly format e.g. 1234 to 1.2K
-     * @see https://stackoverflow.com/questions/2685911/is-there-a-way-to-round-numbers-into-a-reader-friendly-format-e-g-1-1k
+     * @see {@link https://stackoverflow.com/questions/2685911/is-there-a-way-to-round-numbers-into-a-reader-friendly-format-e-g-1-1k}
      *
      * @param {number} number - The number to be converted.
      * @param {number} decPlaces - The number of decimal places to round to.
