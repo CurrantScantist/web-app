@@ -149,7 +149,6 @@ export default defineComponent({
         this.setTotalItems(this.data.length);
         return this.data;
       }
-      this.setPage(1);
 
       // Filter's data
       return this.data.filter((items) =>
@@ -165,11 +164,6 @@ export default defineComponent({
       );
     },
   },
-  watch: {
-    filteredData() {
-      this.page = 1;
-    },
-  },
   methods: {
     /**
      * Called on API request to parse the data.
@@ -183,16 +177,6 @@ export default defineComponent({
       }));
     },
     /**
-     * Called on dropdown selection.
-     *
-     * @param {object} indices - The index of the row being changed and index of the selected release
-     * @deprecated - Release information not displayed within this component
-     */
-    setRelease(indices) {
-      console.log(typeof indices);
-      this.data[indices[0]].selectedRelease = indices[1];
-    },
-    /**
      * Called on pagination button click.
      *
      * @param {number} newPage - The new page number
@@ -202,9 +186,6 @@ export default defineComponent({
     },
     setTotalItems(newTotal) {
       this.totalItems = newTotal;
-    },
-    setPage(newPage) {
-      this.page = newPage;
     },
     handleNavClick() {
       // console.log(this.selectedRows[1]);
