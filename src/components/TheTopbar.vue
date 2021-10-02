@@ -98,7 +98,7 @@ span {
   &:hover {
     text-decoration: underline;
     text-decoration-thickness: 4px;
-    text-decoration-color: purple;
+    text-decoration-color: #17cf97;
   }
 }
 
