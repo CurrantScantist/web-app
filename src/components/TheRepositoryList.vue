@@ -1,15 +1,16 @@
 <template>
   <div>
     <div v-if="numOfSelected != 0">
-      <el-button class="nav-button" @click="handleNavClick" plain round
-        >Checkout</el-button
-      >
+      <button class="nav-button" @click="handleNavClick">
+        <h3>{{ numOfSelected > 1 ? "Compare" : "Checkout" }}</h3>
+      </button>
     </div>
     <div class="list-wrapper">
       <el-input
         class="search"
         placeholder="Search for a repository!"
         v-model="search"
+        prefix-icon="el-icon-search"
         clearable
       />
       <div class="table-wrapper">
@@ -25,7 +26,15 @@
                 <el-checkbox v-model="scope.row.selected"></el-checkbox>
               </template>
             </el-table-column>
-            <el-table-column property="name" label="Repository">
+            <el-table-column property="name">
+              <template #header>
+                <span class="table-header">Name</span>
+              </template>
+            </el-table-column>
+            <el-table-column property="owner" show-overflow-tooltip>
+              <template #header>
+                <span class="table-header">Owner</span>
+              </template>
             </el-table-column>
             <el-table-column property="forks">
               <template #header>
@@ -43,11 +52,10 @@
                 <span>{{ abbrNum(scope.row.stargazers_count, 1) }}</span>
               </template>
             </el-table-column>
-            <el-table-column
-              property="topics"
-              label="Tags"
-              show-overflow-tooltip
-            >
+            <el-table-column property="topics" show-overflow-tooltip>
+              <template #header>
+                <span class="table-header">Tags</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -70,6 +78,16 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+
+  border: none;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 1rem 4rem;
+}
+
+.nav-button:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
 }
 
 .list-wrapper {
@@ -87,6 +105,10 @@
 
 .table {
   border-radius: 10px;
+}
+
+.table-header {
+  color: #5e5e5e;
 }
 </style>
 
