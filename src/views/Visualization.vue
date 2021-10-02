@@ -605,15 +605,6 @@ export default {
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82"
-      );
-      this.repo1Stats.heatMap = response.data.data;
-    } catch (e) {
-      console.log(e);
-    }
-
-    try {
-      const response = await axios.get(
         process.env.VUE_APP_API_URL +
           `/techstack/contribution/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
@@ -676,15 +667,6 @@ export default {
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82"
-        );
-        this.repo2Stats.heatMap = response.data.data; // array of marks
-      } catch (e) {
-        console.log(e);
-      }
-
-      try {
-        const response = await axios.get(
           process.env.VUE_APP_API_URL +
             `/techstack/contribution/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
@@ -722,24 +704,6 @@ export default {
             tagDiv.style.justifyContent = "center";
             document.getElementById(tagName).append(tagDiv);
       })
-    },
-    processDate(inputDate) {
-      if (inputDate) {
-        let date = new Date(inputDate);
-        let dateFormatter = new Intl.DateTimeFormat("en-AU", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          timeZone: "Australia/Sydney",
-          timeZoneName: "short",
-          hour12: false,
-        });
-
-        return dateFormatter.format(date);
-      }
-      return "";
     },
     getColor(size) {
       let colorSet = [
@@ -846,14 +810,12 @@ export default {
         this.bubblePlot1 = depBubbleChartCopy;
         this.nodeLink1 = nodeLinkCopy1;
         this.heatMap1 = heatMapCopy;
-        this.addTags(this.repo1MetaData, "tags1")
       } else if (repoNumber == 2) {
         this.initializeNodeLink(nodeLinkCopy2, this.repo2Stats.nodeLink);
         this.locType2 = locByTypeCopy;
         this.bubblePlot2 = depBubbleChartCopy;
         this.nodeLink2 = nodeLinkCopy2;
         this.heatMap2 = heatMapCopy;
-        
       }
     },
     setSeriesBubbleChart(chart, map, colors) {
@@ -897,9 +859,9 @@ export default {
       let weekCount = 0;
 
       if (repoNumber == 1) {
-        jsonResponse = this.repo1Stats.heatMap;
+        jsonResponse = this.repo1MetaData.heatmap_data;
       } else if (repoNumber == 2) {
-        jsonResponse = this.repo2Stats.heatMap;
+        jsonResponse = this.repo2MetaData.heatmap_data;
       }
 
       for (let week in jsonResponse) {
