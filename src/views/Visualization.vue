@@ -7,10 +7,11 @@
           <h5>{{ repo1MetaData.description }}</h5>
 
           <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
-            <div class="meta-container">
-              <div class="container-title">Tags</div>
-              <div class="tag-grid" id = "tags2" > </div>
-            </div>
+            <the-tags-card
+                  v-if="Object.keys(repo1MetaData).length"
+                  :tags= "repo1MetaData.topics"
+                  :colors= "repo1MetaData.topic_colours"
+            ></the-tags-card>
 
             <the-vulnerabilities-card
                   v-if="Object.keys(repo1MetaData).length"
@@ -490,6 +491,7 @@ import axios from "axios";
 import VChart from "vue-echarts";
 
 import TheMetadataCard from "@/components/TheMetadataCard";
+import TheTagsCard from "@/components/TheTagsCard";
 import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
@@ -509,7 +511,8 @@ export default {
     TheContributorPieChart,
     TheLocLineChart,
     TheMultiLineChart,
-    TheVulnerabilitiesCard
+    TheVulnerabilitiesCard,
+    TheTagsCard,
   },
   data() {
     return {
@@ -542,7 +545,6 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
-      console.log(this.repo1MetaData)
     } catch (e) {
       console.log(e);
     }
