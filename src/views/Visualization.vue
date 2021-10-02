@@ -7,11 +7,12 @@
           <h5>{{ repo1MetaData.description }}</h5>
 
           <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
-            <the-tags-card
-                  v-if="Object.keys(repo1MetaData).length"
-                  :tags= "repo1MetaData.topics"
-                  :colors= "repo1MetaData.topic_colours"
-            ></the-tags-card>
+            <div class="meta-container">
+                <div class="container-title">Tags</div>
+                <div class = "tag-grid" id = "tags1">
+                  
+                </div>
+            </div>
 
             <the-vulnerabilities-card
                   v-if="Object.keys(repo1MetaData).length"
@@ -134,8 +135,9 @@
 
           <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
             <div class="meta-container">
-              <div class="container-title">Tags</div>
-              <div class="tag-grid" id = "tags2" > </div>
+                <div class="container-title">Tags</div>
+                <div class = "tag-grid" id = "tags2">
+                </div>
             </div>
 
             <the-vulnerabilities-card
@@ -253,6 +255,28 @@
 
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
+
+
+.meta-container {
+        background-color: rgba(38, 38, 38, 0.35);
+        padding: 1%;
+        padding-left: 2%;
+        padding-right: 2%;
+        margin-bottom: 1%;
+        border-radius: var(--viz--radius); 
+    }
+    .container-title {
+        padding: 1%;
+        margin-top: 2px;
+        font-size: 158%;
+        font-weight: 800;
+    }
+
+    .tag-grid {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1%;
+    }
 
 .page {
   background: #d4e7e2;
@@ -491,7 +515,7 @@ import axios from "axios";
 import VChart from "vue-echarts";
 
 import TheMetadataCard from "@/components/TheMetadataCard";
-import TheTagsCard from "@/components/TheTagsCard";
+// import TheTagsCard from "@/components/TheTagsCard";
 import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
@@ -512,7 +536,7 @@ export default {
     TheLocLineChart,
     TheMultiLineChart,
     TheVulnerabilitiesCard,
-    TheTagsCard,
+    // TheTagsCard,
   },
   data() {
     return {
@@ -545,6 +569,7 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
+      this.addTags(this.repo1MetaData, "tags1")
     } catch (e) {
       console.log(e);
     }
@@ -615,6 +640,7 @@ export default {
             `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2MetaData = response.data.data[0];
+        this.addTags(this.repo2MetaData, "tags2")
       } catch (e) {
         console.log(e);
       }
@@ -681,6 +707,22 @@ export default {
     }
   },
   methods: {
+    addTags(metaData, tagName){
+        metaData.topics.forEach((item) => {
+            let tagDiv = document.createElement("div");
+            tagDiv.innerText = item;
+            tagDiv.style.backgroundColor = metaData.topic_colours[item];
+            tagDiv.style.display = "flex";
+            tagDiv.style.fontWeight = 800;
+            tagDiv.style.fontSize = "100%";
+            tagDiv.style.padding = "5px 8px";
+            tagDiv.style.margin = "3px";
+            tagDiv.style.borderRadius = "18px";
+            tagDiv.style.alignItems = "center";
+            tagDiv.style.justifyContent = "center";
+            document.getElementById(tagName).append(tagDiv);
+      })
+    },
     processDate(inputDate) {
       if (inputDate) {
         let date = new Date(inputDate);
@@ -804,12 +846,14 @@ export default {
         this.bubblePlot1 = depBubbleChartCopy;
         this.nodeLink1 = nodeLinkCopy1;
         this.heatMap1 = heatMapCopy;
+        this.addTags(this.repo1MetaData, "tags1")
       } else if (repoNumber == 2) {
         this.initializeNodeLink(nodeLinkCopy2, this.repo2Stats.nodeLink);
         this.locType2 = locByTypeCopy;
         this.bubblePlot2 = depBubbleChartCopy;
         this.nodeLink2 = nodeLinkCopy2;
         this.heatMap2 = heatMapCopy;
+        
       }
     },
     setSeriesBubbleChart(chart, map, colors) {
