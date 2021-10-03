@@ -596,6 +596,17 @@ export default {
 
     try {
       const response = await axios.get(
+         process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`  
+      );
+      this.repo1Stats.heatmap_data = response.data.data;
+      console.log(this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data)
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      const response = await axios.get(
         "https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751"
       );
       this.repo1Stats.nodeLink = response.data;
@@ -654,6 +665,16 @@ export default {
         this.repo2Stats.dep = response.data.data;
       } catch (e) {
         console.log(e);
+      }
+
+      try {
+      const response = await axios.get(
+         process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`  
+      );
+        this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
+      } catch (e) {
+      console.log(e);
       }
 
       try {
@@ -739,10 +760,8 @@ export default {
       if(lengthDifference > 0) {
         this.repo2MetaData.description = this.repo2MetaData.description + paddingString.repeat(lengthDifference)
       } else if (lengthDifference < 0){
-        this.repo1MetaData.description = this.repo1MetaData.description + paddingString.repeat( Math.abs(lengthDifference))
+        this.repo1MetaData.description = this.repo1MetaData.description + paddingString.repeat(Math.abs(lengthDifference))
       }
-      console.log(this.repo1MetaData.description.length)
-      console.log(this.repo2MetaData.description.length)
     },
     setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
@@ -870,9 +889,9 @@ export default {
       let weekCount = 0;
 
       if (repoNumber == 1) {
-        jsonResponse = this.repo1MetaData.heatmap_data;
+        jsonResponse = this.repo1Stats.heatmap_data;
       } else if (repoNumber == 2) {
-        jsonResponse = this.repo2MetaData.heatmap_data;
+        jsonResponse = this.repo2Stats.heatmap_data;
       }
 
       for (let week in jsonResponse) {
