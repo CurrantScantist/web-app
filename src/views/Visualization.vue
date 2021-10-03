@@ -861,10 +861,9 @@ export default {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
-        seriesSubObjCopy.data = [repoArray];
+        seriesSubObjCopy.data = [repoArray.slice(0,4)];
         seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
         chart.series.push(seriesSubObjCopy);
-        console.log(seriesSubObjCopy.name, seriesSubObjCopy.areaStyle.color)
       });
     },
     extractDepData(repoNumber) {
@@ -886,14 +885,42 @@ export default {
         let repoData = [];
         repoData.push(repoObj.size);
         repoData.push(repoObj.num_components);
-        repoData.push(Math.sqrt(repoObj.num_vulnerabilities) * 5);
-        repoData.push(repoObj.name);
+        this.vulnerabilityClassification(repoData, repoObj)
         extractedDepData.push(repoData);
         colorMap.set(repoObj.name,repoObj.repo_colour)
-        console.log(Math.sqrt(repoObj.num_vulnerabilities) * 5, repoObj.name)
       }
 
       return [extractedDepData,colorMap];
+    },
+    vulnerabilityClassification(repoData,repoObj) {
+      let bubbleSizes = [15,30,50,80,110]
+      let classes = ["0", "1-50", "51-100", "101-150", "151+"]
+      let repoVulnerabilities = repoObj.num_vulnerabilities
+      let repoBubbleSize = 0
+      let repoClass = ""
+
+      if(repoVulnerabilities === 0) {
+        repoBubbleSize = bubbleSizes[0]
+        repoClass = classes[0]
+      } else if(repoVulnerabilities >=1 && repoVulnerabilities <=50) {
+        repoBubbleSize = bubbleSizes[1]
+        repoClass = classes[1]
+      } else if(repoVulnerabilities >=51 && repoVulnerabilities <=100) {
+        repoBubbleSize = bubbleSizes[2]
+        repoClass = classes[2]
+      } else if(repoVulnerabilities >=101 && repoVulnerabilities <=150) {
+        repoBubbleSize = bubbleSizes[3]
+        repoClass = classes[3]
+      } else {
+        repoBubbleSize = bubbleSizes[4]
+        repoClass = classes[4]
+      }
+
+      repoData.push(repoBubbleSize);
+      repoData.push(repoObj.name);
+      repoData.push(repoVulnerabilities);
+      repoData.push(repoClass);
+      
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
