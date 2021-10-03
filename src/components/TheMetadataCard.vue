@@ -8,13 +8,6 @@
   </div>
 
   <div class="info-item">
-    <div class="stat-name">Forks Count:</div>
-    <div>
-      {{ (forks || 0).toLocaleString() }}
-    </div>
-  </div>
-
-  <div class="info-item">
     <div class="stat-name">Forks:</div>
     <div>{{ (forks || 0).toLocaleString() }}</div>
   </div>
