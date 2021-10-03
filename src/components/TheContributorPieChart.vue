@@ -44,13 +44,13 @@ export default {
         tooltip: {
           trigger: "item",
         },
-      toolbox: {
-        feature: {
-          saveAsImage: {
-              title: "Save"
-            }
-        }
-    },
+        toolbox: {
+          feature: {
+            saveAsImage: {
+              title: "Save",
+            },
+          },
+        },
         series: [
           {
             name: this.hoverHeading,

@@ -37,18 +37,17 @@ export default {
 
       let locByLangCopy = JSON.parse(JSON.stringify(locOptions));
       locByLangCopy.xAxis[0].data = this.versions;
-      locByLangCopy.legend.data = [] // add x axis label
-      locByLangCopy.color = []
+      locByLangCopy.legend.data = []; // add x axis label
+      locByLangCopy.color = [];
       this.setSeriesSubObject(locByLangCopy, this.languageData, seriesObj);
       return locByLangCopy;
     },
   },
   methods: {
     setSeriesSubObject(chart, map, objToCopy) {
-      
       map.forEach((value, key) => {
-        chart.legend.data.push(key)
-        chart.color.push(this.colorData[key])
+        chart.legend.data.push(key);
+        chart.color.push(this.colorData[key]);
         let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = this.colorData[key];

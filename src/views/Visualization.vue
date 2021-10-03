@@ -6,23 +6,29 @@
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
           <h5>{{ repo1MetaData.description }}</h5>
 
-          <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
+          <div
+            v-bind:class="{
+              'meta-grid-round-single meta-grid-round': !name2,
+              'meta-grid-round-multi meta-grid-round': name2,
+            }"
+          >
             <div class="meta-container">
-                <div class="container-title">Tags</div>
-                <div class = "tag-grid" id = "tags1">
-                  
-                </div>
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id="tags1"></div>
             </div>
 
             <the-vulnerabilities-card
-                  v-if="Object.keys(repo1MetaData).length"
-                  :open_issues_count="repo1MetaData.open_issues_count"
+              v-if="Object.keys(repo1MetaData).length"
+              :open_issues_count="repo1MetaData.open_issues_count"
             ></the-vulnerabilities-card>
           </div>
 
-          
-
-          <div  v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
+          <div
+            v-bind:class="{
+              'meta-grid-single meta-grid': !name2,
+              'meta-grid-multi meta-grid': name2,
+            }"
+          >
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
               :forks="repo1MetaData.forks"
@@ -113,7 +119,11 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap1" style="height: 380px" autoresize/>
+              <v-chart
+                v-bind:option="heatMap1"
+                style="height: 380px"
+                autoresize
+              />
             </div>
             <div class="node-link">
               <h3>Node Link Diagram</h3>
@@ -133,20 +143,29 @@
           <h1>{{ repo2MetaData.owner }}/{{ repo2MetaData.name }}</h1>
           <h5>{{ repo2MetaData.description }}</h5>
 
-          <div v-bind:class="{ 'meta-grid-round-single meta-grid-round': !name2, 'meta-grid-round-multi meta-grid-round': name2 }">
+          <div
+            v-bind:class="{
+              'meta-grid-round-single meta-grid-round': !name2,
+              'meta-grid-round-multi meta-grid-round': name2,
+            }"
+          >
             <div class="meta-container">
-                <div class="container-title">Tags</div>
-                <div class = "tag-grid" id = "tags2">
-                </div>
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id="tags2"></div>
             </div>
 
             <the-vulnerabilities-card
-                  v-if="Object.keys(repo2MetaData).length"
-                  :open_issues_count="repo2MetaData.open_issues_count"
+              v-if="Object.keys(repo2MetaData).length"
+              :open_issues_count="repo2MetaData.open_issues_count"
             ></the-vulnerabilities-card>
           </div>
 
-          <div v-bind:class="{ 'meta-grid-single meta-grid': !name2, 'meta-grid-multi meta-grid': name2 }">
+          <div
+            v-bind:class="{
+              'meta-grid-single meta-grid': !name2,
+              'meta-grid-multi meta-grid': name2,
+            }"
+          >
             <the-metadata-card
               v-if="Object.keys(repo2MetaData).length"
               :forks="repo2MetaData.forks"
@@ -234,7 +253,11 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap2" style="height: 380px" autoresize/>
+              <v-chart
+                v-bind:option="heatMap2"
+                style="height: 380px"
+                autoresize
+              />
             </div>
 
             <div class="node-link">
@@ -256,14 +279,13 @@
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
 
-
 .meta-container {
   background-color: rgba(38, 38, 38, 0.35);
   padding: 1%;
   padding-left: 2%;
   padding-right: 2%;
   margin-bottom: 1%;
-  border-radius: var(--viz--radius); 
+  border-radius: var(--viz--radius);
 }
 .container-title {
   padding: 1%;
@@ -325,16 +347,16 @@
 }
 
 .meta-grid-multi {
-    grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
-  }
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+}
 
 .meta-grid-single {
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
 }
 
 .meta-grid-round-multi {
-    grid-template-columns: minmax(0%, 1fr);
-  }
+  grid-template-columns: minmax(0%, 1fr);
+}
 
 .meta-grid-round-single {
   grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
@@ -468,7 +490,7 @@
       "heat-map"
       "node-link";
   }
-  .meta-grid-single{
+  .meta-grid-single {
     grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   }
 
@@ -482,7 +504,7 @@
 
   h1,
   h2 {
-    font-size: 285%
+    font-size: 285%;
   }
 }
 
@@ -569,7 +591,7 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
-      this.addTags(this.repo1MetaData, "tags1")
+      this.addTags(this.repo1MetaData, "tags1");
     } catch (e) {
       console.log(e);
     }
@@ -597,8 +619,8 @@ export default {
 
     try {
       const response = await axios.get(
-         process.env.VUE_APP_API_URL +
-          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`  
+        process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
     } catch (e) {
@@ -607,8 +629,8 @@ export default {
 
     try {
       const response = await axios.get(
-       process.env.VUE_APP_API_URL +
-            `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
+        process.env.VUE_APP_API_URL +
+          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
     } catch (e) {
@@ -643,7 +665,7 @@ export default {
             `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2MetaData = response.data.data[0];
-        this.addTags(this.repo2MetaData, "tags2")
+        this.addTags(this.repo2MetaData, "tags2");
       } catch (e) {
         console.log(e);
       }
@@ -661,22 +683,22 @@ export default {
 
       try {
         const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-      );
-      this.repo2Stats.dep = response.data.data[0];
+          process.env.VUE_APP_API_URL +
+            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        );
+        this.repo2Stats.dep = response.data.data[0];
       } catch (e) {
         console.log(e);
       }
 
       try {
-      const response = await axios.get(
-         process.env.VUE_APP_API_URL +
-          `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`  
-      );
+        const response = await axios.get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        );
         this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
       } catch (e) {
-      console.log(e);
+        console.log(e);
       }
 
       try {
@@ -710,32 +732,38 @@ export default {
       }
       this.processData(2);
       this.balanceHeight();
-    } 
+    }
   },
   methods: {
-    addTags(metaData, tagName){
-        metaData.topics.forEach((item) => {
-            let tagDiv = document.createElement("div");
-            tagDiv.innerText = item;
-            tagDiv.style.backgroundColor = metaData.topic_colours[item];
-            tagDiv.style.display = "flex";
-            tagDiv.style.fontWeight = 800;
-            tagDiv.style.fontSize = "100%";
-            tagDiv.style.padding = "5px 8px";
-            tagDiv.style.margin = "3px";
-            tagDiv.style.borderRadius = "18px";
-            tagDiv.style.alignItems = "center";
-            tagDiv.style.justifyContent = "center";
-            document.getElementById(tagName).append(tagDiv);
-      })
+    addTags(metaData, tagName) {
+      metaData.topics.forEach((item) => {
+        let tagDiv = document.createElement("div");
+        tagDiv.innerText = item;
+        tagDiv.style.backgroundColor = metaData.topic_colours[item];
+        tagDiv.style.display = "flex";
+        tagDiv.style.fontWeight = 800;
+        tagDiv.style.fontSize = "100%";
+        tagDiv.style.padding = "5px 8px";
+        tagDiv.style.margin = "3px";
+        tagDiv.style.borderRadius = "18px";
+        tagDiv.style.alignItems = "center";
+        tagDiv.style.justifyContent = "center";
+        document.getElementById(tagName).append(tagDiv);
+      });
     },
-    balanceHeight(){
-      let lengthDifference = this.repo1MetaData.description.length - this.repo2MetaData.description.length
-      let paddingString = "ㅤ"
-      if(lengthDifference > 0) {
-        this.repo2MetaData.description = this.repo2MetaData.description + paddingString.repeat(lengthDifference)
-      } else if (lengthDifference < 0){
-        this.repo1MetaData.description = this.repo1MetaData.description + paddingString.repeat(Math.abs(lengthDifference))
+    balanceHeight() {
+      let lengthDifference =
+        this.repo1MetaData.description.length -
+        this.repo2MetaData.description.length;
+      let paddingString = "ㅤ";
+      if (lengthDifference > 0) {
+        this.repo2MetaData.description =
+          this.repo2MetaData.description +
+          paddingString.repeat(lengthDifference);
+      } else if (lengthDifference < 0) {
+        this.repo1MetaData.description =
+          this.repo1MetaData.description +
+          paddingString.repeat(Math.abs(lengthDifference));
       }
     },
     setSeriesSubObject(chart, map, objToCopy) {
@@ -781,28 +809,22 @@ export default {
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
       heatMapTooltipData = extractedHeatMapData[4];
 
-      if (extractedDepData[0].length > 0){
+      if (extractedDepData[0].length > 0) {
         let depRepos = extractedDepData[0].map((repoArray) => {
           return repoArray[3];
         });
-        
+
         depDataColorMap = extractedDepData[1];
         depBubbleChartCopy.color = [];
         depBubbleChartCopy.legend.data = depRepos;
         bubbleChartTooltipData = extractedDepData[2];
       }
-      
 
       if (repoNumber === 1) {
-        this.locColorData.push(
-          this.repo1MetaData.language_colours
-        );
+        this.locColorData.push(this.repo1MetaData.language_colours);
       } else {
-        this.locColorData.push(
-          this.repo2MetaData.language_colours
-        );
+        this.locColorData.push(this.repo2MetaData.language_colours);
       }
-      
 
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
@@ -821,25 +843,55 @@ export default {
       // custom tooltips for heatmap
       heatMapCopy.tooltip.formatter = (obj) => {
         var dataPoint = obj.value;
-        var weekTooltipData = heatMapTooltipData.get(dataPoint[0]+"-"+dataPoint[1])
-            return '<div class = "tooltip" style="border: 3px solid '+ obj.color+';">'
-                + '<strong style="font-size: 18px">'+dataPoint[2]+'</strong>' + ' open issues in '+obj.seriesName + '<br><br>'
-                + '<strong> Start Date：</strong>' + weekTooltipData[0] + '<br>'
-                + '<strong> End Date：</strong>' + weekTooltipData[1] + '<br>'
-                + '</div>';          
-      }
+        var weekTooltipData = heatMapTooltipData.get(
+          dataPoint[0] + "-" + dataPoint[1]
+        );
+        return (
+          '<div class = "tooltip" style="border: 3px solid ' +
+          obj.color +
+          ';">' +
+          '<strong style="font-size: 18px">' +
+          dataPoint[2].toLocaleString() +
+          "</strong>" +
+          " open issues in " +
+          obj.seriesName +
+          "<br><br>" +
+          "<strong> Start Date：</strong>" +
+          weekTooltipData[0] +
+          "<br>" +
+          "<strong> End Date：</strong>" +
+          weekTooltipData[1] +
+          "<br>" +
+          "</div>"
+        );
+      };
 
       // custom tooltips for bubble chart
       depBubbleChartCopy.tooltip.formatter = (obj) => {
         var dataPoint = obj.value;
-            return '<div class = "tooltip" style="border: 3px solid '+ obj.color+';">'
-                + '<strong style="font-size: 21px">' + dataPoint[3].charAt(0).toUpperCase() + dataPoint[3].slice(1) + '</strong>  <br><br>'
-                + '<strong> Dependencies Count：</strong>' + dataPoint[1].toLocaleString() + '<br>'
-                + '<strong> Project Size(KB)</strong>：' + dataPoint[0].toLocaleString() + '<br>'
-                + '<strong> Issues Classification：</strong>' + bubbleChartTooltipData.get(dataPoint[3])[1] + '<br>'
-                + '<strong> Issues Count：</strong>' + bubbleChartTooltipData.get(dataPoint[3])[0] + '<br>'
-                + '</div>';          
-      }
+        return (
+          '<div class = "tooltip" style="border: 3px solid ' +
+          obj.color +
+          ';">' +
+          '<strong style="font-size: 21px">' +
+          dataPoint[3].charAt(0).toUpperCase() +
+          dataPoint[3].slice(1) +
+          "</strong>  <br><br>" +
+          "<strong> Dependencies Count：</strong>" +
+          dataPoint[1].toLocaleString() +
+          "<br>" +
+          "<strong> Project Size(KB)</strong>：" +
+          dataPoint[0].toLocaleString() +
+          "<br>" +
+          "<strong> Issues Classification：</strong>" +
+          bubbleChartTooltipData.get(dataPoint[3])[1] +
+          "<br>" +
+          "<strong> Issues Count：</strong>" +
+          bubbleChartTooltipData.get(dataPoint[3])[0] +
+          "<br>" +
+          "</div>"
+        );
+      };
 
       if (repoNumber == 1) {
         this.initializeNodeLink(nodeLinkCopy1, this.repo1Stats.nodeLink);
@@ -857,11 +909,11 @@ export default {
     },
     setSeriesBubbleChart(chart, map, colorMap) {
       map.forEach((repoArray) => {
-        chart.color.push(colorMap.get(repoArray[3]))
+        chart.color.push(colorMap.get(repoArray[3]));
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
-        seriesSubObjCopy.data = [repoArray.slice(0,4)];
+        seriesSubObjCopy.data = [repoArray.slice(0, 4)];
         seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
         chart.series.push(seriesSubObjCopy);
       });
@@ -870,7 +922,7 @@ export default {
       let jsonObj;
       let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
       let tooltipData = new Map();
-      let colorMap = new Map()
+      let colorMap = new Map();
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.dep;
@@ -879,47 +931,47 @@ export default {
       }
 
       if (jsonObj == undefined) {
-        return [extractedDepData,colorMap]
+        return [extractedDepData, colorMap];
       }
 
       for (let repoObj of jsonObj) {
         let repoData = [];
         repoData.push(repoObj.size);
         repoData.push(repoObj.num_components);
-        this.vulnerabilityClassification(repoData, repoObj, tooltipData)
+        this.vulnerabilityClassification(repoData, repoObj, tooltipData);
         extractedDepData.push(repoData);
-        colorMap.set(repoObj.name,repoObj.repo_colour)
+        colorMap.set(repoObj.name, repoObj.repo_colour);
       }
 
-      return [extractedDepData,colorMap, tooltipData];
+      return [extractedDepData, colorMap, tooltipData];
     },
-    vulnerabilityClassification(repoData,repoObj,tooltipData) {
-      let bubbleSizes = [15,30,50,80,110]
-      let classes = ["0", "1-50", "51-100", "101-150", "151+"]
-      let repoVulnerabilities = repoObj.num_vulnerabilities
-      let repoBubbleSize = 0
-      let repoClass = ""
+    vulnerabilityClassification(repoData, repoObj, tooltipData) {
+      let bubbleSizes = [15, 30, 50, 80, 110];
+      let classes = ["0", "1-50", "51-100", "101-150", "151+"];
+      let repoVulnerabilities = repoObj.num_vulnerabilities;
+      let repoBubbleSize = 0;
+      let repoClass = "";
 
-      if(repoVulnerabilities === 0) {
-        repoBubbleSize = bubbleSizes[0]
-        repoClass = classes[0]
-      } else if(repoVulnerabilities >=1 && repoVulnerabilities <=50) {
-        repoBubbleSize = bubbleSizes[1]
-        repoClass = classes[1]
-      } else if(repoVulnerabilities >=51 && repoVulnerabilities <=100) {
-        repoBubbleSize = bubbleSizes[2]
-        repoClass = classes[2]
-      } else if(repoVulnerabilities >=101 && repoVulnerabilities <=150) {
-        repoBubbleSize = bubbleSizes[3]
-        repoClass = classes[3]
+      if (repoVulnerabilities === 0) {
+        repoBubbleSize = bubbleSizes[0];
+        repoClass = classes[0];
+      } else if (repoVulnerabilities >= 1 && repoVulnerabilities <= 50) {
+        repoBubbleSize = bubbleSizes[1];
+        repoClass = classes[1];
+      } else if (repoVulnerabilities >= 51 && repoVulnerabilities <= 100) {
+        repoBubbleSize = bubbleSizes[2];
+        repoClass = classes[2];
+      } else if (repoVulnerabilities >= 101 && repoVulnerabilities <= 150) {
+        repoBubbleSize = bubbleSizes[3];
+        repoClass = classes[3];
       } else {
-        repoBubbleSize = bubbleSizes[4]
-        repoClass = classes[4]
+        repoBubbleSize = bubbleSizes[4];
+        repoClass = classes[4];
       }
 
       repoData.push(repoBubbleSize);
       repoData.push(repoObj.name);
-      tooltipData.set(repoObj.name, [repoVulnerabilities,repoClass])
+      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass]);
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
@@ -927,7 +979,7 @@ export default {
       let extractedTooltipData = new Map(); // [start date, end date]
 
       let maxVal = 0,
-      minVal = Infinity;
+        minVal = Infinity;
       let xAxis = []; // 19 cols
       let xAxisYears = new Set();
       let weekCount = 0;
@@ -942,17 +994,20 @@ export default {
         let weekObj = jsonResponse[week];
         let weekData = [];
         let weekTooltipData = [];
-        
+
         weekCount += 1;
 
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
 
-        weekTooltipData.push(weekObj.start.substring(0,10));
-        weekTooltipData.push(weekObj.end.substring(0,10));
+        weekTooltipData.push(weekObj.start.substring(0, 10));
+        weekTooltipData.push(weekObj.end.substring(0, 10));
 
-        if (weekObj.start.substring(5, 7) === "01" && !xAxisYears.has(weekObj.start.substring(0, 4))) {
+        if (
+          weekObj.start.substring(5, 7) === "01" &&
+          !xAxisYears.has(weekObj.start.substring(0, 4))
+        ) {
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
             xAxisYears.add(weekObj.start.substring(0, 4));
@@ -961,7 +1016,7 @@ export default {
               0,
               4
             );
-             xAxisYears.add(weekObj.start.substring(0, 4));
+            xAxisYears.add(weekObj.start.substring(0, 4));
           }
         }
 
@@ -979,14 +1034,23 @@ export default {
           }
         }
 
-        extractedTooltipData.set(weekObj.coords.x+"-"+weekObj.coords.y, weekTooltipData)
+        extractedTooltipData.set(
+          weekObj.coords.x + "-" + weekObj.coords.y,
+          weekTooltipData
+        );
         extractedHeatMapData.set(weekObj.week, weekData);
       }
       xAxis = xAxis.reverse();
-      return [extractedHeatMapData, minVal, maxVal, xAxis, extractedTooltipData];
+      return [
+        extractedHeatMapData,
+        minVal,
+        maxVal,
+        xAxis,
+        extractedTooltipData,
+      ];
     },
     initializeNodeLink(nodeLink, data) {
-      if (data != undefined){
+      if (data != undefined) {
         let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
         nodeLinkSubObj.categories = data.categories;
         nodeLinkSubObj.nodes = data.nodes;
@@ -1077,5 +1141,4 @@ export default {
     },
   },
 };
-
 </script>

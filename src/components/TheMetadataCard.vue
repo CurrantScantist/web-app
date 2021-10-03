@@ -1,6 +1,5 @@
 <template>
-
-<div class="info-item">
+  <div class="info-item">
     <div class="stat-name">Watchers:</div>
     <div>
       {{ (watchers || 0).toLocaleString() }}
@@ -53,21 +52,21 @@
   <div class="info-item">
     <div class="stat-name">Archived:</div>
     <div>
-      {{ archived == false ? "No" : archived == true? "Yes" : "N/A" }}
+      {{ archived == false ? "No" : archived == true ? "Yes" : "N/A" }}
     </div>
   </div>
 
   <div class="info-item">
     <div class="stat-name">Disabled:</div>
     <div>
-      {{ disabled == false ? "No" : disabled == true? "Yes" : "N/A" }}
+      {{ disabled == false ? "No" : disabled == true ? "Yes" : "N/A" }}
     </div>
   </div>
 
   <div class="info-item">
     <div class="stat-name">Top Language:</div>
     <div>
-      {{ (language || "N/A") }}
+      {{ language || "N/A" }}
     </div>
   </div>
 
@@ -81,7 +80,7 @@
   <div class="info-item">
     <div class="stat-name">Latest Tag:</div>
     <div>
-      {{ (latest_tag || "N/A")}}
+      {{ latest_tag || "N/A" }}
     </div>
   </div>
 
@@ -91,7 +90,6 @@
       {{ (subscriber_count || 0).toLocaleString() }}
     </div>
   </div>
-
 </template>
 
 <style lang="scss" scoped>
@@ -107,7 +105,6 @@
   font-weight: 800;
   padding-right: 5px;
 }
-
 </style>
 
 <script>
