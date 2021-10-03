@@ -1,9 +1,5 @@
 <template>
   <div class="top-wrapper">
-    <div class="title-wrapper">
-      <h3><slot name="title"></slot></h3>
-      <h6>(<slot name="subtitle"></slot>)</h6>
-    </div>
     <div class="dropdown-wrapper" v-if="Object.keys(chartData).length > 1">
       <el-dropdown trigger="click" @command="handleDropdownClick">
         <span class="el-dropdown-link">
@@ -23,7 +19,12 @@
       </el-dropdown>
     </div>
   </div>
-  <v-chart v-bind:option="chartOptions" style="height: 500px" autoresize />
+  <v-chart
+    v-bind:option="chartOptions"
+    style="height: 500px"
+    :loading="isLoading"
+    autoresize
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -45,6 +46,7 @@ import VChart from "vue-echarts";
 export default {
   props: {
     chartData: { type: Object, required: true, default: null },
+    isLoading: { type: Boolean, default: true },
   },
   components: {
     VChart,
