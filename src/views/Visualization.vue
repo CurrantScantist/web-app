@@ -766,6 +766,7 @@ export default {
       let heatMapData = new Map();
       let depDataColorMap = new Map();
       let heatMapTooltipData = new Map();
+      let bubbleChartTooltipData = new Map();
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
@@ -785,9 +786,10 @@ export default {
           return repoArray[3];
         });
         
-        depDataColorMap = extractedDepData[1]
+        depDataColorMap = extractedDepData[1];
         depBubbleChartCopy.color = [];
         depBubbleChartCopy.legend.data = depRepos;
+        bubbleChartTooltipData = extractedDepData[2];
       }
       
 
@@ -818,16 +820,24 @@ export default {
 
       // custom tooltips for heatmap
       heatMapCopy.tooltip.formatter = (obj) => {
-        // console.log(obj)
         var dataPoint = obj.value;
-        // obj.borderColor = obj.color
-        // obj.marker = ""
-        // console.log(obj)
         var weekTooltipData = heatMapTooltipData.get(dataPoint[0]+"-"+dataPoint[1])
             return '<div class = "tooltip" style="border: 3px solid '+ obj.color+';">'
-                + dataPoint[2] + ' open issues in '+obj.seriesName + '<br>'
-                + 'Start Date：' + weekTooltipData[0] + '<br>'
-                + 'End Date：' + weekTooltipData[1] + '<br>'
+                + '<strong style="font-size: 18px">'+dataPoint[2]+'</strong>' + ' open issues in '+obj.seriesName + '<br><br>'
+                + '<strong> Start Date：</strong>' + weekTooltipData[0] + '<br>'
+                + '<strong> End Date：</strong>' + weekTooltipData[1] + '<br>'
+                + '</div>';          
+      }
+
+      // custom tooltips for bubble chart
+      depBubbleChartCopy.tooltip.formatter = (obj) => {
+        var dataPoint = obj.value;
+            return '<div class = "tooltip" style="border: 3px solid '+ obj.color+';">'
+                + '<strong style="font-size: 21px">' + dataPoint[3].charAt(0).toUpperCase() + dataPoint[3].slice(1) + '</strong>  <br><br>'
+                + '<strong> Dependencies Count：</strong>' + dataPoint[1].toLocaleString() + '<br>'
+                + '<strong> Project Size(KB)</strong>：' + dataPoint[0].toLocaleString() + '<br>'
+                + '<strong> Issues Classification：</strong>' + bubbleChartTooltipData.get(dataPoint[3])[1] + '<br>'
+                + '<strong> Issues Count：</strong>' + bubbleChartTooltipData.get(dataPoint[3])[0] + '<br>'
                 + '</div>';          
       }
 
@@ -859,6 +869,7 @@ export default {
     extractDepData(repoNumber) {
       let jsonObj;
       let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let tooltipData = new Map();
       let colorMap = new Map()
 
       if (repoNumber == 1) {
@@ -875,14 +886,14 @@ export default {
         let repoData = [];
         repoData.push(repoObj.size);
         repoData.push(repoObj.num_components);
-        this.vulnerabilityClassification(repoData, repoObj)
+        this.vulnerabilityClassification(repoData, repoObj, tooltipData)
         extractedDepData.push(repoData);
         colorMap.set(repoObj.name,repoObj.repo_colour)
       }
 
-      return [extractedDepData,colorMap];
+      return [extractedDepData,colorMap, tooltipData];
     },
-    vulnerabilityClassification(repoData,repoObj) {
+    vulnerabilityClassification(repoData,repoObj,tooltipData) {
       let bubbleSizes = [15,30,50,80,110]
       let classes = ["0", "1-50", "51-100", "101-150", "151+"]
       let repoVulnerabilities = repoObj.num_vulnerabilities
@@ -908,9 +919,7 @@ export default {
 
       repoData.push(repoBubbleSize);
       repoData.push(repoObj.name);
-      repoData.push(repoVulnerabilities);
-      repoData.push(repoClass);
-      
+      tooltipData.set(repoObj.name, [repoVulnerabilities,repoClass])
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
@@ -944,7 +953,6 @@ export default {
         weekTooltipData.push(weekObj.end.substring(0,10));
 
         if (weekObj.start.substring(5, 7) === "01" && !xAxisYears.has(weekObj.start.substring(0, 4))) {
-          console.log(weekObj.start.substring(0, 4), xAxisYears)
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
             xAxisYears.add(weekObj.start.substring(0, 4));
@@ -974,7 +982,6 @@ export default {
         extractedTooltipData.set(weekObj.coords.x+"-"+weekObj.coords.y, weekTooltipData)
         extractedHeatMapData.set(weekObj.week, weekData);
       }
-      console.log(xAxis)
       xAxis = xAxis.reverse();
       return [extractedHeatMapData, minVal, maxVal, xAxis, extractedTooltipData];
     },
