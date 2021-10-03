@@ -113,7 +113,7 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap1" style="height: 380px" />
+              <v-chart v-bind:option="heatMap1" style="height: 380px" autoresize/>
             </div>
             <div class="node-link">
               <h3>Node Link Diagram</h3>
@@ -234,7 +234,7 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap2" style="height: 380px" />
+              <v-chart v-bind:option="heatMap2" style="height: 380px" autoresize/>
             </div>
 
             <div class="node-link">
