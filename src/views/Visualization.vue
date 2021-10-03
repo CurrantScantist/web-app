@@ -729,34 +729,6 @@ export default {
             document.getElementById(tagName).append(tagDiv);
       })
     },
-    getColor(size) {
-      let colorSet = [
-        "#1ceca8",
-        "#00DDFF",
-        "#37A2FF",
-        "#FF0087",
-        "#FFBF00",
-        "#ff5100",
-        "#8800ff",
-        "#82173f",
-        "#383838",
-        "#000000",
-        "#bc5090",
-        "#a05195",
-        "#f95d6a",
-        "#003f5c",
-        "#55838a",
-      ];
-      let colorPalette = [];
-      for (let i = 0; i < size; i++) {
-        if (i >= colorSet.length) {
-          colorPalette.push(colorSet[i % colorSet.length]);
-        } else {
-          colorPalette.push(colorSet[i]);
-        }
-      }
-      return colorPalette;
-    },
     balanceHeight(){
       let lengthDifference = this.repo1MetaData.description.length - this.repo2MetaData.description.length
       let paddingString = "ㅤ"
@@ -781,13 +753,6 @@ export default {
         seriesSubObjCopy.name = seriesSubObjCopy.name + key;
         seriesSubObjCopy.data = [value];
         chart.series.push(seriesSubObjCopy);
-      });
-    },
-    assignColor(givenMap, colorPalette) {
-      let colorAllocationIndex = 0;
-      givenMap.forEach((value, key, map) => {
-        value.color = colorPalette[colorAllocationIndex++];
-        map.set(key, value);
       });
     },
     processData(repoNumber) {
@@ -819,14 +784,21 @@ export default {
         });
         
         depDataColorMap = extractedDepData[1]
-        depBubbleChartCopy.color = depDataColorMap.values;
+        depBubbleChartCopy.color = [];
         depBubbleChartCopy.legend.data = depRepos;
       }
       
 
-      this.locColorData.push(
-        this.getColor(this.languageData[repoNumber - 1].size)
-      );
+      if (repoNumber === 1) {
+        this.locColorData.push(
+          this.repo1MetaData.language_colours
+        );
+      } else {
+        this.locColorData.push(
+          this.repo2MetaData.language_colours
+        );
+      }
+      
 
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
@@ -858,6 +830,7 @@ export default {
     },
     setSeriesBubbleChart(chart, map, colorMap) {
       map.forEach((repoArray) => {
+        chart.color.push(colorMap.get(repoArray[3]))
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
@@ -988,7 +961,6 @@ export default {
       let versions = [];
       const languageData = new Map();
       const statsData = new Map();
-
       statsData.set("code", { data: [], color: "#34a853" });
       statsData.set("comment", { data: [], color: "#4285f4" });
       statsData.set("blank", { data: [], color: "#ea4335" });
@@ -1033,7 +1005,6 @@ export default {
             }
           })
       );
-      // console.log(this.contributors[0][1]);
       return;
     },
     parseLocOverTimeData(repoNumber, dataType) {
@@ -1069,6 +1040,4 @@ export default {
   },
 };
 
-// bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
-// bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
 </script>

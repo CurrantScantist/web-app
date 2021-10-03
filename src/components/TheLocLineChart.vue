@@ -24,8 +24,7 @@ export default {
   props: {
     languageData: { type: Object, default: () => {} },
     versions: { type: Array, default: () => [] },
-    colorData: { type: Array, default: () => [] },
-    legendData: { type: Array, default: () => [] },
+    colorData: { type: Object, default: () => {} },
   },
   data() {
     return {};
@@ -38,18 +37,21 @@ export default {
 
       let locByLangCopy = JSON.parse(JSON.stringify(locOptions));
       locByLangCopy.xAxis[0].data = this.versions;
-      locByLangCopy.color = this.colorData;
-      locByLangCopy.legend.data = Array.from(this.languageData.keys()); // add x axis label
+      locByLangCopy.legend.data = [] // add x axis label
+      locByLangCopy.color = []
       this.setSeriesSubObject(locByLangCopy, this.languageData, seriesObj);
       return locByLangCopy;
     },
   },
   methods: {
     setSeriesSubObject(chart, map, objToCopy) {
+      
       map.forEach((value, key) => {
+        chart.legend.data.push(key)
+        chart.color.push(this.colorData[key])
         let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
         seriesSubObjCopy.name = key;
-        seriesSubObjCopy.areaStyle.color = value.color;
+        seriesSubObjCopy.areaStyle.color = this.colorData[key];
         seriesSubObjCopy.data = value.data;
         chart.series.push(seriesSubObjCopy);
       });
