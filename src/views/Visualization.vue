@@ -764,7 +764,8 @@ export default {
 
       let statsData = new Map();
       let heatMapData = new Map();
-      let depDataColorMap = new Map()
+      let depDataColorMap = new Map();
+      let heatMapTooltipData = new Map();
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
@@ -777,6 +778,7 @@ export default {
       heatMapData = extractedHeatMapData[0];
       heatMapCopy.visualMap.min = extractedHeatMapData[1];
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
+      heatMapTooltipData = extractedHeatMapData[4];
 
       if (extractedDepData[0].length > 0){
         let depRepos = extractedDepData[0].map((repoArray) => {
@@ -813,6 +815,21 @@ export default {
         depDataColorMap
       );
       this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj);
+
+      // custom tooltips for heatmap
+      heatMapCopy.tooltip.formatter = (obj) => {
+        // console.log(obj)
+        var dataPoint = obj.value;
+        // obj.borderColor = obj.color
+        // obj.marker = ""
+        // console.log(obj)
+        var weekTooltipData = heatMapTooltipData.get(dataPoint[0]+"-"+dataPoint[1])
+            return '<div class = "tooltip" style="border: 3px solid '+ obj.color+';">'
+                + dataPoint[2] + ' open issues in '+obj.seriesName + '<br>'
+                + 'Start Date：' + weekTooltipData[0] + '<br>'
+                + 'End Date：' + weekTooltipData[1] + '<br>'
+                + '</div>';          
+      }
 
       if (repoNumber == 1) {
         this.initializeNodeLink(nodeLinkCopy1, this.repo1Stats.nodeLink);
@@ -898,9 +915,12 @@ export default {
     extractHeatMapData(repoNumber) {
       let jsonResponse;
       let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
+      let extractedTooltipData = new Map(); // [start date, end date]
+
       let maxVal = 0,
-        minVal = Infinity;
+      minVal = Infinity;
       let xAxis = []; // 19 cols
+      let xAxisYears = new Set();
       let weekCount = 0;
 
       if (repoNumber == 1) {
@@ -912,20 +932,28 @@ export default {
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
         let weekData = [];
+        let weekTooltipData = [];
+        
         weekCount += 1;
 
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
 
-        if (weekObj.start.substring(5, 7) === "01") {
+        weekTooltipData.push(weekObj.start.substring(0,10));
+        weekTooltipData.push(weekObj.end.substring(0,10));
+
+        if (weekObj.start.substring(5, 7) === "01" && !xAxisYears.has(weekObj.start.substring(0, 4))) {
+          console.log(weekObj.start.substring(0, 4), xAxisYears)
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
+            xAxisYears.add(weekObj.start.substring(0, 4));
           } else {
             xAxis[Math.floor(weekCount / 8) - 1] = weekObj.start.substring(
               0,
               4
             );
+             xAxisYears.add(weekObj.start.substring(0, 4));
           }
         }
 
@@ -943,9 +971,12 @@ export default {
           }
         }
 
+        extractedTooltipData.set(weekObj.coords.x+"-"+weekObj.coords.y, weekTooltipData)
         extractedHeatMapData.set(weekObj.week, weekData);
       }
-      return [extractedHeatMapData, minVal, maxVal, xAxis];
+      console.log(xAxis)
+      xAxis = xAxis.reverse();
+      return [extractedHeatMapData, minVal, maxVal, xAxis, extractedTooltipData];
     },
     initializeNodeLink(nodeLink, data) {
       if (data != undefined){
