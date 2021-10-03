@@ -258,25 +258,25 @@
 
 
 .meta-container {
-        background-color: rgba(38, 38, 38, 0.35);
-        padding: 1%;
-        padding-left: 2%;
-        padding-right: 2%;
-        margin-bottom: 1%;
-        border-radius: var(--viz--radius); 
-    }
-    .container-title {
-        padding: 1%;
-        margin-top: 2px;
-        font-size: 158%;
-        font-weight: 800;
-    }
+  background-color: rgba(38, 38, 38, 0.35);
+  padding: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: 1%;
+  border-radius: var(--viz--radius); 
+}
+.container-title {
+  padding: 1%;
+  margin-top: 2px;
+  font-size: 158%;
+  font-weight: 800;
+}
 
-    .tag-grid {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 1%;
-    }
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+}
 
 .page {
   background: #d4e7e2;
@@ -684,9 +684,9 @@ export default {
       } catch (e) {
         console.log(e);
       }
-
       this.processData(2);
-    }
+      this.balanceHeight();
+    } 
   },
   methods: {
     addTags(metaData, tagName){
@@ -732,6 +732,17 @@ export default {
         }
       }
       return colorPalette;
+    },
+    balanceHeight(){
+      let lengthDifference = this.repo1MetaData.description.length - this.repo2MetaData.description.length
+      let paddingString = "ㅤ"
+      if(lengthDifference > 0) {
+        this.repo2MetaData.description = this.repo2MetaData.description + paddingString.repeat(lengthDifference)
+      } else if (lengthDifference < 0){
+        this.repo1MetaData.description = this.repo1MetaData.description + paddingString.repeat( Math.abs(lengthDifference))
+      }
+      console.log(this.repo1MetaData.description.length)
+      console.log(this.repo2MetaData.description.length)
     },
     setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
