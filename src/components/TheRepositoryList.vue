@@ -23,7 +23,10 @@
           <el-table class="table" :data="pagedData" @row-click="handleRowClick">
             <el-table-column width="40px">
               <template #default="scope">
-                <el-checkbox v-model="scope.row.selected"></el-checkbox>
+                <el-checkbox
+                  class="checkbox"
+                  v-model="scope.row.selected"
+                ></el-checkbox>
               </template>
             </el-table-column>
             <el-table-column property="name">
@@ -109,6 +112,10 @@
 
 .table-header {
   color: #5e5e5e;
+}
+
+.checkbox {
+  pointer-events: none;
 }
 </style>
 
