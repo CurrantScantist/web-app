@@ -11,7 +11,7 @@
     "toolbox": {
         "feature": {
             "saveAsImage": {
-                "title": "Save as .png"
+                "title": "Save"
             }
         }
     },

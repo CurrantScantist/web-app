@@ -1,6 +1,13 @@
 {
     "legend": {
     },
+    "toolbox": {
+        "feature": {
+            "saveAsImage": {
+                "title": "Save"
+            }
+        }
+    },
     "tooltip": {
         "trigger": "axis",
         "axisPointer": {
