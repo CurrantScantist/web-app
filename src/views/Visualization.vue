@@ -587,9 +587,10 @@ export default {
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
+        process.env.VUE_APP_API_URL +
+          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
-      this.repo1Stats.dep = response.data.data;
+      this.repo1Stats.dep = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
@@ -660,9 +661,10 @@ export default {
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
-        );
-        this.repo2Stats.dep = response.data.data;
+        process.env.VUE_APP_API_URL +
+          `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+      );
+      this.repo2Stats.dep = response.data.data[0];
       } catch (e) {
         console.log(e);
       }
@@ -797,6 +799,7 @@ export default {
 
       let statsData = new Map();
       let heatMapData = new Map();
+      let depDataColorMap = new Map()
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
@@ -810,9 +813,16 @@ export default {
       heatMapCopy.visualMap.min = extractedHeatMapData[1];
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
 
-      let depRepos = extractedDepData.map((repoArray) => {
-        return repoArray[3];
-      });
+      if (extractedDepData[0].length > 0){
+        let depRepos = extractedDepData[0].map((repoArray) => {
+          return repoArray[3];
+        });
+        
+        depDataColorMap = extractedDepData[1]
+        depBubbleChartCopy.color = depDataColorMap.values;
+        depBubbleChartCopy.legend.data = depRepos;
+      }
+      
 
       this.locColorData.push(
         this.getColor(this.languageData[repoNumber - 1].size)
@@ -822,16 +832,13 @@ export default {
 
       heatMapCopy.xAxis.data = extractedHeatMapData[3];
 
-      depBubbleChartCopy.color = this.getColor(depRepos.length);
-      depBubbleChartCopy.legend.data = depRepos;
-
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
 
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
-        extractedDepData,
-        depBubbleChartCopy.color
+        extractedDepData[0],
+        depDataColorMap
       );
       this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj);
 
@@ -849,20 +856,21 @@ export default {
         this.heatMap2 = heatMapCopy;
       }
     },
-    setSeriesBubbleChart(chart, map, colors) {
-      let colorIndex = 0;
+    setSeriesBubbleChart(chart, map, colorMap) {
       map.forEach((repoArray) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
         seriesSubObjCopy.data = [repoArray];
-        seriesSubObjCopy.areaStyle.color = colors[colorIndex++];
+        seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
         chart.series.push(seriesSubObjCopy);
+        console.log(seriesSubObjCopy.name, seriesSubObjCopy.areaStyle.color)
       });
     },
     extractDepData(repoNumber) {
       let jsonObj;
       let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let colorMap = new Map()
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.dep;
@@ -870,16 +878,22 @@ export default {
         jsonObj = this.repo2Stats.dep;
       }
 
+      if (jsonObj == undefined) {
+        return [extractedDepData,colorMap]
+      }
+
       for (let repoObj of jsonObj) {
         let repoData = [];
         repoData.push(repoObj.size);
-        repoData.push(repoObj.dep_count);
-        repoData.push(Math.sqrt(repoObj.issue_count) * 5);
+        repoData.push(repoObj.num_components);
+        repoData.push(Math.sqrt(repoObj.num_vulnerabilities) * 5);
         repoData.push(repoObj.name);
         extractedDepData.push(repoData);
+        colorMap.set(repoObj.name,repoObj.repo_colour)
+        console.log(Math.sqrt(repoObj.num_vulnerabilities) * 5, repoObj.name)
       }
 
-      return extractedDepData;
+      return [extractedDepData,colorMap];
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
