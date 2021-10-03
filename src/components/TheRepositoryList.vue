@@ -81,8 +81,10 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-
+  z-index: 10;
   border: none;
+
+  box-shadow: 0px 0px 10px 0.25px gray;
   background-color: white;
   border-radius: 3rem;
   padding: 1rem 4rem;
