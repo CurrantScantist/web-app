@@ -599,17 +599,17 @@ export default {
          process.env.VUE_APP_API_URL +
           `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`  
       );
-      this.repo1Stats.heatmap_data = response.data.data;
-      console.log(this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data)
+      this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
     } catch (e) {
       console.log(e);
     }
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751"
+       process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
       );
-      this.repo1Stats.nodeLink = response.data;
+      this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
     } catch (e) {
       console.log(e);
     }
@@ -679,9 +679,10 @@ export default {
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda"
+          process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
         );
-        this.repo2Stats.nodeLink = response.data;
+        this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
       } catch (e) {
         console.log(e);
       }
@@ -933,11 +934,13 @@ export default {
       return [extractedHeatMapData, minVal, maxVal, xAxis];
     },
     initializeNodeLink(nodeLink, data) {
-      let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
-      nodeLinkSubObj.categories = data.categories;
-      nodeLinkSubObj.nodes = data.nodes;
-      nodeLinkSubObj.links = data.links;
-      nodeLink.series.push(nodeLinkSubObj);
+      if (data != undefined){
+        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
+        nodeLinkSubObj.categories = data.categories;
+        nodeLinkSubObj.nodes = data.nodes;
+        nodeLinkSubObj.links = data.links;
+        nodeLink.series.push(nodeLinkSubObj);
+      }
     },
     extractData(repoNumber) {
       let jsonObj;
