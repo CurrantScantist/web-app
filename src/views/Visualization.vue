@@ -20,7 +20,7 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo1MetaData).length"
               :open_issues_count="repo1MetaData.open_issues_count"
-              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown"
+              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown || {}"
             ></the-vulnerabilities-card>
           </div>
 
@@ -758,7 +758,7 @@ export default {
       let lengthDifference =
         this.repo1MetaData.description.length -
         this.repo2MetaData.description.length;
-      let paddingString = "ㅤ";
+      let paddingString = " ";
       if (lengthDifference > 0) {
         this.repo2MetaData.description =
           this.repo2MetaData.description +
