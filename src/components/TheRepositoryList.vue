@@ -1,75 +1,73 @@
 <template>
-  <div class="list-wrapper">
-    <el-input
-      class="search"
-      placeholder="Search for a repository!"
-      v-model="search"
-      clearable
-    />
-    <div class="table-wrapper">
-      <!-- Shown when no data has been loaded in -->
-      <div v-if="pagedData.length == 0">
-        <el-empty description="No Data" :image-size="300"></el-empty>
-      </div>
-      <!-- Otherwise, show this -->
-      <div v-else>
-        <el-table :data="pagedData" @row-click="handleRowClick">
-          <!-- <el-table-column type="selection"> </el-table-column> -->
-          <el-table-column prop="name" label="Repository" sortable>
-          </el-table-column>
-          <el-table-column
-            prop="owner"
-            label="Owner"
-            sortable
-            show-overflow-tooltip
-          >
-          </el-table-column>
-          <!-- Deprecated -->
-          <!-- <el-table-column
-            property="releases"
-            label="Releases"
-            v-slot="scope"
-            show-overflow-tooltip
-          >
-            <el-dropdown @command="setRelease" trigger="click">
-              <span class="el-dropdown-link">
-                {{ scope.row.releases[scope.row.selectedRelease]
-                }}<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item
-                    v-for="(item, releaseIndex) in scope.row.releases"
-                    :key="releaseIndex"
-                    :command="[scope.row.index, releaseIndex]"
-                    >{{ item }}</el-dropdown-item
-                  >
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-          </el-table-column> -->
-          <el-table-column prop="forks" label="Forks" sortable>
-          </el-table-column>
-          <el-table-column prop="stargazers_count" label="Stargazers" sortable>
-          </el-table-column>
-          <el-table-column prop="topics" label="Tags" show-overflow-tooltip>
-          </el-table-column>
-        </el-table>
-      </div>
+  <div>
+    <div v-if="numOfSelected != 0">
+      <el-button class="nav-button" @click="handleNavClick" plain round
+        >Checkout</el-button
+      >
     </div>
-    <el-pagination
-      class="pagination"
-      background
-      layout="prev, pager, next"
-      @current-change="handlePageChange"
-      :page-size="pageSize"
-      :total="totalItems"
-    >
-    </el-pagination>
+    <p>List of repositories</p>
+    <div class="list-wrapper">
+      <el-input
+        class="search"
+        placeholder="Search for a repository!"
+        v-model="search"
+        clearable
+      />
+      <div class="table-wrapper">
+        <!-- Shown when no data has been loaded in -->
+        <div v-if="pagedData.length == 0">
+          <el-empty description="No Data" :image-size="300"></el-empty>
+        </div>
+        <!-- Otherwise, show this -->
+        <div v-else>
+          <el-table class="table" :data="pagedData" @row-click="handleRowClick">
+            <el-table-column width="40px">
+              <template #default="scope">
+                <el-checkbox v-model="scope.row.selected"></el-checkbox>
+              </template>
+            </el-table-column>
+            <el-table-column property="name" label="Repository" sortable> 
+            </el-table-column>
+            <el-table-column
+              property="owner"
+              label="Owner"
+              show-overflow-tooltip
+              sortable
+            >
+            </el-table-column>
+            <el-table-column property="forks" label="Forks" sortable> </el-table-column>
+            <el-table-column property="stargazers_count" label="Stargazers" sortable>
+            </el-table-column>
+            <el-table-column
+              property="topics"
+              label="Tags"
+              show-overflow-tooltip
+              sortable
+            >
+            </el-table-column>
+          </el-table>
+        </div>
+      </div>
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, pager, next"
+        @current-change="handlePageChange"
+        :page-size="pageSize"
+        :total="totalItems"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.nav-button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 .list-wrapper {
   display: flex;
   flex-direction: column;
@@ -81,6 +79,10 @@
   .pagination {
     margin: 0 auto;
   }
+}
+
+.table {
+  border-radius: 10px;
 }
 </style>
 
@@ -101,6 +103,8 @@ export default defineComponent({
       page: 1,
       pageSize: 20,
       totalItems: 0,
+      numOfSelected: 0,
+      selectedRows: [],
     };
   },
   async created() {
@@ -203,11 +207,58 @@ export default defineComponent({
     setPage(newPage) {
       this.page = newPage;
     },
+    handleNavClick() {
+      // console.log(this.selectedRows[1]);
+
+      if (this.selectedRows.length == 2) {
+        this.$router.push({
+          name: "visualize",
+          params: {
+            name1: this.selectedRows[0].name,
+            owner1: this.selectedRows[0].owner,
+            name2: this.selectedRows[1].name,
+            owner2: this.selectedRows[1].owner,
+          },
+        });
+      } else {
+        this.$router.push({
+          name: "visualize",
+          params: {
+            name1: this.selectedRows[0].name,
+            owner1: this.selectedRows[0].owner,
+          },
+        });
+      }
+    },
     handleRowClick(row) {
-      this.$router.push({
-        name: "repository_view",
-        params: { name: row.name, owner: row.owner },
-      });
+      if (this.numOfSelected == 2 && row.selected == false) {
+        this.printMessage(
+          "More than two repositories selected, please deselect one."
+        );
+        return;
+      }
+
+      row.selected = !row.selected;
+
+      if (row.selected == true) {
+        this.selectedRows.push({ name: row.name, owner: row.owner });
+        this.numOfSelected++;
+      } else {
+        for (var i = 0; i < this.selectedRows.length; i++) {
+          if (
+            this.selectedRows[i].name == row.name &&
+            this.selectedRows[i].owner == row.owner
+          ) {
+            this.selectedRows.splice(i, 1);
+          }
+        }
+        this.numOfSelected--;
+      }
+
+      return;
+    },
+    printMessage(message) {
+      this.$message.error(message);
     },
   },
 });

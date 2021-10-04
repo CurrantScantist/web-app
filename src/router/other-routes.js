@@ -1,5 +1,5 @@
 import Landing from "@/views/Landing";
-import OneOneRepoComparison from "@/views/OneOneRepoComparison";
+import Visualization from "@/views/Visualization";
 
 export default [
   {
@@ -11,9 +11,9 @@ export default [
     },
   },
   {
-    path: "/repository_view/:name/:owner",
-    name: "repository_view",
-    component: OneOneRepoComparison,
+    path: "/visualize/:name1&:owner1/:name2?&:owner2?",
+    name: "visualize",
+    component: Visualization,
     props: true,
   },
 ];

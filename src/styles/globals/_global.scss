@@ -1,8 +1,5 @@
 // global styles
-// font import
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&display=swap");
 
-// css
 html {
   box-sizing: border-box;
 }
@@ -13,8 +10,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: inherit;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
 }
 
 :root {
@@ -29,4 +24,12 @@ body {
 body {
   margin: 0;
   position: relative;
+}
+
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 13px;
+  padding: 10px;
+  font-weight: 500;
+  color:white;
 }
