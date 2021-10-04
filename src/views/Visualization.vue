@@ -1075,7 +1075,7 @@ export default {
 
       for (let versionObj of jsonObj) {
         versions.push(versionObj.tag_name);
-        for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
+        for (const [langKey, langObj] of Object.entries(versionObj.LOC_limited)) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
               value.data.push(langObj[key]);
