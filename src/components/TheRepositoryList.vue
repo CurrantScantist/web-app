@@ -26,16 +26,22 @@
                 <el-checkbox v-model="scope.row.selected"></el-checkbox>
               </template>
             </el-table-column>
-            <el-table-column property="name" label="Repository">
+            <el-table-column property="name" label="Repository" sortable>
             </el-table-column>
             <el-table-column
               property="owner"
               label="Owner"
               show-overflow-tooltip
+              sortable
             >
             </el-table-column>
-            <el-table-column property="forks" label="Forks"> </el-table-column>
-            <el-table-column property="stargazers_count" label="Stargazers">
+            <el-table-column property="forks" label="Forks" sortable>
+            </el-table-column>
+            <el-table-column
+              property="stargazers_count"
+              label="Stargazers"
+              sortable
+            >
             </el-table-column>
             <el-table-column
               property="topics"
@@ -124,8 +130,14 @@ export default defineComponent({
       this.setPage(1);
 
       // Filter's data
-      return this.data.filter((items) =>
-        items.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.data.filter(
+        (items) =>
+          items.name.toLowerCase().includes(this.search.toLowerCase()) || // Search on row name
+          items.owner.toLowerCase().includes(this.search.toLowerCase()) || // Search on row owner
+          items.topics.some((element) => {
+            // Search on row tags
+            return element.toLowerCase().includes(this.search.toLowerCase());
+          })
       );
     },
     pagedData() {
@@ -135,6 +147,7 @@ export default defineComponent({
         this.pageSize * this.page - this.pageSize,
         this.pageSize * this.page
       );
+      //   }
     },
   },
   watch: {
@@ -149,6 +162,26 @@ export default defineComponent({
      * @param {object} data - The data object to be parsed
      */
     parseData(data) {
+      // Object.keys(data).forEach((repoItem) => {
+      //   var repoTopics = data[repoItem].topics;
+
+      //   Object.keys(repoTopics).forEach((topic) => {
+      //     var index = this.tagFilters.findIndex(
+      //       (x) => x.text == repoTopics[topic]
+      //     );
+
+      //     if (index == -1) {
+      //       this.tagFilters.push({
+      //         text: repoTopics[topic],
+      //         value: repoTopics[topic],
+      //       });
+      //     }
+      //   });
+      // });
+
+      // this.tagFiltersProcessed = true;
+      // console.log(this.tagFilters);
+
       return data.map((item) => ({
         ...item,
         selected: false,
