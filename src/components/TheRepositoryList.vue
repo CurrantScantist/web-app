@@ -1,9 +1,9 @@
 <template>
   <div>
     <div v-if="numOfSelected != 0">
-      <el-button class="nav-button" @click="handleNavClick" plain round
-        >Checkout</el-button
-      >
+      <button class="nav-button" @click="handleNavClick">
+        <h3>{{ numOfSelected > 1 ? "Compare" : "Checkout" }}</h3>
+      </button>
     </div>
     <p>List of repositories</p>
     <div class="list-wrapper">
@@ -11,6 +11,7 @@
         class="search"
         placeholder="Search for a repository!"
         v-model="search"
+        prefix-icon="el-icon-search"
         clearable
       />
       <div class="table-wrapper">
@@ -20,34 +21,50 @@
         </div>
         <!-- Otherwise, show this -->
         <div v-else>
-          <el-table class="table" :data="pagedData" @row-click="handleRowClick">
+          <el-table
+            class="table"
+            :data="pagedData"
+            @row-click="handleRowClick"
+            :row-style="rowStyle"
+          >
             <el-table-column width="40px">
               <template #default="scope">
-                <el-checkbox v-model="scope.row.selected"></el-checkbox>
+                <el-checkbox
+                  class="checkbox"
+                  v-model="scope.row.selected"
+                ></el-checkbox>
               </template>
             </el-table-column>
-            <el-table-column property="name" label="Repository" sortable>
+            <el-table-column property="name" sortable>
+              <template #header>
+                <span class="table-header">Repository</span>
+              </template>
             </el-table-column>
-            <el-table-column
-              property="owner"
-              label="Owner"
-              show-overflow-tooltip
-              sortable
-            >
+            <el-table-column property="owner" sortable show-overflow-tooltip>
+              <template #header>
+                <span class="table-header">Owner</span>
+              </template>
             </el-table-column>
-            <el-table-column property="forks" label="Forks" sortable>
+            <el-table-column property="forks" sortable>
+              <template #header>
+                <span class="table-header">Forks</span>
+              </template>
+              <template #default="scope">
+                <span>{{ abbrNum(scope.row.forks, 1) }}</span>
+              </template>
             </el-table-column>
-            <el-table-column
-              property="stargazers_count"
-              label="Stargazers"
-              sortable
-            >
+            <el-table-column property="stargazers_count" sortable>
+              <template #header>
+                <span class="table-header">Stargazers</span>
+              </template>
+              <template #default="scope">
+                <span>{{ abbrNum(scope.row.stargazers_count, 1) }}</span>
+              </template>
             </el-table-column>
-            <el-table-column
-              property="topics"
-              label="Tags"
-              show-overflow-tooltip
-            >
+            <el-table-column property="topics" show-overflow-tooltip>
+              <template #header>
+                <span class="table-header">Tags</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -70,6 +87,18 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+  z-index: 10;
+  border: none;
+
+  box-shadow: 0px 0px 10px 0.25px gray;
+  background-color: white;
+  border-radius: 3rem;
+  padding: 1rem 4rem;
+}
+
+.nav-button:hover {
+  cursor: pointer;
+  background-color: #f5f5f5;
 }
 
 .list-wrapper {
@@ -87,6 +116,14 @@
 
 .table {
   border-radius: 10px;
+}
+
+.table-header {
+  color: #5e5e5e;
+}
+
+.checkbox {
+  pointer-events: none;
 }
 </style>
 
@@ -127,7 +164,6 @@ export default defineComponent({
         this.setTotalItems(this.data.length);
         return this.data;
       }
-      this.setPage(1);
 
       // Filter's data
       return this.data.filter(
@@ -148,11 +184,6 @@ export default defineComponent({
         this.pageSize * this.page
       );
       //   }
-    },
-  },
-  watch: {
-    filteredData() {
-      this.page = 1;
     },
   },
   methods: {
@@ -188,16 +219,6 @@ export default defineComponent({
       }));
     },
     /**
-     * Called on dropdown selection.
-     *
-     * @param {object} indices - The index of the row being changed and index of the selected release
-     * @deprecated - Release information not displayed within this component
-     */
-    setRelease(indices) {
-      console.log(typeof indices);
-      this.data[indices[0]].selectedRelease = indices[1];
-    },
-    /**
      * Called on pagination button click.
      *
      * @param {number} newPage - The new page number
@@ -207,9 +228,6 @@ export default defineComponent({
     },
     setTotalItems(newTotal) {
       this.totalItems = newTotal;
-    },
-    setPage(newPage) {
-      this.page = newPage;
     },
     handleNavClick() {
       // console.log(this.selectedRows[1]);
@@ -263,6 +281,54 @@ export default defineComponent({
     },
     printMessage(message) {
       this.$message.error(message);
+    },
+    /**
+     * Converts a number to a reader friendly format e.g. 1234 to 1.2K
+     * @see {@link https://stackoverflow.com/questions/2685911/is-there-a-way-to-round-numbers-into-a-reader-friendly-format-e-g-1-1k}
+     *
+     * @param {number} number - The number to be converted.
+     * @param {number} decPlaces - The number of decimal places to round to.
+     *
+     * @return {string} A number in a reader friendly format.
+     */
+    abbrNum(number, decPlaces) {
+      // 2 decimal places => 100, 3 => 1000, etc
+      decPlaces = Math.pow(10, decPlaces);
+
+      // Enumerate number abbreviations
+      var abbrev = ["K", "M", "B", "T"];
+
+      // Go through the array backwards, so we do the largest first
+      for (var i = abbrev.length - 1; i >= 0; i--) {
+        // Convert array index to "1000", "1000000", etc
+        var size = Math.pow(10, (i + 1) * 3);
+
+        // If the number is bigger or equal do the abbreviation
+        if (size <= number) {
+          // Here, we multiply by decPlaces, round, and then divide by decPlaces.
+          // This gives us nice rounding to a particular decimal place.
+          number = Math.round((number * decPlaces) / size) / decPlaces;
+
+          // Handle special case where we round up to the next abbreviation
+          if (number == 1000 && i < abbrev.length - 1) {
+            number = 1;
+            i++;
+          }
+
+          // Add the letter for the abbreviation
+          number += abbrev[i];
+
+          // We are done... stop
+          break;
+        }
+      }
+
+      return number;
+    },
+    rowStyle() {
+      return {
+        cursor: "pointer",
+      };
     },
   },
 });
