@@ -32,7 +32,7 @@
             </el-table-column>
             <el-table-column property="name" sortable>
               <template #header>
-                <span class="table-header">Name</span>
+                <span class="table-header">Repository</span>
               </template>
             </el-table-column>
             <el-table-column property="owner" sortable show-overflow-tooltip>
