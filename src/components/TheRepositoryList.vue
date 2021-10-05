@@ -21,7 +21,12 @@
         </div>
         <!-- Otherwise, show this -->
         <div v-else>
-          <el-table class="table" :data="pagedData" @row-click="handleRowClick">
+          <el-table
+            class="table"
+            :data="pagedData"
+            @row-click="handleRowClick"
+            :row-style="rowStyle"
+          >
             <el-table-column width="40px">
               <template #default="scope">
                 <el-checkbox
@@ -319,6 +324,11 @@ export default defineComponent({
       }
 
       return number;
+    },
+    rowStyle() {
+      return {
+        cursor: "pointer",
+      };
     },
   },
 });
