@@ -4,23 +4,58 @@
     <div class="vulnerability-grid">
       <div class="vulnerability-grid-item vulnerabilityTheme critical">
         <div class="stat-name">Critical:</div>
-        <div>{{ (vulnerability_breakdown.critical !== undefined ? vulnerability_breakdown.critical : "N/A").toLocaleString() }}</div>
+        <div>
+          {{
+            (vulnerability_breakdown.critical !== undefined
+              ? vulnerability_breakdown.critical
+              : "N/A"
+            ).toLocaleString()
+          }}
+        </div>
       </div>
       <div class="vulnerability-grid-item vulnerabilityTheme high">
         <div class="stat-name">High:</div>
-        <div>{{ (vulnerability_breakdown.high !== undefined ? vulnerability_breakdown.high : "N/A").toLocaleString() }}</div>
+        <div>
+          {{
+            (vulnerability_breakdown.high !== undefined
+              ? vulnerability_breakdown.high
+              : "N/A"
+            ).toLocaleString()
+          }}
+        </div>
       </div>
       <div class="vulnerability-grid-item vulnerabilityTheme medium">
         <div class="stat-name">Medium:</div>
-        <div>{{ (vulnerability_breakdown.median !== undefined ? vulnerability_breakdown.median : "N/A").toLocaleString() }}</div>
+        <div>
+          {{
+            (vulnerability_breakdown.median !== undefined
+              ? vulnerability_breakdown.median
+              : "N/A"
+            ).toLocaleString()
+          }}
+        </div>
       </div>
       <div class="vulnerability-grid-item vulnerabilityTheme low">
         <div class="stat-name">Low:</div>
-        <div>{{ (vulnerability_breakdown.low !== undefined ? vulnerability_breakdown.low : "N/A").toLocaleString() }}</div>
+        <div>
+          {{
+            (vulnerability_breakdown.low !== undefined
+              ? vulnerability_breakdown.low
+              : "N/A"
+            ).toLocaleString()
+          }}
+        </div>
       </div>
       <div class="vulnerability-grid-item vulnerabilityTheme unknown">
         <div class="stat-name">Unknown:</div>
-        <div>{{ (vulnerability_breakdown.none !== undefined ? vulnerability_breakdown.none : "N/A").toLocaleString() }}</div>
+        <div>
+          {{
+            (vulnerability_breakdown.none !== undefined
+              ? vulnerability_breakdown.none
+              : "N/A"
+            ).toLocaleString()
+          }}
+        </div>
       </div>
     </div>
   </div>
@@ -112,7 +147,7 @@
 export default {
   props: {
     open_issues_count: { type: Number },
-    vulnerability_breakdown: { type: Object, default: () => {}},
+    vulnerability_breakdown: { type: Object, default: () => {} },
   },
 };
 </script>
