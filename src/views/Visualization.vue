@@ -109,7 +109,7 @@
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
-                v-if="repo1Stats.dep != null"
+                v-if="repo1Stats.dep"
                 v-bind:option="bubblePlot1"
                 style="height: 500px"
                 :loading="bubblePlot1Loading"
@@ -182,7 +182,7 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo2MetaData).length"
               :open_issues_count="repo2MetaData.open_issues_count"
-              :vulnerability_breakdown = "repo2MetaData.vulnerability_breakdown"
+              :vulnerability_breakdown = "repo2MetaData.vulnerability_breakdown || {}"
             ></the-vulnerabilities-card>
           </div>
 
@@ -267,7 +267,7 @@
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
-                v-if="repo2Stats.dep != null"
+                v-if="repo2Stats.dep"
                 v-bind:option="bubblePlot2"
                 style="height: 500px"
                 :loading="bubblePlot2Loading"
@@ -1155,7 +1155,7 @@ export default {
         jsonObj = this.repo2Stats.dep;
       }
 
-      if (jsonObj == undefined) {
+      if (!jsonObj) {
         return [extractedDepData, colorMap];
       }
 
