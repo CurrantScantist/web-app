@@ -42,7 +42,6 @@
               property="topics"
               label="Tags"
               show-overflow-tooltip
-              sortable
             >
             </el-table-column>
           </el-table>
