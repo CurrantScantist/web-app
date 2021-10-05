@@ -29,6 +29,10 @@
         },
         "axisLine": {
             "show": false
+        },
+        "axisLabel": {
+            "fontSize": 11,
+            "fontWeight": "bold"
         }
     },
     "yAxis": {

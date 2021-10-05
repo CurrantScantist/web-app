@@ -20,6 +20,7 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo1MetaData).length"
               :open_issues_count="repo1MetaData.open_issues_count"
+              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown || {}"
             ></the-vulnerabilities-card>
           </div>
 
@@ -46,6 +47,7 @@
               :num_tags="repo1MetaData.num_tags"
               :latest_tag="repo1MetaData.latest_tag"
               :subscriber_count="repo1MetaData.subscribers_count"
+              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown"
             ></the-metadata-card>
           </div>
 
@@ -157,6 +159,7 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo2MetaData).length"
               :open_issues_count="repo2MetaData.open_issues_count"
+              :vulnerability_breakdown = "repo2MetaData.vulnerability_breakdown"
             ></the-vulnerabilities-card>
           </div>
 
@@ -755,7 +758,7 @@ export default {
       let lengthDifference =
         this.repo1MetaData.description.length -
         this.repo2MetaData.description.length;
-      let paddingString = "ㅤ";
+      let paddingString = " ";
       if (lengthDifference > 0) {
         this.repo2MetaData.description =
           this.repo2MetaData.description +
@@ -1075,7 +1078,7 @@ export default {
 
       for (let versionObj of jsonObj) {
         versions.push(versionObj.tag_name);
-        for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
+        for (const [langKey, langObj] of Object.entries(versionObj.LOC_limited)) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
               value.data.push(langObj[key]);
