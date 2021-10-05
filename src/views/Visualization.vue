@@ -55,84 +55,107 @@
             class="viz-grid"
             v-bind:class="{ 'single-repo': !name2, 'multi-repo': name2 }"
           >
-            <div
-              class="simple-visualisation1"
-              v-if="contributors[0].length != 0"
-            >
+            <div class="simple-visualisation1">
+              <h3>Contributors</h3>
+              <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
+                v-if="contributors[0][0] != null"
                 :pieData="contributors[0][0]"
+                :isLoading="contributorsLoading[0]"
                 hoverHeading="Contributor"
               >
-                <template v-slot:heading>Contributors</template>
-                <template v-slot:subheading>last 30 days</template>
               </the-contributor-pie-chart>
+              <el-empty v-else description="No data"></el-empty>
             </div>
-            <div
-              class="simple-visualisation2"
-              v-if="contributors[0].length != 0"
-            >
+            <div class="simple-visualisation2">
+              <h3>Contributors</h3>
+              <h6>(all time)</h6>
               <the-contributor-pie-chart
+                v-if="contributors[0][1] != null"
                 :pieData="contributors[0][1]"
+                :isLoading="contributorsLoading[0]"
                 hoverHeading="Contributor"
               >
-                <template v-slot:heading>Contributors</template>
-                <template v-slot:subheading>all time</template>
               </the-contributor-pie-chart>
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div class="wide-visualisation1">
-              <the-loc-line-chart
-                :languageData="languageData[0]"
-                :versions="versionData[0]"
-                :colorData="locColorData[0]"
-              >
-                <template v-slot:title>Lines of Code by language</template>
-                <template v-slot:subtitle>(over versions)</template>
-              </the-loc-line-chart>
+              <h3>Lines of Code by language</h3>
+              <h6>(over versions)</h6>
+              <v-chart
+                v-if="repo1Stats.loc != null"
+                v-bind:option="locByLang1"
+                style="height: 500px"
+                :loading="locByLang1Loading"
+                autoresize
+              />
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
               <v-chart
+                v-if="repo1Stats.loc != null"
                 v-bind:option="locType1"
                 style="height: 500px"
+                :loading="locType1Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
+                v-if="repo1Stats.dep != null"
                 v-bind:option="bubblePlot1"
                 style="height: 500px"
+                :loading="bubblePlot1Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div
               class="wide-visualisation4"
               v-if="Object.keys(locOverTimeData[0]).length != 0"
             >
-              <the-multi-line-chart :chartData="locOverTimeData[0]">
-                <template v-slot:title>Lines of Code</template>
-                <template v-slot:subtitle>over time</template>
+              <h3>Lines of Code</h3>
+              <h6>(over time)</h6>
+              <the-multi-line-chart
+                v-if="locOverTimeData[0] != null"
+                :chartData="locOverTimeData[0]"
+                :isLoading="locOverTimeLoading[0]"
+              >
               </the-multi-line-chart>
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
               <v-chart
+                v-if="repo1Stats.heatmap_data != null"
                 v-bind:option="heatMap1"
                 style="height: 380px"
+                :loading="heatMap1Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div class="node-link">
               <h3>Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
-                  <v-chart v-bind:option="nodeLink1" style="height: 1100px" />
+                  <v-chart
+                    v-if="repo1Stats.nodeLink != null"
+                    v-bind:option="nodeLink1"
+                    style="height: 1100px"
+                    :loading="nodeLink1Loading"
+                    autoresize
+                  />
+                  <el-empty v-else description="No data"></el-empty>
                 </div>
               </div>
             </div>
@@ -189,78 +212,94 @@
           </div>
 
           <div class="viz-grid multi-repo">
-            <div
-              class="simple-visualisation2"
-              v-if="contributors[1].length != 0"
-            >
+            <div class="simple-visualisation2">
+              <h3>Contributors</h3>
+              <h6>(all time)</h6>
               <the-contributor-pie-chart
-                :pieData="contributors[1][0]"
-                hoverHeading="Contributor"
-              >
-                <template v-slot:heading>Contributors</template>
-                <template v-slot:subheading>all time</template>
-              </the-contributor-pie-chart>
-            </div>
-            <div
-              class="simple-visualisation1"
-              v-if="contributors[1].length != 0"
-            >
-              <the-contributor-pie-chart
+                v-if="contributors[1][1] != null"
                 :pieData="contributors[1][1]"
+                :isLoading="contributorsLoading[1]"
                 hoverHeading="Contributor"
               >
-                <template v-slot:heading>Contributors</template>
-                <template v-slot:subheading>last 30 days</template>
               </the-contributor-pie-chart>
+              <el-empty v-else description="No data"></el-empty>
+            </div>
+            <div class="simple-visualisation1">
+              <h3>Contributors</h3>
+              <h6>(last 30 days)</h6>
+              <the-contributor-pie-chart
+                v-if="contributors[1][0] != null"
+                :pieData="contributors[1][0]"
+                :isLoading="contributorsLoading[1]"
+                hoverHeading="Contributor"
+              >
+              </the-contributor-pie-chart>
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="wide-visualisation1">
-              <the-loc-line-chart
-                :languageData="languageData[1]"
-                :versions="versionData[1]"
-                :colorData="locColorData[1]"
-              >
-                <template v-slot:title>Lines of Code by language</template>
-                <template v-slot:subtitle>(over versions)</template>
-              </the-loc-line-chart>
+              <h3>Lines of Code by language</h3>
+              <h6>(over versions)</h6>
+              <v-chart
+                v-if="repo2Stats.loc != null"
+                v-bind:option="locByLang2"
+                style="height: 500px"
+                :loading="locByLang2Loading"
+                autoresize
+              />
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="wide-visualisation2">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
               <v-chart
+                v-if="repo2Stats.loc != null"
                 v-bind:option="locType2"
                 style="height: 500px"
+                :loading="locType2Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
+                v-if="repo2Stats.dep != null"
                 v-bind:option="bubblePlot2"
                 style="height: 500px"
+                :loading="bubblePlot2Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div
               class="wide-visualisation4"
               v-if="Object.keys(locOverTimeData[1]).length != 0"
             >
-              <the-multi-line-chart :chartData="locOverTimeData[1]">
-                <template v-slot:title>Lines of Code</template>
-                <template v-slot:subtitle>over time</template>
+              <h3>Lines of Code</h3>
+              <h6>(over time)</h6>
+              <the-multi-line-chart
+                v-if="locOverTimeData[1] != null"
+                :chartData="locOverTimeData[1]"
+                :isLoading="locOverTimeLoading[1]"
+              >
               </the-multi-line-chart>
+              <el-empty v-else description="No data"></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
               <v-chart
+                v-if="repo2Stats.heatmap_data != null"
                 v-bind:option="heatMap2"
                 style="height: 380px"
+                :loading="heatMap2Loading"
                 autoresize
               />
+              <el-empty v-else description="No data"></el-empty>
             </div>
 
             <div class="node-link">
@@ -268,7 +307,14 @@
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
-                  <v-chart v-bind:option="nodeLink2" style="height: 1100px" />
+                  <v-chart
+                    v-if="repo2Stats.nodeLink != null"
+                    v-bind:option="nodeLink2"
+                    style="height: 1100px"
+                    :loading="nodeLink2Loading"
+                    autoresize
+                  />
+                  <el-empty v-else description="No data"></el-empty>
                 </div>
               </div>
             </div>
@@ -525,12 +571,14 @@
 
 <script>
 // imports for json visualisations containing all the design elements representing the channel of visualisations
+import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
 import depBubbleChart from "@/visualisations/DependencyIssuesSizeBubbleChart.json";
 import nodeLink from "@/visualisations/NodeLinkDiagram.json";
 import heatMap from "@/visualisations/HeatMapDiagram.json";
 
 // imports for series sub objects for different visualisations representing the mark of visualisations
+import locByLangSeriesObj from "@/visualisations/SeriesSubObjLangLOC.json";
 import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json";
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
@@ -543,7 +591,6 @@ import TheMetadataCard from "@/components/TheMetadataCard";
 // import TheTagsCard from "@/components/TheTagsCard";
 import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
-import TheLocLineChart from "@/components/TheLocLineChart";
 import TheMultiLineChart from "@/components/TheMultiLineChart";
 
 export default {
@@ -558,7 +605,6 @@ export default {
     VChart,
     TheMetadataCard,
     TheContributorPieChart,
-    TheLocLineChart,
     TheMultiLineChart,
     TheVulnerabilitiesCard,
     // TheTagsCard,
@@ -567,24 +613,37 @@ export default {
     return {
       repo1MetaData: {},
       repo2MetaData: {},
-      repo1Stats: {},
-      repo2Stats: {},
+      repo1Stats: { loc: {}, nodeLink: {}, dep: {}, heatMap: {} },
+      repo2Stats: { loc: {}, nodeLink: {}, dep: {}, heatMap: {} },
       locType1: {},
+      locType1Loading: true,
       locType2: {},
+      locType2Loading: true,
+      locByLang1: {},
+      locByLang1Loading: true,
+      locByLang2: {},
+      locByLang2Loading: true,
       bubblePlot1: {},
+      bubblePlot1Loading: true,
       bubblePlot2: {},
+      bubblePlot2Loading: true,
       heatMap1: {},
+      heatMap1Loading: true,
       heatMap2: {},
+      heatMap2Loading: true,
       nodeLink1: {},
+      nodeLink1Loading: true,
       nodeLink2: {},
+      nodeLink2Loading: true,
       contributors: [[], []],
+      contributorsLoading: [true, true],
       versionData: [],
       languageData: [],
-      locColorData: [],
       locOverTimeData: {
         0: {},
         1: {},
       },
+      locOverTimeLoading: [true, true],
     };
   },
   async created() {
@@ -599,6 +658,19 @@ export default {
       console.log(e);
     }
 
+    if (this.name2) {
+      try {
+        const response = await axios.get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        );
+        this.repo2MetaData = response.data.data[0];
+        this.addTags(this.repo2MetaData, "tags2");
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     try {
       const response = await axios.get(
         process.env.VUE_APP_API_URL +
@@ -608,6 +680,7 @@ export default {
       this.parseLocOverTimeData(1, "LocOverTime");
     } catch (e) {
       console.log(e);
+      this.repo1Stats.loc = null;
     }
 
     try {
@@ -618,6 +691,7 @@ export default {
       this.repo1Stats.dep = response.data.data[0];
     } catch (e) {
       console.log(e);
+      this.repo1Stats.dep = null;
     }
 
     try {
@@ -628,6 +702,7 @@ export default {
       this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
     } catch (e) {
       console.log(e);
+      this.repo1Stats.heatmap_data = null;
     }
 
     try {
@@ -638,6 +713,7 @@ export default {
       this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
     } catch (e) {
       console.log(e);
+      this.repo1Stats.nodeLink = null;
     }
 
     try {
@@ -657,22 +733,13 @@ export default {
       );
     } catch (e) {
       console.log(e);
+      this.contributors[0][0] = null;
+      this.contributors[0][1] = null;
     }
 
     this.processData(1);
 
     if (this.name2) {
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2MetaData = response.data.data[0];
-        this.addTags(this.repo2MetaData, "tags2");
-      } catch (e) {
-        console.log(e);
-      }
-
       try {
         const response = await axios.get(
           process.env.VUE_APP_API_URL +
@@ -682,6 +749,7 @@ export default {
         this.parseLocOverTimeData(2, "LocOverTime");
       } catch (e) {
         console.log(e);
+        this.repo2Stats.loc = null;
       }
 
       try {
@@ -692,6 +760,7 @@ export default {
         this.repo2Stats.dep = response.data.data[0];
       } catch (e) {
         console.log(e);
+        this.repo2Stats.dep = null;
       }
 
       try {
@@ -702,6 +771,7 @@ export default {
         this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
       } catch (e) {
         console.log(e);
+        this.repo2Stats.heatmap_data = null;
       }
 
       try {
@@ -712,6 +782,7 @@ export default {
         this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
       } catch (e) {
         console.log(e);
+        this.repo2Stats.nodeLink = null;
       }
 
       try {
@@ -732,6 +803,8 @@ export default {
         );
       } catch (e) {
         console.log(e);
+        this.contributors[1][0] = null;
+        this.contributors[1][1] = null;
       }
       this.processData(2);
       this.balanceHeight();
@@ -753,6 +826,139 @@ export default {
         tagDiv.style.justifyContent = "center";
         document.getElementById(tagName).append(tagDiv);
       });
+    },
+    async getMetaData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/{name_owner}?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          if (repoNumber == 1) {
+            this.repo1MetaData = response.data.data[0];
+            this.addTags(this.repo1MetaData, "tags1");
+          } else {
+            this.repo2MetaData = response.data.data[0];
+            this.addTags(this.repo2MetaData, "tags2");
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    async getContributionData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/contribution/{name_owner}?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          this.parseContributorData(
+            response.data.data[0].commits_per_author,
+            repoNumber,
+            "last_30_days"
+          );
+          this.parseContributorData(
+            response.data.data[0].commits_per_author,
+            repoNumber,
+            "all_time"
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+          this.contributors[repoNumber - 1] = null;
+        });
+    },
+    async getLOCData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/release/{name_owner}?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          if (repoNumber == 1) {
+            this.repo1Stats.loc = response.data.data[0];
+            this.parseLocOverTimeData(repoNumber, "LocOverTime");
+          } else {
+            this.repo2Stats.loc = response.data.data[0];
+            this.parseLocOverTimeData(repoNumber, "LocOverTime");
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          if (repoNumber == 1) {
+            this.repo1Stats.loc = null;
+          } else {
+            this.repo2Stats.loc = null;
+          }
+          this.locOverTimeData[repoNumber - 1] = null;
+        });
+    },
+    async getDependencyData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/similar/{name_owner}?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          if (repoNumber == 1) {
+            this.repo1Stats.dep = response.data.data[0];
+          } else {
+            this.repo2Stats.dep = response.data.data[0];
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          if (repoNumber == 1) {
+            this.repo1Stats.dep = null;
+          } else {
+            this.repo2Stats.dep = null;
+          }
+        });
+    },
+    async getHeatMapData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/heatmap/{name_owner}?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          if (repoNumber == 1) {
+            this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
+          } else {
+            this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          if (repoNumber == 1) {
+            this.repo1Stats.heatmap_data = null;
+          } else {
+            this.repo2Stats.heatmap_data = null;
+          }
+        });
+    },
+    async getNodeLinkData(name, owner, repoNumber) {
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${name}&owner=${owner}`
+        )
+        .then((response) => {
+          if (repoNumber == 1) {
+            this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
+          } else {
+            this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          if (repoNumber == 1) {
+            this.repo1Stats.nodeLink = null;
+          } else {
+            this.repo2Stats.nodeLink = null;
+          }
+        });
     },
     balanceHeight() {
       let lengthDifference =
@@ -778,6 +984,17 @@ export default {
         chart.series.push(seriesSubObjCopy);
       });
     },
+    setSeriesLocByLang(chart, map, colorData, objToCopy) {
+      map.forEach((value, key) => {
+        chart.legend.data.push(key);
+        chart.color.push(colorData[key]);
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
+        seriesSubObjCopy.name = key;
+        seriesSubObjCopy.areaStyle.color = colorData[key];
+        seriesSubObjCopy.data = value.data;
+        chart.series.push(seriesSubObjCopy);
+      });
+    },
     setSeriesHeatMap(chart, map, subObj) {
       map.forEach((value, key) => {
         let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj));
@@ -788,6 +1005,7 @@ export default {
     },
     processData(repoNumber) {
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
+      let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
       let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink));
       let nodeLinkCopy2 = JSON.parse(JSON.stringify(nodeLink));
@@ -816,25 +1034,31 @@ export default {
         let depRepos = extractedDepData[0].map((repoArray) => {
           return repoArray[3];
         });
-
         depDataColorMap = extractedDepData[1];
         depBubbleChartCopy.color = [];
         depBubbleChartCopy.legend.data = depRepos;
         bubbleChartTooltipData = extractedDepData[2];
       }
 
-      if (repoNumber === 1) {
-        this.locColorData.push(this.repo1MetaData.language_colours);
-      } else {
-        this.locColorData.push(this.repo2MetaData.language_colours);
-      }
+      locByLangCopy.color = [];
 
+      locByLangCopy.xAxis[0].data = this.versionData[repoNumber - 1];
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
       heatMapCopy.xAxis.data = extractedHeatMapData[3];
 
+      locByLangCopy.legend.data = Array.from(
+        this.languageData[repoNumber - 1].keys()
+      );
+
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
 
+      this.setSeriesLocByLang(
+        locByLangCopy,
+        this.languageData[repoNumber - 1],
+        this.repo1MetaData.language_colours,
+        locByLangSeriesObj
+      );
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
@@ -899,15 +1123,27 @@ export default {
       if (repoNumber == 1) {
         this.initializeNodeLink(nodeLinkCopy1, this.repo1Stats.nodeLink);
         this.locType1 = locByTypeCopy;
+        this.locType1Loading = false;
+        this.locByLang1 = locByLangCopy;
+        this.locByLang1Loading = false;
         this.bubblePlot1 = depBubbleChartCopy;
+        this.bubblePlot1Loading = false;
         this.nodeLink1 = nodeLinkCopy1;
+        this.nodeLink1Loading = false;
         this.heatMap1 = heatMapCopy;
+        this.heatMap1Loading = false;
       } else if (repoNumber == 2) {
         this.initializeNodeLink(nodeLinkCopy2, this.repo2Stats.nodeLink);
         this.locType2 = locByTypeCopy;
+        this.locType2Loading = false;
+        this.locByLang2 = locByLangCopy;
+        this.locByLang2Loading = false;
         this.bubblePlot2 = depBubbleChartCopy;
+        this.bubblePlot2Loading = false;
         this.nodeLink2 = nodeLinkCopy2;
+        this.nodeLink2Loading = false;
         this.heatMap2 = heatMapCopy;
+        this.heatMap2Loading = false;
       }
     },
     setSeriesBubbleChart(chart, map, colorMap) {
@@ -1110,6 +1346,19 @@ export default {
             }
           })
       );
+
+      if (
+        this.contributors[repoNumber - 1][
+          this.contributors[repoNumber - 1].length - 1
+        ] == 0
+      ) {
+        this.contributors[repoNumber - 1][
+          this.contributors[repoNumber - 1].length - 1
+        ] = null;
+      }
+
+      console.log(this.contributors);
+      this.contributorsLoading[repoNumber - 1] = false;
       return;
     },
     parseLocOverTimeData(repoNumber, dataType) {
@@ -1140,6 +1389,7 @@ export default {
 
         this.locOverTimeData[repoNumber - 1][dataType].xData.push(date);
         this.locOverTimeData[repoNumber - 1][dataType].yData.push(loc);
+        this.locOverTimeLoading[repoNumber - 1] = false;
       });
     },
   },
