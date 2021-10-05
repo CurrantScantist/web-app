@@ -5,6 +5,7 @@
         <h3>{{ numOfSelected > 1 ? "Compare" : "Checkout" }}</h3>
       </button>
     </div>
+    <p>List of repositories</p>
     <div class="list-wrapper">
       <el-input
         class="search"
@@ -29,17 +30,17 @@
                 ></el-checkbox>
               </template>
             </el-table-column>
-            <el-table-column property="name">
+            <el-table-column property="name" sortable>
               <template #header>
                 <span class="table-header">Name</span>
               </template>
             </el-table-column>
-            <el-table-column property="owner" show-overflow-tooltip>
+            <el-table-column property="owner" sortable show-overflow-tooltip>
               <template #header>
                 <span class="table-header">Owner</span>
               </template>
             </el-table-column>
-            <el-table-column property="forks">
+            <el-table-column property="forks" sortable>
               <template #header>
                 <span class="table-header">Forks</span>
               </template>
@@ -47,7 +48,7 @@
                 <span>{{ abbrNum(scope.row.forks, 1) }}</span>
               </template>
             </el-table-column>
-            <el-table-column property="stargazers_count">
+            <el-table-column property="stargazers_count" sortable>
               <template #header>
                 <span class="table-header">Stargazers</span>
               </template>
@@ -160,8 +161,14 @@ export default defineComponent({
       }
 
       // Filter's data
-      return this.data.filter((items) =>
-        items.name.toLowerCase().includes(this.search.toLowerCase())
+      return this.data.filter(
+        (items) =>
+          items.name.toLowerCase().includes(this.search.toLowerCase()) || // Search on row name
+          items.owner.toLowerCase().includes(this.search.toLowerCase()) || // Search on row owner
+          items.topics.some((element) => {
+            // Search on row tags
+            return element.toLowerCase().includes(this.search.toLowerCase());
+          })
       );
     },
     pagedData() {
@@ -171,6 +178,7 @@ export default defineComponent({
         this.pageSize * this.page - this.pageSize,
         this.pageSize * this.page
       );
+      //   }
     },
   },
   methods: {
@@ -180,6 +188,26 @@ export default defineComponent({
      * @param {object} data - The data object to be parsed
      */
     parseData(data) {
+      // Object.keys(data).forEach((repoItem) => {
+      //   var repoTopics = data[repoItem].topics;
+
+      //   Object.keys(repoTopics).forEach((topic) => {
+      //     var index = this.tagFilters.findIndex(
+      //       (x) => x.text == repoTopics[topic]
+      //     );
+
+      //     if (index == -1) {
+      //       this.tagFilters.push({
+      //         text: repoTopics[topic],
+      //         value: repoTopics[topic],
+      //       });
+      //     }
+      //   });
+      // });
+
+      // this.tagFiltersProcessed = true;
+      // console.log(this.tagFilters);
+
       return data.map((item) => ({
         ...item,
         selected: false,

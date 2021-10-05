@@ -6,17 +6,48 @@
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
           <h5>{{ repo1MetaData.description }}</h5>
 
-          <div class="meta-grid">
+          <div
+            v-bind:class="{
+              'meta-grid-round-single meta-grid-round': !name2,
+              'meta-grid-round-multi meta-grid-round': name2,
+            }"
+          >
+            <div class="meta-container">
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id="tags1"></div>
+            </div>
+
+            <the-vulnerabilities-card
+              v-if="Object.keys(repo1MetaData).length"
+              :open_issues_count="repo1MetaData.open_issues_count"
+              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown || {}"
+            ></the-vulnerabilities-card>
+          </div>
+
+          <div
+            v-bind:class="{
+              'meta-grid-single meta-grid': !name2,
+              'meta-grid-multi meta-grid': name2,
+            }"
+          >
             <the-metadata-card
               v-if="Object.keys(repo1MetaData).length"
               :forks="repo1MetaData.forks"
-              :stargazers="repo1MetaData.stargazers"
+              :stargazers="repo1MetaData.stargazers_count"
+              :watchers="repo1MetaData.watchers_count"
               :openIssues="repo1MetaData.open_issues"
               :defaultBranch="repo1MetaData.default_branch"
               :size="repo1MetaData.size"
               :topics="repo1MetaData.topics"
               :createdOn="repo1MetaData.created_at"
               :lastUpdatedOn="repo1MetaData.updated_at"
+              :archived="repo1MetaData.archived"
+              :disabled="repo1MetaData.disabled"
+              :language="repo1MetaData.language"
+              :num_tags="repo1MetaData.num_tags"
+              :latest_tag="repo1MetaData.latest_tag"
+              :subscriber_count="repo1MetaData.subscribers_count"
+              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown"
             ></the-metadata-card>
           </div>
 
@@ -70,7 +101,7 @@
             </div>
 
             <div class="wide-visualisation3">
-              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
                 v-bind:option="bubblePlot1"
@@ -90,7 +121,11 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap1" style="height: 380px" />
+              <v-chart
+                v-bind:option="heatMap1"
+                style="height: 380px"
+                autoresize
+              />
             </div>
             <div class="node-link">
               <h3>Node Link Diagram</h3>
@@ -110,7 +145,30 @@
           <h1>{{ repo2MetaData.owner }}/{{ repo2MetaData.name }}</h1>
           <h5>{{ repo2MetaData.description }}</h5>
 
-          <div class="meta-grid">
+          <div
+            v-bind:class="{
+              'meta-grid-round-single meta-grid-round': !name2,
+              'meta-grid-round-multi meta-grid-round': name2,
+            }"
+          >
+            <div class="meta-container">
+              <div class="container-title">Tags</div>
+              <div class="tag-grid" id="tags2"></div>
+            </div>
+
+            <the-vulnerabilities-card
+              v-if="Object.keys(repo2MetaData).length"
+              :open_issues_count="repo2MetaData.open_issues_count"
+              :vulnerability_breakdown = "repo2MetaData.vulnerability_breakdown"
+            ></the-vulnerabilities-card>
+          </div>
+
+          <div
+            v-bind:class="{
+              'meta-grid-single meta-grid': !name2,
+              'meta-grid-multi meta-grid': name2,
+            }"
+          >
             <the-metadata-card
               v-if="Object.keys(repo2MetaData).length"
               :forks="repo2MetaData.forks"
@@ -121,6 +179,12 @@
               :topics="repo2MetaData.topics"
               :createdOn="repo2MetaData.created_at"
               :lastUpdatedOn="repo2MetaData.updated_at"
+              :archived="repo2MetaData.archived"
+              :disabled="repo2MetaData.disabled"
+              :language="repo2MetaData.language"
+              :num_tags="repo2MetaData.num_tags"
+              :latest_tag="repo2MetaData.latest_tag"
+              :subscriber_count="repo2MetaData.subscribers_count"
             ></the-metadata-card>
           </div>
 
@@ -172,7 +236,7 @@
             </div>
 
             <div class="wide-visualisation3">
-              <h3>Dependencies, Issues & Sizes Comparison</h3>
+              <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
                 v-bind:option="bubblePlot2"
@@ -192,7 +256,11 @@
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
-              <v-chart v-bind:option="heatMap2" style="height: 380px" />
+              <v-chart
+                v-bind:option="heatMap2"
+                style="height: 380px"
+                autoresize
+              />
             </div>
 
             <div class="node-link">
@@ -214,8 +282,29 @@
 <style lang="scss" scoped>
 @import "@/styles/components/_chart.scss";
 
+.meta-container {
+  background-color: rgba(38, 38, 38, 0.35);
+  padding: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
+  margin-bottom: 1%;
+  border-radius: var(--viz--radius);
+}
+.container-title {
+  padding: 1%;
+  margin-top: 2px;
+  font-size: 158%;
+  font-weight: 800;
+}
+
+.tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1%;
+}
+
 .page {
-  background: linear-gradient(90deg, #5ed098 13%, #15ccff 88%);
+  background: #d4e7e2;
   color: white;
 }
 
@@ -224,10 +313,11 @@
 }
 
 .rep-container {
-  background-color: rgba(113, 113, 113, 0.58);
+  background-color: rgba(23, 158, 117, 0.7);
   padding: 2%;
   padding-top: 5px;
   border-radius: 25px;
+  box-shadow: 5px 10px 18px #888888;
 }
 
 .viz-grid {
@@ -259,9 +349,24 @@
     "node-link node-link";
 }
 
+.meta-grid-multi {
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+}
+
+.meta-grid-single {
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr) minmax(0%, 1fr);
+}
+
+.meta-grid-round-multi {
+  grid-template-columns: minmax(0%, 1fr);
+}
+
+.meta-grid-round-single {
+  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+}
+
 .meta-grid {
   display: grid;
-  grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   grid-template-rows: repeat(1fr);
   grid-gap: 0.5rem;
   grid-auto-flow: row;
@@ -269,6 +374,13 @@
   background-color: rgba(38, 38, 38, 0.35);
   border-radius: var(--viz--radius);
   margin-bottom: 3%;
+}
+
+.meta-grid-round {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  grid-gap: 0.5rem;
+  grid-auto-flow: row;
 }
 
 .health-model {
@@ -367,23 +479,6 @@
   color: white;
 }
 
-@media only screen and (max-width: 650px) {
-  .info-grid {
-    display: grid;
-    grid-template-columns: minmax(0%, 1fr);
-    grid-template-rows: repeat(1fr);
-    grid-gap: 0.5rem;
-    grid-auto-flow: row;
-    margin-bottom: 3%;
-  }
-
-  h1,
-  h2 {
-    font-size: 185%;
-    margin-bottom: 8px;
-  }
-}
-
 @media only screen and (max-width: 850px) {
   .viz-grid {
     grid-gap: 1rem;
@@ -398,9 +493,25 @@
       "heat-map"
       "node-link";
   }
+  .meta-grid-single {
+    grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
+  }
+
+  .meta-grid-multi {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
+  .meta-grid-round-single {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
+  h1,
+  h2 {
+    font-size: 285%;
+  }
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 1300px) {
   .health-model {
     display: grid;
     grid-template-rows: repeat(1fr);
@@ -429,6 +540,8 @@ import axios from "axios";
 import VChart from "vue-echarts";
 
 import TheMetadataCard from "@/components/TheMetadataCard";
+// import TheTagsCard from "@/components/TheTagsCard";
+import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
 import TheContributorPieChart from "@/components/TheContributorPieChart";
 import TheLocLineChart from "@/components/TheLocLineChart";
 import TheMultiLineChart from "@/components/TheMultiLineChart";
@@ -447,6 +560,8 @@ export default {
     TheContributorPieChart,
     TheLocLineChart,
     TheMultiLineChart,
+    TheVulnerabilitiesCard,
+    // TheTagsCard,
   },
   data() {
     return {
@@ -479,6 +594,7 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
+      this.addTags(this.repo1MetaData, "tags1");
     } catch (e) {
       console.log(e);
     }
@@ -496,27 +612,30 @@ export default {
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
+        process.env.VUE_APP_API_URL +
+          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
-      this.repo1Stats.dep = response.data.data;
+      this.repo1Stats.dep = response.data.data[0];
     } catch (e) {
       console.log(e);
     }
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/c820af62-b4ef-4840-915f-bab4b82dd751"
+        process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
-      this.repo1Stats.nodeLink = response.data;
+      this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
     } catch (e) {
       console.log(e);
     }
 
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82"
+        process.env.VUE_APP_API_URL +
+          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
       );
-      this.repo1Stats.heatMap = response.data.data;
+      this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
     } catch (e) {
       console.log(e);
     }
@@ -549,6 +668,7 @@ export default {
             `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2MetaData = response.data.data[0];
+        this.addTags(this.repo2MetaData, "tags2");
       } catch (e) {
         console.log(e);
       }
@@ -566,27 +686,30 @@ export default {
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712"
+          process.env.VUE_APP_API_URL +
+            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
-        this.repo2Stats.dep = response.data.data;
+        this.repo2Stats.dep = response.data.data[0];
       } catch (e) {
         console.log(e);
       }
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/ad3b2bfc-c81d-4d1f-a88d-8c3477b8ceda"
+          process.env.VUE_APP_API_URL +
+            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
-        this.repo2Stats.nodeLink = response.data;
+        this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
       } catch (e) {
         console.log(e);
       }
 
       try {
         const response = await axios.get(
-          "https://run.mocky.io/v3/1e024a52-8dd0-4844-bae8-644ddae4ee82"
+          process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
         );
-        this.repo2Stats.heatMap = response.data.data; // array of marks
+        this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
       } catch (e) {
         console.log(e);
       }
@@ -610,56 +733,41 @@ export default {
       } catch (e) {
         console.log(e);
       }
-
       this.processData(2);
+      this.balanceHeight();
     }
   },
   methods: {
-    processDate(inputDate) {
-      if (inputDate) {
-        let date = new Date(inputDate);
-        let dateFormatter = new Intl.DateTimeFormat("en-AU", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          timeZone: "Australia/Sydney",
-          timeZoneName: "short",
-          hour12: false,
-        });
-
-        return dateFormatter.format(date);
-      }
-      return "";
+    addTags(metaData, tagName) {
+      metaData.topics.forEach((item) => {
+        let tagDiv = document.createElement("div");
+        tagDiv.innerText = item;
+        tagDiv.style.backgroundColor = metaData.topic_colours[item];
+        tagDiv.style.display = "flex";
+        tagDiv.style.fontWeight = 800;
+        tagDiv.style.fontSize = "100%";
+        tagDiv.style.padding = "5px 8px";
+        tagDiv.style.margin = "3px";
+        tagDiv.style.borderRadius = "18px";
+        tagDiv.style.alignItems = "center";
+        tagDiv.style.justifyContent = "center";
+        document.getElementById(tagName).append(tagDiv);
+      });
     },
-    getColor(size) {
-      let colorSet = [
-        "#1ceca8",
-        "#00DDFF",
-        "#37A2FF",
-        "#FF0087",
-        "#FFBF00",
-        "#ff5100",
-        "#8800ff",
-        "#82173f",
-        "#383838",
-        "#000000",
-        "#bc5090",
-        "#a05195",
-        "#f95d6a",
-        "#003f5c",
-        "#55838a",
-      ];
-      let colorPalette = [];
-      for (let i = 0; i < size; i++) {
-        if (i >= colorSet.length) {
-          colorPalette.push(colorSet[i % colorSet.length]);
-        } else {
-          colorPalette.push(colorSet[i]);
-        }
+    balanceHeight() {
+      let lengthDifference =
+        this.repo1MetaData.description.length -
+        this.repo2MetaData.description.length;
+      let paddingString = " ";
+      if (lengthDifference > 0) {
+        this.repo2MetaData.description =
+          this.repo2MetaData.description +
+          paddingString.repeat(lengthDifference);
+      } else if (lengthDifference < 0) {
+        this.repo1MetaData.description =
+          this.repo1MetaData.description +
+          paddingString.repeat(Math.abs(lengthDifference));
       }
-      return colorPalette;
     },
     setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
@@ -678,13 +786,6 @@ export default {
         chart.series.push(seriesSubObjCopy);
       });
     },
-    assignColor(givenMap, colorPalette) {
-      let colorAllocationIndex = 0;
-      givenMap.forEach((value, key, map) => {
-        value.color = colorPalette[colorAllocationIndex++];
-        map.set(key, value);
-      });
-    },
     processData(repoNumber) {
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
       let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
@@ -694,6 +795,9 @@ export default {
 
       let statsData = new Map();
       let heatMapData = new Map();
+      let depDataColorMap = new Map();
+      let heatMapTooltipData = new Map();
+      let bubbleChartTooltipData = new Map();
 
       let extractedDepData = this.extractDepData(repoNumber);
       let extractedData = this.extractData(repoNumber);
@@ -706,31 +810,91 @@ export default {
       heatMapData = extractedHeatMapData[0];
       heatMapCopy.visualMap.min = extractedHeatMapData[1];
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
+      heatMapTooltipData = extractedHeatMapData[4];
 
-      let depRepos = extractedDepData.map((repoArray) => {
-        return repoArray[3];
-      });
+      if (extractedDepData[0].length > 0) {
+        let depRepos = extractedDepData[0].map((repoArray) => {
+          return repoArray[3];
+        });
 
-      this.locColorData.push(
-        this.getColor(this.languageData[repoNumber - 1].size)
-      );
+        depDataColorMap = extractedDepData[1];
+        depBubbleChartCopy.color = [];
+        depBubbleChartCopy.legend.data = depRepos;
+        bubbleChartTooltipData = extractedDepData[2];
+      }
+
+      if (repoNumber === 1) {
+        this.locColorData.push(this.repo1MetaData.language_colours);
+      } else {
+        this.locColorData.push(this.repo2MetaData.language_colours);
+      }
 
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
       heatMapCopy.xAxis.data = extractedHeatMapData[3];
-
-      depBubbleChartCopy.color = this.getColor(depRepos.length);
-      depBubbleChartCopy.legend.data = depRepos;
 
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
 
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
-        extractedDepData,
-        depBubbleChartCopy.color
+        extractedDepData[0],
+        depDataColorMap
       );
       this.setSeriesHeatMap(heatMapCopy, heatMapData, heatMapSeriesObj);
+
+      // custom tooltips for heatmap
+      heatMapCopy.tooltip.formatter = (obj) => {
+        var dataPoint = obj.value;
+        var weekTooltipData = heatMapTooltipData.get(
+          dataPoint[0] + "-" + dataPoint[1]
+        );
+        return (
+          '<div class = "tooltip" style="border: 3px solid ' +
+          obj.color +
+          ';">' +
+          '<strong style="font-size: 18px">' +
+          dataPoint[2].toLocaleString() +
+          "</strong>" +
+          " open issues in " +
+          obj.seriesName +
+          "<br><br>" +
+          "<strong> Start Date：</strong>" +
+          weekTooltipData[0] +
+          "<br>" +
+          "<strong> End Date：</strong>" +
+          weekTooltipData[1] +
+          "<br>" +
+          "</div>"
+        );
+      };
+
+      // custom tooltips for bubble chart
+      depBubbleChartCopy.tooltip.formatter = (obj) => {
+        var dataPoint = obj.value;
+        return (
+          '<div class = "tooltip" style="border: 3px solid ' +
+          obj.color +
+          ';">' +
+          '<strong style="font-size: 21px">' +
+          dataPoint[3].charAt(0).toUpperCase() +
+          dataPoint[3].slice(1) +
+          "</strong>  <br><br>" +
+          "<strong> Dependencies Count：</strong>" +
+          dataPoint[1].toLocaleString() +
+          "<br>" +
+          "<strong> Project Size(KB)</strong>：" +
+          dataPoint[0].toLocaleString() +
+          "<br>" +
+          "<strong> Issues Classification：</strong>" +
+          bubbleChartTooltipData.get(dataPoint[3])[1] +
+          "<br>" +
+          "<strong> Issues Count：</strong>" +
+          bubbleChartTooltipData.get(dataPoint[3])[0] +
+          "<br>" +
+          "</div>"
+        );
+      };
 
       if (repoNumber == 1) {
         this.initializeNodeLink(nodeLinkCopy1, this.repo1Stats.nodeLink);
@@ -746,20 +910,22 @@ export default {
         this.heatMap2 = heatMapCopy;
       }
     },
-    setSeriesBubbleChart(chart, map, colors) {
-      let colorIndex = 0;
+    setSeriesBubbleChart(chart, map, colorMap) {
       map.forEach((repoArray) => {
+        chart.color.push(colorMap.get(repoArray[3]));
         let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
-        seriesSubObjCopy.data = [repoArray];
-        seriesSubObjCopy.areaStyle.color = colors[colorIndex++];
+        seriesSubObjCopy.data = [repoArray.slice(0, 4)];
+        seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
         chart.series.push(seriesSubObjCopy);
       });
     },
     extractDepData(repoNumber) {
       let jsonObj;
       let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let tooltipData = new Map();
+      let colorMap = new Map();
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.dep;
@@ -767,48 +933,93 @@ export default {
         jsonObj = this.repo2Stats.dep;
       }
 
+      if (jsonObj == undefined) {
+        return [extractedDepData, colorMap];
+      }
+
       for (let repoObj of jsonObj) {
         let repoData = [];
         repoData.push(repoObj.size);
-        repoData.push(repoObj.dep_count);
-        repoData.push(Math.sqrt(repoObj.issue_count) * 5);
-        repoData.push(repoObj.name);
+        repoData.push(repoObj.num_components);
+        this.vulnerabilityClassification(repoData, repoObj, tooltipData);
         extractedDepData.push(repoData);
+        colorMap.set(repoObj.name, repoObj.repo_colour);
       }
 
-      return extractedDepData;
+      return [extractedDepData, colorMap, tooltipData];
+    },
+    vulnerabilityClassification(repoData, repoObj, tooltipData) {
+      let bubbleSizes = [15, 30, 50, 80, 110];
+      let classes = ["0", "1-50", "51-100", "101-150", "151+"];
+      let repoVulnerabilities = repoObj.num_vulnerabilities;
+      let repoBubbleSize = 0;
+      let repoClass = "";
+
+      if (repoVulnerabilities === 0) {
+        repoBubbleSize = bubbleSizes[0];
+        repoClass = classes[0];
+      } else if (repoVulnerabilities >= 1 && repoVulnerabilities <= 50) {
+        repoBubbleSize = bubbleSizes[1];
+        repoClass = classes[1];
+      } else if (repoVulnerabilities >= 51 && repoVulnerabilities <= 100) {
+        repoBubbleSize = bubbleSizes[2];
+        repoClass = classes[2];
+      } else if (repoVulnerabilities >= 101 && repoVulnerabilities <= 150) {
+        repoBubbleSize = bubbleSizes[3];
+        repoClass = classes[3];
+      } else {
+        repoBubbleSize = bubbleSizes[4];
+        repoClass = classes[4];
+      }
+
+      repoData.push(repoBubbleSize);
+      repoData.push(repoObj.name);
+      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass]);
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
       let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
+      let extractedTooltipData = new Map(); // [start date, end date]
+
       let maxVal = 0,
         minVal = Infinity;
       let xAxis = []; // 19 cols
+      let xAxisYears = new Set();
       let weekCount = 0;
 
       if (repoNumber == 1) {
-        jsonResponse = this.repo1Stats.heatMap;
+        jsonResponse = this.repo1Stats.heatmap_data;
       } else if (repoNumber == 2) {
-        jsonResponse = this.repo2Stats.heatMap;
+        jsonResponse = this.repo2Stats.heatmap_data;
       }
 
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
         let weekData = [];
+        let weekTooltipData = [];
+
         weekCount += 1;
 
         weekData.push(weekObj.coords.x);
         weekData.push(weekObj.coords.y);
         weekData.push(weekObj.issues.open);
 
-        if (weekObj.start.substring(5, 7) === "01") {
+        weekTooltipData.push(weekObj.start.substring(0, 10));
+        weekTooltipData.push(weekObj.end.substring(0, 10));
+
+        if (
+          weekObj.start.substring(5, 7) === "01" &&
+          !xAxisYears.has(weekObj.start.substring(0, 4))
+        ) {
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
+            xAxisYears.add(weekObj.start.substring(0, 4));
           } else {
             xAxis[Math.floor(weekCount / 8) - 1] = weekObj.start.substring(
               0,
               4
             );
+            xAxisYears.add(weekObj.start.substring(0, 4));
           }
         }
 
@@ -826,23 +1037,35 @@ export default {
           }
         }
 
+        extractedTooltipData.set(
+          weekObj.coords.x + "-" + weekObj.coords.y,
+          weekTooltipData
+        );
         extractedHeatMapData.set(weekObj.week, weekData);
       }
-      return [extractedHeatMapData, minVal, maxVal, xAxis];
+      xAxis = xAxis.reverse();
+      return [
+        extractedHeatMapData,
+        minVal,
+        maxVal,
+        xAxis,
+        extractedTooltipData,
+      ];
     },
     initializeNodeLink(nodeLink, data) {
-      let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
-      nodeLinkSubObj.categories = data.categories;
-      nodeLinkSubObj.nodes = data.nodes;
-      nodeLinkSubObj.links = data.links;
-      nodeLink.series.push(nodeLinkSubObj);
+      if (data != undefined) {
+        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
+        nodeLinkSubObj.categories = data.categories;
+        nodeLinkSubObj.nodes = data.nodes;
+        nodeLinkSubObj.links = data.links;
+        nodeLink.series.push(nodeLinkSubObj);
+      }
     },
     extractData(repoNumber) {
       let jsonObj;
       let versions = [];
       const languageData = new Map();
       const statsData = new Map();
-
       statsData.set("code", { data: [], color: "#34a853" });
       statsData.set("comment", { data: [], color: "#4285f4" });
       statsData.set("blank", { data: [], color: "#ea4335" });
@@ -855,7 +1078,7 @@ export default {
 
       for (let versionObj of jsonObj) {
         versions.push(versionObj.tag_name);
-        for (const [langKey, langObj] of Object.entries(versionObj.LOC)) {
+        for (const [langKey, langObj] of Object.entries(versionObj.LOC_limited)) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
               value.data.push(langObj[key]);
@@ -887,7 +1110,6 @@ export default {
             }
           })
       );
-      // console.log(this.contributors[0][1]);
       return;
     },
     parseLocOverTimeData(repoNumber, dataType) {
@@ -922,7 +1144,4 @@ export default {
     },
   },
 };
-
-// bubble chart: https://run.mocky.io/v3/4f9a9846-1152-4d3a-97be-3620c6a11712
-// bubble chart delete: https://designer.mocky.io/manage/delete/4f9a9846-1152-4d3a-97be-3620c6a11712/7Z3ZyMjTlAAFvcCRGcb4UnZAXSgU60okB7hF
 </script>
