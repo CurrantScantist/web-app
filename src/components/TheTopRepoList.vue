@@ -11,26 +11,28 @@
           style="width: 100%"
           :row-style="rowstyle"
         >
-          <el-table-column
-            property="name"
-            label="Repository 📖"
-            show-overflow-tooltip
-            align="center"
-          >
+          <el-table-column property="name" show-overflow-tooltip align="center">
+            <template #header>
+              <span class="table-header">Repository 📖</span>
+            </template>
           </el-table-column>
           <el-table-column
             property="owner"
-            label="Owner 🤝🏼"
             show-overflow-tooltip
             align="center"
           >
+            <template #header>
+              <span class="table-header">Owner 🤝🏼</span>
+            </template>
           </el-table-column>
           <el-table-column
             property="stargazers_count"
-            label="Stargazers ⭐"
             show-overflow-tooltip
             align="center"
           >
+            <template #header>
+              <span class="table-header">Stargazers ⭐</span>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -121,5 +123,9 @@ export default defineComponent({
   .pagination {
     margin: 0 auto;
   }
+}
+
+.table-header {
+  color: #5e5e5e;
 }
 </style>
