@@ -506,25 +506,6 @@
   margin: 1%;
 }
 
-.close-button {
-  background-color: rgb(255, 0, 0, 0.8);
-  color: rgba(255, 255, 255, 0.8);
-  border: none;
-  font-size: 11;
-  display: block;
-  border-radius: 50%;
-  font-weight: 500;
-  height: 25px;
-  width: 25px;
-  margin-top: 13px;
-  float: right;
-}
-
-.close-button:hover {
-  background-color: rgb(255, 0, 0, 1);
-  color: white;
-}
-
 @media only screen and (max-width: 850px) {
   .viz-grid {
     grid-gap: 1rem;
