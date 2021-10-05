@@ -58,7 +58,7 @@
             v-bind:class="{ 'single-repo': !name2, 'multi-repo': name2 }"
           >
             <div class="simple-visualisation1">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[0][0] != null"
@@ -67,10 +67,14 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="simple-visualisation2">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[0][1] != null"
@@ -79,7 +83,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
@@ -91,7 +99,11 @@
                 :loading="locByLang1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation2">
@@ -104,20 +116,28 @@
                 :loading="locType1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
-                v-if="repo1Stats.dep != null"
+                v-if="repo1Stats.dep"
                 v-bind:option="bubblePlot1"
                 style="height: 500px"
                 :loading="bubblePlot1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div
               class="wide-visualisation4"
@@ -131,7 +151,11 @@
                 :isLoading="locOverTimeLoading[0]"
               >
               </the-multi-line-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
@@ -143,10 +167,14 @@
                 :loading="heatMap1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 380px"
+              ></el-empty>
             </div>
             <div class="node-link">
-              <h3>Node Link Diagram</h3>
+              <h3>Dependency Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
@@ -157,7 +185,11 @@
                     :loading="nodeLink1Loading"
                     autoresize
                   />
-                  <el-empty v-else description="No data"></el-empty>
+                  <el-empty
+                    v-else
+                    description="No data"
+                    style="height: 1100px"
+                  ></el-empty>
                 </div>
               </div>
             </div>
@@ -184,7 +216,9 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo2MetaData).length"
               :open_issues_count="repo2MetaData.open_issues_count"
-              :vulnerability_breakdown="repo2MetaData.vulnerability_breakdown"
+              :vulnerability_breakdown="
+                repo2MetaData.vulnerability_breakdown || {}
+              "
             ></the-vulnerabilities-card>
           </div>
 
@@ -215,7 +249,7 @@
 
           <div class="viz-grid multi-repo">
             <div class="simple-visualisation2">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[1][1] != null"
@@ -224,10 +258,14 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="simple-visualisation1">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[1][0] != null"
@@ -236,7 +274,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation1">
@@ -249,7 +291,11 @@
                 :loading="locByLang2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation2">
@@ -262,20 +308,28 @@
                 :loading="locType2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation3">
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
-                v-if="repo2Stats.dep != null"
+                v-if="repo2Stats.dep"
                 v-bind:option="bubblePlot2"
                 style="height: 500px"
                 :loading="bubblePlot2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div
               class="wide-visualisation4"
@@ -289,7 +343,11 @@
                 :isLoading="locOverTimeLoading[1]"
               >
               </the-multi-line-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
@@ -301,11 +359,15 @@
                 :loading="heatMap2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 380px"
+              ></el-empty>
             </div>
 
             <div class="node-link">
-              <h3>Node Link Diagram</h3>
+              <h3>Dependency Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
@@ -316,7 +378,11 @@
                     :loading="nodeLink2Loading"
                     autoresize
                   />
-                  <el-empty v-else description="No data"></el-empty>
+                  <el-empty
+                    v-else
+                    description="No data"
+                    style="height: 1100px"
+                  ></el-empty>
                 </div>
               </div>
             </div>
@@ -508,25 +574,6 @@
   margin: 1%;
 }
 
-.close-button {
-  background-color: rgb(255, 0, 0, 0.8);
-  color: rgba(255, 255, 255, 0.8);
-  border: none;
-  font-size: 11;
-  display: block;
-  border-radius: 50%;
-  font-weight: 500;
-  height: 25px;
-  width: 25px;
-  margin-top: 13px;
-  float: right;
-}
-
-.close-button:hover {
-  background-color: rgb(255, 0, 0, 1);
-  color: white;
-}
-
 @media only screen and (max-width: 850px) {
   .viz-grid {
     grid-gap: 1rem;
@@ -553,6 +600,10 @@
     grid-template-columns: minmax(0%, 1fr);
   }
 
+  .meta-grid-round-multi {
+    grid-template-columns: minmax(0%, 1fr);
+  }
+
   h1,
   h2 {
     font-size: 285%;
@@ -567,6 +618,10 @@
     grid-template-columns: minmax(0%, auto);
     grid-auto-flow: row;
     grid-template-rows: repeat(1fr);
+  }
+
+  .meta-grid-round-multi {
+    grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   }
 }
 </style>
@@ -668,6 +723,7 @@ export default {
         );
         this.repo2MetaData = response.data.data[0];
         this.addTags(this.repo2MetaData, "tags2");
+        this.balanceHeight();
       } catch (e) {
         console.log(e);
       }
@@ -809,7 +865,6 @@ export default {
         this.contributors[1][1] = null;
       }
       this.processData(2);
-      this.balanceHeight();
     }
   },
   methods: {
@@ -966,7 +1021,7 @@ export default {
       let lengthDifference =
         this.repo1MetaData.description.length -
         this.repo2MetaData.description.length;
-      let paddingString = " ";
+      let paddingString = "‎‎ㅤ";
       if (lengthDifference > 0) {
         this.repo2MetaData.description =
           this.repo2MetaData.description +
@@ -1055,10 +1110,14 @@ export default {
 
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
 
+      let colorPalette =
+        repoNumber == 1
+          ? this.repo1MetaData.language_colours
+          : this.repo2MetaData.language_colours;
       this.setSeriesLocByLang(
         locByLangCopy,
         this.languageData[repoNumber - 1],
-        this.repo1MetaData.language_colours,
+        colorPalette,
         locByLangSeriesObj
       );
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
@@ -1171,7 +1230,7 @@ export default {
         jsonObj = this.repo2Stats.dep;
       }
 
-      if (jsonObj == undefined) {
+      if (!jsonObj) {
         return [extractedDepData, colorMap];
       }
 
@@ -1326,9 +1385,9 @@ export default {
             });
           } else {
             if (languageData.has(langKey)) {
-              let tempValue = languageData.get(langKey);
-              tempValue.data.push(langObj.code);
-              languageData.set(langKey, tempValue);
+              let tempValue = languageData.get(langKey); // "Yaml": [0,1,15]
+              tempValue.data.push(langObj.code); // [0,1,15,4]
+              languageData.set(langKey, tempValue); // "Yaml" <- [0,1,15,4]
             } else {
               languageData.set(langKey, { data: [langObj.code] });
             }
@@ -1360,8 +1419,6 @@ export default {
           this.contributors[repoNumber - 1].length - 1
         ] = null;
       }
-
-      console.log(this.contributors);
       this.contributorsLoading[repoNumber - 1] = false;
       return;
     },

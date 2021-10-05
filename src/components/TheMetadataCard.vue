@@ -36,7 +36,7 @@
   </div>
 
   <div class="info-item">
-    <div class="stat-name">Last update:</div>
+    <div class="stat-name">Updated at:</div>
     <div>
       {{ parsedUpdatedOn }}
     </div>

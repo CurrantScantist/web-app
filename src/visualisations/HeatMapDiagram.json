@@ -1,7 +1,10 @@
 {
     "tooltip": {
         "position": "top",
-        "backgroundColor": ["rgba(0, 0, 0, 0.7)"]
+        "backgroundColor": ["rgba(0, 0, 0, 0.0)"],
+        "borderColor": ["rgba(0, 0, 0, 0.0)"],
+        "shadowColor" : ["rgba(0, 0, 0, 0.0)"]
+
     },
     "toolbox": {
         "feature": {
