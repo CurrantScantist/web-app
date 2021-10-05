@@ -536,6 +536,10 @@
   h2 {
     font-size: 285%;
   }
+
+  h5 {
+    text-align: right;
+  }
 }
 
 @media only screen and (max-width: 1300px) {
@@ -647,6 +651,7 @@ export default {
         );
         this.repo2MetaData = response.data.data[0];
         this.addTags(this.repo2MetaData, "tags2");
+        this.balanceHeight();
       } catch (e) {
         console.log(e);
       }
@@ -788,7 +793,6 @@ export default {
         this.contributors[1][1] = null;
       }
       this.processData(2);
-      this.balanceHeight();
     }
   },
   methods: {
@@ -945,7 +949,7 @@ export default {
       let lengthDifference =
         this.repo1MetaData.description.length -
         this.repo2MetaData.description.length;
-      let paddingString = " ";
+      let paddingString = "‎‎ㅤ";
       if (lengthDifference > 0) {
         this.repo2MetaData.description =
           this.repo2MetaData.description +
@@ -1034,10 +1038,11 @@ export default {
 
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
 
+      let colorPalette = (repoNumber == 1)?  this.repo1MetaData.language_colours : this.repo2MetaData.language_colours
       this.setSeriesLocByLang(
         locByLangCopy,
         this.languageData[repoNumber - 1],
-        this.repo1MetaData.language_colours,
+        colorPalette,
         locByLangSeriesObj
       );
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
@@ -1303,9 +1308,9 @@ export default {
             });
           } else {
             if (languageData.has(langKey)) {
-              let tempValue = languageData.get(langKey);
-              tempValue.data.push(langObj.code);
-              languageData.set(langKey, tempValue);
+              let tempValue = languageData.get(langKey); // "Yaml": [0,1,15]
+              tempValue.data.push(langObj.code); // [0,1,15,4]
+              languageData.set(langKey, tempValue); // "Yaml" <- [0,1,15,4]
             } else {
               languageData.set(langKey, { data: [langObj.code] });
             }
@@ -1337,8 +1342,6 @@ export default {
           this.contributors[repoNumber - 1].length - 1
         ] = null;
       }
-
-      console.log(this.contributors);
       this.contributorsLoading[repoNumber - 1] = false;
       return;
     },
