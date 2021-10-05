@@ -26,7 +26,7 @@
                 <el-checkbox v-model="scope.row.selected"></el-checkbox>
               </template>
             </el-table-column>
-            <el-table-column property="name" label="Repository" sortable> 
+            <el-table-column property="name" label="Repository" sortable>
             </el-table-column>
             <el-table-column
               property="owner"
@@ -35,8 +35,13 @@
               sortable
             >
             </el-table-column>
-            <el-table-column property="forks" label="Forks" sortable> </el-table-column>
-            <el-table-column property="stargazers_count" label="Stargazers" sortable>
+            <el-table-column property="forks" label="Forks" sortable>
+            </el-table-column>
+            <el-table-column
+              property="stargazers_count"
+              label="Stargazers"
+              sortable
+            >
             </el-table-column>
             <el-table-column
               property="topics"
