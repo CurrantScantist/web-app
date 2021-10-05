@@ -1,5 +1,5 @@
 import Repositories from "@/views/Repositories";
-import About from "@/views/About";
+// import About from "@/views/About";
 
 export default [
   {
@@ -10,12 +10,12 @@ export default [
       icon: "el-icon-s-home",
     },
   },
-  {
-    path: "/about",
-    name: "about",
-    component: About,
-    meta: {
-      icon: "el-icon-info",
-    },
-  },
+  // {
+  //   path: "/about",
+  //   name: "about",
+  //   component: About,
+  //   meta: {
+  //     icon: "el-icon-info",
+  //   },
+  // },
 ];
