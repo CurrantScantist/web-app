@@ -1,11 +1,10 @@
 <template>
-  <h3><slot name="heading">Pie Chart Heading</slot></h3>
-  <h6>
-    (
-    <slot name="subheading">subheading</slot>
-    )
-  </h6>
-  <v-chart :option="pieOptions" :style="pieHeight" autoresize />
+  <v-chart
+    :option="pieOptions"
+    :style="pieHeight"
+    :loading="isLoading"
+    autoresize
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -26,7 +25,6 @@ export default {
       default: "300px",
     },
     pieData: {
-      type: Object,
       required: true,
     },
     pieRadius: {
@@ -37,10 +35,14 @@ export default {
       type: String,
       required: true,
     },
+    isLoading: {
+      type: Boolean,
+      default: true,
+    },
   },
-  data() {
-    return {
-      pieOptions: {
+  computed: {
+    pieOptions() {
+      return {
         tooltip: {
           trigger: "item",
         },
@@ -66,10 +68,8 @@ export default {
             },
           },
         ],
-      },
-    };
-  },
-  computed: {
+      };
+    },
     pieHeight() {
       return `height: ${this.height}`;
     },
