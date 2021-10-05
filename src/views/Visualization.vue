@@ -58,7 +58,7 @@
             v-bind:class="{ 'single-repo': !name2, 'multi-repo': name2 }"
           >
             <div class="simple-visualisation1">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[0][0] != null"
@@ -74,7 +74,7 @@
               ></el-empty>
             </div>
             <div class="simple-visualisation2">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[0][1] != null"
@@ -174,7 +174,7 @@
               ></el-empty>
             </div>
             <div class="node-link">
-              <h3>Node Link Diagram</h3>
+              <h3>Dependency Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
@@ -249,7 +249,7 @@
 
           <div class="viz-grid multi-repo">
             <div class="simple-visualisation2">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[1][1] != null"
@@ -265,7 +265,7 @@
               ></el-empty>
             </div>
             <div class="simple-visualisation1">
-              <h3>Contributors</h3>
+              <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
                 v-if="contributors[1][0] != null"
@@ -367,7 +367,7 @@
             </div>
 
             <div class="node-link">
-              <h3>Node Link Diagram</h3>
+              <h3>Dependency Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
                 <div style="width: auto; min-width: 1100px">
