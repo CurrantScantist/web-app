@@ -20,7 +20,9 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo1MetaData).length"
               :open_issues_count="repo1MetaData.open_issues_count"
-              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown || {}"
+              :vulnerability_breakdown="
+                repo1MetaData.vulnerability_breakdown || {}
+              "
             ></the-vulnerabilities-card>
           </div>
 
@@ -47,7 +49,7 @@
               :num_tags="repo1MetaData.num_tags"
               :latest_tag="repo1MetaData.latest_tag"
               :subscriber_count="repo1MetaData.subscribers_count"
-              :vulnerability_breakdown = "repo1MetaData.vulnerability_breakdown"
+              :vulnerability_breakdown="repo1MetaData.vulnerability_breakdown"
             ></the-metadata-card>
           </div>
 
@@ -65,7 +67,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="simple-visualisation2">
               <h3>Contributors</h3>
@@ -77,7 +83,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="wide-visualisation1">
               <h3>Lines of Code by language</h3>
@@ -89,7 +99,11 @@
                 :loading="locByLang1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation2">
@@ -102,7 +116,11 @@
                 :loading="locType1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation3">
@@ -115,7 +133,11 @@
                 :loading="bubblePlot1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div
               class="wide-visualisation4"
@@ -129,7 +151,11 @@
                 :isLoading="locOverTimeLoading[0]"
               >
               </the-multi-line-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
@@ -141,7 +167,11 @@
                 :loading="heatMap1Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 380px"
+              ></el-empty>
             </div>
             <div class="node-link">
               <h3>Node Link Diagram</h3>
@@ -155,7 +185,11 @@
                     :loading="nodeLink1Loading"
                     autoresize
                   />
-                  <el-empty v-else description="No data"></el-empty>
+                  <el-empty
+                    v-else
+                    description="No data"
+                    style="height: 1100px"
+                  ></el-empty>
                 </div>
               </div>
             </div>
@@ -182,7 +216,7 @@
             <the-vulnerabilities-card
               v-if="Object.keys(repo2MetaData).length"
               :open_issues_count="repo2MetaData.open_issues_count"
-              :vulnerability_breakdown = "repo2MetaData.vulnerability_breakdown"
+              :vulnerability_breakdown="repo2MetaData.vulnerability_breakdown"
             ></the-vulnerabilities-card>
           </div>
 
@@ -222,7 +256,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
             <div class="simple-visualisation1">
               <h3>Contributors</h3>
@@ -234,7 +272,11 @@
                 hoverHeading="Contributor"
               >
               </the-contributor-pie-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 300px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation1">
@@ -247,7 +289,11 @@
                 :loading="locByLang2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation2">
@@ -260,7 +306,11 @@
                 :loading="locType2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
 
             <div class="wide-visualisation3">
@@ -273,7 +323,11 @@
                 :loading="bubblePlot2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div
               class="wide-visualisation4"
@@ -287,7 +341,11 @@
                 :isLoading="locOverTimeLoading[1]"
               >
               </the-multi-line-chart>
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 500px"
+              ></el-empty>
             </div>
             <div class="heat-map">
               <h3>Open Issues Heat Map</h3>
@@ -299,7 +357,11 @@
                 :loading="heatMap2Loading"
                 autoresize
               />
-              <el-empty v-else description="No data"></el-empty>
+              <el-empty
+                v-else
+                description="No data"
+                style="height: 380px"
+              ></el-empty>
             </div>
 
             <div class="node-link">
@@ -314,7 +376,11 @@
                     :loading="nodeLink2Loading"
                     autoresize
                   />
-                  <el-empty v-else description="No data"></el-empty>
+                  <el-empty
+                    v-else
+                    description="No data"
+                    style="height: 1100px"
+                  ></el-empty>
                 </div>
               </div>
             </div>
@@ -1314,7 +1380,9 @@ export default {
 
       for (let versionObj of jsonObj) {
         versions.push(versionObj.tag_name);
-        for (const [langKey, langObj] of Object.entries(versionObj.LOC_limited)) {
+        for (const [langKey, langObj] of Object.entries(
+          versionObj.LOC_limited
+        )) {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
               value.data.push(langObj[key]);
