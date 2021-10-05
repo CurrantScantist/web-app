@@ -35,7 +35,7 @@
     ],
     "yAxis": [
         {
-            "name": "Versions",
+            "name": "Versions >",
             "nameLocation": "middle",
             "nameGap": 15,
             "nameTextStyle": {
