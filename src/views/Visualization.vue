@@ -14,7 +14,18 @@
           >
             <div class="meta-container">
               <div class="container-title">Tags</div>
-              <div class="tag-grid" id="tags1"></div>
+              <div class="tag-grid" id="tags1">
+                <div
+                  class="tag"
+                  v-for="(value, index) in repo1MetaData.topics"
+                  :key="index"
+                  v-bind:style="{
+                    backgroundColor: repo1MetaData.topic_colours[value],
+                  }"
+                >
+                  {{ value }}
+                </div>
+              </div>
             </div>
 
             <the-vulnerabilities-card
@@ -210,7 +221,18 @@
           >
             <div class="meta-container">
               <div class="container-title">Tags</div>
-              <div class="tag-grid" id="tags2"></div>
+              <div class="tag-grid" id="tags2">
+                <div
+                  class="tag"
+                  v-for="(value, index) in repo2MetaData.topics"
+                  :key="index"
+                  v-bind:style="{
+                    backgroundColor: repo2MetaData.topic_colours[value],
+                  }"
+                >
+                  {{ value }}
+                </div>
+              </div>
             </div>
 
             <the-vulnerabilities-card
@@ -415,6 +437,16 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1%;
+}
+
+.tag {
+  display: flex;
+  font-weight: 800;
+  padding: 5px 8px;
+  margin: 3px;
+  border-radius: 18px;
+  align-items: center;
+  justify-content: center;
 }
 
 .page {
@@ -710,7 +742,6 @@ export default {
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
       );
       this.repo1MetaData = response.data.data[0];
-      this.addTags(this.repo1MetaData, "tags1");
     } catch (e) {
       console.log(e);
     }
@@ -722,7 +753,6 @@ export default {
             `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2MetaData = response.data.data[0];
-        this.addTags(this.repo2MetaData, "tags2");
         this.balanceHeight();
       } catch (e) {
         console.log(e);
@@ -868,22 +898,6 @@ export default {
     }
   },
   methods: {
-    addTags(metaData, tagName) {
-      metaData.topics.forEach((item) => {
-        let tagDiv = document.createElement("div");
-        tagDiv.innerText = item;
-        tagDiv.style.backgroundColor = metaData.topic_colours[item];
-        tagDiv.style.display = "flex";
-        tagDiv.style.fontWeight = 800;
-        tagDiv.style.fontSize = "100%";
-        tagDiv.style.padding = "5px 8px";
-        tagDiv.style.margin = "3px";
-        tagDiv.style.borderRadius = "18px";
-        tagDiv.style.alignItems = "center";
-        tagDiv.style.justifyContent = "center";
-        document.getElementById(tagName).append(tagDiv);
-      });
-    },
     async getMetaData(name, owner, repoNumber) {
       await axios
         .get(
