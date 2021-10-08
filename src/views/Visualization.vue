@@ -4,7 +4,7 @@
       <div class="repository">
         <div class="rep-container">
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
-          <h5>{{ repo1MetaData.description }}</h5>
+          <h5>{{ repo1MetaData.description }}</h5> 
 
           <div
             v-bind:class="{
@@ -658,6 +658,18 @@
     grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   }
 }
+
+h5 {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+  }
+  
+  h5:hover {
+      overflow: visible;
+      white-space: initial;
+  }
 </style>
 
 <script>
@@ -1032,21 +1044,6 @@ export default {
             this.repo2Stats.nodeLink = null;
           }
         });
-    },
-    balanceHeight() {
-      let lengthDifference =
-        this.repo1MetaData.description.length -
-        this.repo2MetaData.description.length;
-      let paddingString = "‎‎ㅤ";
-      if (lengthDifference > 0) {
-        this.repo2MetaData.description =
-          this.repo2MetaData.description +
-          paddingString.repeat(lengthDifference);
-      } else if (lengthDifference < 0) {
-        this.repo1MetaData.description =
-          this.repo1MetaData.description +
-          paddingString.repeat(Math.abs(lengthDifference));
-      }
     },
     setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
