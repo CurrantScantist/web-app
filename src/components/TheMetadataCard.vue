@@ -132,7 +132,7 @@ export default {
     num_tags: { type: Number },
     latest_tag: { type: String },
     subscriber_count: { type: Number },
-    license_type: {type: String},
+    license_type: { type: String },
   },
   computed: {
     parsedCreatedOn() {

@@ -4,7 +4,7 @@
       <div class="repository">
         <div class="rep-container">
           <h1>{{ repo1MetaData.owner }}/{{ repo1MetaData.name }}</h1>
-          <h5>{{ repo1MetaData.description }}</h5> 
+          <h5>{{ repo1MetaData.description }}</h5>
 
           <div
             v-bind:class="{
@@ -660,16 +660,16 @@
 }
 
 h5 {
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-  }
-  
-  h5:hover {
-      overflow: visible;
-      white-space: initial;
-  }
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+h5:hover {
+  overflow: visible;
+  white-space: initial;
+}
 </style>
 
 <script>
