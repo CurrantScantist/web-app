@@ -61,6 +61,7 @@
               :latest_tag="repo1MetaData.latest_tag"
               :subscriber_count="repo1MetaData.subscribers_count"
               :vulnerability_breakdown="repo1MetaData.vulnerability_breakdown"
+              :license_type="repo1MetaData.license.name"
             ></the-metadata-card>
           </div>
 
@@ -266,6 +267,7 @@
               :num_tags="repo2MetaData.num_tags"
               :latest_tag="repo2MetaData.latest_tag"
               :subscriber_count="repo2MetaData.subscribers_count"
+              :license_type="repo2MetaData.license.name"
             ></the-metadata-card>
           </div>
 
