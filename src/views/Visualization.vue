@@ -767,7 +767,6 @@ export default {
             `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         );
         this.repo2MetaData = response.data.data[0];
-        this.balanceHeight();
       } catch (e) {
         console.log(e);
       }
