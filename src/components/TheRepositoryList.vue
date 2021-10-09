@@ -149,14 +149,15 @@ export default defineComponent({
     };
   },
   async created() {
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL + "/techstack/list"
-      );
-      this.data = this.parseData(response.data.data[0]);
-    } catch (e) {
-      console.log(e);
-    }
+    // Fetch repository list data.
+    await axios
+      .get(process.env.VUE_APP_API_URL + "/techstack/list")
+      .then((res) => {
+        this.data = this.parseData(res.data.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   },
   computed: {
     filteredData() {
@@ -183,7 +184,6 @@ export default defineComponent({
         this.pageSize * this.page - this.pageSize,
         this.pageSize * this.page
       );
-      //   }
     },
   },
   methods: {
@@ -193,26 +193,6 @@ export default defineComponent({
      * @param {object} data - The data object to be parsed
      */
     parseData(data) {
-      // Object.keys(data).forEach((repoItem) => {
-      //   var repoTopics = data[repoItem].topics;
-
-      //   Object.keys(repoTopics).forEach((topic) => {
-      //     var index = this.tagFilters.findIndex(
-      //       (x) => x.text == repoTopics[topic]
-      //     );
-
-      //     if (index == -1) {
-      //       this.tagFilters.push({
-      //         text: repoTopics[topic],
-      //         value: repoTopics[topic],
-      //       });
-      //     }
-      //   });
-      // });
-
-      // this.tagFiltersProcessed = true;
-      // console.log(this.tagFilters);
-
       return data.map((item) => ({
         ...item,
         selected: false,

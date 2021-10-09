@@ -25,6 +25,7 @@
 <script>
 import TheRepositoryList from "@/components/TheRepositoryList";
 
+/** The Repositories view. */
 export default {
   name: "Repositories",
   components: {
