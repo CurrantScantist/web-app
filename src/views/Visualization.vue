@@ -75,7 +75,7 @@
                 v-if="contributors[0][0] != null"
                 :pieData="contributors[0][0]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -91,7 +91,7 @@
                 v-if="contributors[0][1] != null"
                 :pieData="contributors[0][1]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -277,7 +277,7 @@
                 v-if="contributors[1][1] != null"
                 :pieData="contributors[1][1]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -293,7 +293,7 @@
                 v-if="contributors[1][0] != null"
                 :pieData="contributors[1][0]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
