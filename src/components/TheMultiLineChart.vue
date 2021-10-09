@@ -1,5 +1,9 @@
 <template>
   <div class="top-wrapper">
+    <div>
+      <h3>{{ chartData[Object.keys(chartData)[selectedData]].name }}</h3>
+      <h6>(over time)</h6>
+    </div>
     <div class="dropdown-wrapper" v-if="Object.keys(chartData).length > 1">
       <el-dropdown trigger="click" @command="handleDropdownClick">
         <span class="el-dropdown-link">
@@ -12,7 +16,7 @@
               :key="name"
               :command="index"
             >
-              {{ name }}
+              {{ item.name }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -103,7 +107,6 @@ export default {
   methods: {
     handleDropdownClick(newIndex) {
       this.selectedData = newIndex;
-      console.log(this.selectedData);
     },
   },
 };
