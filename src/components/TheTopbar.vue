@@ -2,12 +2,12 @@
   <div class="topbar-wrapper">
     <div class="topbar">
       <div class="logo-button">
-        <router-link to="/">
-          <img src="@/assets/temp-logo.svg" alt="Logo" height="50"
-        /></router-link>
+        <router-link class="logo-link" to="/">
+          <img src="@/assets/temp-logo.svg" alt="Logo" height="50" />
+          <div class="app-name">Scantist</div>
+          <div class="app-subname">Health Model</div></router-link
+        >
       </div>
-      <div class="app-name">Scantist</div>
-      <div class="app-subname">Health Model</div>
       <nav class="nav-wrapper" v-bind:class="{ active: isActive }">
         <ul class="nav">
           <li class="nav-button">
@@ -39,13 +39,23 @@
   border-color: $scantist-border-grey;
 }
 
+.logo-button {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 3px;
+  margin-left: 1rem;
+}
+
+.logo-link {
+  display: flex;
+}
+
 .app-name,
 .app-subname {
   color: black;
   font-size: 150%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: auto 0;
 }
 
 .app-name {
@@ -55,14 +65,6 @@
 
 .app-subname {
   font-weight: 300;
-}
-
-.logo-button {
-  display: block;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding: 3px;
-  margin-left: 1rem;
 }
 
 .menu-button {
