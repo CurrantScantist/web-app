@@ -655,6 +655,14 @@
 </style>
 
 <script>
+import axios from "axios";
+import VChart from "vue-echarts";
+
+import TheMetadataCard from "@/components/TheMetadataCard";
+import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
+import TheContributorPieChart from "@/components/TheContributorPieChart";
+import TheMultiLineChart from "@/components/TheMultiLineChart";
+
 // imports for json visualisations containing all the design elements representing the channel of visualisations
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
@@ -668,15 +676,6 @@ import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 import heatMapSeriesObj from "@/visualisations/SeriesSubObjHeatMap.json";
-
-import axios from "axios";
-import VChart from "vue-echarts";
-
-import TheMetadataCard from "@/components/TheMetadataCard";
-// import TheTagsCard from "@/components/TheTagsCard";
-import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
-import TheContributorPieChart from "@/components/TheContributorPieChart";
-import TheMultiLineChart from "@/components/TheMultiLineChart";
 
 export default {
   name: "MultipleRepository",
