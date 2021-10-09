@@ -587,14 +587,15 @@
 
 .node-link {
   grid-area: node-link;
-  overflow-x: scroll;
-  overflow-y: scroll;
 
   //white-space:nowrap;
 }
 
 .node-link-container {
   height: 800px;
+
+  overflow-x: scroll;
+  overflow-y: scroll;
   //display:inline-block;
 }
 
