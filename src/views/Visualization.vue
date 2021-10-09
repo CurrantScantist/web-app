@@ -1297,6 +1297,13 @@ export default {
       }
       return [versions, languageData, statsData];
     },
+    /**
+     * Parse data for contributors pie charts.
+     *
+     * @param {object} data - The data to be parsed.
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     * @param {string} type - The type of contributor data to parse. "all_time" or "last_30_days"
+     */
     parseContributorData(data, repoNumber, type) {
       this.contributors[repoNumber - 1].push(
         Object.keys(data[type].top_25)
@@ -1323,6 +1330,11 @@ export default {
       this.contributorsLoading[repoNumber - 1] = false;
       return;
     },
+    /**
+     * Parse lines of code over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
     parseLocOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
@@ -1355,6 +1367,11 @@ export default {
         this.overTimeDataLoading[repoNumber - 1] = false;
       });
     },
+    /**
+     * Parse commits over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
     parseCommitsOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
@@ -1368,7 +1385,6 @@ export default {
       let weeks = this[statsRepos[repoNumber - 1]].heatmap_data;
 
       Object.keys(weeks).forEach((key) => {
-        console.log(weeks[key].commits.created);
         this.overTimeData[repoNumber - 1].commits.xData.push(weeks[key].start);
         this.overTimeData[repoNumber - 1].commits.yData.push(
           weeks[key].commits.created
