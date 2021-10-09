@@ -135,6 +135,9 @@ span {
 <script>
 import navRoutes from "@/router/nav-routes.js";
 
+/**
+ * The top navigation bar using routes from nav-routes.js.
+ */
 export default {
   name: "Topbar",
   data() {
@@ -144,9 +147,19 @@ export default {
     };
   },
   methods: {
+    /**
+     * Capitalizes the first letter of a string.
+     *
+     * @param {string} string - A string.
+     *
+     * @return {string} The input string with the first letter capitalized.
+     */
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
+    /**
+     * Called on burger menu button click, toggling the CSS class.
+     */
     collapseMenu() {
       this.isActive = !this.isActive;
     },
