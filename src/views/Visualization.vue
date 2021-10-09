@@ -617,6 +617,7 @@
       "wide-visualisation1"
       "wide-visualisation2"
       "wide-visualisation3"
+      "wide-visualisation4"
       "heat-map"
       "node-link";
   }
