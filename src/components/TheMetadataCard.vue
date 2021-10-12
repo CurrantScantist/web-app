@@ -108,22 +108,66 @@
 </style>
 
 <script>
+/**
+ * A card component for displaying repository metadata.
+ */
 export default {
   props: {
+    /**
+     * Number of forks.
+     */
     forks: { type: Number },
+    /**
+     * Number of watchers.
+     */
     watchers: { type: Number },
+    /**
+     * Number of stargazers
+     */
     stargazers: { type: Number },
+    /**
+     * Number of open issues.
+     */
     openIssues: { type: Number },
+    /**
+     * The default repository branch.
+     */
     defaultBranch: { type: String },
+    /**
+     * The size of the repository (in KB)
+     */
     size: { type: Number },
-    topics: { type: Array },
+    /**
+     * The date the repository was created.
+     */
     createdOn: { type: String },
+    /**
+     * The date the repository was last updated.
+     */
     lastUpdatedOn: { type: String },
+    /**
+     * If the repository is archived or not.
+     */
     archived: { type: Boolean },
+    /**
+     * If the repository is disabled or not.
+     */
     disabled: { type: Boolean },
+    /**
+     * The top programming language.
+     */
     language: { type: String },
+    /**
+     * The total number of tagged releases/versions.
+     */
     num_tags: { type: Number },
+    /**
+     * The latest tagged release/version.
+     */
     latest_tag: { type: String },
+    /**
+     * The number of subscribers.
+     */
     subscriber_count: { type: Number },
   },
   computed: {
@@ -135,6 +179,13 @@ export default {
     },
   },
   methods: {
+    /**
+     * Process a date to an Australian timezone.
+     *
+     * @param {string} inputDate - The date to be converted.
+     *
+     * @returns {string} inputDate formatted to AEST timezone.
+     */
     processDate(inputDate) {
       if (inputDate) {
         let date = new Date(inputDate);
