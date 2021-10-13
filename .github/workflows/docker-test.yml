@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Docker Test
 
 on: [push, pull_request]
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [10.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -20,4 +20,4 @@ jobs:
       - run: docker build --tag test-frontend-monashfyp .
       - run: docker run --init -d --name test-frontend-monashfyp -p 8081:4444 test-frontend-monashfyp
       - run: echo "Image has been deployed in production"
-      - run: cat http://localhost:8080
+      - run: curl http://localhost:8080
