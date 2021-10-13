@@ -1,0 +1,23 @@
+name: Node.js CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: docker build --tag test-frontend-monashfyp .
+      - run: docker run --init -d --name test-frontend-monashfyp -p 8081:4444 test-frontend-monashfyp
+      - run: echo "Image has been deployed in production"
+      - run: cat http://localhost:8080
