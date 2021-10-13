@@ -15,7 +15,6 @@ jobs:
             VUE_APP_TITLE: ${{ secrets.VUE_APP_TITLE }}
     steps:
       - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
@@ -24,6 +23,6 @@ jobs:
       - run: docker run --init -d --name test-frontend-monashfyp -p 8080:4444 test-frontend-monashfyp
       - run: echo "Image is live now ready not"
       - run: curl http://127.0.0.1:8080
-
+      - uses: cypress-io/github-action@v2
         
         
