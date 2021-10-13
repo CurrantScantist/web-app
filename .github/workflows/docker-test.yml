@@ -11,7 +11,7 @@ jobs:
       matrix:
         node-version: [10.x]
     env:
-            VUE_APP_API_URL: ${{ secrets.VUE_APP_API_URL }}
+            VUE_APP_API_URL: "http://127.0.0.1:8080"
             VUE_APP_TITLE: ${{ secrets.VUE_APP_TITLE }}
     steps:
       - uses: actions/checkout@v2
