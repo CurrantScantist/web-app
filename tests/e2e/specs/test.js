@@ -2,7 +2,7 @@
 
 describe("My First Test", () => {
   it("Visits the app root url", () => {
-    cy.visit("http://localhost:8080/");
+    cy.visit("http://127.0.0.1:8080/");
     cy.contains("h1", "Compare Open Source Projects & Analyse Vulnerabilities");
   });
 });
