@@ -1,0 +1,14 @@
+{
+  "data": [
+    [
+      { "name": "axios", "owner": "axios", "stargazers_count": 88392 },
+      { "name": "deno", "owner": "denoland", "stargazers_count": 78214 },
+      { "name": "angular", "owner": "angular", "stargazers_count": 76998 },
+      { "name": "PowerToys", "owner": "microsoft", "stargazers_count": 61481 },
+      { "name": "django", "owner": "django", "stargazers_count": 60120 },
+      { "name": "flask", "owner": "pallets", "stargazers_count": 56858 },
+      { "name": "jquery", "owner": "jquery", "stargazers_count": 55458 },
+      { "name": "Chart.js", "owner": "chartjs", "stargazers_count": 55033 }
+    ]
+  ]
+}
