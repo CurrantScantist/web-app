@@ -22,4 +22,4 @@ jobs:
       - run: docker build --tag test-frontend-monashfyp .
       - run: docker run --init -d --name test-frontend-monashfyp -p 8081:4444 test-frontend-monashfyp
       - run: echo "Image has been deployed in production"
-      - run: curl http://127.0.0.1:8080
+      - run: curl http://127.0.0.1:8081
