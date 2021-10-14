@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: docker build --tag test-frontend-monashfyp .
       - run: docker run --init -d --name test-frontend-monashfyp -p 8080:4444 test-frontend-monashfyp
-      - run: echo "Image is live now ready not"
+      - run: echo "Web app is ready to test and running on http://127.0.0.1:8080"
       - run: curl http://127.0.0.1:8080
       - uses: cypress-io/github-action@v2
         

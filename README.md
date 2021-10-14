@@ -7,8 +7,7 @@
 | npm run serve     | Run development server |
 | npm run build     | Build for production   |
 | npm run lint      | Run linter             |
-| npm run test:unit | Run unit tests         |
-| npm run test:e2e  | Run end-to-end tests   |
+| npm run test:cypress  | Run end-to-end tests   |
 
 ## Building for production
 - Create a .env.production.local file in the project root
