@@ -1,0 +1,148 @@
+{
+  "data": [
+    [
+      {
+        "name": "react",
+        "owner": "facebook",
+        "forks": 35546,
+        "stargazers_count": 175989,
+        "topics": [
+          "javascript",
+          "react",
+          "frontend",
+          "declarative",
+          "ui",
+          "library"
+        ],
+        "id": "61093545799bad69e5106146"
+      },
+      {
+        "name": "uvicorn",
+        "owner": "encode",
+        "forks": 361,
+        "stargazers_count": 4430,
+        "topics": ["python", "asyncio", "asgi", "http", "http-server"],
+        "id": "6165a908d7c8014d27e7482a"
+      },
+      
+      {
+        "name": "audioread",
+        "owner": "beetbox",
+        "forks": 91,
+        "stargazers_count": 371,
+        "topics": ["python", "audio"],
+        "id": "6165b918d7c8014d27ec0d98"
+      },
+
+      {
+        "name": "theos",
+        "owner": "theos",
+        "forks": 970,
+        "stargazers_count": 3560,
+        "topics": [
+          "theos",
+          "ios",
+          "build-system",
+          "macos",
+          "linux",
+          "windows",
+          "makefile",
+          "perl"
+        ],
+        "id": "61665b72d7c8014d271c4d9b"
+      },
+      {
+        "name": "weechat",
+        "owner": "weechat",
+        "forks": 291,
+        "stargazers_count": 2308,
+        "topics": [
+          "chat",
+          "irc",
+          "c",
+          "extensible",
+          "scripting",
+          "python",
+          "perl",
+          "ruby",
+          "lua",
+          "tcl",
+          "javascript",
+          "scheme",
+          "php",
+          "client"
+        ],
+        "id": "6166604fd7c8014d271e0207"
+      },
+  
+      {
+        "name": "PowerToys",
+        "owner": "microsoft",
+        "forks": 3402,
+        "stargazers_count": 61481,
+        "topics": [
+          "powertoys",
+          "desktop",
+          "windows",
+          "fancyzones",
+          "microsoft-powertoys",
+          "powerrename",
+          "keyboard-manager",
+          "color-picker"
+        ],
+        "id": "6166e000d7c8014d27455ba8"
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "forks": 16142,
+        "stargazers_count": 53190,
+        "topics": ["shadowsocks", "c-sharp", "proxy"],
+        "id": "6166ecedd7c8014d27490164"
+      },
+      {
+        "name": "Powershell",
+        "owner": "Powershell",
+        "forks": 4709,
+        "stargazers_count": 30047,
+        "topics": [
+          "powershell",
+          "windows",
+          "macos",
+          "linux",
+          "command-line",
+          "shell",
+          "netcore",
+          "hacktoberfest"
+        ],
+        "id": "616740ead7c8014d275f93ea"
+      },
+      {
+        "name": "aspnetcore",
+        "owner": "dotnet",
+        "forks": 6945,
+        "stargazers_count": 26077,
+        "topics": ["dotnet", "aspnetcore", "hacktoberfest"],
+        "id": "61682576d7c8014d27a338be"
+      },
+      {
+        "name": "ScreenToGif",
+        "owner": "NickeManarin",
+        "forks": 1687,
+        "stargazers_count": 15575,
+        "topics": [
+          "gif",
+          "recorder",
+          "editor",
+          "video",
+          "webcam",
+          "sketchboard",
+          "wpf"
+        ],
+        "id": "61682b4bd7c8014d27a4e095"
+      }
+    ]
+  ],
+  "code": 200,
+  "message": "Techstacks data retrieved successfully"
+}

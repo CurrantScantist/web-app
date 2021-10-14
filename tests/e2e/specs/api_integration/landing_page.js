@@ -1,15 +1,18 @@
-// https://docs.cypress.io/api/introduction/api.html
-
+// Testing landing page content load by checking heading
 describe("Heading Test for Landing Page", () => {
-  it("Checking Heading string match", () => {
+  it("Testing Heading string match", () => {
     cy.visit("/");
 
-    cy.contains("h1", "Compare Open Source Projects & Analyse Vulnerabilities");
+    cy.get("h1").should(
+      "contain",
+      "Compare Open Source Projects & Analyse Vulnerabilities"
+    );
   });
 });
 
+// Testing backend call from landing page using mock data
 describe("Backend Mock Endpoint for top ten teckstack", () => {
-  beforeEach("testing top ten", () => {
+  beforeEach("testing techstack/topen endpoint", () => {
     cy.server();
     cy.route("GET", "**/techstack/topten**", "fixture:test_top_ten.json");
   });
