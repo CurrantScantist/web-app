@@ -1,6 +1,6 @@
 // Testing /repositories page
 
-describe("Testing on Load of /repositories page", () => {
+describe("Testing page on Load of /repositories page", () => {
   it("Checking Input placeholder string match", () => {
     cy.visit("/repositories");
     cy.get("input")
@@ -9,8 +9,8 @@ describe("Testing on Load of /repositories page", () => {
   });
 });
 
-// Testing backend call from repository page using mock data
-describe("Backend Mock Endpoint for list of teckstack", () => {
+// Testing endpoint from repository page using mock data
+describe("Testing endpoint using Mock data for the list of techstack", () => {
   beforeEach("testing techstack/list endpoint", () => {
     cy.server();
     cy.route("GET", "**/techstack/list**", "fixture:techstack_list.json");

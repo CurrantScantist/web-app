@@ -1,0 +1,1968 @@
+{
+  "data": [
+    [
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.3",
+        "LOC": {
+          "C#": { "nFiles": 89, "blank": 1550, "comment": 4059, "code": 12305 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 314
+          },
+          "Markdown": { "nFiles": 2, "blank": 21, "comment": 0, "code": 50 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1573, "comment": 4073, "code": 12673, "nFiles": 94 }
+        },
+        "committed_date": "2015-01-24T17:04:26",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 89, "blank": 1550, "comment": 4059, "code": 12305 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 314
+          },
+          "Markdown": { "nFiles": 2, "blank": 21, "comment": 0, "code": 50 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1573,
+            "comment": 4073,
+            "code": 12673,
+            "nFiles": 94
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.3.1",
+        "LOC": {
+          "C#": { "nFiles": 89, "blank": 1559, "comment": 4062, "code": 12371 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 315
+          },
+          "Markdown": { "nFiles": 2, "blank": 21, "comment": 0, "code": 52 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1582, "comment": 4076, "code": 12742, "nFiles": 94 }
+        },
+        "committed_date": "2015-03-06T15:21:56",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 89, "blank": 1559, "comment": 4062, "code": 12371 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 315
+          },
+          "Markdown": { "nFiles": 2, "blank": 21, "comment": 0, "code": 52 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1582,
+            "comment": 4076,
+            "code": 12742,
+            "nFiles": 94
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.5",
+        "LOC": {
+          "C#": { "nFiles": 94, "blank": 1667, "comment": 4110, "code": 13228 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 321
+          },
+          "Markdown": { "nFiles": 2, "blank": 25, "comment": 0, "code": 52 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1694, "comment": 4124, "code": 13605, "nFiles": 99 }
+        },
+        "committed_date": "2015-07-25T11:20:17",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 94, "blank": 1667, "comment": 4110, "code": 13228 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 321
+          },
+          "Markdown": { "nFiles": 2, "blank": 25, "comment": 0, "code": 52 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1694,
+            "comment": 4124,
+            "code": 13605,
+            "nFiles": 99
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.5.2",
+        "LOC": {
+          "C#": { "nFiles": 96, "blank": 1693, "comment": 4142, "code": 13410 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 329
+          },
+          "Markdown": { "nFiles": 2, "blank": 26, "comment": 0, "code": 54 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1721,
+            "comment": 4156,
+            "code": 13797,
+            "nFiles": 101
+          }
+        },
+        "committed_date": "2015-08-04T09:08:48",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 96, "blank": 1693, "comment": 4142, "code": 13410 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 329
+          },
+          "Markdown": { "nFiles": 2, "blank": 26, "comment": 0, "code": 54 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1721,
+            "comment": 4156,
+            "code": 13797,
+            "nFiles": 101
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.5.4",
+        "LOC": {
+          "C#": { "nFiles": 98, "blank": 1731, "comment": 4165, "code": 13783 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 26, "comment": 0, "code": 55 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1759,
+            "comment": 4179,
+            "code": 14174,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2015-08-17T05:05:12",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 98, "blank": 1731, "comment": 4165, "code": 13783 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 26, "comment": 0, "code": 55 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1759,
+            "comment": 4179,
+            "code": 14174,
+            "nFiles": 103
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.5.6",
+        "LOC": {
+          "C#": { "nFiles": 98, "blank": 1724, "comment": 4199, "code": 13962 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 31, "comment": 0, "code": 66 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1757,
+            "comment": 4213,
+            "code": 14364,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2015-08-20T05:19:20",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 98, "blank": 1724, "comment": 4199, "code": 13962 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 31, "comment": 0, "code": 66 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1757,
+            "comment": 4213,
+            "code": 14364,
+            "nFiles": 103
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "2.5.7",
+        "LOC": {
+          "C#": { "nFiles": 98, "blank": 1731, "comment": 4218, "code": 14082 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 33, "comment": 0, "code": 69 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1766,
+            "comment": 4232,
+            "code": 14487,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2015-09-19T08:24:24",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 98, "blank": 1731, "comment": 4218, "code": 14082 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 332
+          },
+          "Markdown": { "nFiles": 2, "blank": 33, "comment": 0, "code": 69 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1766,
+            "comment": 4232,
+            "code": 14487,
+            "nFiles": 103
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.0",
+        "LOC": {
+          "C#": {
+            "nFiles": 105,
+            "blank": 1771,
+            "comment": 4122,
+            "code": 14648
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 483
+          },
+          "Markdown": { "nFiles": 2, "blank": 33, "comment": 0, "code": 69 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1810,
+            "comment": 4136,
+            "code": 15209,
+            "nFiles": 111
+          }
+        },
+        "committed_date": "2016-03-02T02:47:03",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 105,
+            "blank": 1771,
+            "comment": 4122,
+            "code": 14648
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 483
+          },
+          "Markdown": { "nFiles": 2, "blank": 33, "comment": 0, "code": 69 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1810,
+            "comment": 4136,
+            "code": 15209,
+            "nFiles": 111
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.3",
+        "LOC": {
+          "C#": {
+            "nFiles": 112,
+            "blank": 2027,
+            "comment": 4255,
+            "code": 16253
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 439
+          },
+          "Markdown": { "nFiles": 2, "blank": 32, "comment": 0, "code": 67 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2065,
+            "comment": 4269,
+            "code": 16768,
+            "nFiles": 118
+          }
+        },
+        "committed_date": "2016-09-09T09:48:22",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 112,
+            "blank": 2027,
+            "comment": 4255,
+            "code": 16253
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 439
+          },
+          "Markdown": { "nFiles": 2, "blank": 32, "comment": 0, "code": 67 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2065,
+            "comment": 4269,
+            "code": 16768,
+            "nFiles": 118
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.3.2",
+        "LOC": {
+          "C#": {
+            "nFiles": 120,
+            "blank": 2229,
+            "comment": 4448,
+            "code": 17848
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 463
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 96 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2288,
+            "comment": 4462,
+            "code": 18416,
+            "nFiles": 127
+          }
+        },
+        "committed_date": "2016-10-03T10:58:45",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 120,
+            "blank": 2229,
+            "comment": 4448,
+            "code": 17848
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 463
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 96 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2288,
+            "comment": 4462,
+            "code": 18416,
+            "nFiles": 127
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.3.4",
+        "LOC": {
+          "C#": {
+            "nFiles": 126,
+            "blank": 2309,
+            "comment": 4660,
+            "code": 18191
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 462
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 96 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2368,
+            "comment": 4674,
+            "code": 18758,
+            "nFiles": 133
+          }
+        },
+        "committed_date": "2016-10-21T01:57:08",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 126,
+            "blank": 2309,
+            "comment": 4660,
+            "code": 18191
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 462
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 96 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2368,
+            "comment": 4674,
+            "code": 18758,
+            "nFiles": 133
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.3.6",
+        "LOC": {
+          "C#": {
+            "nFiles": 132,
+            "blank": 2369,
+            "comment": 4680,
+            "code": 18438
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 477
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2428,
+            "comment": 4694,
+            "code": 19022,
+            "nFiles": 139
+          }
+        },
+        "committed_date": "2016-12-06T11:43:19",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 132,
+            "blank": 2369,
+            "comment": 4680,
+            "code": 18438
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 477
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2428,
+            "comment": 4694,
+            "code": 19022,
+            "nFiles": 139
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.4.1",
+        "LOC": {
+          "C#": {
+            "nFiles": 127,
+            "blank": 2332,
+            "comment": 4456,
+            "code": 18089
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 471
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2391,
+            "comment": 4470,
+            "code": 18667,
+            "nFiles": 134
+          }
+        },
+        "committed_date": "2016-12-13T10:08:32",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 127,
+            "blank": 2332,
+            "comment": 4456,
+            "code": 18089
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 471
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2391,
+            "comment": 4470,
+            "code": 18667,
+            "nFiles": 134
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "3.4.2.1",
+        "LOC": {
+          "C#": {
+            "nFiles": 127,
+            "blank": 2318,
+            "comment": 4509,
+            "code": 18266
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 474
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2377,
+            "comment": 4523,
+            "code": 18847,
+            "nFiles": 134
+          }
+        },
+        "committed_date": "2016-12-30T11:24:12",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 127,
+            "blank": 2318,
+            "comment": 4509,
+            "code": 18266
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 474
+          },
+          "Markdown": { "nFiles": 3, "blank": 53, "comment": 0, "code": 98 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2377,
+            "comment": 4523,
+            "code": 18847,
+            "nFiles": 134
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "YAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0",
+        "LOC": {
+          "C#": { "nFiles": 79, "blank": 1575, "comment": 1184, "code": 12307 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 437
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1632, "comment": 1198, "code": 12870, "nFiles": 87 }
+        },
+        "committed_date": "2017-04-04T00:47:43",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 79, "blank": 1575, "comment": 1184, "code": 12307 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 437
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1632,
+            "comment": 1198,
+            "code": 12870,
+            "nFiles": 87
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0.1.1",
+        "LOC": {
+          "C#": { "nFiles": 80, "blank": 1584, "comment": 1190, "code": 12430 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 438
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1641, "comment": 1204, "code": 12994, "nFiles": 88 }
+        },
+        "committed_date": "2017-05-01T05:01:58",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 80, "blank": 1584, "comment": 1190, "code": 12430 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 438
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1641,
+            "comment": 1204,
+            "code": 12994,
+            "nFiles": 88
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0.4",
+        "LOC": {
+          "C#": { "nFiles": 81, "blank": 1656, "comment": 1351, "code": 12676 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 436
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1713, "comment": 1365, "code": 13238, "nFiles": 89 }
+        },
+        "committed_date": "2017-06-01T07:55:55",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 81, "blank": 1656, "comment": 1351, "code": 12676 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 436
+          },
+          "Markdown": { "nFiles": 3, "blank": 51, "comment": 0, "code": 95 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1713,
+            "comment": 1365,
+            "code": 13238,
+            "nFiles": 89
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0.6",
+        "LOC": {
+          "C#": { "nFiles": 82, "blank": 1709, "comment": 1366, "code": 13074 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 437
+          },
+          "Markdown": { "nFiles": 3, "blank": 55, "comment": 0, "code": 103 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1770, "comment": 1380, "code": 13645, "nFiles": 90 }
+        },
+        "committed_date": "2017-09-09T12:24:50",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 82, "blank": 1709, "comment": 1366, "code": 13074 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 437
+          },
+          "Markdown": { "nFiles": 3, "blank": 55, "comment": 0, "code": 103 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1770,
+            "comment": 1380,
+            "code": 13645,
+            "nFiles": 90
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0.8",
+        "LOC": {
+          "C#": { "nFiles": 85, "blank": 1803, "comment": 1403, "code": 13616 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 450
+          },
+          "Markdown": { "nFiles": 3, "blank": 55, "comment": 0, "code": 103 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1864, "comment": 1417, "code": 14200, "nFiles": 93 }
+        },
+        "committed_date": "2018-02-16T02:15:53",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 85, "blank": 1803, "comment": 1403, "code": 13616 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 450
+          },
+          "Markdown": { "nFiles": 3, "blank": 55, "comment": 0, "code": 103 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1864,
+            "comment": 1417,
+            "code": 14200,
+            "nFiles": 93
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.0.10",
+        "LOC": {
+          "C#": { "nFiles": 85, "blank": 1802, "comment": 1404, "code": 13638 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 449
+          },
+          "Markdown": { "nFiles": 3, "blank": 59, "comment": 0, "code": 121 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1867, "comment": 1418, "code": 14239, "nFiles": 93 }
+        },
+        "committed_date": "2018-05-10T15:29:06",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 85, "blank": 1802, "comment": 1404, "code": 13638 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 449
+          },
+          "Markdown": { "nFiles": 3, "blank": 59, "comment": 0, "code": 121 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1867,
+            "comment": 1418,
+            "code": 14239,
+            "nFiles": 93
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.1",
+        "LOC": {
+          "C#": { "nFiles": 86, "blank": 1799, "comment": 1383, "code": 13743 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 450
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 1870, "comment": 1397, "code": 14360, "nFiles": 95 }
+        },
+        "committed_date": "2018-08-18T01:51:02",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 86, "blank": 1799, "comment": 1383, "code": 13743 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 450
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 1870,
+            "comment": 1397,
+            "code": 14360,
+            "nFiles": 95
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.3",
+        "LOC": {
+          "C#": { "nFiles": 87, "blank": 1937, "comment": 1417, "code": 14585 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 2008, "comment": 1431, "code": 15204, "nFiles": 96 }
+        },
+        "committed_date": "2018-12-08T02:29:35",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 87, "blank": 1937, "comment": 1417, "code": 14585 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2008,
+            "comment": 1431,
+            "code": 15204,
+            "nFiles": 96
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.4",
+        "LOC": {
+          "C#": { "nFiles": 87, "blank": 1938, "comment": 1423, "code": 14622 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 451
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 2009, "comment": 1437, "code": 15240, "nFiles": 96 }
+        },
+        "committed_date": "2019-02-04T08:09:36",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 87, "blank": 1938, "comment": 1423, "code": 14622 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 451
+          },
+          "Markdown": { "nFiles": 4, "blank": 65, "comment": 0, "code": 136 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2009,
+            "comment": 1437,
+            "code": 15240,
+            "nFiles": 96
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XSD": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.6",
+        "LOC": {
+          "C#": { "nFiles": 87, "blank": 1961, "comment": 1451, "code": 14834 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 66, "comment": 0, "code": 139 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 2033, "comment": 1466, "code": 15567, "nFiles": 97 }
+        },
+        "committed_date": "2019-04-17T12:45:50",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 87, "blank": 1961, "comment": 1451, "code": 14834 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 66, "comment": 0, "code": 139 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2033,
+            "comment": 1466,
+            "code": 15567,
+            "nFiles": 97
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.7.1",
+        "LOC": {
+          "C#": { "nFiles": 87, "blank": 2030, "comment": 1459, "code": 15073 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 149 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": { "blank": 2104, "comment": 1474, "code": 15816, "nFiles": 97 }
+        },
+        "committed_date": "2019-07-14T11:46:44",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 87, "blank": 2030, "comment": 1459, "code": 15073 },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 4,
+            "comment": 14,
+            "code": 452
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 149 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 22 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2104,
+            "comment": 1474,
+            "code": 15816,
+            "nFiles": 97
+          },
+          "JavaScript": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.9.0",
+        "LOC": {
+          "C#": { "nFiles": 91, "blank": 2074, "comment": 1473, "code": 15276 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 416
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 77, "code": 68 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2205,
+            "comment": 1586,
+            "code": 24037,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2019-12-21T15:10:54",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 91, "blank": 2074, "comment": 1473, "code": 15276 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 416
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 77, "code": 68 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2205,
+            "comment": 1586,
+            "code": 24037,
+            "nFiles": 103
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.9.2",
+        "LOC": {
+          "C#": { "nFiles": 91, "blank": 2073, "comment": 1474, "code": 15285 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 416
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 77, "code": 68 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2204,
+            "comment": 1587,
+            "code": 24046,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2019-12-25T09:18:26",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 91, "blank": 2073, "comment": 1474, "code": 15285 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 416
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 77, "code": 68 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2204,
+            "comment": 1587,
+            "code": 24046,
+            "nFiles": 103
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.9.2-a-nbbnu",
+        "LOC": {
+          "C#": { "nFiles": 91, "blank": 2036, "comment": 1386, "code": 14930 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 443
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2167,
+            "comment": 1500,
+            "code": 23717,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2020-01-08T05:23:18",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 91, "blank": 2036, "comment": 1386, "code": 14930 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 443
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 155 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2167,
+            "comment": 1500,
+            "code": 23717,
+            "nFiles": 103
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.9.3-nbbnu",
+        "LOC": {
+          "C#": { "nFiles": 92, "blank": 2078, "comment": 1427, "code": 15149 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 442
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 152 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2209,
+            "comment": 1541,
+            "code": 23927,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2020-03-31T17:00:32",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 92, "blank": 2078, "comment": 1427, "code": 15149 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 442
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 152 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2209,
+            "comment": 1541,
+            "code": 23927,
+            "nFiles": 103
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.1.10.0-nbbnu",
+        "LOC": {
+          "C#": { "nFiles": 92, "blank": 2081, "comment": 1427, "code": 15168 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 442
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 152 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2212,
+            "comment": 1541,
+            "code": 23946,
+            "nFiles": 103
+          }
+        },
+        "committed_date": "2020-04-13T18:30:09",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 92, "blank": 2081, "comment": 1427, "code": 15168 },
+          "JavaScript": {
+            "nFiles": 2,
+            "blank": 20,
+            "comment": 21,
+            "code": 8002
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 442
+          },
+          "Markdown": { "nFiles": 4, "blank": 68, "comment": 0, "code": 152 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 41, "comment": 78, "code": 67 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2212,
+            "comment": 1541,
+            "code": 23946,
+            "nFiles": 103
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "XML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "Protocol Buffers": {
+            "nFiles": 0,
+            "blank": 0,
+            "comment": 0,
+            "code": 0
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.2.0.1",
+        "LOC": {
+          "C#": { "nFiles": 96, "blank": 2281, "comment": 1563, "code": 16557 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 22,
+            "comment": 23,
+            "code": 765
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 488
+          },
+          "Markdown": { "nFiles": 6, "blank": 88, "comment": 0, "code": 204 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 42, "comment": 77, "code": 52 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2443,
+            "comment": 1687,
+            "code": 18212,
+            "nFiles": 110
+          }
+        },
+        "committed_date": "2020-09-25T17:17:52",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 96, "blank": 2281, "comment": 1563, "code": 16557 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 22,
+            "comment": 23,
+            "code": 765
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 488
+          },
+          "Markdown": { "nFiles": 6, "blank": 88, "comment": 0, "code": 204 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 111 },
+          "YAML": { "nFiles": 1, "blank": 42, "comment": 77, "code": 52 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 5 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2443,
+            "comment": 1687,
+            "code": 18212,
+            "nFiles": 110
+          },
+          "XAML": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.3.0.0",
+        "LOC": {
+          "C#": {
+            "nFiles": 102,
+            "blank": 2369,
+            "comment": 1633,
+            "code": 16487
+          },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 22,
+            "comment": 23,
+            "code": 765
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 574
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 220 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 75, "code": 44 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2543,
+            "comment": 1755,
+            "code": 18595,
+            "nFiles": 121
+          }
+        },
+        "committed_date": "2020-10-18T17:05:43",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": {
+            "nFiles": 102,
+            "blank": 2369,
+            "comment": 1633,
+            "code": 16487
+          },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 22,
+            "comment": 23,
+            "code": 765
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 574
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 220 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 75, "code": 44 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2543,
+            "comment": 1755,
+            "code": 18595,
+            "nFiles": 121
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.3.2.0",
+        "LOC": {
+          "C#": { "nFiles": 93, "blank": 2190, "comment": 1467, "code": 14774 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 24,
+            "comment": 24,
+            "code": 778
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 548
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 220 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 74, "code": 45 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2366,
+            "comment": 1589,
+            "code": 16870,
+            "nFiles": 112
+          }
+        },
+        "committed_date": "2020-11-05T07:11:37",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 93, "blank": 2190, "comment": 1467, "code": 14774 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 24,
+            "comment": 24,
+            "code": 778
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 548
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 220 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 74, "code": 45 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2366,
+            "comment": 1589,
+            "code": 16870,
+            "nFiles": 112
+          }
+        }
+      },
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "tag_name": "4.4.0.0",
+        "LOC": {
+          "C#": { "nFiles": 88, "blank": 2095, "comment": 1429, "code": 14068 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 24,
+            "comment": 24,
+            "code": 778
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 543
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 217 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 74, "code": 45 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2271,
+            "comment": 1551,
+            "code": 16156,
+            "nFiles": 107
+          }
+        },
+        "committed_date": "2020-12-31T20:55:01",
+        "LOC_limited": {
+          "Other": { "nFiles": 0, "blank": 0, "comment": 0, "code": 0 },
+          "C#": { "nFiles": 88, "blank": 2095, "comment": 1429, "code": 14068 },
+          "JavaScript": {
+            "nFiles": 1,
+            "blank": 24,
+            "comment": 24,
+            "code": 778
+          },
+          "MSBuild script": {
+            "nFiles": 2,
+            "blank": 0,
+            "comment": 14,
+            "code": 543
+          },
+          "XAML": { "nFiles": 5, "blank": 15, "comment": 0, "code": 357 },
+          "Markdown": { "nFiles": 6, "blank": 90, "comment": 0, "code": 217 },
+          "XSD": { "nFiles": 1, "blank": 0, "comment": 1, "code": 112 },
+          "YAML": { "nFiles": 1, "blank": 37, "comment": 74, "code": 45 },
+          "Protocol Buffers": {
+            "nFiles": 1,
+            "blank": 8,
+            "comment": 9,
+            "code": 26
+          },
+          "XML": { "nFiles": 1, "blank": 0, "comment": 0, "code": 6 },
+          "Bourne Shell": { "nFiles": 1, "blank": 2, "comment": 0, "code": 4 },
+          "SUM": {
+            "blank": 2271,
+            "comment": 1551,
+            "code": 16156,
+            "nFiles": 107
+          }
+        }
+      }
+    ]
+  ],
+  "code": 200,
+  "message": "release data retrieved successfully"
+}

@@ -1,5 +1,5 @@
 // Testing landing page content load by checking heading
-describe("Heading Test for Landing Page", () => {
+describe("Testing content of heading for Landing Page", () => {
   it("Testing Heading string match", () => {
     cy.visit("/");
 
@@ -11,7 +11,7 @@ describe("Heading Test for Landing Page", () => {
 });
 
 // Testing backend call from landing page using mock data
-describe("Backend Mock Endpoint for top ten teckstack", () => {
+describe("Testing endpoint using mock data for the top ten teckstack", () => {
   beforeEach("testing techstack/topen endpoint", () => {
     cy.server();
     cy.route("GET", "**/techstack/topten**", "fixture:test_top_ten.json");
