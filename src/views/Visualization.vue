@@ -583,14 +583,15 @@
 
 .node-link {
   grid-area: node-link;
-  overflow-x: scroll;
-  overflow-y: scroll;
 
   //white-space:nowrap;
 }
 
 .node-link-container {
   height: 800px;
+
+  overflow-x: scroll;
+  overflow-y: scroll;
   //display:inline-block;
 }
 
@@ -613,6 +614,7 @@
       "wide-visualisation1"
       "wide-visualisation2"
       "wide-visualisation3"
+      "wide-visualisation4"
       "heat-map"
       "node-link";
   }
