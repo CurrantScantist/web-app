@@ -1,5 +1,5 @@
 describe('Testing the user experience from landing page to repository view', () => {
-    beforeEach("testing techstack/topen endpoint", () => {
+    beforeEach("Retrieve all required routes", () => {
 
       // Getting all required routes ready for end-to-end tests from landing page to repository view for mock repo: shadowsocks/shadowsocks-windows
       let name = "shadowsocks-windows";
