@@ -73,10 +73,10 @@
               <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[0][0] != null"
+                v-if="contributors[0] != null"
                 :pieData="contributors[0][0]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -89,10 +89,10 @@
               <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[0][1] != null"
+                v-if="contributors[0] != null"
                 :pieData="contributors[0][1]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -153,14 +153,12 @@
             </div>
             <div
               class="wide-visualisation4"
-              v-if="Object.keys(locOverTimeData[0]).length != 0"
+              v-if="Object.keys(overTimeData[0]).length != 0"
             >
-              <h3>Lines of Code</h3>
-              <h6>(over time)</h6>
               <the-multi-line-chart
-                v-if="locOverTimeData[0] != null"
-                :chartData="locOverTimeData[0]"
-                :isLoading="locOverTimeLoading[0]"
+                v-if="overTimeData[0] != null"
+                :chartData="overTimeData[0]"
+                :isLoading="overTimeDataLoading[0]"
               >
               </the-multi-line-chart>
               <el-empty
@@ -276,10 +274,10 @@
               <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[1][1] != null"
+                v-if="contributors[1] != null"
                 :pieData="contributors[1][1]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -292,10 +290,10 @@
               <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[1][0] != null"
+                v-if="contributors[1] != null"
                 :pieData="contributors[1][0]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -357,14 +355,12 @@
             </div>
             <div
               class="wide-visualisation4"
-              v-if="Object.keys(locOverTimeData[1]).length != 0"
+              v-if="Object.keys(overTimeData[1]).length != 0"
             >
-              <h3>Lines of Code</h3>
-              <h6>(over time)</h6>
               <the-multi-line-chart
-                v-if="locOverTimeData[1] != null"
-                :chartData="locOverTimeData[1]"
-                :isLoading="locOverTimeLoading[1]"
+                v-if="overTimeData[1] != null"
+                :chartData="overTimeData[1]"
+                :isLoading="overTimeDataLoading[1]"
               >
               </the-multi-line-chart>
               <el-empty
@@ -589,14 +585,15 @@
 
 .node-link {
   grid-area: node-link;
-  overflow-x: scroll;
-  overflow-y: scroll;
 
   //white-space:nowrap;
 }
 
 .node-link-container {
   height: 800px;
+
+  overflow-x: scroll;
+  overflow-y: scroll;
   //display:inline-block;
 }
 
@@ -619,6 +616,7 @@
       "wide-visualisation1"
       "wide-visualisation2"
       "wide-visualisation3"
+      "wide-visualisation4"
       "heat-map"
       "node-link";
   }
@@ -673,6 +671,14 @@ h5:hover {
 </style>
 
 <script>
+import axios from "axios";
+import VChart from "vue-echarts";
+
+import TheMetadataCard from "@/components/TheMetadataCard";
+import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
+import TheContributorPieChart from "@/components/TheContributorPieChart";
+import TheMultiLineChart from "@/components/TheMultiLineChart";
+
 // imports for json visualisations containing all the design elements representing the channel of visualisations
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
@@ -686,15 +692,6 @@ import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 import heatMapSeriesObj from "@/visualisations/SeriesSubObjHeatMap.json";
-
-import axios from "axios";
-import VChart from "vue-echarts";
-
-import TheMetadataCard from "@/components/TheMetadataCard";
-// import TheTagsCard from "@/components/TheTagsCard";
-import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
-import TheContributorPieChart from "@/components/TheContributorPieChart";
-import TheMultiLineChart from "@/components/TheMultiLineChart";
 
 export default {
   name: "MultipleRepository",
@@ -742,307 +739,214 @@ export default {
       contributorsLoading: [true, true],
       versionData: [],
       languageData: [],
-      locOverTimeData: {
+      overTimeData: {
         0: {},
         1: {},
       },
-      locOverTimeLoading: [true, true],
+      overTimeDataLoading: [true, true],
     };
   },
   async created() {
-    try {
-      const response = await axios.get(
+    await axios
+      .get(
         process.env.VUE_APP_API_URL +
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1MetaData = response.data.data[0];
-    } catch (e) {
-      console.log(e);
-    }
+      )
+      .then((res) => {
+        this.repo1MetaData = res.data.data[0];
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     if (this.name2) {
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2MetaData = response.data.data[0];
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.loc = response.data.data[0];
-      this.parseLocOverTimeData(1, "LocOverTime");
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.loc = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.dep = response.data.data[0];
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.dep = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.heatmap_data = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.nodeLink = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/contribution/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.parseContributorData(
-        response.data.data[0].commits_per_author,
-        1,
-        "last_30_days"
-      );
-      this.parseContributorData(
-        response.data.data[0].commits_per_author,
-        1,
-        "all_time"
-      );
-    } catch (e) {
-      console.log(e);
-      this.contributors[0][0] = null;
-      this.contributors[0][1] = null;
-    }
-
-    this.processData(1);
-
-    if (this.name2) {
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.loc = response.data.data[0];
-        this.parseLocOverTimeData(2, "LocOverTime");
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.loc = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.dep = response.data.data[0];
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.dep = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.heatmap_data = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.nodeLink = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/contribution/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-
-        this.parseContributorData(
-          response.data.data[0].commits_per_author,
-          2,
-          "last_30_days"
-        );
-        this.parseContributorData(
-          response.data.data[0].commits_per_author,
-          2,
-          "all_time"
-        );
-      } catch (e) {
-        console.log(e);
-        this.contributors[1][0] = null;
-        this.contributors[1][1] = null;
-      }
-      this.processData(2);
-    }
-  },
-  methods: {
-    async getMetaData(name, owner, repoNumber) {
       await axios
         .get(
           process.env.VUE_APP_API_URL +
-            `/techstack/{name_owner}?name=${name}&owner=${owner}`
+            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1MetaData = response.data.data[0];
-            this.addTags(this.repo1MetaData, "tags1");
-          } else {
-            this.repo2MetaData = response.data.data[0];
-            this.addTags(this.repo2MetaData, "tags2");
-          }
+        .then((res) => {
+          this.repo2MetaData = res.data.data[0];
         })
         .catch((e) => {
           console.log(e);
         });
-    },
-    async getContributionData(name, owner, repoNumber) {
+    }
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.loc = res.data.data[0];
+        this.parseLocOverTimeData(1);
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.loc = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.dep = res.data.data[0];
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.dep = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.heatmap_data = res.data.data[0].heatmap_data;
+        this.parseCommitsOverTimeData(1);
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.heatmap_data = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.nodeLink = res.data.data[0].nodelink_data;
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.nodeLink = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/contribution/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.parseContributorData(
+          res.data.data[0].commits_per_author,
+          1,
+          "last_30_days"
+        );
+        this.parseContributorData(
+          res.data.data[0].commits_per_author,
+          1,
+          "all_time"
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+        this.contributors[0][0] = null;
+        this.contributors[0][1] = null;
+      });
+
+    this.processData(1);
+
+    if (this.name2) {
       await axios
         .get(
           process.env.VUE_APP_API_URL +
-            `/techstack/contribution/{name_owner}?name=${name}&owner=${owner}`
+            `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         )
-        .then((response) => {
+        .then((res) => {
+          this.repo2Stats.loc = res.data.data[0];
+          this.parseLocOverTimeData(2);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.loc = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.dep = res.data.data[0];
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.dep = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.heatmap_data = res.data.data[0].heatmap_data;
+          this.parseCommitsOverTimeData(2);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.heatmap_data = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.nodeLink = res.data.data[0].nodelink_data;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.nodeLink = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/contribution/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
           this.parseContributorData(
-            response.data.data[0].commits_per_author,
-            repoNumber,
+            res.data.data[0].commits_per_author,
+            2,
             "last_30_days"
           );
           this.parseContributorData(
-            response.data.data[0].commits_per_author,
-            repoNumber,
+            res.data.data[0].commits_per_author,
+            2,
             "all_time"
           );
         })
         .catch((e) => {
           console.log(e);
-          this.contributors[repoNumber - 1] = null;
+          this.contributors[1][0] = null;
+          this.contributors[1][1] = null;
         });
-    },
-    async getLOCData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/release/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.loc = response.data.data[0];
-            this.parseLocOverTimeData(repoNumber, "LocOverTime");
-          } else {
-            this.repo2Stats.loc = response.data.data[0];
-            this.parseLocOverTimeData(repoNumber, "LocOverTime");
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.loc = null;
-          } else {
-            this.repo2Stats.loc = null;
-          }
-          this.locOverTimeData[repoNumber - 1] = null;
-        });
-    },
-    async getDependencyData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/similar/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.dep = response.data.data[0];
-          } else {
-            this.repo2Stats.dep = response.data.data[0];
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.dep = null;
-          } else {
-            this.repo2Stats.dep = null;
-          }
-        });
-    },
-    async getHeatMapData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/heatmap/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
-          } else {
-            this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.heatmap_data = null;
-          } else {
-            this.repo2Stats.heatmap_data = null;
-          }
-        });
-    },
-    async getNodeLinkData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/nodelink_data?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
-          } else {
-            this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.nodeLink = null;
-          } else {
-            this.repo2Stats.nodeLink = null;
-          }
-        });
+      this.processData(2);
+    }
+  },
+  methods: {
+    balanceHeight() {
+      let lengthDifference =
+        this.repo1MetaData.description.length -
+        this.repo2MetaData.description.length;
+      let paddingString = "‎‎ㅤ";
+      if (lengthDifference > 0) {
+        this.repo2MetaData.description =
+          this.repo2MetaData.description +
+          paddingString.repeat(lengthDifference);
+      } else if (lengthDifference < 0) {
+        this.repo1MetaData.description =
+          this.repo1MetaData.description +
+          paddingString.repeat(Math.abs(lengthDifference));
+      }
     },
     setSeriesSubObject(chart, map, objToCopy) {
       map.forEach((value, key) => {
@@ -1408,6 +1312,13 @@ export default {
       }
       return [versions, languageData, statsData];
     },
+    /**
+     * Parse data for contributors pie charts.
+     *
+     * @param {object} data - The data to be parsed.
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     * @param {string} type - The type of contributor data to parse. "all_time" or "last_30_days"
+     */
     parseContributorData(data, repoNumber, type) {
       this.contributors[repoNumber - 1].push(
         Object.keys(data[type].top_25)
@@ -1434,7 +1345,12 @@ export default {
       this.contributorsLoading[repoNumber - 1] = false;
       return;
     },
-    parseLocOverTimeData(repoNumber, dataType) {
+    /**
+     * Parse lines of code over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
+    parseLocOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
       // If there is no 'SUM' key in the lines of code data
@@ -1443,7 +1359,8 @@ export default {
       }
 
       // Add a new object
-      this.locOverTimeData[repoNumber - 1][dataType] = {
+      this.overTimeData[repoNumber - 1].loc = {
+        name: "Lines of Code",
         xData: [],
         yData: [],
       };
@@ -1460,9 +1377,33 @@ export default {
           }
         });
 
-        this.locOverTimeData[repoNumber - 1][dataType].xData.push(date);
-        this.locOverTimeData[repoNumber - 1][dataType].yData.push(loc);
-        this.locOverTimeLoading[repoNumber - 1] = false;
+        this.overTimeData[repoNumber - 1].loc.xData.push(date);
+        this.overTimeData[repoNumber - 1].loc.yData.push(loc);
+        this.overTimeDataLoading[repoNumber - 1] = false;
+      });
+    },
+    /**
+     * Parse commits over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
+    parseCommitsOverTimeData(repoNumber) {
+      var statsRepos = ["repo1Stats", "repo2Stats"];
+
+      // Add a new object
+      this.overTimeData[repoNumber - 1].commits = {
+        name: "Commits",
+        xData: [],
+        yData: [],
+      };
+
+      let weeks = this[statsRepos[repoNumber - 1]].heatmap_data;
+
+      Object.keys(weeks).forEach((key) => {
+        this.overTimeData[repoNumber - 1].commits.xData.push(weeks[key].start);
+        this.overTimeData[repoNumber - 1].commits.yData.push(
+          weeks[key].commits.created
+        );
       });
     },
   },

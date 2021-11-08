@@ -149,14 +149,15 @@ export default defineComponent({
     };
   },
   async created() {
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL + "/techstack/list"
-      );
-      this.data = this.parseData(response.data.data[0]);
-    } catch (e) {
-      console.log(e);
-    }
+    // Fetch repository list data.
+    await axios
+      .get(process.env.VUE_APP_API_URL + "/techstack/list")
+      .then((res) => {
+        this.data = this.parseData(res.data.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   },
   computed: {
     filteredData() {
@@ -183,7 +184,6 @@ export default defineComponent({
         this.pageSize * this.page - this.pageSize,
         this.pageSize * this.page
       );
-      //   }
     },
   },
   methods: {
@@ -193,26 +193,6 @@ export default defineComponent({
      * @param {object} data - The data object to be parsed
      */
     parseData(data) {
-      // Object.keys(data).forEach((repoItem) => {
-      //   var repoTopics = data[repoItem].topics;
-
-      //   Object.keys(repoTopics).forEach((topic) => {
-      //     var index = this.tagFilters.findIndex(
-      //       (x) => x.text == repoTopics[topic]
-      //     );
-
-      //     if (index == -1) {
-      //       this.tagFilters.push({
-      //         text: repoTopics[topic],
-      //         value: repoTopics[topic],
-      //       });
-      //     }
-      //   });
-      // });
-
-      // this.tagFiltersProcessed = true;
-      // console.log(this.tagFilters);
-
       return data.map((item) => ({
         ...item,
         selected: false,
@@ -221,17 +201,23 @@ export default defineComponent({
     /**
      * Called on pagination button click.
      *
-     * @param {number} newPage - The new page number
+     * @param {number} newPage - The new page number.
      */
     handlePageChange(newPage) {
       this.page = newPage;
     },
+    /**
+     * Called on change of table contents.
+     *
+     * @param {number} newTotal - The new total number of items in the table.
+     */
     setTotalItems(newTotal) {
       this.totalItems = newTotal;
     },
+    /**
+     * Called on nav-button click to route to Visualization view.
+     */
     handleNavClick() {
-      // console.log(this.selectedRows[1]);
-
       if (this.selectedRows.length == 2) {
         this.$router.push({
           name: "visualize",
@@ -252,6 +238,11 @@ export default defineComponent({
         });
       }
     },
+    /**
+     * Called on row click.
+     *
+     * @param {number} row - The index of the row clicked on.
+     */
     handleRowClick(row) {
       if (this.numOfSelected == 2 && row.selected == false) {
         this.printMessage(
@@ -260,7 +251,7 @@ export default defineComponent({
         return;
       }
 
-      row.selected = !row.selected;
+      row.selected = !row.selected; // Inverse the selected property.
 
       if (row.selected == true) {
         this.selectedRows.push({ name: row.name, owner: row.owner });
@@ -276,15 +267,19 @@ export default defineComponent({
         }
         this.numOfSelected--;
       }
-
-      return;
     },
+    /**
+     * Prints error message to user.
+     * @see {@link https://element-plus.org/en-US/component/message.html} for further information.
+     *
+     * @param {string} message - The message to be printed.
+     */
     printMessage(message) {
       this.$message.error(message);
     },
     /**
      * Converts a number to a reader friendly format e.g. 1234 to 1.2K
-     * @see {@link https://stackoverflow.com/questions/2685911/is-there-a-way-to-round-numbers-into-a-reader-friendly-format-e-g-1-1k}
+     * @see {@link https://stackoverflow.com/questions/2685911/is-there-a-way-to-round-numbers-into-a-reader-friendly-format-e-g-1-1k} for further information.
      *
      * @param {number} number - The number to be converted.
      * @param {number} decPlaces - The number of decimal places to round to.
@@ -325,6 +320,10 @@ export default defineComponent({
 
       return number;
     },
+    /**
+     * Gives a style to each row in the table.
+     * @see {@link https://element-plus.org/en-US/component/table.html#table-attributes}
+     */
     rowStyle() {
       return {
         cursor: "pointer",
