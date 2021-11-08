@@ -1,5 +1,7 @@
-describe('Testing Start Analysing button', () => {
+describe('Testing the user experience from landing page to repository view', () => {
     beforeEach("testing techstack/topen endpoint", () => {
+
+      // Getting all required routes ready for end-to-end tests from landing page to repository view for mock repo: shadowsocks/shadowsocks-windows
       let name = "shadowsocks-windows";
       let owner = "shadowsocks";
       cy.server();
@@ -13,25 +15,23 @@ describe('Testing Start Analysing button', () => {
       cy.route("GET", "**/techstack/list**", "fixture:techstack_list.json");
       });
 
-    it('Test that clicking Start Analysing takes the user to the repository list page', () => {
+    it('Scenario from landing page to repository view', () => {
       cy.visit("/");
-      cy.get("div.callToAction").click().get("p").should('contain','List of repositories')
-      // cy.get("td.el-table_2_column_5.el-table__cell").click({ multiple: true })
-      // testing search bar
-      // cy.get(input.el-input__inner)
 
-      // Using the search bar above repo list
+      // Pressing the 'Start Analysing" Button on the landing page
+      cy.get("div.callToAction").click().get("p").should('contain','List of repositories')
+
+      // Using the search bar above repo list and typing in 'shadowsocks-windows'.
       cy.get("input.el-input__inner").type('shadowsocks-windows').should('have.value','shadowsocks-windows')
 
+      // Selecting row for 'shadowsocks-windows'
       cy.get("td.el-table_2_column_5.el-table__cell").click()
 
+      // Clicking Checkout button
       cy.get("button.nav-button").click() 
 
+      // Verifying that the user has reached the final step, which is the repository's view page
       cy.get("h1").should("contain", "shadowsocks/shadowsocks-windows");
-
-
-
-
 
     });
   });
