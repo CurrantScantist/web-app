@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [17.x]
     env:
             VUE_APP_API_URL: "http://127.0.0.1:8080"
             VUE_APP_TITLE: ${{ secrets.VUE_APP_TITLE }}
