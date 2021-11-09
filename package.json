@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "set 17.0.1=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "set 17.0.1=--openssl-legacy-provider && vue-cli-service build",
+    "serve": "SET 14.17.3=--openssl-legacy-provider && vue-cli-service build",
+    "build": "SET 14.17.3=--openssl-legacy-provider && vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --passWithNoTests",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
