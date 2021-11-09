@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 15.x]
+        node-version: [14.x]
     env:
             VUE_APP_API_URL: "http://127.0.0.1:8080"
             VUE_APP_TITLE: ${{ secrets.VUE_APP_TITLE }}
@@ -22,6 +22,7 @@ jobs:
       - run: docker build --tag test-frontend-monashfyp .
       - run: docker run --init -d --name test-frontend-monashfyp -p 8080:4444 test-frontend-monashfyp
       - run: echo "Web app is ready to test and running on http://127.0.0.1:8080"
+      - run: echo "testing locally hosted webpage"
       - run: curl http://127.0.0.1:8080
       - uses: cypress-io/github-action@v2
         
