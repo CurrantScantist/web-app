@@ -24,10 +24,10 @@ describe('Testing the user experience from landing page to repository view', () 
       // Using the search bar above repo list and typing in 'shadowsocks-windows'.
       cy.get("input.el-input__inner").type('shadowsocks-windows').should('have.value','shadowsocks-windows')
 
-      // Selecting row for 'shadowsocks-windows'
+      // Selecting row for 'shadowsocks-windows' 
       cy.get("td.el-table_2_column_5.el-table__cell").click()
 
-      // Clicking Checkout button
+      // Clicking Checkout button 
       cy.get("button.nav-button").click() 
 
       // Verifying that the user has reached the final step, which is the repository's view page
