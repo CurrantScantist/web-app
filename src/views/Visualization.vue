@@ -948,7 +948,6 @@ export default {
     }
   },
   methods: {
-
     /**
      * This method is used to set marks for a given chart, these represent the data points
      *
@@ -957,14 +956,13 @@ export default {
      * @param {object} objToCopy - This is the JSON object that will represent a mark
      */
     setSeriesSubObject(chart, map, objToCopy) {
-
       // Looping over all the data points
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));   // creating a deep copy
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy)); // creating a deep copy
         seriesSubObjCopy.name = key;
-        seriesSubObjCopy.areaStyle.color = value.color;       // setting the value of the data points in the mark object
+        seriesSubObjCopy.areaStyle.color = value.color; // setting the value of the data points in the mark object
         seriesSubObjCopy.data = value.data;
-        chart.series.push(seriesSubObjCopy);                // adding the mark to the visualisation object
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
 
@@ -977,16 +975,15 @@ export default {
      * @param {object} objToCopy - This is the JSON object that will represent a mark
      */
     setSeriesLocByLang(chart, map, colorData, objToCopy) {
-
       // Looping over all the continuous data points
       map.forEach((value, key) => {
         chart.legend.data.push(key);
         chart.color.push(colorData[key]);
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));     // creating a deep copy
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy)); // creating a deep copy
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = colorData[key];
-        seriesSubObjCopy.data = value.data;                 // setting the value of the data points in the mark object
-        chart.series.push(seriesSubObjCopy);        // adding the mark to the visualisation object
+        seriesSubObjCopy.data = value.data; // setting the value of the data points in the mark object
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
 
@@ -998,18 +995,17 @@ export default {
      * @param {object} subObj - This is the JSON object that will represent a mark
      */
     setSeriesHeatMap(chart, map, subObj) {
-
       // Looping over all data points
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj));      // creating a deep copy
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj)); // creating a deep copy
         seriesSubObjCopy.name = seriesSubObjCopy.name + key;
-        seriesSubObjCopy.data = [value];                            // setting up a data point tile
-        chart.series.push(seriesSubObjCopy);              // adding the mark to the visualisation object
+        seriesSubObjCopy.data = [value]; // setting up a data point tile
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
 
     /**
-     * This method is used to process all the data fetched from the API, transform it into compatible formats and invoke relevant 
+     * This method is used to process all the data fetched from the API, transform it into compatible formats and invoke relevant
      * sections of the system once done in order to render the charts onto the screen.
      *
      * @param {number} repoNumber - This is the number of the repository. This is used to access the data fetched from the API and
@@ -1019,26 +1015,26 @@ export default {
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
       let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
-      let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink));               // creating deep copy of the visualisation objects
+      let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink)); // creating deep copy of the visualisation objects
       let nodeLinkCopy2 = JSON.parse(JSON.stringify(nodeLink));
       let heatMapCopy = JSON.parse(JSON.stringify(heatMap));
 
       let statsData = new Map();
       let heatMapData = new Map();
-      let depDataColorMap = new Map();            // initializing maps for data points processing
+      let depDataColorMap = new Map(); // initializing maps for data points processing
       let heatMapTooltipData = new Map();
       let bubbleChartTooltipData = new Map();
 
-      let extractedDepData = this.extractDepData(repoNumber);     // function call to extract and retrieve bubble chart data
-      let extractedData = this.extractData(repoNumber);     // function call to extract and retrieve other chart data
-      let extractedHeatMapData = this.extractHeatMapData(repoNumber);   // function call to extract and retrieve heat map data
+      let extractedDepData = this.extractDepData(repoNumber); // function call to extract and retrieve bubble chart data
+      let extractedData = this.extractData(repoNumber); // function call to extract and retrieve other chart data
+      let extractedHeatMapData = this.extractHeatMapData(repoNumber); // function call to extract and retrieve heat map data
 
-      this.versionData.push(extractedData[0]);      // setting up global version & language data
-      this.languageData.push(extractedData[1]);     
+      this.versionData.push(extractedData[0]); // setting up global version & language data
+      this.languageData.push(extractedData[1]);
       statsData = extractedData[2];
 
       heatMapData = extractedHeatMapData[0];
-      heatMapCopy.visualMap.min = extractedHeatMapData[1];      // extracting relevant heat map data and assigning it 
+      heatMapCopy.visualMap.min = extractedHeatMapData[1]; // extracting relevant heat map data and assigning it
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
       heatMapTooltipData = extractedHeatMapData[4];
 
@@ -1048,31 +1044,31 @@ export default {
         });
         depDataColorMap = extractedDepData[1];
         depBubbleChartCopy.color = [];
-        depBubbleChartCopy.legend.data = depRepos;            // assigning data to the bubble chart object for global reference
+        depBubbleChartCopy.legend.data = depRepos; // assigning data to the bubble chart object for global reference
         bubbleChartTooltipData = extractedDepData[2];
       }
 
       locByLangCopy.color = [];
-      locByLangCopy.xAxis[0].data = this.versionData[repoNumber - 1];     // setting up axis information for stacked area chart
+      locByLangCopy.xAxis[0].data = this.versionData[repoNumber - 1]; // setting up axis information for stacked area chart
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
-      heatMapCopy.xAxis.data = extractedHeatMapData[3];       // setting up axis info for heat map
+      heatMapCopy.xAxis.data = extractedHeatMapData[3]; // setting up axis info for heat map
 
       locByLangCopy.legend.data = Array.from(
-        this.languageData[repoNumber - 1].keys()        // setting up legend for stacked area chart
+        this.languageData[repoNumber - 1].keys() // setting up legend for stacked area chart
       );
 
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
       let colorPalette =
         repoNumber == 1
-          ? this.repo1MetaData.language_colours                         // extracting color palette for consistent colors
+          ? this.repo1MetaData.language_colours // extracting color palette for consistent colors
           : this.repo2MetaData.language_colours;
       this.setSeriesLocByLang(
         locByLangCopy,
-        this.languageData[repoNumber - 1],  
+        this.languageData[repoNumber - 1],
         colorPalette,
         locByLangSeriesObj
-      );                                                                                // function calls to set marks for visualisations 
+      ); // function calls to set marks for visualisations
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
@@ -1130,25 +1126,21 @@ export default {
           "<strong> Issues Count：</strong>" +
           bubbleChartTooltipData.get(dataPoint[3])[0] +
           "<br>" +
-          (bubbleChartTooltipData.get(dataPoint[3])[2] != null ? 
-          "<strong> Common Language：</strong>" +
-          bubbleChartTooltipData.get(dataPoint[3])[2] +
-          "<br>" 
-          : 
-          "" ) +
-          (bubbleChartTooltipData.get(dataPoint[3])[3].length > 0 ? 
-          ("<strong> Common Topics：</strong> <div> " +
-          bubbleChartTooltipData.get(dataPoint[3])[3].map((item) => {
-            return ("<span> &nbsp" + item + "</span>")
-          }) +
-          "</div> <br>")
-          :
-          "" )
-          +
+          (bubbleChartTooltipData.get(dataPoint[3])[2] != null
+            ? "<strong> Common Language：</strong>" +
+              bubbleChartTooltipData.get(dataPoint[3])[2] +
+              "<br>"
+            : "") +
+          (bubbleChartTooltipData.get(dataPoint[3])[3].length > 0
+            ? "<strong> Common Topics：</strong> <div> " +
+              bubbleChartTooltipData.get(dataPoint[3])[3].map((item) => {
+                return "<span> &nbsp" + item + "</span>";
+              }) +
+              "</div> <br>"
+            : "") +
           "</div>"
         );
       };
-
 
       // setting data & behaviour based on the repository number given
       if (repoNumber == 1) {
@@ -1186,16 +1178,15 @@ export default {
      * @param {Map} colorMap - This is the map for consistent colors in the visualisations
      */
     setSeriesBubbleChart(chart, map, colorMap) {
-
       // looping over the data points
       map.forEach((repoArray) => {
         chart.color.push(colorMap.get(repoArray[3]));
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));    // creating a deep copy of series sub object
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj)); // creating a deep copy of series sub object
         seriesSubObjCopy.name = repoArray[3];
-        seriesSubObjCopy.symbolSize = repoArray[2];                         
-        seriesSubObjCopy.data = [repoArray.slice(0, 4)];                      // setting up data for mark object
+        seriesSubObjCopy.symbolSize = repoArray[2];
+        seriesSubObjCopy.data = [repoArray.slice(0, 4)]; // setting up data for mark object
         seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
-        chart.series.push(seriesSubObjCopy);                            // adding the mark to the visualisation object
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
 
@@ -1206,30 +1197,30 @@ export default {
      */
     extractDepData(repoNumber) {
       let jsonObj;
-      let extractedDepData = [];  // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
+      let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
       let tooltipData = new Map();
-      let colorMap = new Map();               // initializing the variables
+      let colorMap = new Map(); // initializing the variables
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.dep;
       } else if (repoNumber == 2) {
-        jsonObj = this.repo2Stats.dep;              // getting the data fetched from API based on the repo number given
+        jsonObj = this.repo2Stats.dep; // getting the data fetched from API based on the repo number given
       }
 
       if (!jsonObj) {
-        return [extractedDepData, colorMap];      // for cases with no data
+        return [extractedDepData, colorMap]; // for cases with no data
       }
 
       for (let repoObj of jsonObj) {
         let repoData = [];
         repoData.push(repoObj.size);
-        repoData.push(repoObj.num_components);                // extracting the data and tranforming it into the required format
+        repoData.push(repoObj.num_components); // extracting the data and tranforming it into the required format
         this.vulnerabilityClassification(repoData, repoObj, tooltipData);
         extractedDepData.push(repoData);
         colorMap.set(repoObj.name, repoObj.repo_colour);
       }
 
-      return [extractedDepData, colorMap, tooltipData];   // returning the extracted data
+      return [extractedDepData, colorMap, tooltipData]; // returning the extracted data
     },
 
     /**
@@ -1241,10 +1232,10 @@ export default {
      */
     vulnerabilityClassification(repoData, repoObj, tooltipData) {
       let bubbleSizes = [15, 30, 50, 80, 110];
-      let classes = ["0", "1-50", "51-100", "101-150", "151+"];     // setting up classes & sizes for bubbles
+      let classes = ["0", "1-50", "51-100", "101-150", "151+"]; // setting up classes & sizes for bubbles
       let repoVulnerabilities = repoObj.num_vulnerabilities;
       let repoBubbleSize = 0;
-      let repoClass = "";                         // initialising variables
+      let repoClass = ""; // initialising variables
 
       if (repoVulnerabilities === 0) {
         repoBubbleSize = bubbleSizes[0];
@@ -1253,7 +1244,7 @@ export default {
         repoBubbleSize = bubbleSizes[1];
         repoClass = classes[1];
       } else if (repoVulnerabilities >= 51 && repoVulnerabilities <= 100) {
-        repoBubbleSize = bubbleSizes[2];                                          // setting up the class and bubble size based on the count
+        repoBubbleSize = bubbleSizes[2]; // setting up the class and bubble size based on the count
         repoClass = classes[2];
       } else if (repoVulnerabilities >= 101 && repoVulnerabilities <= 150) {
         repoBubbleSize = bubbleSizes[3];
@@ -1264,8 +1255,13 @@ export default {
       }
 
       repoData.push(repoBubbleSize);
-      repoData.push(repoObj.name);              // storing the information for the mark obj
-      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass, repoObj.common_language, repoObj.common_topics]);  // addiing tooltip data for the given repo
+      repoData.push(repoObj.name); // storing the information for the mark obj
+      tooltipData.set(repoObj.name, [
+        repoVulnerabilities,
+        repoClass,
+        repoObj.common_language,
+        repoObj.common_topics,
+      ]); // addiing tooltip data for the given repo
     },
 
     /**
@@ -1275,34 +1271,36 @@ export default {
      */
     extractHeatMapData(repoNumber) {
       let jsonResponse;
-      let extractedHeatMapData = new Map();               // [Week: [X,Y,VAL]]
-      let extractedTooltipData = new Map();               // [start date, end date]
+      let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
+      let extractedTooltipData = new Map(); // [start date, end date]
 
-      let maxVal = 0, minVal = Infinity;        // initialising the values
-      let xAxis = [];                           // 19 cols
-      let xAxisYears = new Set();               // a set for years in xAxis
+      let maxVal = 0,
+        minVal = Infinity; // initialising the values
+      let xAxis = []; // 19 cols
+      let xAxisYears = new Set(); // a set for years in xAxis
       let weekCount = 0;
 
       if (repoNumber == 1) {
         jsonResponse = this.repo1Stats.heatmap_data;
-      } else if (repoNumber == 2) {                                // getting the data fetched from API based on the repo number given
+      } else if (repoNumber == 2) {
+        // getting the data fetched from API based on the repo number given
         jsonResponse = this.repo2Stats.heatmap_data;
       }
 
       // iterating over all the weeks from the fetched data
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
-        let weekData = [];                      // initialising loop variables 
+        let weekData = []; // initialising loop variables
         let weekTooltipData = [];
 
         weekCount += 1;
 
         weekData.push(weekObj.coords.x);
-        weekData.push(weekObj.coords.y);                   // Adding the week data point info   
+        weekData.push(weekObj.coords.y); // Adding the week data point info
         weekData.push(weekObj.issues.open);
 
         weekTooltipData.push(weekObj.start.substring(0, 10));
-        weekTooltipData.push(weekObj.end.substring(0, 10));               // Adding the tooltip information for the week
+        weekTooltipData.push(weekObj.end.substring(0, 10)); // Adding the tooltip information for the week
 
         if (
           weekObj.start.substring(5, 7) === "01" &&
@@ -1310,7 +1308,7 @@ export default {
         ) {
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
-            xAxisYears.add(weekObj.start.substring(0, 4));                            // extracting xAxis years
+            xAxisYears.add(weekObj.start.substring(0, 4)); // extracting xAxis years
           } else {
             xAxis[Math.floor(weekCount / 8) - 1] = weekObj.start.substring(
               0,
@@ -1321,11 +1319,11 @@ export default {
         }
 
         if (weekData[2] > maxVal) {
-          maxVal = weekData[2];                      // max range for color palette and accurate colour interpolation
+          maxVal = weekData[2]; // max range for color palette and accurate colour interpolation
         }
 
         if (weekData[2] < minVal) {
-          minVal = weekData[2];                     // max range for color palette and accurate colour interpolation
+          minVal = weekData[2]; // max range for color palette and accurate colour interpolation
         }
 
         if (weekCount % 8 == 0) {
@@ -1336,44 +1334,47 @@ export default {
 
         extractedTooltipData.set(
           weekObj.coords.x + "-" + weekObj.coords.y,
-          weekTooltipData                                   
-        );                                                            // storing the week dat by coords 
+          weekTooltipData
+        ); // storing the week dat by coords
         extractedHeatMapData.set(weekObj.week, weekData);
       }
-      xAxis = xAxis.reverse();                            
+      xAxis = xAxis.reverse();
       return [
         extractedHeatMapData,
         minVal,
-        maxVal,                                  
+        maxVal,
         xAxis,
         extractedTooltipData,
-      ];                                  // returning the extracted information
+      ]; // returning the extracted information
     },
 
     /**
      * This method is used to extract data and initialise the node link diagram object
      *
      * @param {Object} nodeLink - This is the JSON Object of the node-link visualization
-     * @param {Object} data - This is the data fetched from the API 
+     * @param {Object} data - This is the data fetched from the API
      */
     initializeNodeLink(nodeLink, data) {
       if (data != undefined) {
-        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));     // creating a deep copy
+        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj)); // creating a deep copy
         nodeLinkSubObj.categories = data.categories;
-        nodeLinkSubObj.nodes = data.nodes;                  // setting up categories, nodes and links in the visualisaion
+        nodeLinkSubObj.nodes = data.nodes; // setting up categories, nodes and links in the visualisaion
         nodeLinkSubObj.links = data.links;
-        
-        // looping over all the categories to assign consistent colors 
+
+        // looping over all the categories to assign consistent colors
         for (let categoryObj in nodeLinkSubObj.categories) {
-          nodeLinkSubObj.categories[categoryObj].itemStyle = {}
-          nodeLinkSubObj.categories[categoryObj].itemStyle.color = this.repo1MetaData.license_colours[nodeLinkSubObj.categories[categoryObj].name]
+          nodeLinkSubObj.categories[categoryObj].itemStyle = {};
+          nodeLinkSubObj.categories[categoryObj].itemStyle.color =
+            this.repo1MetaData.license_colours[
+              nodeLinkSubObj.categories[categoryObj].name
+            ];
         }
-        nodeLink.series.push(nodeLinkSubObj);     // setting marks to the visualisation JSON Objects
+        nodeLink.series.push(nodeLinkSubObj); // setting marks to the visualisation JSON Objects
       }
     },
 
     /**
-     * This method is used to extract the data for the LOC related data and tranform it to fit the information required for stacked area 
+     * This method is used to extract the data for the LOC related data and tranform it to fit the information required for stacked area
      * and bar chart of the system.
      *
      * @param {number} repoNumber - This is the repo number which is used to access the data stored in the system
@@ -1381,15 +1382,16 @@ export default {
     extractData(repoNumber) {
       let jsonObj;
       let versions = [];
-      const languageData = new Map();                                   // initialising variables
+      const languageData = new Map(); // initialising variables
       const statsData = new Map();
       statsData.set("code", { data: [], color: "#34a853" });
-      statsData.set("comment", { data: [], color: "#4285f4" });             // setting up colors for stacked bar chart
+      statsData.set("comment", { data: [], color: "#4285f4" }); // setting up colors for stacked bar chart
       statsData.set("blank", { data: [], color: "#ea4335" });
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.loc;
-      } else if (repoNumber == 2) {                         // getting the data fetched from API based on the repo number given
+      } else if (repoNumber == 2) {
+        // getting the data fetched from API based on the repo number given
         jsonObj = this.repo2Stats.loc;
       }
 
@@ -1402,20 +1404,20 @@ export default {
           if (langKey === "SUM") {
             statsData.forEach((value, key, map) => {
               value.data.push(langObj[key]);
-              map.set(key, value);                        
+              map.set(key, value);
             });
           } else {
             if (languageData.has(langKey)) {
-              let tempValue = languageData.get(langKey);          // "Yaml": [0,1,15]
-              tempValue.data.push(langObj.code);                  // [0,1,15,4]
-              languageData.set(langKey, tempValue);               // "Yaml" <- [0,1,15,4]
+              let tempValue = languageData.get(langKey); // "Yaml": [0,1,15]
+              tempValue.data.push(langObj.code); // [0,1,15,4]
+              languageData.set(langKey, tempValue); // "Yaml" <- [0,1,15,4]
             } else {
               languageData.set(langKey, { data: [langObj.code] });
             }
           }
         }
       }
-      return [versions, languageData, statsData];         // returning the extracted data
+      return [versions, languageData, statsData]; // returning the extracted data
     },
 
     /**
