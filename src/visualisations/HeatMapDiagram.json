@@ -15,7 +15,7 @@
     },
     "grid": {
         "height": "75%",
-        "left": "-3%",
+        "left": "3%",
         "right": "3%",
         "bottom": "18%",
         "top": "8%",
@@ -34,7 +34,7 @@
             "show": false
         },
         "axisLabel": {
-            "fontSize": 11,
+            "fontSize": 10,
             "fontWeight": "bold"
         }
     },
