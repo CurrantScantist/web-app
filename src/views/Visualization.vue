@@ -12,7 +12,7 @@
               'meta-grid-round-multi meta-grid-round': name2,
             }"
           >
-            <div class="meta-container">
+            <div class="meta-container tag-container">
               <div class="container-title">Tags</div>
               <div class="tag-grid" id="tags1">
                 <div
@@ -424,6 +424,7 @@
   margin-bottom: 1%;
   border-radius: var(--viz--radius);
 }
+
 .container-title {
   padding: 1%;
   margin-top: 2px;
@@ -1093,6 +1094,23 @@ export default {
           "<strong> Issues Count：</strong>" +
           bubbleChartTooltipData.get(dataPoint[3])[0] +
           "<br>" +
+
+          (bubbleChartTooltipData.get(dataPoint[3])[2] != null ? 
+          "<strong> Common Language：</strong>" +
+          bubbleChartTooltipData.get(dataPoint[3])[2] +
+          "<br>" 
+          : 
+          "" ) +
+       
+          (bubbleChartTooltipData.get(dataPoint[3])[3].length > 0 ? 
+          ("<strong> Common Topics：</strong> <div> " +
+          bubbleChartTooltipData.get(dataPoint[3])[3].map((item) => {
+            return ("<span>" + item + "</span>")
+          }) +
+          "</div> <br>")
+          :
+          "" )
+          +
           "</div>"
         );
       };
@@ -1187,7 +1205,7 @@ export default {
 
       repoData.push(repoBubbleSize);
       repoData.push(repoObj.name);
-      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass]);
+      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass, repoObj.common_language, repoObj.common_topics]);
     },
     extractHeatMapData(repoNumber) {
       let jsonResponse;
