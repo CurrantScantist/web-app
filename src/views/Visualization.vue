@@ -1301,6 +1301,12 @@ export default {
         nodeLinkSubObj.categories = data.categories;
         nodeLinkSubObj.nodes = data.nodes;
         nodeLinkSubObj.links = data.links;
+
+        for (let categoryObj in nodeLinkSubObj.categories) {
+          nodeLinkSubObj.categories[categoryObj].itemStyle = {}
+          nodeLinkSubObj.categories[categoryObj].itemStyle.color = this.repo1MetaData.license_colours[nodeLinkSubObj.categories[categoryObj].name]
+        }
+
         nodeLink.series.push(nodeLinkSubObj);
       }
     },
