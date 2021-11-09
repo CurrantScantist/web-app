@@ -218,7 +218,7 @@
               'meta-grid-round-multi meta-grid-round': name2,
             }"
           >
-            <div class="meta-container">
+            <div class="meta-container tag-container">
               <div class="container-title">Tags</div>
               <div class="tag-grid" id="tags2">
                 <div
@@ -432,10 +432,21 @@
   font-weight: 800;
 }
 
+.tag-container:hover {
+  max-height: 100%;
+  overflow: visible;
+}
+
+.tag-container {
+  max-height: 85px;
+  overflow: hidden;
+}
+
 .tag-grid {
   display: flex;
-  flex-wrap: wrap;
   margin-bottom: 1%;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .tag {
@@ -443,6 +454,7 @@
   font-weight: 800;
   padding: 5px 8px;
   margin: 3px;
+  margin-bottom: 8px;
   border-radius: 18px;
   align-items: center;
   justify-content: center;
