@@ -1,4 +1,4 @@
-name: Docker Test Cypress
+name: Frontend Test Cypress
 
 on: [push, pull_request]
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [12.x, 14.x, 15.x]
     env:
             VUE_APP_API_URL: "http://127.0.0.1:8080"
             VUE_APP_TITLE: ${{ secrets.VUE_APP_TITLE }}
