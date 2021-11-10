@@ -78,7 +78,7 @@
   </div>
 
   <div class="info-item">
-    <div class="stat-name">Latest Tag:</div>
+    <div class="stat-name">Latest Version:</div>
     <div>
       {{ latest_tag || "N/A" }}
     </div>
@@ -88,6 +88,13 @@
     <div class="stat-name">Subscribers:</div>
     <div>
       {{ (subscriber_count || 0).toLocaleString() }}
+    </div>
+  </div>
+
+  <div class="info-item">
+    <div class="stat-name">License Type:</div>
+    <div>
+      {{ license_type || "N/A" }}
     </div>
   </div>
 </template>
@@ -169,6 +176,7 @@ export default {
      * The number of subscribers.
      */
     subscriber_count: { type: Number },
+    license_type: { type: String },
   },
   computed: {
     parsedCreatedOn() {
