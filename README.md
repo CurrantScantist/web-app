@@ -7,6 +7,7 @@
 5. Run "npm run serve" command to start a development server and navigate to http://localhost:8080/ in a web browser.
 <br />
 <br />
+
 ## Preparing for production
 1. Create a .env.production.local file in the project root.
 2. Configure the VUE_APP_API_URL variable to the URL of the backend REST API server.
