@@ -1465,8 +1465,6 @@ export default {
     parseLocOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
-      console.log(this[statsRepos[repoNumber - 1]].loc[0].LOC_limited);
-
       // If there is no 'SUM' key in the lines of code data
       if (!("SUM" in this[statsRepos[repoNumber - 1]].loc[0].LOC_limited)) {
         return;
