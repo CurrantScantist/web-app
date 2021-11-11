@@ -1465,8 +1465,10 @@ export default {
     parseLocOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
+      console.log(this[statsRepos[repoNumber - 1]].loc[0].LOC_limited);
+
       // If there is no 'SUM' key in the lines of code data
-      if (!("SUM" in this[statsRepos[repoNumber - 1]].loc[0].LOC)) {
+      if (!("SUM" in this[statsRepos[repoNumber - 1]].loc[0].LOC_limited)) {
         return;
       }
 
@@ -1483,9 +1485,9 @@ export default {
         var date = commit[commitKey].committed_date;
         var loc = 0;
 
-        Object.keys(commit[commitKey].LOC["SUM"]).forEach((lineKey) => {
+        Object.keys(commit[commitKey].LOC_limited["SUM"]).forEach((lineKey) => {
           if (lineKey != "nFiles") {
-            loc += commit[commitKey].LOC["SUM"][lineKey];
+            loc += commit[commitKey].LOC_limited["SUM"][lineKey];
           }
         });
 
