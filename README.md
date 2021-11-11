@@ -13,6 +13,7 @@
 2. Configure the VUE_APP_API_URL variable to the URL of the backend REST API server.
 <br />
 <br />
+
 ## Development commands
 | Function             | Command                |
 | :------------------- | :--------------------- |
