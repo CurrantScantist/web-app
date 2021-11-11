@@ -1,0 +1,62 @@
+{
+  "data": [
+    [
+      {
+        "name": "shadowsocks-windows",
+        "owner": "shadowsocks",
+        "size": 13482,
+        "num_components": 74,
+        "num_vulnerabilities": 0,
+        "repo_colour": "#c62a4c",
+        "common_topics": ["shadowsocks", "c-sharp", "proxy"],
+        "common_language": "C#"
+      },
+      {
+        "name": "PowerToys",
+        "owner": "microsoft",
+        "language": "C#",
+        "size": 290640,
+        "num_components": 64,
+        "num_vulnerabilities": 0,
+        "repo_colour": "#c63c2a",
+        "common_topics": [],
+        "common_language": "C#"
+      },
+      {
+        "name": "Powershell",
+        "owner": "Powershell",
+        "language": "C#",
+        "size": 81077,
+        "num_components": 76,
+        "num_vulnerabilities": 0,
+        "repo_colour": "#c3c62a",
+        "common_topics": [],
+        "common_language": "C#"
+      },
+      {
+        "name": "ScreenToGif",
+        "owner": "NickeManarin",
+        "language": "C#",
+        "size": 22878,
+        "num_components": 78,
+        "num_vulnerabilities": 1,
+        "repo_colour": "#2aa1c6",
+        "common_topics": [],
+        "common_language": "C#"
+      },
+      {
+        "name": "jellyfin",
+        "owner": "jellyfin",
+        "language": "C#",
+        "size": 50344,
+        "num_components": 267,
+        "num_vulnerabilities": 0,
+        "repo_colour": "#2f2ac6",
+        "common_topics": [],
+        "common_language": "C#"
+      }
+    ]
+  ],
+  "code": 200,
+  "message": "Similar repository data retrieved"
+}

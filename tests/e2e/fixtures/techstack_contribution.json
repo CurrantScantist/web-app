@@ -1,0 +1,81 @@
+{
+  "data": [
+    {
+      "name": "shadowsocks-windows",
+      "owner": "shadowsocks",
+      "commits_per_author": {
+        "all_time": {
+          "top_25": [
+            { "name": "clowwindy", "all_time": 433, "last_30_days": 0 },
+            { "name": "Student Main", "all_time": 207, "last_30_days": 0 },
+            { "name": "Syrone Wong", "all_time": 152, "last_30_days": 0 },
+            { "name": "celeron533", "all_time": 139, "last_30_days": 0 },
+            { "name": "database64128", "all_time": 124, "last_30_days": 0 },
+            { "name": "noisyfox", "all_time": 100, "last_30_days": 0 },
+            { "name": "Gang Zhuo", "all_time": 98, "last_30_days": 0 },
+            { "name": "Allen Zhu", "all_time": 78, "last_30_days": 0 },
+            { "name": "icylogic", "all_time": 75, "last_30_days": 0 },
+            { "name": "kimw", "all_time": 58, "last_30_days": 0 },
+            {
+              "name": "dependabot-preview[bot]",
+              "all_time": 36,
+              "last_30_days": 0
+            },
+            { "name": "Licshee", "all_time": 29, "last_30_days": 0 },
+            { "name": "MysticBoy", "all_time": 26, "last_30_days": 0 },
+            { "name": "破娃酱", "all_time": 16, "last_30_days": 0 },
+            { "name": "Bruce Wayne", "all_time": 11, "last_30_days": 0 },
+            { "name": "wzxjohn", "all_time": 11, "last_30_days": 0 },
+            { "name": "Noisyfox", "all_time": 10, "last_30_days": 0 },
+            { "name": "Stzx", "all_time": 9, "last_30_days": 0 },
+            { "name": "Damir Ainullin", "all_time": 7, "last_30_days": 0 },
+            { "name": "StudentEx", "all_time": 7, "last_30_days": 0 },
+            { "name": "Chen Shaoju", "all_time": 7, "last_30_days": 0 },
+            { "name": "Raif Atef", "all_time": 6, "last_30_days": 0 },
+            { "name": "Yifei0727", "all_time": 6, "last_30_days": 0 },
+            { "name": "ahmadali shafiee", "all_time": 5, "last_30_days": 0 },
+            { "name": "everyx", "all_time": 5, "last_30_days": 0 }
+          ],
+          "total": 1758
+        },
+        "last_30_days": {
+          "top_25": [
+            {
+              "name": "dependabot-preview[bot]",
+              "all_time": 36,
+              "last_30_days": 0
+            },
+            { "name": "database64128", "all_time": 124, "last_30_days": 0 },
+            { "name": "loyalsoldier", "all_time": 1, "last_30_days": 0 },
+            { "name": "Bruce Wayne", "all_time": 11, "last_30_days": 0 },
+            { "name": "ahmadali shafiee", "all_time": 5, "last_30_days": 0 },
+            { "name": "Student Main", "all_time": 207, "last_30_days": 0 },
+            { "name": "Beta Soft", "all_time": 1, "last_30_days": 0 },
+            { "name": "celeron533", "all_time": 139, "last_30_days": 0 },
+            { "name": "Allen Zhu", "all_time": 78, "last_30_days": 0 },
+            { "name": "bdbai", "all_time": 1, "last_30_days": 0 },
+            { "name": "kingofotaku", "all_time": 1, "last_30_days": 0 },
+            { "name": "Stzx", "all_time": 9, "last_30_days": 0 },
+            { "name": "RekonChan", "all_time": 2, "last_30_days": 0 },
+            { "name": "MysticBoy", "all_time": 26, "last_30_days": 0 },
+            { "name": "Nerekihs", "all_time": 1, "last_30_days": 0 },
+            { "name": "notsure2", "all_time": 1, "last_30_days": 0 },
+            { "name": "Rolf Kristensen", "all_time": 1, "last_30_days": 0 },
+            { "name": "Seia-Soto", "all_time": 1, "last_30_days": 0 },
+            { "name": "Silence Tai", "all_time": 3, "last_30_days": 0 },
+            { "name": "RK", "all_time": 3, "last_30_days": 0 },
+            { "name": "Raif Atef", "all_time": 6, "last_30_days": 0 },
+            { "name": "anmingwei", "all_time": 1, "last_30_days": 0 },
+            { "name": "Kexy Biscuit", "all_time": 2, "last_30_days": 0 },
+            { "name": "Damir Ainullin", "all_time": 7, "last_30_days": 0 },
+            { "name": "lonelam", "all_time": 1, "last_30_days": 0 }
+          ],
+          "total": 0
+        }
+      },
+      "id": "6166ecedd7c8014d27490164"
+    }
+  ],
+  "code": 200,
+  "message": "Techstack data retrieved successfully"
+}
