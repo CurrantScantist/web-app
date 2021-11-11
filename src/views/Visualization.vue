@@ -69,7 +69,7 @@
             class="viz-grid"
             v-bind:class="{ 'single-repo': !name2, 'multi-repo': name2 }"
           >
-            <div class="simple-visualisation1">
+            <div class="simple-visualisation1" id="contributors-30-days">
               <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
@@ -85,7 +85,7 @@
                 style="height: 300px"
               ></el-empty>
             </div>
-            <div class="simple-visualisation2">
+            <div class="simple-visualisation2" id="contributors-all-time">
               <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
@@ -101,7 +101,7 @@
                 style="height: 300px"
               ></el-empty>
             </div>
-            <div class="wide-visualisation1">
+            <div class="wide-visualisation1" id="loc-by-language">
               <h3>Lines of Code by language</h3>
               <h6>(over versions)</h6>
               <v-chart
@@ -118,7 +118,7 @@
               ></el-empty>
             </div>
 
-            <div class="wide-visualisation2">
+            <div class="wide-visualisation2" id="loc-by-type">
               <h3>Lines in files by type</h3>
               <h6>(over versions)</h6>
               <v-chart
@@ -135,7 +135,10 @@
               ></el-empty>
             </div>
 
-            <div class="wide-visualisation3">
+            <div
+              class="wide-visualisation3"
+              id="dependencies-issues-sizes-bubble-plot"
+            >
               <h3>Dependencies, Issues & Sizes</h3>
               <h6>Bubble plot</h6>
               <v-chart
@@ -153,6 +156,7 @@
             </div>
             <div
               class="wide-visualisation4"
+              id="loc-over-time"
               v-if="Object.keys(overTimeData[0]).length != 0"
             >
               <the-multi-line-chart
@@ -167,7 +171,7 @@
                 style="height: 500px"
               ></el-empty>
             </div>
-            <div class="heat-map">
+            <div class="heat-map" id="issues-heatmap">
               <h3>Open Issues Heat Map</h3>
               <h6>By Weeks</h6>
               <v-chart
@@ -183,7 +187,7 @@
                 style="height: 380px"
               ></el-empty>
             </div>
-            <div class="node-link">
+            <div class="node-link" id="node-link">
               <h3>Dependency Node Link Diagram</h3>
               <h6>By License Type</h6>
               <div class="node-link-container">
