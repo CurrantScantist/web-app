@@ -12,7 +12,7 @@
               'meta-grid-round-multi meta-grid-round': name2,
             }"
           >
-            <div class="meta-container">
+            <div class="meta-container tag-container">
               <div class="container-title">Tags</div>
               <div class="tag-grid" id="tags1">
                 <div
@@ -61,6 +61,7 @@
               :latest_tag="repo1MetaData.latest_tag"
               :subscriber_count="repo1MetaData.subscribers_count"
               :vulnerability_breakdown="repo1MetaData.vulnerability_breakdown"
+              :license_type="repo1MetaData.license.name"
             ></the-metadata-card>
           </div>
 
@@ -72,10 +73,10 @@
               <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[0][0] != null"
+                v-if="contributors[0] != null"
                 :pieData="contributors[0][0]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -88,10 +89,10 @@
               <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[0][1] != null"
+                v-if="contributors[0] != null"
                 :pieData="contributors[0][1]"
                 :isLoading="contributorsLoading[0]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -152,14 +153,12 @@
             </div>
             <div
               class="wide-visualisation4"
-              v-if="Object.keys(locOverTimeData[0]).length != 0"
+              v-if="Object.keys(overTimeData[0]).length != 0"
             >
-              <h3>Lines of Code</h3>
-              <h6>(over time)</h6>
               <the-multi-line-chart
-                v-if="locOverTimeData[0] != null"
-                :chartData="locOverTimeData[0]"
-                :isLoading="locOverTimeLoading[0]"
+                v-if="overTimeData[0] != null"
+                :chartData="overTimeData[0]"
+                :isLoading="overTimeDataLoading[0]"
               >
               </the-multi-line-chart>
               <el-empty
@@ -219,7 +218,7 @@
               'meta-grid-round-multi meta-grid-round': name2,
             }"
           >
-            <div class="meta-container">
+            <div class="meta-container tag-container">
               <div class="container-title">Tags</div>
               <div class="tag-grid" id="tags2">
                 <div
@@ -266,6 +265,7 @@
               :num_tags="repo2MetaData.num_tags"
               :latest_tag="repo2MetaData.latest_tag"
               :subscriber_count="repo2MetaData.subscribers_count"
+              :license_type="repo2MetaData.license.name"
             ></the-metadata-card>
           </div>
 
@@ -274,10 +274,10 @@
               <h3>Top Contributors</h3>
               <h6>(all time)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[1][1] != null"
+                v-if="contributors[1] != null"
                 :pieData="contributors[1][1]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -290,10 +290,10 @@
               <h3>Top Contributors</h3>
               <h6>(last 30 days)</h6>
               <the-contributor-pie-chart
-                v-if="contributors[1][0] != null"
+                v-if="contributors[1] != null"
                 :pieData="contributors[1][0]"
                 :isLoading="contributorsLoading[1]"
-                hoverHeading="Contributor"
+                hoverHeading="Commits"
               >
               </the-contributor-pie-chart>
               <el-empty
@@ -355,14 +355,12 @@
             </div>
             <div
               class="wide-visualisation4"
-              v-if="Object.keys(locOverTimeData[1]).length != 0"
+              v-if="Object.keys(overTimeData[1]).length != 0"
             >
-              <h3>Lines of Code</h3>
-              <h6>(over time)</h6>
               <the-multi-line-chart
-                v-if="locOverTimeData[1] != null"
-                :chartData="locOverTimeData[1]"
-                :isLoading="locOverTimeLoading[1]"
+                v-if="overTimeData[1] != null"
+                :chartData="overTimeData[1]"
+                :isLoading="overTimeDataLoading[1]"
               >
               </the-multi-line-chart>
               <el-empty
@@ -426,6 +424,7 @@
   margin-bottom: 1%;
   border-radius: var(--viz--radius);
 }
+
 .container-title {
   padding: 1%;
   margin-top: 2px;
@@ -433,10 +432,21 @@
   font-weight: 800;
 }
 
+.tag-container:hover {
+  max-height: 100%;
+  overflow: visible;
+}
+
+.tag-container {
+  max-height: 85px;
+  overflow: hidden;
+}
+
 .tag-grid {
   display: flex;
-  flex-wrap: wrap;
   margin-bottom: 1%;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .tag {
@@ -444,6 +454,7 @@
   font-weight: 800;
   padding: 5px 8px;
   margin: 3px;
+  margin-bottom: 8px;
   border-radius: 18px;
   align-items: center;
   justify-content: center;
@@ -587,14 +598,15 @@
 
 .node-link {
   grid-area: node-link;
-  overflow-x: scroll;
-  overflow-y: scroll;
 
   //white-space:nowrap;
 }
 
 .node-link-container {
   height: 800px;
+
+  overflow-x: scroll;
+  overflow-y: scroll;
   //display:inline-block;
 }
 
@@ -617,6 +629,7 @@
       "wide-visualisation1"
       "wide-visualisation2"
       "wide-visualisation3"
+      "wide-visualisation4"
       "heat-map"
       "node-link";
   }
@@ -656,9 +669,31 @@
     grid-template-columns: minmax(0%, 1fr) minmax(0%, 1fr);
   }
 }
+
+h5 {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+h5:hover {
+  overflow: visible;
+  white-space: initial;
+}
 </style>
 
 <script>
+// importing necessary libraries
+import axios from "axios";
+import VChart from "vue-echarts";
+
+// importing visualisation components
+import TheMetadataCard from "@/components/TheMetadataCard";
+import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
+import TheContributorPieChart from "@/components/TheContributorPieChart";
+import TheMultiLineChart from "@/components/TheMultiLineChart";
+
 // imports for json visualisations containing all the design elements representing the channel of visualisations
 import locByLang from "@/visualisations/LinesOfCodeByLanguage.json";
 import locByType from "@/visualisations/LinesOfCodeByType.json";
@@ -672,15 +707,6 @@ import bubbleChartSeriesObj from "@/visualisations/SeriesSubObjBubbleChart.json"
 import horizontalBarSeriesObj from "@/visualisations/SeriesSubObjHorizontalBar.json";
 import nodeLinkSeriesObj from "@/visualisations/SeriesSubObjNodeLink.json";
 import heatMapSeriesObj from "@/visualisations/SeriesSubObjHeatMap.json";
-
-import axios from "axios";
-import VChart from "vue-echarts";
-
-import TheMetadataCard from "@/components/TheMetadataCard";
-// import TheTagsCard from "@/components/TheTagsCard";
-import TheVulnerabilitiesCard from "@/components/TheVulnerabilitiesCard";
-import TheContributorPieChart from "@/components/TheContributorPieChart";
-import TheMultiLineChart from "@/components/TheMultiLineChart";
 
 export default {
   name: "MultipleRepository",
@@ -728,376 +754,287 @@ export default {
       contributorsLoading: [true, true],
       versionData: [],
       languageData: [],
-      locOverTimeData: {
+      overTimeData: {
         0: {},
         1: {},
       },
-      locOverTimeLoading: [true, true],
+      overTimeDataLoading: [true, true],
     };
   },
   async created() {
-    try {
-      const response = await axios.get(
+    await axios
+      .get(
         process.env.VUE_APP_API_URL +
           `/techstack/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1MetaData = response.data.data[0];
-    } catch (e) {
-      console.log(e);
-    }
+      )
+      .then((res) => {
+        this.repo1MetaData = res.data.data[0];
+      })
+      .catch((e) => {
+        console.log(e);
+      });
 
     if (this.name2) {
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2MetaData = response.data.data[0];
-        this.balanceHeight();
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.loc = response.data.data[0];
-      this.parseLocOverTimeData(1, "LocOverTime");
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.loc = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.dep = response.data.data[0];
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.dep = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.heatmap_data = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
-    } catch (e) {
-      console.log(e);
-      this.repo1Stats.nodeLink = null;
-    }
-
-    try {
-      const response = await axios.get(
-        process.env.VUE_APP_API_URL +
-          `/techstack/contribution/{name_owner}?name=${this.name1}&owner=${this.owner1}`
-      );
-      this.parseContributorData(
-        response.data.data[0].commits_per_author,
-        1,
-        "last_30_days"
-      );
-      this.parseContributorData(
-        response.data.data[0].commits_per_author,
-        1,
-        "all_time"
-      );
-    } catch (e) {
-      console.log(e);
-      this.contributors[0][0] = null;
-      this.contributors[0][1] = null;
-    }
-
-    this.processData(1);
-
-    if (this.name2) {
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.loc = response.data.data[0];
-        this.parseLocOverTimeData(2, "LocOverTime");
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.loc = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.dep = response.data.data[0];
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.dep = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.heatmap_data = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
-        );
-        this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
-      } catch (e) {
-        console.log(e);
-        this.repo2Stats.nodeLink = null;
-      }
-
-      try {
-        const response = await axios.get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/contribution/{name_owner}?name=${this.name2}&owner=${this.owner2}`
-        );
-
-        this.parseContributorData(
-          response.data.data[0].commits_per_author,
-          2,
-          "last_30_days"
-        );
-        this.parseContributorData(
-          response.data.data[0].commits_per_author,
-          2,
-          "all_time"
-        );
-      } catch (e) {
-        console.log(e);
-        this.contributors[1][0] = null;
-        this.contributors[1][1] = null;
-      }
-      this.processData(2);
-    }
-  },
-  methods: {
-    async getMetaData(name, owner, repoNumber) {
       await axios
         .get(
           process.env.VUE_APP_API_URL +
-            `/techstack/{name_owner}?name=${name}&owner=${owner}`
+            `/techstack/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1MetaData = response.data.data[0];
-            this.addTags(this.repo1MetaData, "tags1");
-          } else {
-            this.repo2MetaData = response.data.data[0];
-            this.addTags(this.repo2MetaData, "tags2");
-          }
+        .then((res) => {
+          this.repo2MetaData = res.data.data[0];
         })
         .catch((e) => {
           console.log(e);
         });
-    },
-    async getContributionData(name, owner, repoNumber) {
+    }
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/release/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.loc = res.data.data[0];
+        this.parseLocOverTimeData(1);
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.loc = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/similar/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.dep = res.data.data[0];
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.dep = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/heatmap/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.heatmap_data = res.data.data[0].heatmap_data;
+        this.parseCommitsOverTimeData(1);
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.heatmap_data = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/nodelink_data?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.repo1Stats.nodeLink = res.data.data[0].nodelink_data;
+      })
+      .catch((e) => {
+        console.log(e);
+        this.repo1Stats.nodeLink = null;
+      });
+
+    await axios
+      .get(
+        process.env.VUE_APP_API_URL +
+          `/techstack/contribution/{name_owner}?name=${this.name1}&owner=${this.owner1}`
+      )
+      .then((res) => {
+        this.parseContributorData(
+          res.data.data[0].commits_per_author,
+          1,
+          "last_30_days"
+        );
+        this.parseContributorData(
+          res.data.data[0].commits_per_author,
+          1,
+          "all_time"
+        );
+      })
+      .catch((e) => {
+        console.log(e);
+        this.contributors[0][0] = null;
+        this.contributors[0][1] = null;
+      });
+
+    this.processData(1);
+
+    if (this.name2) {
       await axios
         .get(
           process.env.VUE_APP_API_URL +
-            `/techstack/contribution/{name_owner}?name=${name}&owner=${owner}`
+            `/release/{name_owner}?name=${this.name2}&owner=${this.owner2}`
         )
-        .then((response) => {
+        .then((res) => {
+          this.repo2Stats.loc = res.data.data[0];
+          this.parseLocOverTimeData(2);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.loc = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/similar/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.dep = res.data.data[0];
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.dep = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/heatmap/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.heatmap_data = res.data.data[0].heatmap_data;
+          this.parseCommitsOverTimeData(2);
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.heatmap_data = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/nodelink_data?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
+          this.repo2Stats.nodeLink = res.data.data[0].nodelink_data;
+        })
+        .catch((e) => {
+          console.log(e);
+          this.repo2Stats.nodeLink = null;
+        });
+
+      await axios
+        .get(
+          process.env.VUE_APP_API_URL +
+            `/techstack/contribution/{name_owner}?name=${this.name2}&owner=${this.owner2}`
+        )
+        .then((res) => {
           this.parseContributorData(
-            response.data.data[0].commits_per_author,
-            repoNumber,
+            res.data.data[0].commits_per_author,
+            2,
             "last_30_days"
           );
           this.parseContributorData(
-            response.data.data[0].commits_per_author,
-            repoNumber,
+            res.data.data[0].commits_per_author,
+            2,
             "all_time"
           );
         })
         .catch((e) => {
           console.log(e);
-          this.contributors[repoNumber - 1] = null;
+          this.contributors[1][0] = null;
+          this.contributors[1][1] = null;
         });
-    },
-    async getLOCData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/release/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.loc = response.data.data[0];
-            this.parseLocOverTimeData(repoNumber, "LocOverTime");
-          } else {
-            this.repo2Stats.loc = response.data.data[0];
-            this.parseLocOverTimeData(repoNumber, "LocOverTime");
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.loc = null;
-          } else {
-            this.repo2Stats.loc = null;
-          }
-          this.locOverTimeData[repoNumber - 1] = null;
-        });
-    },
-    async getDependencyData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/similar/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.dep = response.data.data[0];
-          } else {
-            this.repo2Stats.dep = response.data.data[0];
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.dep = null;
-          } else {
-            this.repo2Stats.dep = null;
-          }
-        });
-    },
-    async getHeatMapData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/heatmap/{name_owner}?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.heatmap_data = response.data.data[0].heatmap_data;
-          } else {
-            this.repo2Stats.heatmap_data = response.data.data[0].heatmap_data;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.heatmap_data = null;
-          } else {
-            this.repo2Stats.heatmap_data = null;
-          }
-        });
-    },
-    async getNodeLinkData(name, owner, repoNumber) {
-      await axios
-        .get(
-          process.env.VUE_APP_API_URL +
-            `/techstack/nodelink_data?name=${name}&owner=${owner}`
-        )
-        .then((response) => {
-          if (repoNumber == 1) {
-            this.repo1Stats.nodeLink = response.data.data[0].nodelink_data;
-          } else {
-            this.repo2Stats.nodeLink = response.data.data[0].nodelink_data;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (repoNumber == 1) {
-            this.repo1Stats.nodeLink = null;
-          } else {
-            this.repo2Stats.nodeLink = null;
-          }
-        });
-    },
-    balanceHeight() {
-      let lengthDifference =
-        this.repo1MetaData.description.length -
-        this.repo2MetaData.description.length;
-      let paddingString = "‎‎ㅤ";
-      if (lengthDifference > 0) {
-        this.repo2MetaData.description =
-          this.repo2MetaData.description +
-          paddingString.repeat(lengthDifference);
-      } else if (lengthDifference < 0) {
-        this.repo1MetaData.description =
-          this.repo1MetaData.description +
-          paddingString.repeat(Math.abs(lengthDifference));
-      }
-    },
+      this.processData(2);
+    }
+  },
+  methods: {
+    /**
+     * This method is used to set marks for a given chart, these represent the data points
+     *
+     * @param {object} chart - This is the JSON object of the visualisation
+     * @param {Map} map - This is the data necessary to represent a data point in a viz
+     * @param {object} objToCopy - This is the JSON object that will represent a mark
+     */
     setSeriesSubObject(chart, map, objToCopy) {
+      // Looping over all the data points
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy)); // creating a deep copy
         seriesSubObjCopy.name = key;
-        seriesSubObjCopy.areaStyle.color = value.color;
+        seriesSubObjCopy.areaStyle.color = value.color; // setting the value of the data points in the mark object
         seriesSubObjCopy.data = value.data;
-        chart.series.push(seriesSubObjCopy);
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
+
+    /**
+     * This method is used to set marks for a stacked area chart, these represent the continuous data points
+     *
+     * @param {object} chart - This is the JSON object of the visualisation
+     * @param {Map} map - This is the data necessary to represent a data point in a viz
+     * @param {Map} colorData - This is a map of colors for consistent colors across the system
+     * @param {object} objToCopy - This is the JSON object that will represent a mark
+     */
     setSeriesLocByLang(chart, map, colorData, objToCopy) {
+      // Looping over all the continuous data points
       map.forEach((value, key) => {
         chart.legend.data.push(key);
         chart.color.push(colorData[key]);
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(objToCopy)); // creating a deep copy
         seriesSubObjCopy.name = key;
         seriesSubObjCopy.areaStyle.color = colorData[key];
-        seriesSubObjCopy.data = value.data;
-        chart.series.push(seriesSubObjCopy);
+        seriesSubObjCopy.data = value.data; // setting the value of the data points in the mark object
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
+
+    /**
+     * This method is used to set marks for a heat map. A heat map has different method of declaring marks.
+     *
+     * @param {object} chart - This is the JSON object of the visualisation
+     * @param {Map} map - This is the data necessary to represent a data point in a viz
+     * @param {object} subObj - This is the JSON object that will represent a mark
+     */
     setSeriesHeatMap(chart, map, subObj) {
+      // Looping over all data points
       map.forEach((value, key) => {
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(subObj)); // creating a deep copy
         seriesSubObjCopy.name = seriesSubObjCopy.name + key;
-        seriesSubObjCopy.data = [value];
-        chart.series.push(seriesSubObjCopy);
+        seriesSubObjCopy.data = [value]; // setting up a data point tile
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
+
+    /**
+     * This method is used to process all the data fetched from the API, transform it into compatible formats and invoke relevant
+     * sections of the system once done in order to render the charts onto the screen.
+     *
+     * @param {number} repoNumber - This is the number of the repository. This is used to access the data fetched from the API and
+     *                              differentiate between the two repos in multi view.
+     */
     processData(repoNumber) {
       let locByTypeCopy = JSON.parse(JSON.stringify(locByType));
       let locByLangCopy = JSON.parse(JSON.stringify(locByLang));
       let depBubbleChartCopy = JSON.parse(JSON.stringify(depBubbleChart));
-      let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink));
+      let nodeLinkCopy1 = JSON.parse(JSON.stringify(nodeLink)); // creating deep copy of the visualisation objects
       let nodeLinkCopy2 = JSON.parse(JSON.stringify(nodeLink));
       let heatMapCopy = JSON.parse(JSON.stringify(heatMap));
 
       let statsData = new Map();
       let heatMapData = new Map();
-      let depDataColorMap = new Map();
+      let depDataColorMap = new Map(); // initializing maps for data points processing
       let heatMapTooltipData = new Map();
       let bubbleChartTooltipData = new Map();
 
-      let extractedDepData = this.extractDepData(repoNumber);
-      let extractedData = this.extractData(repoNumber);
-      let extractedHeatMapData = this.extractHeatMapData(repoNumber);
+      let extractedDepData = this.extractDepData(repoNumber); // function call to extract and retrieve bubble chart data
+      let extractedData = this.extractData(repoNumber); // function call to extract and retrieve other chart data
+      let extractedHeatMapData = this.extractHeatMapData(repoNumber); // function call to extract and retrieve heat map data
 
-      this.versionData.push(extractedData[0]);
+      this.versionData.push(extractedData[0]); // setting up global version & language data
       this.languageData.push(extractedData[1]);
       statsData = extractedData[2];
 
       heatMapData = extractedHeatMapData[0];
-      heatMapCopy.visualMap.min = extractedHeatMapData[1];
+      heatMapCopy.visualMap.min = extractedHeatMapData[1]; // extracting relevant heat map data and assigning it
       heatMapCopy.visualMap.max = extractedHeatMapData[2];
       heatMapTooltipData = extractedHeatMapData[4];
 
@@ -1107,33 +1044,31 @@ export default {
         });
         depDataColorMap = extractedDepData[1];
         depBubbleChartCopy.color = [];
-        depBubbleChartCopy.legend.data = depRepos;
+        depBubbleChartCopy.legend.data = depRepos; // assigning data to the bubble chart object for global reference
         bubbleChartTooltipData = extractedDepData[2];
       }
 
       locByLangCopy.color = [];
-
-      locByLangCopy.xAxis[0].data = this.versionData[repoNumber - 1];
+      locByLangCopy.xAxis[0].data = this.versionData[repoNumber - 1]; // setting up axis information for stacked area chart
       locByTypeCopy.yAxis[0].data = this.versionData[repoNumber - 1];
 
-      heatMapCopy.xAxis.data = extractedHeatMapData[3];
+      heatMapCopy.xAxis.data = extractedHeatMapData[3]; // setting up axis info for heat map
 
       locByLangCopy.legend.data = Array.from(
-        this.languageData[repoNumber - 1].keys()
+        this.languageData[repoNumber - 1].keys() // setting up legend for stacked area chart
       );
 
       // locByTypeCopy.legend.data = Array.from(statsData.keys()); // rm legend
-
       let colorPalette =
         repoNumber == 1
-          ? this.repo1MetaData.language_colours
+          ? this.repo1MetaData.language_colours // extracting color palette for consistent colors
           : this.repo2MetaData.language_colours;
       this.setSeriesLocByLang(
         locByLangCopy,
         this.languageData[repoNumber - 1],
         colorPalette,
         locByLangSeriesObj
-      );
+      ); // function calls to set marks for visualisations
       this.setSeriesSubObject(locByTypeCopy, statsData, horizontalBarSeriesObj);
       this.setSeriesBubbleChart(
         depBubbleChartCopy,
@@ -1191,10 +1126,23 @@ export default {
           "<strong> Issues Count：</strong>" +
           bubbleChartTooltipData.get(dataPoint[3])[0] +
           "<br>" +
+          (bubbleChartTooltipData.get(dataPoint[3])[2] != null
+            ? "<strong> Common Language：</strong>" +
+              bubbleChartTooltipData.get(dataPoint[3])[2] +
+              "<br>"
+            : "") +
+          (bubbleChartTooltipData.get(dataPoint[3])[3].length > 0
+            ? "<strong> Common Topics：</strong> <div> " +
+              bubbleChartTooltipData.get(dataPoint[3])[3].map((item) => {
+                return "<span> &nbsp" + item + "</span>";
+              }) +
+              "</div> <br>"
+            : "") +
           "</div>"
         );
       };
 
+      // setting data & behaviour based on the repository number given
       if (repoNumber == 1) {
         this.initializeNodeLink(nodeLinkCopy1, this.repo1Stats.nodeLink);
         this.locType1 = locByTypeCopy;
@@ -1221,50 +1169,73 @@ export default {
         this.heatMap2Loading = false;
       }
     },
+
+    /**
+     * This method is used to set marks for the bubble chart. A bubble chart has different method of declaring marks.
+     *
+     * @param {object} chart - This is the JSON object of the visualisation
+     * @param {Map} map - This is the data necessary to represent a data point in a viz
+     * @param {Map} colorMap - This is the map for consistent colors in the visualisations
+     */
     setSeriesBubbleChart(chart, map, colorMap) {
+      // looping over the data points
       map.forEach((repoArray) => {
         chart.color.push(colorMap.get(repoArray[3]));
-        let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj));
+        let seriesSubObjCopy = JSON.parse(JSON.stringify(bubbleChartSeriesObj)); // creating a deep copy of series sub object
         seriesSubObjCopy.name = repoArray[3];
         seriesSubObjCopy.symbolSize = repoArray[2];
-        seriesSubObjCopy.data = [repoArray.slice(0, 4)];
+        seriesSubObjCopy.data = [repoArray.slice(0, 4)]; // setting up data for mark object
         seriesSubObjCopy.areaStyle.color = colorMap.get(repoArray[3]);
-        chart.series.push(seriesSubObjCopy);
+        chart.series.push(seriesSubObjCopy); // adding the mark to the visualisation object
       });
     },
+
+    /**
+     * This method is used to extract and tranform the fecthed data for bubble chart. It is a adpater function.
+     *
+     * @param {number} repoNumber - This is the repo number which is used to access the data
+     */
     extractDepData(repoNumber) {
       let jsonObj;
       let extractedDepData = []; // [[xAxis: repo_size, yAxis: Dep_count, Size: Issue_count, Color: Name]]
       let tooltipData = new Map();
-      let colorMap = new Map();
+      let colorMap = new Map(); // initializing the variables
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.dep;
       } else if (repoNumber == 2) {
-        jsonObj = this.repo2Stats.dep;
+        jsonObj = this.repo2Stats.dep; // getting the data fetched from API based on the repo number given
       }
 
       if (!jsonObj) {
-        return [extractedDepData, colorMap];
+        return [extractedDepData, colorMap]; // for cases with no data
       }
 
       for (let repoObj of jsonObj) {
         let repoData = [];
         repoData.push(repoObj.size);
-        repoData.push(repoObj.num_components);
+        repoData.push(repoObj.num_components); // extracting the data and tranforming it into the required format
         this.vulnerabilityClassification(repoData, repoObj, tooltipData);
         extractedDepData.push(repoData);
         colorMap.set(repoObj.name, repoObj.repo_colour);
       }
 
-      return [extractedDepData, colorMap, tooltipData];
+      return [extractedDepData, colorMap, tooltipData]; // returning the extracted data
     },
+
+    /**
+     * This method is used to set classifications and store the tooltip data for the marks.
+     *
+     * @param {object} repoData - This is the JSON object of the repository mark used in the bubble chart
+     * @param {object} repoObj - This is the JSON object retrieevd from the API call for similar repos
+     * @param {Map} subObj - This is a map for storing all the tooltip data for a mark
+     */
     vulnerabilityClassification(repoData, repoObj, tooltipData) {
       let bubbleSizes = [15, 30, 50, 80, 110];
-      let classes = ["0", "1-50", "51-100", "101-150", "151+"];
+      let classes = ["0", "1-50", "51-100", "101-150", "151+"]; // setting up classes & sizes for bubbles
       let repoVulnerabilities = repoObj.num_vulnerabilities;
       let repoBubbleSize = 0;
-      let repoClass = "";
+      let repoClass = ""; // initialising variables
 
       if (repoVulnerabilities === 0) {
         repoBubbleSize = bubbleSizes[0];
@@ -1273,7 +1244,7 @@ export default {
         repoBubbleSize = bubbleSizes[1];
         repoClass = classes[1];
       } else if (repoVulnerabilities >= 51 && repoVulnerabilities <= 100) {
-        repoBubbleSize = bubbleSizes[2];
+        repoBubbleSize = bubbleSizes[2]; // setting up the class and bubble size based on the count
         repoClass = classes[2];
       } else if (repoVulnerabilities >= 101 && repoVulnerabilities <= 150) {
         repoBubbleSize = bubbleSizes[3];
@@ -1284,39 +1255,52 @@ export default {
       }
 
       repoData.push(repoBubbleSize);
-      repoData.push(repoObj.name);
-      tooltipData.set(repoObj.name, [repoVulnerabilities, repoClass]);
+      repoData.push(repoObj.name); // storing the information for the mark obj
+      tooltipData.set(repoObj.name, [
+        repoVulnerabilities,
+        repoClass,
+        repoObj.common_language,
+        repoObj.common_topics,
+      ]); // addiing tooltip data for the given repo
     },
+
+    /**
+     * This method is used to extract and tranform the heat map data from the API.
+     *
+     * @param {number} repoNumber - This is the repo number which is used for accessing the data
+     */
     extractHeatMapData(repoNumber) {
       let jsonResponse;
       let extractedHeatMapData = new Map(); // [Week: [X,Y,VAL]]
       let extractedTooltipData = new Map(); // [start date, end date]
 
       let maxVal = 0,
-        minVal = Infinity;
+        minVal = Infinity; // initialising the values
       let xAxis = []; // 19 cols
-      let xAxisYears = new Set();
+      let xAxisYears = new Set(); // a set for years in xAxis
       let weekCount = 0;
 
       if (repoNumber == 1) {
         jsonResponse = this.repo1Stats.heatmap_data;
       } else if (repoNumber == 2) {
+        // getting the data fetched from API based on the repo number given
         jsonResponse = this.repo2Stats.heatmap_data;
       }
 
+      // iterating over all the weeks from the fetched data
       for (let week in jsonResponse) {
         let weekObj = jsonResponse[week];
-        let weekData = [];
+        let weekData = []; // initialising loop variables
         let weekTooltipData = [];
 
         weekCount += 1;
 
         weekData.push(weekObj.coords.x);
-        weekData.push(weekObj.coords.y);
+        weekData.push(weekObj.coords.y); // Adding the week data point info
         weekData.push(weekObj.issues.open);
 
         weekTooltipData.push(weekObj.start.substring(0, 10));
-        weekTooltipData.push(weekObj.end.substring(0, 10));
+        weekTooltipData.push(weekObj.end.substring(0, 10)); // Adding the tooltip information for the week
 
         if (
           weekObj.start.substring(5, 7) === "01" &&
@@ -1324,7 +1308,7 @@ export default {
         ) {
           if (xAxis.length < Math.floor(weekCount / 8)) {
             xAxis.push(weekObj.start.substring(0, 4));
-            xAxisYears.add(weekObj.start.substring(0, 4));
+            xAxisYears.add(weekObj.start.substring(0, 4)); // extracting xAxis years
           } else {
             xAxis[Math.floor(weekCount / 8) - 1] = weekObj.start.substring(
               0,
@@ -1351,7 +1335,7 @@ export default {
         extractedTooltipData.set(
           weekObj.coords.x + "-" + weekObj.coords.y,
           weekTooltipData
-        );
+        ); // storing the week dat by coords
         extractedHeatMapData.set(weekObj.week, weekData);
       }
       xAxis = xAxis.reverse();
@@ -1361,32 +1345,57 @@ export default {
         maxVal,
         xAxis,
         extractedTooltipData,
-      ];
+      ]; // returning the extracted information
     },
+
+    /**
+     * This method is used to extract data and initialise the node link diagram object
+     *
+     * @param {Object} nodeLink - This is the JSON Object of the node-link visualization
+     * @param {Object} data - This is the data fetched from the API
+     */
     initializeNodeLink(nodeLink, data) {
       if (data != undefined) {
-        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj));
+        let nodeLinkSubObj = JSON.parse(JSON.stringify(nodeLinkSeriesObj)); // creating a deep copy
         nodeLinkSubObj.categories = data.categories;
-        nodeLinkSubObj.nodes = data.nodes;
+        nodeLinkSubObj.nodes = data.nodes; // setting up categories, nodes and links in the visualisaion
         nodeLinkSubObj.links = data.links;
-        nodeLink.series.push(nodeLinkSubObj);
+
+        // looping over all the categories to assign consistent colors
+        for (let categoryObj in nodeLinkSubObj.categories) {
+          nodeLinkSubObj.categories[categoryObj].itemStyle = {};
+          nodeLinkSubObj.categories[categoryObj].itemStyle.color =
+            this.repo1MetaData.license_colours[
+              nodeLinkSubObj.categories[categoryObj].name
+            ];
+        }
+        nodeLink.series.push(nodeLinkSubObj); // setting marks to the visualisation JSON Objects
       }
     },
+
+    /**
+     * This method is used to extract the data for the LOC related data and tranform it to fit the information required for stacked area
+     * and bar chart of the system.
+     *
+     * @param {number} repoNumber - This is the repo number which is used to access the data stored in the system
+     */
     extractData(repoNumber) {
       let jsonObj;
       let versions = [];
-      const languageData = new Map();
+      const languageData = new Map(); // initialising variables
       const statsData = new Map();
       statsData.set("code", { data: [], color: "#34a853" });
-      statsData.set("comment", { data: [], color: "#4285f4" });
+      statsData.set("comment", { data: [], color: "#4285f4" }); // setting up colors for stacked bar chart
       statsData.set("blank", { data: [], color: "#ea4335" });
 
       if (repoNumber == 1) {
         jsonObj = this.repo1Stats.loc;
       } else if (repoNumber == 2) {
+        // getting the data fetched from API based on the repo number given
         jsonObj = this.repo2Stats.loc;
       }
 
+      // iterating over all the versions of the repository and tranforming the necessary data in required formats
       for (let versionObj of jsonObj) {
         versions.push(versionObj.tag_name);
         for (const [langKey, langObj] of Object.entries(
@@ -1408,8 +1417,16 @@ export default {
           }
         }
       }
-      return [versions, languageData, statsData];
+      return [versions, languageData, statsData]; // returning the extracted data
     },
+
+    /**
+     * Parse data for contributors pie charts.
+     *
+     * @param {object} data - The data to be parsed.
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     * @param {string} type - The type of contributor data to parse. "all_time" or "last_30_days"
+     */
     parseContributorData(data, repoNumber, type) {
       this.contributors[repoNumber - 1].push(
         Object.keys(data[type].top_25)
@@ -1436,7 +1453,12 @@ export default {
       this.contributorsLoading[repoNumber - 1] = false;
       return;
     },
-    parseLocOverTimeData(repoNumber, dataType) {
+    /**
+     * Parse lines of code over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
+    parseLocOverTimeData(repoNumber) {
       var statsRepos = ["repo1Stats", "repo2Stats"];
 
       // If there is no 'SUM' key in the lines of code data
@@ -1445,7 +1467,8 @@ export default {
       }
 
       // Add a new object
-      this.locOverTimeData[repoNumber - 1][dataType] = {
+      this.overTimeData[repoNumber - 1].loc = {
+        name: "Lines of Code",
         xData: [],
         yData: [],
       };
@@ -1462,9 +1485,33 @@ export default {
           }
         });
 
-        this.locOverTimeData[repoNumber - 1][dataType].xData.push(date);
-        this.locOverTimeData[repoNumber - 1][dataType].yData.push(loc);
-        this.locOverTimeLoading[repoNumber - 1] = false;
+        this.overTimeData[repoNumber - 1].loc.xData.push(date);
+        this.overTimeData[repoNumber - 1].loc.yData.push(loc);
+        this.overTimeDataLoading[repoNumber - 1] = false;
+      });
+    },
+    /**
+     * Parse commits over time data for a repository.
+     *
+     * @param {number} repoNumber - The repository number. 1 or 2.
+     */
+    parseCommitsOverTimeData(repoNumber) {
+      var statsRepos = ["repo1Stats", "repo2Stats"];
+
+      // Add a new object
+      this.overTimeData[repoNumber - 1].commits = {
+        name: "Commits",
+        xData: [],
+        yData: [],
+      };
+
+      let weeks = this[statsRepos[repoNumber - 1]].heatmap_data;
+
+      Object.keys(weeks).forEach((key) => {
+        this.overTimeData[repoNumber - 1].commits.xData.push(weeks[key].start);
+        this.overTimeData[repoNumber - 1].commits.yData.push(
+          weeks[key].commits.created
+        );
       });
     },
   },
